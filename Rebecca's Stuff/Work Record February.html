@@ -12,11 +12,11 @@
 	</ul>
 	<p></p>
 	<script type="text/javascript">
-	var dataSet= ["1st: 1.5 hrs"];
+	var dataSet= ["1st: 1.5 hrs", "2nd: 3hrs"];
 	var day= [];
 	var hrs=[];
 	var worked= function(x,y){day.push(x); hrs.push(y);}
-	worked(1,1.5);
+	worked(1,1.5);worked(2, 3);
 	
 	var total= function(){var out=0; for(var i = 0 ; i<hrs.length; i++){out=out+hrs[i];} return out;}
 	
