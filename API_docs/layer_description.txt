@@ -1,0 +1,13 @@
+User-Interface Layer
+      ^
+      |
+Javascript/AnjularJS Layer
+      ^
+      |
+RESTful WebAPI Layer
+      ^
+      |
+JDBC Layer
+      ^
+      |
+SQL Database

@@ -1,0 +1,23 @@
+/course/{course_id}
+:returns a JSON object with course information
+
+/file/{course_id}/{assignment}/{file_name}
+:returns a JSON object with file information from an assignment
+
+/assignment/{course_id}/{assignment}
+:returns a JSON object with assignment information
+
+/grade/{course_id}/{student_user_name}/{assignment}
+:returns a JSON object with grade information
+
+/student/{student_user_name}
+:returns a JSON object with student information
+
+/TA/{student_user_name}
+:returns a JSON object with TA information
+
+/professor/{prof_user_name}
+:returns a JSON object with prof information
+
+/submission/{course_id}/{student_user_name}/{assignment}
+:returns a JSON object with sudmission information
