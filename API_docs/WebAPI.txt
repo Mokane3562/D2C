@@ -1,23 +1,68 @@
-/course/{course_id}
+GET /course/{course_id}
 :returns a JSON object with course information
 
-/file/{course_id}/{assignment}/{file_name}
+POST /course/{course_id}
+:creates a new course or edits an existing course using a JSON
+:object in the request body
+
+GET /file/{course_id}/{assignment}/{file_name}
 :returns a JSON object with file information from an assignment
 
-/assignment/{course_id}/{assignment}
+POST /file/{course_id}/{assignment}/{file_name}
+:uploads a file to an assignment using a JSON object in the 
+:request body
+
+GET /assignment/{course_id}/{assignment}
 :returns a JSON object with assignment information
 
-/grade/{course_id}/{student_user_name}/{assignment}
+POST /assignment/{course_id}/{assignment}
+:creates a new assignment or edits and existing one using a JSON 
+:object in the request body
+
+GET /grade/{course_id}/{student_user_name}/{assignment}
 :returns a JSON object with grade information
 
-/student/{student_user_name}
-:returns a JSON object with student information
+POST /grade/{course_id}/{student_user_name}/{assignment}
+:posts a grade and any comments relavent to a submission using 
+:a JSON object in the request body
 
-/TA/{student_user_name}
-:returns a JSON object with TA information
+POST /grade/{course_id}/{assignment}
+:allows all students to view their grade for an assignment
 
-/professor/{prof_user_name}
+GET /student/{student_user_name}
+:returns a JSON object with student information for a given course
+
+POST /student/{student_user_name}
+:edits or creates a student
+
+GET /TA/{student_user_name}/{course_id}
+:returns a JSON object with TA information for a given course
+
+POST /TA/{student_user_name}/{course_id}
+:sets the student user as a TA for the given course 
+
+GET /professor/{prof_user_name}
 :returns a JSON object with prof information
 
-/submission/{course_id}/{student_user_name}/{assignment}
+POST /professor/{prof_user_name}
+:gives a given user the abilities of a professor, or creates a new account
+:with professor abilities
+
+GET /submission/{course_id}/{student_user_name}/{assignment}
 :returns a JSON object with sudmission information
+
+POST /submission/{course_id}/{student_user_name}/{assignment}
+:uploads all files and submission information for a students assignment
+:using a JSON object in the request body
+
+GET /main/index.html
+:returns the main pages html file
+
+GET /main/{folder}/{name}.js
+:returns a script with name {name} from the {folder} folder
+
+GET /main/style/{name}.css
+:returns the cascading style sheet with name {name}
+
+GET /main/directive/{name}.html
+:returns the directive html template with name {name}

@@ -1,0 +1,38 @@
+CourseResource:
++ Response getCourseInfo(String course_id)
++ Response createOrUpdateCourse(String course_id, TransferableCourse course)
+
+FileResource:
++ Response getFileInfo(String course_id, String assignment, String file_name)
++ Response uploadOrUpdateFile(String course_id, String assignment, String file_name, TransferableFile file)
+
+AssignmentResource:
++ Response getAssignment(String course_id, String assignment)
++ Response createOrUpdateAssignment(String course_id, String assignment, TransferableAssignment context)
+
+GradeResource:
++ Response getGrade(String course_id, String student_user_name, String assignment)
++ Response postGrade(String course_id, String student_user_name, String assignment, TransferableGrade grade)
++ Response releaseGrades(String course_id, String assignment)
+
+StudentResource:
++ Response getStudentInfo(String student_user_name)
++ Response createOrUpdateStudent(String student_user_name, TransferableStudent student)
+
+TeachingAssistantResource:
++ Response getTAInfo(String student_user_name, String course_id)
++ Response setTA(String student_user_name, String course_id)
+
+ProfessorResource:
++ Response getProfessorInfo(String professor_user_name)
++ Response makeProfessor(String professor_user_name)
+
+SubmissionResource:
++ Response getSubmissionInfo(String course_id, String student_user_name, String assignment)
++ Response uploadOrUpdateSubmission(String course_id, String student_user_name, String assignment, TransferableSubmission submission)
+
+MainPageResource:
++ Response getDirectiveHTML(String name)
++ Response getMainPage()
++ Response getStyleSheet(String name)
++ Response getScript(String folder, String name)

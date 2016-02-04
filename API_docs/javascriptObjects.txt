@@ -11,31 +11,27 @@ grade{
 }
 
 student{
-	perName: String;
-	perNum: String;
-	perEmail: String;
+	name: String;
+	number: String;
+	email: String;
 	courseList: [course];
 }
 
 TA{
-	stu: Student;
+	student: Student;
 	course: course;
 }
 
 prof{
-	profName: String;
-	profNum: String;
-	profEmail: String;
-	courseList: [course]
-}
-
-classList{
-	students: [student]; //A list of students
+	name: String;
+	num: String;
+	email: String;
+	courseList: [course];
 }
 
 assignment{
 	files: [file]; //A list of files
-	assignName: String;
+	assignmentName: String;
 	dueDate: date;
 	content: String;
 }
@@ -54,10 +50,10 @@ date{
 }
 
 course{
-	classNum: String;
+	courseNumber: String;
 	classList: [student]; //A list of enrolled students
 	assignments: [assignment]; //A list of assignments
 	subject: String;
-	className: String;
-	TAs: [student]; //A list of students 
+	courseName: String;
+	TAs: [TA]; //A list of TAs 
 }
