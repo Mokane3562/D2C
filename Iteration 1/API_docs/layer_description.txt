@@ -31,4 +31,4 @@ and the arguments to the method to insert, update, or select a row
 in the database.
 
     The Database will be a MySQL database, whose schema is described
-in the <TODO: INSERT FILE NAME HERE>
+in the files located in the Database folder
