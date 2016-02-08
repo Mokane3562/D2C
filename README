@@ -1,1 +1,30 @@
-readme
+ITERATION ONE - TEAM G 
+SUBMITTED: FEBRUARY 8TH 2016
+SCOTT YOUNG, MICHELLE CROKE, REBECCA PRICE, TYLER BENNETT, MIKE SINGLETON
+Description of changes, additions and refinements
+
+NOTE: All of these refinements/changes are in addition to the entire
+design/project being constantly updated and worked on throughout
+each iteration. This list is just to point out major changes
+to parts of the project which were specifically pointed out to be 
+fixed and major items which are added to our GIT repository. 
+
+Additions to Iteration 0:
+Within Folder "Iteration 0" > COMP4770 Team G Project Design Document.pdf
+- We have created a new, more accurate, domain model from 
+the one that was submitted with iteration 0. 
+- We have added missing entities and extra associations that 
+are needed. We have supplied a Data Dictionary which was missing 
+from Iteration 0. 
+- Our Data Dictionary outlines the key words/concepts which are 
+used throughout the domain model, use cases and user stories.
+- The Statechart has been revised to encompass changes we are 
+making so that a Prof can access both a TA and Student homepages, 
+as well as the TA being able to access the Student homepage. 
+- Use Cases (4, 5, 6)  have been revised to be more flexible when 
+using the Systems’ Editor to work on assignments/files.
+
+Iteration 1:
+- Database Schema
+- Rough HTML draft of our application (GUI)
+- Web API (Angular services, layer description, Java Classes, Java Resources)
