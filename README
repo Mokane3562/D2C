@@ -1,4 +1,6 @@
-ITERATION ONE SUBMITTED FEBRUARY 8TH 2016
+ITERATION ONE - TEAM G 
+SUBMITTED: FEBRUARY 8TH 2016
+SCOTT YOUNG, MICHELLE CROKE, REBECCA PRICE, TYLER BENNETT, MIKE SINGLETON
 Description of changes, additions and refinements
 
 NOTE: All of these refinements/changes are in addition to the entire
@@ -23,6 +25,6 @@ as well as the TA being able to access the Student homepage.
 using the Systems’ Editor to work on assignments/files.
 
 Iteration 1:
-Database Schema
-Rough HTML draft of our application (GUI)
-Web API (Angular services, layer description, Java Classes, Java Resources)
+- Database Schema
+- Rough HTML draft of our application (GUI)
+- Web API (Angular services, layer description, Java Classes, Java Resources)
