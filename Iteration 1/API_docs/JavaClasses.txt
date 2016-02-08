@@ -1,0 +1,47 @@
+TransferableFile:
++ String fileName
++ String fileContent
+
+TransferableGrade:
++ Map<String, Integer> marks
+
+TransferableStudent:
++ String name
++ string number
++ String email
++ List<TransferableCourse> courseList
+
+TransferableTeachAssistant:
++ TransferableStudent student
++ TransferableCourse course
+
+TransferableProfessor:
++ String name
++ String num
++ String email
++ List<TransferableCourse> courseList
+
+TransferableAssignment:
++ List<TransferableFile> files
++ String assignmentName
++ TransferableDate date
++ String content
+
+TransferableSubmission:
++ List<TransferableFile> files
++ TransferableAssignment assignment
++ TransferableStudent student
+
+TransferableDate:
++ String Month
++ String day
++ String time
++ String year
+
+TransferableCourse:
++ String courseNumber
++ List<TransferableSudent> classList
++ List<TransferableAssignment> assignments
++ String subject
++ String courseName
++ List<TransferableTeachingAssistant> TAs
