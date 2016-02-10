@@ -1,0 +1,236 @@
+#wrapper{
+        border:1px solid;
+        width:100%;
+        height:55px;
+        margin:0;
+        background-color: #4D4D4D;        
+    }
+
+    #header{
+        font-family:"Arial Black", Gadget, sans-serif;
+        font-size:40px;
+        text-shadow:3px 3px 3px #000;
+        font-weight: bold;
+        text-align:center;
+        padding: 5px;
+        color: #31B404;
+       
+    }
+    <!-- HATE SIGN OUT BUTTON
+
+        #signout{
+        display:inline-block;
+        font-family:"Arial Black", Gadget, sans-serif;
+        font-size:20px;
+        text-align:right;
+        padding: 5px;
+    }
+    -->
+    #menubar{
+        margin:0;
+        padding:0;
+    }
+
+    #menubar ul{
+        margin:0;
+        padding:10px;
+        line-height:30px;
+        position:absolute;
+        font-size:20px;
+    }
+
+    #menubar li{
+        margin:0;
+        padding:0;
+        list-style:none;
+        float:left;
+        postion:relative;
+        background:#999;
+    }
+
+    #menubar ul li a {
+        text-align:center;
+        font-family:"Arial Black", Gadget, sans-serif;
+        font-weight: bold;
+        text-decoration:none;
+        height:30px;
+        width:150px;
+        display:block;
+        color:#FFF;
+        border:1px solid #000;
+        text-shadow:1px 1px 1px #000;
+        padding: 1px;
+    }
+    
+    #menubar ul ul{
+        visibility:hidden;
+        top:32px;
+ 
+    }
+ 
+    #menubar ul li:hover ul{
+        visibility:visible;
+    }
+
+    #menubar li:hover {
+        background:#31B404;
+    }
+
+    #menubar ul li:hover ul li a:hover {
+        background:#CCC;
+        color:#000;
+
+    }
+
+    #navbar {
+       width: 100%;
+       border-bottom:1px solid #FFF;
+       height:60px;
+       padding-left:5%;
+       padding-right:10%;
+       margin: 5px;
+      
+    }
+
+    #holder {
+        height:60px;
+        width:100%;
+        
+    }
+
+    #navbar #holder ul {
+        list-style:none;
+        margin:0;
+        padding:0;
+    }
+
+    #navbar #holder ul li a {
+        text-decoration:none;
+        float:left;
+        margin-right:5px;
+        font-family:"Arial Black", Gadget, sans-serif;
+        font-weight: bold;
+        color:#FFF;
+        border:1px solid #FFF;
+        border-bottom:none;
+        text-shadow:1px 1px 1px #000;
+        padding:20px;
+        width:25%;
+        text-align:center;
+        display:block;
+        background:#31B404;
+    }
+
+    #navbar #holder ul li a:hover {
+        background:#00e600;
+        color:#FFF;
+        text-shadow:4px 4px 4px #000;
+
+    }
+
+    #holder ul li a#onlink {
+        background:#262626;
+        color:#31B404;
+        border-bottom:1px solid #262626;
+
+    }
+
+    #holder ul li a#onlink:hover {
+        background:#262626;
+        color:#FFF;
+        text-shadow:4px 4px 4px #000; 
+    }
+    
+    button{
+      background-color: #31B404;
+      width:15%;
+      height:50px;
+      padding: 10px;
+      margin: 10px;    
+      font-weight: bold; 
+      color:#FFF;
+      text-shadow: 2px 2px 2px #000; 
+    }
+    button:hover{
+      background-color: #00e600;
+      width:15%;
+      height:50px;
+      padding: 10px;
+      margin: 10px;    
+      font-weight: bold; 
+      color:#FFF;
+      text-shadow: 4px 4px 4px #000; 
+    }
+    h1{
+     color:#FFF;
+     font-weight: bold;
+     text-shadow:3px 3px 3px #000;
+    }
+    h2{
+     color:#31B404;
+     text-shadow:3px 3px 3px #000;
+    }
+    span{
+     font-weight:bold;
+     color:#FFF;
+     text-shadow:2px 2px 2px #000;
+    }
+
+
+
+    #signbar{
+        margin:0;
+        padding:0;
+    }
+
+    #signbar ul{
+        margin:0;
+        padding:10px;
+        line-height:30px;
+        position:absolute;
+        font-size:20px;
+    }
+
+    #signbar li{
+        margin:0;
+        padding:0;
+        list-style:none;
+        float:right;
+        background:#999;
+    }
+
+    #signbar ul li a {
+        text-align:center;
+        font-family:"Arial Black", Gadget, sans-serif;
+        font-weight: bold;
+        text-decoration:none;
+        height:30px;
+        width:150px;
+        display:block;
+        color:#FFF;
+        border:1px solid #000;
+        text-shadow:1px 1px 1px #000;
+        padding: 1px;
+    }
+    
+    #signbar ul ul{
+        visibility:hidden;
+        top:32px;
+ 
+    }
+ 
+    #signbar ul li:hover ul{
+        visibility:visible;
+    }
+
+    #signbar li:hover {
+        background:#31B404;
+    }
+
+    #signbar ul li:hover ul li a:hover {
+        background:#CCC;
+        color:#000;
+
+    }
+
+
