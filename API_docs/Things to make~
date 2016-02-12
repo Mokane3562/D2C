@@ -1,0 +1,64 @@
+Key:
+      * = Done
+      B = Tyler is working on it
+      C = Michelle is working on it
+      P = Rebecca is working on it
+      S = Mike is working on it
+      Y = Scott got dis
+
+~Server~
+      Source: JaxRSResources.txt
+            CourseResource: Y
+            FileResource:
+            AssignmentResource:
+            GradeResource:    
+            StudentResource:
+            TeachingAssistantResource:
+            ProfessorResource:
+            SubmissionResource:
+            MainPageResource:
+
+      Source: JavaClasses.txt
+            TransferableFile:
+            TransferableGrade:
+            TransferableStudent:
+            TransferableTeachAssistant:
+            TransferableProfessor:
+            TransferableAssignment:
+            TransferableSubmission:
+            TransferableDate:
+            TransferableCourse:
+
+            
+
+~Client~
+      Source: AngularJS_services.txt
+            getCourse(course_id): object
+            postCourse(course_id, data): void
+            getFile(course_id, assignment, file_name): object
+            postFile(course_id, assignment, file_name, data): void
+            getAssignment(course_id, assignment): object
+            postAssignment(course_id, assignment, data): void
+            getGrade(course_id, student_user_name, assignment): object
+            postGrade(course_id, student_user_name, assignment, grade): void
+            releaseGrades(course_id, assignment): void
+      getStudent(student_user_name): object
+postStudent(student_user_name, data): void
+
+--TA--
+--object returned and data supplied are in the form of--
+--a TA JSON object as described in the javascriptObjects.txt file--
+getTA(student_user_name, course_id): object
+postTA(student_user_name, course_id, data): void
+
+--Professor--
+--object returned and data supplied are in the form of--
+--a prof JSON object as described in the javascriptObjects.txt file--
+getProfessor(prof_user_name): object
+postProfessor(prof_user_name, data): void
+
+--Submission-- 
+--object returned and data supplied are in the form of--
+--a submission JSON object as described in the javascriptObjects.txt file--
+getSubmission(course_id, student_user_name, assignment): object
+postSubmission(course_id, student_user_name, assignment, data): void
