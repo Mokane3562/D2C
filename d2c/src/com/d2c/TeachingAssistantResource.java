@@ -12,22 +12,23 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("/student")
-public class StudentResource {
+@Path("/TA")
+public class TeachingAssistantResource {
 	
 	@GET
-	@Path("/{student_user_name}")
+	@Path("/{student_user_name}/{course_id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getStudentInfo(@PathParam("student_user_name") String studentUserName){
+	public Response getTAInfo(@PathParam("student_user_name") String studentUserName, 
+			@PathParam("course_id") String courseID){
 		//TODO Some sql shit to get my object
 		
 		//TODO check that object exists
 		boolean check = true;
 		//if it exists then save it to a java object and return through response
 		if(check){
-			TransferableStudent s = new TransferableStudent();
+			TransferableTA t = new TransferableTA();
 			return Response.ok()
-					.entity(s)
+					.entity(t)
 					.build();
 		} else { // else return a not found
 			return Response.noContent().build();
@@ -35,14 +36,14 @@ public class StudentResource {
 	}
 
 	@POST
-	@Path("/{student_user_name}")
+	@Path("/{course_id}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createOrUpdateStudent(@PathParam("student_user_name") String studentUserName,
-			TransferableStudent student){
+	public Response setTA(@PathParam("student_user_name") String studentUserName, 
+			@PathParam("course_id") String courseID, TransferableTA ta){
 		//TODO make this post the course info to the DB
 		
 		try {
-			return Response.created(new URI("/"+studentUserName))
+			return Response.created(new URI("/"+studentUserName+"/"+courseID))
 					.build();
 		} catch (URISyntaxException e) {
 			return Response.serverError().build();
