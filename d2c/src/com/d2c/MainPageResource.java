@@ -14,13 +14,13 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("/main")
 public class MainPageResource {
 	
 	@GET
 	@Path("/index.html")
 	@Produces(MediaType.TEXT_HTML)
 	public Response getMainPage(){
+		System.out.println("MainPageResource.getMainPage");
 		File file = new File("index.html");
 		String html = "";
 		try {
