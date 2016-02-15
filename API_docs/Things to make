@@ -16,7 +16,7 @@ Key:
             TeachingAssistantResource:
             ProfessorResource:
             SubmissionResource:
-            MainPageResource:
+            MainPageResource: Y
 
       Source: JavaClasses.txt
             TransferableFile:
