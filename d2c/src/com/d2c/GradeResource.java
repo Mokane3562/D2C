@@ -18,7 +18,7 @@ public class GradeResource {
 	@GET
 	@Path("/{course_id}/{student_user_name}/{assignment}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getCourseInfo(@PathParam("course_id") String courseID, 
+	public Response getGrade(@PathParam("course_id") String courseID, 
 			@PathParam("student_user_name") String studentUserName, 
 			@PathParam("assignment")String assignment){
 		//Some sql shit to get my object
@@ -37,9 +37,9 @@ public class GradeResource {
 	}
 
 	@POST
-	@Path("/{course_id}")
+	@Path("/{course_id}/{student_user_name}/{assignment}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createOrUpdateCourse(@PathParam("course_id") String courseID, 
+	public Response postGrade(@PathParam("course_id") String courseID, 
 			@PathParam("student_user_name") String studentUserName, 
 			@PathParam("assignment")String assignment, TransferableGrade grade){
 		//TODO make this post the course info to the DB
@@ -51,7 +51,21 @@ public class GradeResource {
 			return Response.serverError().build();
 		}
 	}
+	//CHECK THIS OUT right?
+	@POST
+	@Path("/{course_id}/{assignment}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response releaseGrade(@PathParam("course_id") String courseID, 
+			@PathParam("assignment")String assignment){
+		//TODO make this post the course info to the DB
+		
+		try {
+			return Response.created(new URI("/"+courseID+"/"+assignment))
+					.build();
+		} catch (URISyntaxException e) {
+			return Response.serverError().build();
+		}
+	}
 	
-	//POST /grade/{course_id}/{assignment}
 
 }
