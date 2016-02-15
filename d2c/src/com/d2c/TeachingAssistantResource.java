@@ -12,23 +12,23 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("/assignment")
-public class AssignmentResource {
+@Path("/TA")
+public class TeachingAssistantResource {
 	
 	@GET
-	@Path("/{course_id}/{assignment}")
+	@Path("/{student_user_name}/{course_id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getCourseInfo(@PathParam("course_id") String courseID, 
-			@PathParam("assignment") String assignment){
-		//Some sql shit to get my object
+	public Response getTAInfo(@PathParam("student_user_name") String studentUserName, 
+			@PathParam("course_id") String courseID){
+		//TODO Some sql shit to get my object
 		
-		//check that object exists
+		//TODO check that object exists
 		boolean check = true;
 		//if it exists then save it to a java object and return through response
 		if(check){
-			TransferableAssignment a = new TransferableAssignment();
+			TransferableTA t = new TransferableTA();
 			return Response.ok()
-					.entity(a)
+					.entity(t)
 					.build();
 		} else { // else return a not found
 			return Response.noContent().build();
@@ -36,14 +36,14 @@ public class AssignmentResource {
 	}
 
 	@POST
-	@Path("/{course_id}/{assignment}")
+	@Path("/{course_id}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createOrUpdateAssignment(@PathParam("course_id") String courseID, 
-			@PathParam("assignment") String assignment, TransferableAssignment context){
+	public Response setTA(@PathParam("student_user_name") String studentUserName, 
+			@PathParam("course_id") String courseID, TransferableTA ta){
 		//TODO make this post the course info to the DB
 		
 		try {
-			return Response.created(new URI("/"+courseID+"/"+assignment))
+			return Response.created(new URI("/"+studentUserName+"/"+courseID))
 					.build();
 		} catch (URISyntaxException e) {
 			return Response.serverError().build();
