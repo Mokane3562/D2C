@@ -19,9 +19,9 @@ public class CourseResource {
 	@Path("/{course_id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getCourseInfo(@PathParam("course_id") String courseID){
-		//Some sql shit to get my object
+		//TODO Some sql shit to get my object
 		
-		//check that object exists
+		//TODO check that object exists
 		boolean check = true;
 		//if it exists then save it to a java object and return through response
 		if(check){
