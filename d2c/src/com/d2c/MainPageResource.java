@@ -1,8 +1,11 @@
 package com.d2c;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -34,7 +37,7 @@ public class MainPageResource {
 			//Get a stream of the contents
 			Stream<String> contents = br.lines();
 			//Collect the contents into a string, without dividing them (empty string arg)
-			fileAsString = contents.collect(Collectors.joining(""));
+			fileAsString = contents.collect(Collectors.joining("\n"));
 			//Close the Buffered Reader
 			br.close();
 			//Return the response with the file contents as the argument to entity()
@@ -70,7 +73,48 @@ public class MainPageResource {
 									)
 								);
 			Stream<String> contents = br.lines();
-			fileAsString = contents.collect(Collectors.joining(""));
+			fileAsString = contents.collect(Collectors.joining("\n"));
+			br.close();
+			return Response.ok()
+					.entity(fileAsString)
+					.build();
+		} catch (FileNotFoundException e) {
+			return Response.serverError()
+					.build();
+		} catch (IOException e) {
+			// This may be wrong, not sure yet.
+			return Response.ok()
+					.entity(fileAsString)
+					.build();
+		}
+	}
+	
+	@GET
+	@Produces(MediaType.TEXT_PLAIN)
+	@Path("{folder}/{js}.js")
+	//This method gets the a CSS file. Uncommented, but more or less a copy of getMainPage
+	public Response getJSfile(	@Context ServletContext context,
+								@PathParam("folder") String jsFolderName,
+								@PathParam("js") String jsFileName)
+	{
+		String fileAsString = "";
+		InputStream i = context.getResourceAsStream(
+				"/WEB-INF/"+jsFolderName+"/"+jsFileName+".js"
+			);
+		if(i == null){
+			System.out.println("You found the null!" + jsFolderName + "/" + jsFileName + ".js");
+			return Response.serverError().entity("null file resource").build();
+		}
+		try {
+			BufferedReader br = new BufferedReader(
+									new InputStreamReader(
+										context.getResourceAsStream(
+											"/WEB-INF/"+jsFolderName+"/"+jsFileName+".js"
+										)
+									)
+								);
+			Stream<String> contents = br.lines();
+			fileAsString = contents.collect(Collectors.joining("\n"));
 			br.close();
 			return Response.ok()
 					.entity(fileAsString)
