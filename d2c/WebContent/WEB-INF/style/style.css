@@ -3,7 +3,8 @@
         width:100%;
         height:55px;
         margin:0;
-        background-color: #4D4D4D;        
+        background-color: #4D4D4D;
+        overflow: auto;        
     }
 
     #header{
@@ -185,8 +186,9 @@
 
 
     #signbar{
-        margin:0;
+        margin-left:80%;
         padding:0;
+        position:absolute;
     }
 
     #signbar ul{
@@ -201,7 +203,7 @@
         margin:0;
         padding:0;
         list-style:none;
-        float:right;
+
         background:#999;
     }
 
