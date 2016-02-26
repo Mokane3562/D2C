@@ -39,7 +39,7 @@ public class TerminalCaller {
 	
 	public static IOPipe aout(String user, String path, String args) throws IOException{
 		String command = "./a.out" + args;
-		return call(user, path, args);
+		return call(user, path, command);
 	}
 	
 	public static IOPipe javac(String user, String path, String args) throws IOException{

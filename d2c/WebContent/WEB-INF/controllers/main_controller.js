@@ -6,5 +6,8 @@
 app.controller('main_controller',['$scope', 'example_service', function($scope, example_service){
 	$scope.course = example_service()[0];
 	$scope.submission = example_service()[1];
-	console.log($scope.example)
+	$scope.compile_c = c_compile_request();
+	$scope.run_c = c_run_request();
+	$scope.compile_java = java_compile_request();
+	$scope.run_java = java_run_request();
 }]);

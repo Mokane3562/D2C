@@ -56,15 +56,20 @@
             <input type="radio" name="courseList" value="courseFour"><span> Course Four</span><br>
             <input type="radio" name="courseList" value="courseFive"><span> Course Five</span><br>  
             <h2>Action: </h2>
-            <button type="courseInfo" value="Submit">Course Information</button>
-            <button type="assignments" value="Submit">Assignments</button>
-            <button type="workspace" value="Submit">Workspace</button><br>
-            <button type="testing" value="Submit">Testing</button>
-            <button type="submissions" value="Submit">{{submission.name}}</button>
-            <button type="grades" value="Submit">{{course.name}}</button><br>
+            <div class="button" id="courseInfo">Course Information</div>
+            <div class="button" id="assignments">Assignments</div>
+            <div class="button" id="workspace">Workspace</div><br>
+            <div class="button" id="testing">Testing</div>
+            <div class="button" id="submissions">{{submission.name}}</div>
+            <div class="button" id="grades">{{course.name}}</div>
+            <br>
         </form> 
+        <div class="button" id="compile_c" ng-click="">Compile C Code</div>
+        <div class="button" id="compile_java" ng-click="">Compile Java Code</div>
+        <div class="button" id="run_c" ng-click="">Compile C Code</div>
+        <div class="button" id="run_java" ng-click="">Compile C Code</div>
 	    <textarea rows="240" cols="80">
-		
+			Code Here!
 	    </textarea> 
     </body>
 </html> 
