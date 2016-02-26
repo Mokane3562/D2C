@@ -2,9 +2,11 @@
 <html ng-app="d2c_main">
     <head>
         <title> G-Unit:Student </title>
-        <link rel="shortcut icon" href="http://i65.tinypic.com/24fmoet.png">
+        <link rel="shortcut icon" href="https://www.google.ca/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=0ahUKEwi31KL_hZbLAhVH8j4KHQmGCkwQjRwIBw&url=http%3A%2F%2Fgteam4everunited.blogspot.com%2F2010%2F06%2Fg-team.html&psig=AFQjCNFOVY2KpLRaURlAvP6berU5pcpl5A&ust=1456597316806682">
         <link rel="stylesheet" href="style/style.css">
         <script type="text/javascript" src="shared/angular.js"></script>
+        <script>document.write('<base href="' + document.location + '" />');</script>
+        <script src="http://code.angularjs.org/1.1.3/angular.js"></script>
         <script type="text/javascript" src="shared/d3.v3.js"></script>
         <script type="text/javascript" src="apps/main.js"></script>
         <script type="text/javascript" src="controllers/main_controller.js"></script>
@@ -42,7 +44,7 @@
             <div id="holder">
                 <ul>
                     <li><a href="#" id="onlink">Students</a></li>
-                    <li><a href="ta.html" >Teaching Assistant</a></li>
+                    <li><a href="ta.html">Teaching Assistant</a></li>
                     <li><a href="prof.html" >Professor</a></li>
                 </ul>
             </div><!--end of holder div -->
@@ -56,18 +58,19 @@
             <input type="radio" name="courseList" value="courseFour"><span> Course Four</span><br>
             <input type="radio" name="courseList" value="courseFive"><span> Course Five</span><br>  
             <h2>Action: </h2>
-            <div class="button" id="courseInfo">Course Information</div>
-            <div class="button" id="assignments">Assignments</div>
-            <div class="button" id="workspace">Workspace</div><br>
-            <div class="button" id="testing">Testing</div>
-            <div class="button" id="submissions">Submissions</div>
-            <div class="button" id="grades">Grades</div>
+
+            <div class="button" id="courseInfo" go-click="">Course Information</div>
+            <div class="button" id="assignments" go-click="">Assignments</div>
+            <div class="button" id="workspace" go-click="">Workspace</div><br>
+            <div class="button" id="testing" go-click="">Testing</div>
+            <div class="button" id="submissions" go-click="">Submissions</div>
+            <div class="button" id="grades" go-click="">Grades</div>
             <br>
         </form> 
-        <div class="button" id="compile_c" ng-click="">Compile C Code</div>
-        <div class="button" id="compile_java" ng-click="">Compile Java Code</div>
-        <div class="button" id="run_c" ng-click="">Run C Code</div>
-        <div class="button" id="run_java" ng-click="">Run Java Code</div>
+        <div class="button" id="compile_c" go-click="">Compile C Code</div>
+        <div class="button" id="compile_java" go-click="">Compile Java Code</div>
+        <div class="button" id="run_c" go-click="">Run C Code</div>
+        <div class="button" id="run_java" go-click="">Run Java Code</div>
 	    <textarea rows="240" cols="80">
 			Code Here!
 	    </textarea> 
