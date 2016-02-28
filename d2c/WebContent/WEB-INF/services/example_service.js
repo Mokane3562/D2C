@@ -1,5 +1,5 @@
-app.factory('example_service',function(){
+app.factory('example_service',[function(){
 	return function() {
 		
 	}
-});
+}]);

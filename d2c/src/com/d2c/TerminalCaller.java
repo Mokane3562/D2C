@@ -4,13 +4,18 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class TerminalCaller {
 
 	public static void saveFile(String user, String path, String name, String contents) throws IOException{
 		//make temporary file
+		File dir = new File("/tmp/"+user+path);
 		File file = new File("/tmp/"+user+path+"/"+name);
-		file.mkdirs();
+		dir.mkdirs();
 		file.createNewFile();
 		//write code contents to temporary file
 		BufferedWriter bw = new BufferedWriter(new FileWriter(file));
@@ -19,7 +24,7 @@ public class TerminalCaller {
 	}
 	
 	public static void clearTempUserFiles(String user, String path){
-		File file = new File("/tmp/"+user+path);
+		File file = new File("/tmp/"+user);
 		delete(file);
 	}
 	
@@ -32,31 +37,48 @@ public class TerminalCaller {
 		file.delete();
 	}
 	
-	public static IOPipe gcc(String user, String path, String args) throws IOException{
-		String command = "gcc " + args;
+	public static IOPipe gcc(String user, String path, List<String> args) throws IOException, InterruptedException{
+		ArrayList<String> command = new ArrayList<>();
+		command.add("gcc");
+		command.addAll(args);
 		return call(user, path, command);
 	}
 	
-	public static IOPipe aout(String user, String path, String args) throws IOException{
-		String command = "./a.out" + args;
+	public static IOPipe aout(String user, String path, List<String> args) throws IOException, InterruptedException{
+		ArrayList<String> command = new ArrayList<>();
+		command.add("./a.out");
+		command.addAll(args);
 		return call(user, path, command);
 	}
 	
-	public static IOPipe javac(String user, String path, String args) throws IOException{
-		String command = "javac " + args;
+	public static IOPipe javac(String user, String path, List<String> args) throws IOException, InterruptedException{
+		ArrayList<String> command = new ArrayList<>();
+		command.add("javac");
+		command.addAll(args);
 		return call(user, path, command);
 	}
 	
-	public static IOPipe java(String user, String path, String args) throws IOException{
-		String command = "java " + args;
+	public static IOPipe java(String user, String path, List<String> args) throws IOException, InterruptedException{
+		ArrayList<String> command = new ArrayList<>();
+		command.add("java");
+		command.addAll(args);
 		return call(user, path, command);
 	}
 	
-	private static IOPipe call(String user, String path, String command) throws IOException{
-		Process process = new ProcessBuilder(command)
+	public static IOPipe ls(String user, String path, List<String> args) throws IOException, InterruptedException{
+		ArrayList<String> command = new ArrayList<>();
+		command.add("ls");
+		command.addAll(args);
+		return call(user, path, command);
+	}
+	
+	private static IOPipe call(String user, String path, List<String> command) throws IOException, InterruptedException{
+		ProcessBuilder processBuilder = new ProcessBuilder(command)
 								.redirectErrorStream(true)
-								.directory(new File("/tmp/"+user+path))
-								.start();
+								.directory(new File("/tmp/"+user+path));
+		System.out.println(processBuilder.command().get(0));
+		Process process = processBuilder.start();
+		process.waitFor();
 		return new IOPipe(process);
 	}
 }

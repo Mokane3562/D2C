@@ -11,6 +11,7 @@
         <script type="text/javascript" src="apps/main.js"></script>
         <script type="text/javascript" src="controllers/main_controller.js"></script>
         <script type="text/javascript" src="services/example_service.js"></script>
+        <script type="text/javascript" src="services/c_compile_request.js"></script>
     </head>
     <body bgcolor="#262626" ng-controller="main_controller">
         <div id="header"><img src="http://i65.tinypic.com/24fmoet.png" border="0"></div><!--end of header div -->
@@ -31,9 +32,9 @@
             </div><!--end of menubar div -->
             <div id="signbar">
                 <ul>
-                    <li><a href="#">Sign Out</a>
+                    <li><a href="#">Sign In</a>
                         <ul>
-                            <li><a href="#">Save</a></li>
+                            <li><a href="#"><textarea id="user_name" rows="1" cols="25">User Name</textarea></a></li>
                             <li><a href="#">Sign Out</a></li>
                         </ul>
                     </li>
@@ -59,20 +60,25 @@
             <input type="radio" name="courseList" value="courseFive"><span> Course Five</span><br>  
             <h2>Action: </h2>
 
-            <div class="button" id="courseInfo" go-click="">Course Information</div>
-            <div class="button" id="assignments" go-click="">Assignments</div>
-            <div class="button" id="workspace" go-click="">Workspace</div><br>
-            <div class="button" id="testing" go-click="">Testing</div>
-            <div class="button" id="submissions" go-click="">Submissions</div>
-            <div class="button" id="grades" go-click="">Grades</div>
+            <div class="button" id="courseInfo" ng-click="">Course Information</div>
+            <div class="button" id="assignments" ng-click="">Assignments</div>
+            <div class="button" id="workspace" ng-click="">Workspace</div><br>
+            <div class="button" id="testing" ng-click="">Testing</div>
+            <div class="button" id="submissions" ng-click="">Submissions</div>
+            <div class="button" id="grades" ng-click="">Grades</div>
             <br>
         </form> 
-        <div class="button" id="compile_c" go-click="">Compile C Code</div>
-        <div class="button" id="compile_java" go-click="">Compile Java Code</div>
-        <div class="button" id="run_c" go-click="">Run C Code</div>
-        <div class="button" id="run_java" go-click="">Run Java Code</div>
-	    <textarea rows="240" cols="80">
+        <div class="button" id="compile_c" ng-click="c_compile_function()">Compile C Code</div>
+        <div class="button" id="compile_java" ng-click="">Compile Java Code</div>
+        <div class="button" id="run_c" ng-click="">Run C Code</div>
+        <div class="button" id="run_java" ng-click="">Run Java Code</div>
+        <textarea id="path" rows="1" cols="50">
+        </textarea>
+	    <textarea id="code" rows="40" cols="80">
 			Code Here!
-	    </textarea> 
+	    </textarea>
+	    <div>
+			{{output}}
+	    </div> 
     </body>
 </html> 
