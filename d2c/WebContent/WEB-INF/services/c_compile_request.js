@@ -1,7 +1,7 @@
 /**
  * 
  */
-app.factory('c_compile_request',[ '$q', '$http',function($q, $http){
+app.factory('c_compile_request',[ '$q', '$http', function($q, $http){
 	return function(code, user, path){
 		var deferred = $q.defer();
 		console.log('/d2c/code/'+user+'/'+path.split("/").join("_")+'/c');

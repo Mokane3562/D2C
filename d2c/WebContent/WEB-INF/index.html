@@ -5,7 +5,6 @@
         <link rel="shortcut icon" href="https://www.google.ca/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=0ahUKEwi31KL_hZbLAhVH8j4KHQmGCkwQjRwIBw&url=http%3A%2F%2Fgteam4everunited.blogspot.com%2F2010%2F06%2Fg-team.html&psig=AFQjCNFOVY2KpLRaURlAvP6berU5pcpl5A&ust=1456597316806682">
         <link rel="stylesheet" href="style/style.css">
         <script type="text/javascript" src="shared/angular.js"></script>
-        <script>document.write('<base href="' + document.location + '" />');</script>
         <script src="http://code.angularjs.org/1.1.3/angular.js"></script>
         <script type="text/javascript" src="shared/d3.v3.js"></script>
         <script type="text/javascript" src="apps/main.js"></script>
@@ -52,22 +51,17 @@
         </div><!--end of navbar div -->
         <h1>Welcome Students!</h1>
         <h2>Select a Course: </h2>
-        <form>
-            <input type="radio" name="courseList" value="courseOne" checked><span> Course One</span><br>
-            <input type="radio" name="courseList" value="courseTwo" ><span> Course Two</span><br>
-            <input type="radio" name="courseList" value="courseThree"><span> Course Three</span><br>
-            <input type="radio" name="courseList" value="courseFour"><span> Course Four</span><br>
-            <input type="radio" name="courseList" value="courseFive"><span> Course Five</span><br>  
-            <h2>Action: </h2>
-
-            <div class="button" id="courseInfo" ng-click="">Course Information</div>
-            <div class="button" id="assignments" ng-click="">Assignments</div>
-            <div class="button" id="workspace" ng-click="">Workspace</div><br>
-            <div class="button" id="testing" ng-click="">Testing</div>
-            <div class="button" id="submissions" ng-click="">Submissions</div>
-            <div class="button" id="grades" ng-click="">Grades</div>
-            <br>
-        </form> 
+        <div class="course_div" ng-repeat="course in courseList" ng-click="courseHandler(course)">
+            {{course.subject + " " + course.number + ": " + course.name}}
+        </div>
+        <h2>Action: </h2>
+        <div class="button" id="courseInfo" ng-click="">Course Information</div>
+        <div class="button" id="assignments" ng-click="">Assignments</div>
+        <div class="button" id="workspace" ng-click="">Workspace</div><br>
+        <div class="button" id="testing" ng-click="">Testing</div>
+        <div class="button" id="submissions" ng-click="">Submissions</div>
+        <div class="button" id="grades" ng-click="">Grades</div>
+        <br>
         <div class="button" id="compile_c" ng-click="c_compile_function()">Compile C Code</div>
         <div class="button" id="compile_java" ng-click="">Compile Java Code</div>
         <div class="button" id="run_c" ng-click="">Run C Code</div>

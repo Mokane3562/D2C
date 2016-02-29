@@ -27,6 +27,21 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		);
 		console.log("c_compile_function starting");
 	};
-
+	$scope.courseList = [];
+	$scope.getCourseList = function(){
+		var user = document.getElementById("user_name").value;
+		var password = document.getElementById("user_name").value;
+		getMeMYMotherFuckingCourses(user, password).then(
+				function(response){
+					$scope.courseList = response.data.courseList;
+				},
+				function(errors){
+					//TODO deal with the error
+				}
+		);
+	}
+	$scope.courseHandler = function(course){
+		//TODO something fucking useful with a course i guess?
+	}
 	console.log("main controller loaded");
 }]);
