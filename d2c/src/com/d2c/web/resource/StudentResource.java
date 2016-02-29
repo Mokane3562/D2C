@@ -1,4 +1,4 @@
-package com.d2c;
+package com.d2c.web.resource;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -12,22 +12,24 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("/professor")
-public class ProfessorResource {
+import com.d2c.web.beans.TransferableStudent;
+
+@Path("/student")
+public class StudentResource {
 	
 	@GET
-	@Path("/{prof_user_name}")
+	@Path("/{student_user_name}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getProfessorInfo(@PathParam("prof_user_name") String profUserName){
+	public Response getStudentInfo(@PathParam("student_user_name") String studentUserName){
 		//TODO Some sql shit to get my object
 		
 		//TODO check that object exists
 		boolean check = true;
 		//if it exists then save it to a java object and return through response
 		if(check){
-			TransferableProf p = new TransferableProf();
+			TransferableStudent s = new TransferableStudent();
 			return Response.ok()
-					.entity(p)
+					.entity(s)
 					.build();
 		} else { // else return a not found
 			return Response.noContent().build();
@@ -35,14 +37,14 @@ public class ProfessorResource {
 	}
 
 	@POST
-	@Path("/{prof_user_name}")
+	@Path("/{student_user_name}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response makeProfessor(@PathParam("prof_user_name") String profUserName, 
-			TransferableProf prof){
+	public Response createOrUpdateStudent(@PathParam("student_user_name") String studentUserName,
+			TransferableStudent student){
 		//TODO make this post the course info to the DB
 		
 		try {
-			return Response.created(new URI("/"+profUserName))
+			return Response.created(new URI("/"+studentUserName))
 					.build();
 		} catch (URISyntaxException e) {
 			return Response.serverError().build();

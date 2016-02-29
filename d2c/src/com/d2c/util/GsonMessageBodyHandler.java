@@ -1,4 +1,4 @@
-package com.d2c;
+package com.d2c.util;
 
 import java.io.IOException;
 import java.io.InputStream;

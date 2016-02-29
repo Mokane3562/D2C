@@ -1,4 +1,4 @@
-package com.d2c;
+package com.d2c.web.resource;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -12,20 +12,24 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("/student")
-public class StudentResource {
+import com.d2c.web.beans.TransferableSubmission;
+
+@Path("/submission")
+public class SubmissionResource {
 	
 	@GET
-	@Path("/{student_user_name}")
+	@Path("/{course_id}/{student_user_name}/{assignment}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getStudentInfo(@PathParam("student_user_name") String studentUserName){
+	public Response getSubmissionInfo(@PathParam("course_id") String courseID, 
+	                 @PathParam("student_user_name") String studentUserName, 
+	                 @PathParam("assignment") String assignment){
 		//TODO Some sql shit to get my object
 		
 		//TODO check that object exists
 		boolean check = true;
 		//if it exists then save it to a java object and return through response
 		if(check){
-			TransferableStudent s = new TransferableStudent();
+			TransferableSubmission s = new TransferableSubmission();
 			return Response.ok()
 					.entity(s)
 					.build();
@@ -35,14 +39,15 @@ public class StudentResource {
 	}
 
 	@POST
-	@Path("/{student_user_name}")
+	@Path("/{course_id}/{student_user_name}/{assignment}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createOrUpdateStudent(@PathParam("student_user_name") String studentUserName,
-			TransferableStudent student){
+	public Response uploadOrUpdateSubmission(@PathParam("course_id") String courseID, 
+	                @PathParam("student_user_name") String studentUserName, 
+	                @PathParam("assignment") String assignment, TransferableSubmission submission){
 		//TODO make this post the course info to the DB
 		
 		try {
-			return Response.created(new URI("/"+studentUserName))
+			return Response.created(new URI("/"+courseID+"/"+studentUserName+"/"+assignment))
 					.build();
 		} catch (URISyntaxException e) {
 			return Response.serverError().build();

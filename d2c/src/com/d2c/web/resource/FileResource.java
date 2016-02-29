@@ -1,4 +1,4 @@
-package com.d2c;
+package com.d2c.web.resource;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -11,6 +11,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import com.d2c.web.beans.TransferableFile;
 
 @Path("/file")
 public class FileResource{

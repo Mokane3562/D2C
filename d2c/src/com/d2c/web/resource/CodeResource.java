@@ -1,4 +1,4 @@
-package com.d2c;
+package com.d2c.web.resource;
 
 import java.io.BufferedReader;
 //import java.io.BufferedWriter; //Uncomment later when we figure out the stream problem
@@ -16,8 +16,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.d2c.util.IOPipe;
+import com.d2c.util.TerminalCaller;
+
 @Path("/code/{user}/{path}")
-public class CodeHandler {
+public class CodeResource {
 	
 	@POST
 	@Path("/c")

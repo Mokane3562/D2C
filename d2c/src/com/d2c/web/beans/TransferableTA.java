@@ -1,4 +1,4 @@
-package com.d2c;
+package com.d2c.web.beans;
 
 public class TransferableTA {
 
