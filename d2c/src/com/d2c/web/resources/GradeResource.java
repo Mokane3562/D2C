@@ -1,4 +1,4 @@
-package com.d2c.web.resource;
+package com.d2c.web.resources;
 
 import java.net.URI;
 import java.net.URISyntaxException;

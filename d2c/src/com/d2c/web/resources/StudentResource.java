@@ -1,4 +1,4 @@
-package com.d2c.web.resource;
+package com.d2c.web.resources;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -12,24 +12,22 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.d2c.web.beans.TransferableSubmission;
+import com.d2c.web.beans.TransferableStudent;
 
-@Path("/submission")
-public class SubmissionResource {
+@Path("/student")
+public class StudentResource {
 	
 	@GET
-	@Path("/{course_id}/{student_user_name}/{assignment}")
+	@Path("/{student_user_name}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getSubmissionInfo(@PathParam("course_id") String courseID, 
-	                 @PathParam("student_user_name") String studentUserName, 
-	                 @PathParam("assignment") String assignment){
+	public Response getStudentInfo(@PathParam("student_user_name") String studentUserName){
 		//TODO Some sql shit to get my object
 		
 		//TODO check that object exists
 		boolean check = true;
 		//if it exists then save it to a java object and return through response
 		if(check){
-			TransferableSubmission s = new TransferableSubmission();
+			TransferableStudent s = new TransferableStudent();
 			return Response.ok()
 					.entity(s)
 					.build();
@@ -39,15 +37,14 @@ public class SubmissionResource {
 	}
 
 	@POST
-	@Path("/{course_id}/{student_user_name}/{assignment}")
+	@Path("/{student_user_name}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response uploadOrUpdateSubmission(@PathParam("course_id") String courseID, 
-	                @PathParam("student_user_name") String studentUserName, 
-	                @PathParam("assignment") String assignment, TransferableSubmission submission){
+	public Response createOrUpdateStudent(@PathParam("student_user_name") String studentUserName,
+			TransferableStudent student){
 		//TODO make this post the course info to the DB
 		
 		try {
-			return Response.created(new URI("/"+courseID+"/"+studentUserName+"/"+assignment))
+			return Response.created(new URI("/"+studentUserName))
 					.build();
 		} catch (URISyntaxException e) {
 			return Response.serverError().build();

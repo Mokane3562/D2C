@@ -1,4 +1,4 @@
-package com.d2c.web.resource;
+package com.d2c.web.resources;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

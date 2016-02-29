@@ -1,4 +1,4 @@
-package com.d2c.web.resource;
+package com.d2c.web.resources;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -12,24 +12,25 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.d2c.web.beans.TransferableStudent;
+import com.d2c.web.beans.TransferableAssignment;
 
-@Path("/student")
-public class StudentResource {
+@Path("/assignment")
+public class AssignmentResource {
 	
 	@GET
-	@Path("/{student_user_name}")
+	@Path("/{course_id}/{assignment}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getStudentInfo(@PathParam("student_user_name") String studentUserName){
-		//TODO Some sql shit to get my object
+	public Response getCourseInfo(@PathParam("course_id") String courseID, 
+			@PathParam("assignment") String assignment){
+		//Some sql shit to get my object
 		
-		//TODO check that object exists
+		//check that object exists
 		boolean check = true;
 		//if it exists then save it to a java object and return through response
 		if(check){
-			TransferableStudent s = new TransferableStudent();
+			TransferableAssignment a = new TransferableAssignment();
 			return Response.ok()
-					.entity(s)
+					.entity(a)
 					.build();
 		} else { // else return a not found
 			return Response.noContent().build();
@@ -37,14 +38,14 @@ public class StudentResource {
 	}
 
 	@POST
-	@Path("/{student_user_name}")
+	@Path("/{course_id}/{assignment}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createOrUpdateStudent(@PathParam("student_user_name") String studentUserName,
-			TransferableStudent student){
+	public Response createOrUpdateAssignment(@PathParam("course_id") String courseID, 
+			@PathParam("assignment") String assignment, TransferableAssignment context){
 		//TODO make this post the course info to the DB
 		
 		try {
-			return Response.created(new URI("/"+studentUserName))
+			return Response.created(new URI("/"+courseID+"/"+assignment))
 					.build();
 		} catch (URISyntaxException e) {
 			return Response.serverError().build();

@@ -1,4 +1,4 @@
-package com.d2c.web.resource;
+package com.d2c.web.resources;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -12,25 +12,24 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.d2c.web.beans.TransferableAssignment;
+import com.d2c.web.beans.TransferableProf;
 
-@Path("/assignment")
-public class AssignmentResource {
+@Path("/professor")
+public class ProfessorResource {
 	
 	@GET
-	@Path("/{course_id}/{assignment}")
+	@Path("/{prof_user_name}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getCourseInfo(@PathParam("course_id") String courseID, 
-			@PathParam("assignment") String assignment){
-		//Some sql shit to get my object
+	public Response getProfessorInfo(@PathParam("prof_user_name") String profUserName){
+		//TODO Some sql shit to get my object
 		
-		//check that object exists
+		//TODO check that object exists
 		boolean check = true;
 		//if it exists then save it to a java object and return through response
 		if(check){
-			TransferableAssignment a = new TransferableAssignment();
+			TransferableProf p = new TransferableProf();
 			return Response.ok()
-					.entity(a)
+					.entity(p)
 					.build();
 		} else { // else return a not found
 			return Response.noContent().build();
@@ -38,14 +37,14 @@ public class AssignmentResource {
 	}
 
 	@POST
-	@Path("/{course_id}/{assignment}")
+	@Path("/{prof_user_name}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createOrUpdateAssignment(@PathParam("course_id") String courseID, 
-			@PathParam("assignment") String assignment, TransferableAssignment context){
+	public Response makeProfessor(@PathParam("prof_user_name") String profUserName, 
+			TransferableProf prof){
 		//TODO make this post the course info to the DB
 		
 		try {
-			return Response.created(new URI("/"+courseID+"/"+assignment))
+			return Response.created(new URI("/"+profUserName))
 					.build();
 		} catch (URISyntaxException e) {
 			return Response.serverError().build();
