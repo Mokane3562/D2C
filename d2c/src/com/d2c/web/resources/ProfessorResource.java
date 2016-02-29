@@ -16,21 +16,20 @@ import com.d2c.web.beans.TransferableProf;
 
 @Path("/professor")
 public class ProfessorResource {
-	
+
 	@GET
 	@Path("/{prof_user_name}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getProfessorInfo(@PathParam("prof_user_name") String profUserName){
-		//TODO Some sql shit to get my object
-		
-		//TODO check that object exists
+	public Response getProfessorInfo(@PathParam("prof_user_name") String profUserName) {
+		// TODO Some sql shit to get my object
+
+		// TODO check that object exists
 		boolean check = true;
-		//if it exists then save it to a java object and return through response
-		if(check){
+		// if it exists then save it to a java object and return through
+		// response
+		if (check) {
 			TransferableProf p = new TransferableProf();
-			return Response.ok()
-					.entity(p)
-					.build();
+			return Response.ok().entity(p).build();
 		} else { // else return a not found
 			return Response.noContent().build();
 		}
@@ -39,13 +38,11 @@ public class ProfessorResource {
 	@POST
 	@Path("/{prof_user_name}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response makeProfessor(@PathParam("prof_user_name") String profUserName, 
-			TransferableProf prof){
-		//TODO make this post the course info to the DB
-		
+	public Response makeProfessor(@PathParam("prof_user_name") String profUserName, TransferableProf prof) {
+		// TODO make this post the course info to the DB
+
 		try {
-			return Response.created(new URI("/"+profUserName))
-					.build();
+			return Response.created(new URI("/" + profUserName)).build();
 		} catch (URISyntaxException e) {
 			return Response.serverError().build();
 		}

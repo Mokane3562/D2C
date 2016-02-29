@@ -16,22 +16,20 @@ import com.d2c.web.beans.TransferableAssignment;
 
 @Path("/assignment")
 public class AssignmentResource {
-	
+
 	@GET
 	@Path("/{course_id}/{assignment}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getCourseInfo(@PathParam("course_id") String courseID, 
-			@PathParam("assignment") String assignment){
-		//Some sql shit to get my object
-		
-		//check that object exists
+	public Response getCourseInfo(@PathParam("course_id") String courseID, @PathParam("assignment") String assignment) {
+		// Some sql shit to get my object
+
+		// check that object exists
 		boolean check = true;
-		//if it exists then save it to a java object and return through response
-		if(check){
+		// if it exists then save it to a java object and return through
+		// response
+		if (check) {
 			TransferableAssignment a = new TransferableAssignment();
-			return Response.ok()
-					.entity(a)
-					.build();
+			return Response.ok().entity(a).build();
 		} else { // else return a not found
 			return Response.noContent().build();
 		}
@@ -40,13 +38,12 @@ public class AssignmentResource {
 	@POST
 	@Path("/{course_id}/{assignment}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createOrUpdateAssignment(@PathParam("course_id") String courseID, 
-			@PathParam("assignment") String assignment, TransferableAssignment context){
-		//TODO make this post the course info to the DB
-		
+	public Response createOrUpdateAssignment(@PathParam("course_id") String courseID,
+			@PathParam("assignment") String assignment, TransferableAssignment context) {
+		// TODO make this post the course info to the DB
+
 		try {
-			return Response.created(new URI("/"+courseID+"/"+assignment))
-					.build();
+			return Response.created(new URI("/" + courseID + "/" + assignment)).build();
 		} catch (URISyntaxException e) {
 			return Response.serverError().build();
 		}

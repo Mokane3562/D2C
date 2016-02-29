@@ -15,41 +15,40 @@ import javax.ws.rs.core.Response;
 import com.d2c.web.beans.TransferableFile;
 
 @Path("/file")
-public class FileResource{
-	
+public class FileResource {
+
 	@GET
 	@Path("/{course_id}/{assignment}/{file_name}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getFileInfo(@PathParam("course_id") String courseID, 
-			@PathParam("assignment") String assignment, @PathParam("file_name") String fileName){
-		//Some sql shit to get my object
-		
-		//check that object exists
+	public Response getFileInfo(@PathParam("course_id") String courseID, @PathParam("assignment") String assignment,
+			@PathParam("file_name") String fileName) {
+		// Some sql shit to get my object
+
+		// check that object exists
 		boolean check = true;
-		//if it exists then save it to a java object and return through response
-		if(check){
+		// if it exists then save it to a java object and return through
+		// response
+		if (check) {
 			TransferableFile f = new TransferableFile();
-			return Response.ok()
-					.entity(f)
-					.build();
+			return Response.ok().entity(f).build();
 		} else { // else return a not found
 			return Response.noContent().build();
 		}
 	}
+
 	@POST
 	@Path("/{course_id}/{assignment}/{file_name}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response uploadOrUpdateFile(@PathParam("course_id") String courseID, 
-			@PathParam("assignment") String assignment,@PathParam("file_name") String fileName,
-            TransferableFile file){
-		//TODO make this post the course info to the DB
-		
+	public Response uploadOrUpdateFile(@PathParam("course_id") String courseID,
+			@PathParam("assignment") String assignment, @PathParam("file_name") String fileName,
+			TransferableFile file) {
+		// TODO make this post the course info to the DB
+
 		try {
-			return Response.created(new URI("/"+courseID+"/"+assignment+"/"+fileName))
-					.build();
+			return Response.created(new URI("/" + courseID + "/" + assignment + "/" + fileName)).build();
 		} catch (URISyntaxException e) {
 			return Response.serverError().build();
 		}
-	}	
-	
+	}
+
 }

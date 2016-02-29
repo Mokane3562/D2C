@@ -11,22 +11,22 @@ public class IOPipe {
 	private final BufferedWriter bw;
 	private final BufferedReader br;
 	private final Process process;
-	
-	public IOPipe(Process process) throws UnsupportedEncodingException{
+
+	public IOPipe(Process process) throws UnsupportedEncodingException {
 		this.process = process;
 		this.bw = new BufferedWriter(new OutputStreamWriter(process.getOutputStream()));
 		this.br = new BufferedReader(new InputStreamReader(process.getInputStream(), "UTF-8"));
 	}
-	
-	public BufferedReader getOutput(){
+
+	public BufferedReader getOutput() {
 		return this.br;
 	}
-	
-	public BufferedWriter getInput(){
+
+	public BufferedWriter getInput() {
 		return this.bw;
 	}
-	
-	public void close() throws IOException{
+
+	public void close() throws IOException {
 		this.br.close();
 		this.bw.close();
 		this.process.destroy();

@@ -19,7 +19,7 @@ import com.d2c.web.resources.TeachingAssistantResource;
 
 public class D2CApplication extends Application {
 	@Override
-	public Set<Class<?>> getClasses(){
+	public Set<Class<?>> getClasses() {
 		Set<Class<?>> s = new HashSet<>();
 		s.add(AssignmentResource.class);
 		s.add(CodeResource.class);
