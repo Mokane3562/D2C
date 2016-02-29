@@ -8,5 +8,5 @@ public class TransferableCourse {
 	public List<TransferableAssignment> assignments;
 	public String subject;
 	public String courseName;
-	public List<TransferableTeachingAssistant> teachingAssistants;
+	public List<TransferableTA> teachingAssistants;
 }

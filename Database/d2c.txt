@@ -1,0 +1,251 @@
+-- MySQL dump 10.13  Distrib 5.5.47, for debian-linux-gnu (x86_64)
+--
+-- Host: localhost    Database: d2c
+-- ------------------------------------------------------
+-- Server version	5.5.47-0ubuntu0.14.04.1
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `Account`
+--
+
+DROP TABLE IF EXISTS `Account`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Account` (
+  `username` char(20) NOT NULL,
+  `password` char(20) NOT NULL,
+  `account_id` char(20) NOT NULL,
+  `fname` char(20) NOT NULL,
+  `lname` char(20) DEFAULT NULL,
+  PRIMARY KEY (`account_id`),
+  UNIQUE KEY `username` (`username`),
+  UNIQUE KEY `account_id` (`account_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Account`
+--
+
+LOCK TABLES `Account` WRITE;
+/*!40000 ALTER TABLE `Account` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Account` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Assignment`
+--
+
+DROP TABLE IF EXISTS `Assignment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Assignment` (
+  `number` char(20) NOT NULL,
+  `course_id` char(20) NOT NULL,
+  `due_date` date NOT NULL,
+  `test_id` char(20) DEFAULT NULL,
+  `assign_id` char(20) NOT NULL,
+  PRIMARY KEY (`assign_id`),
+  UNIQUE KEY `assign_id` (`assign_id`),
+  KEY `course_id` (`course_id`),
+  CONSTRAINT `Assignment_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `Course` (`course_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Assignment`
+--
+
+LOCK TABLES `Assignment` WRITE;
+/*!40000 ALTER TABLE `Assignment` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Assignment` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Assignment_File`
+--
+
+DROP TABLE IF EXISTS `Assignment_File`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Assignment_File` (
+  `account_id` char(20) NOT NULL,
+  `assignment_id` char(20) NOT NULL,
+  `file_id` char(20) NOT NULL,
+  KEY `account_id` (`account_id`),
+  KEY `assignment_id` (`assignment_id`),
+  KEY `file_id` (`file_id`),
+  CONSTRAINT `Assignment_File_ibfk_1` FOREIGN KEY (`account_id`) REFERENCES `Account` (`account_id`),
+  CONSTRAINT `Assignment_File_ibfk_2` FOREIGN KEY (`assignment_id`) REFERENCES `Assignment` (`assign_id`),
+  CONSTRAINT `Assignment_File_ibfk_3` FOREIGN KEY (`file_id`) REFERENCES `File` (`file_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Assignment_File`
+--
+
+LOCK TABLES `Assignment_File` WRITE;
+/*!40000 ALTER TABLE `Assignment_File` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Assignment_File` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Course`
+--
+
+DROP TABLE IF EXISTS `Course`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Course` (
+  `number` char(20) NOT NULL,
+  `subject` char(20) NOT NULL,
+  `name` char(20) NOT NULL,
+  `course_id` char(20) NOT NULL,
+  PRIMARY KEY (`course_id`),
+  UNIQUE KEY `course_id` (`course_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Course`
+--
+
+LOCK TABLES `Course` WRITE;
+/*!40000 ALTER TABLE `Course` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Course` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `File`
+--
+
+DROP TABLE IF EXISTS `File`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `File` (
+  `name` char(20) NOT NULL,
+  `binary_date` date DEFAULT NULL,
+  `text_data` text,
+  `file_id` char(20) NOT NULL,
+  PRIMARY KEY (`file_id`),
+  UNIQUE KEY `file_id` (`file_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `File`
+--
+
+LOCK TABLES `File` WRITE;
+/*!40000 ALTER TABLE `File` DISABLE KEYS */;
+/*!40000 ALTER TABLE `File` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Role`
+--
+
+DROP TABLE IF EXISTS `Role`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Role` (
+  `course_id` char(20) NOT NULL,
+  `account_id` char(20) NOT NULL,
+  `type` char(20) NOT NULL,
+  `role_id` char(20) NOT NULL,
+  PRIMARY KEY (`role_id`),
+  UNIQUE KEY `role_id` (`role_id`),
+  KEY `account_id` (`account_id`),
+  KEY `course_id` (`course_id`),
+  CONSTRAINT `Role_ibfk_1` FOREIGN KEY (`account_id`) REFERENCES `Account` (`account_id`),
+  CONSTRAINT `Role_ibfk_2` FOREIGN KEY (`course_id`) REFERENCES `Course` (`course_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Role`
+--
+
+LOCK TABLES `Role` WRITE;
+/*!40000 ALTER TABLE `Role` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Role` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Submission`
+--
+
+DROP TABLE IF EXISTS `Submission`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Submission` (
+  `account_id` char(20) NOT NULL,
+  `assignment_id` char(20) NOT NULL,
+  `grade` int(11) DEFAULT NULL,
+  `submission_id` char(20) NOT NULL,
+  PRIMARY KEY (`submission_id`),
+  UNIQUE KEY `submission_id` (`submission_id`),
+  KEY `account_id` (`account_id`),
+  KEY `assignment_id` (`assignment_id`),
+  CONSTRAINT `Submission_ibfk_1` FOREIGN KEY (`account_id`) REFERENCES `Account` (`account_id`),
+  CONSTRAINT `Submission_ibfk_2` FOREIGN KEY (`assignment_id`) REFERENCES `Assignment` (`assign_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Submission`
+--
+
+LOCK TABLES `Submission` WRITE;
+/*!40000 ALTER TABLE `Submission` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Submission` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Submission_File`
+--
+
+DROP TABLE IF EXISTS `Submission_File`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Submission_File` (
+  `submission_id` char(20) NOT NULL,
+  `file_id` char(20) NOT NULL,
+  KEY `submission_id` (`submission_id`),
+  KEY `file_id` (`file_id`),
+  CONSTRAINT `Submission_File_ibfk_1` FOREIGN KEY (`submission_id`) REFERENCES `Submission` (`submission_id`),
+  CONSTRAINT `Submission_File_ibfk_2` FOREIGN KEY (`file_id`) REFERENCES `File` (`file_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Submission_File`
+--
+
+LOCK TABLES `Submission_File` WRITE;
+/*!40000 ALTER TABLE `Submission_File` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Submission_File` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2016-02-23 12:09:15
