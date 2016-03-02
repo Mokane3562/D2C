@@ -29,45 +29,139 @@ public class CodeResource {
 			Map<String, String> code) {
 		String proper_path = path.replace('_', '/');
 		try {
-			System.out.println(code.get("text"));
 			ArrayList<String> args = new ArrayList<>();
 			IOPipe pipe;
 			String output = "";
-			String line = "";
 			for (String name : code.keySet()) {
 				TerminalCaller.saveFile(user, proper_path, name + ".c", code.get(name));
 				pipe = TerminalCaller.gcc(user, proper_path, stringToList("-c " + name + ".c"));
 				args.add(name + ".o");
 				// BufferedWriter bw = pipe.getInput();
 				BufferedReader br = pipe.getOutput();
-				while ((line = br.readLine()) != null) {
-					output += line + "\n";
-				}
-				line = "";
+				output += stringContentsOfBuffer(br);
 			}
 			args.add("-o");
 			args.add("a.out");
 			pipe = TerminalCaller.gcc(user, proper_path, args);
-			// TODO Figure out how THE FUCK WE ARE GOING TO HANDLE CONTINUOUS IO
-			// STREAMS WHAT THE HELL OMG PANIC
-			// BufferedWriter bw = pipe.getInput();
 			BufferedReader br = pipe.getOutput();
-			while ((line = br.readLine()) != null) {
-				output += line + "\n";
-			}
+			output += stringContentsOfBuffer(br);
 			System.out.println("returning ok response");
 			// TerminalCaller.clearTempUserFiles(user, proper_path);
 			return Response.ok().entity(output).build();
 		} catch (IOException e) {
 			// TerminalCaller.clearTempUserFiles(user, proper_path);
-			System.out.println("returning server error response from IOException");
-			System.out.println(e.getMessage());
-			return Response.serverError().entity("Error handling files").build();
+			return serverError("returning server error response from IOException", "Error handling files", e);
 		} catch (InterruptedException e) {
 			// TerminalCaller.clearTempUserFiles(user, proper_path);
-			System.out.println("returning server error response from InterruptedException");
-			System.out.println(e.getMessage());
-			return Response.serverError().entity("Error waiting for process").build();
+			return serverError("returning server error response from InterruptedException", "Error waiting for process", e);
+		}
+	}
+	
+	@POST
+	@Path("/javac")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response compileJavaCode(@PathParam("user") String user, @PathParam("path") String path,
+			Map<String, String> code) {
+		String proper_path = path.replace('_', '/');
+		try {
+			ArrayList<String> args = new ArrayList<>();
+			IOPipe pipe;
+			String output = "";
+			for (String name : code.keySet()) {
+				TerminalCaller.saveFile(user, proper_path, name + ".c", code.get(name));
+				pipe = TerminalCaller.gcc(user, proper_path, stringToList("-c " + name + ".c"));
+				args.add(name + ".o");
+				// BufferedWriter bw = pipe.getInput();
+				BufferedReader br = pipe.getOutput();
+				output += stringContentsOfBuffer(br);
+			}
+			args.add("-o");
+			args.add("a.out");
+			pipe = TerminalCaller.gcc(user, proper_path, args);
+			BufferedReader br = pipe.getOutput();
+			output += stringContentsOfBuffer(br);
+			System.out.println("returning ok response");
+			// TerminalCaller.clearTempUserFiles(user, proper_path);
+			return Response.ok().entity(output).build();
+		} catch (IOException e) {
+			// TerminalCaller.clearTempUserFiles(user, proper_path);
+			return serverError("returning server error response from IOException", "Error handling files", e);
+		} catch (InterruptedException e) {
+			// TerminalCaller.clearTempUserFiles(user, proper_path);
+			return serverError("returning server error response from InterruptedException", "Error waiting for process", e);
+		}
+	}
+	
+	@POST
+	@Path("/c")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response runJavaClass(@PathParam("user") String user, @PathParam("path") String path,
+			Map<String, String> code) {
+		String proper_path = path.replace('_', '/');
+		try {
+			ArrayList<String> args = new ArrayList<>();
+			IOPipe pipe;
+			String output = "";
+			for (String name : code.keySet()) {
+				TerminalCaller.saveFile(user, proper_path, name + ".c", code.get(name));
+				pipe = TerminalCaller.gcc(user, proper_path, stringToList("-c " + name + ".c"));
+				args.add(name + ".o");
+				// BufferedWriter bw = pipe.getInput();
+				BufferedReader br = pipe.getOutput();
+				output += stringContentsOfBuffer(br);
+			}
+			args.add("-o");
+			args.add("a.out");
+			pipe = TerminalCaller.gcc(user, proper_path, args);
+			BufferedReader br = pipe.getOutput();
+			output += stringContentsOfBuffer(br);
+			System.out.println("returning ok response");
+			// TerminalCaller.clearTempUserFiles(user, proper_path);
+			return Response.ok().entity(output).build();
+		} catch (IOException e) {
+			// TerminalCaller.clearTempUserFiles(user, proper_path);
+			return serverError("returning server error response from IOException", "Error handling files", e);
+		} catch (InterruptedException e) {
+			// TerminalCaller.clearTempUserFiles(user, proper_path);
+			return serverError("returning server error response from InterruptedException", "Error waiting for process", e);
+		}
+	}
+	
+	@POST
+	@Path("/c")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response runCompiledClass(@PathParam("user") String user, @PathParam("path") String path,
+			Map<String, String> code) {
+		String proper_path = path.replace('_', '/');
+		try {
+			ArrayList<String> args = new ArrayList<>();
+			IOPipe pipe;
+			String output = "";
+			for (String name : code.keySet()) {
+				TerminalCaller.saveFile(user, proper_path, name + ".c", code.get(name));
+				pipe = TerminalCaller.gcc(user, proper_path, stringToList("-c " + name + ".c"));
+				args.add(name + ".o");
+				// BufferedWriter bw = pipe.getInput();
+				BufferedReader br = pipe.getOutput();
+				output += stringContentsOfBuffer(br);
+			}
+			args.add("-o");
+			args.add("a.out");
+			pipe = TerminalCaller.gcc(user, proper_path, args);
+			BufferedReader br = pipe.getOutput();
+			output += stringContentsOfBuffer(br);
+			System.out.println("returning ok response");
+			// TerminalCaller.clearTempUserFiles(user, proper_path);
+			return Response.ok().entity(output).build();
+		} catch (IOException e) {
+			// TerminalCaller.clearTempUserFiles(user, proper_path);
+			return serverError("returning server error response from IOException", "Error handling files", e);
+		} catch (InterruptedException e) {
+			// TerminalCaller.clearTempUserFiles(user, proper_path);
+			return serverError("returning server error response from InterruptedException", "Error waiting for process", e);
 		}
 	}
 
@@ -78,5 +172,23 @@ public class CodeResource {
 			asArrayList.add(a);
 		}
 		return asArrayList;
+	}
+	
+	private String stringContentsOfBuffer(BufferedReader br) throws IOException{
+		String line = "";
+		while ((line = br.readLine()) != null) {
+			line += line + "\n";
+		}
+		return line;
+	}
+	
+	private void logError(String console, Exception e){
+		System.out.println(console);
+		System.out.println(e.getMessage());
+	}
+	
+	private Response serverError(String console, String client, Exception e){
+		logError(console, e);
+		return Response.serverError().entity(client).build();
 	}
 }
