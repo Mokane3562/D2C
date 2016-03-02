@@ -3,7 +3,6 @@ package com.d2c.web.resources;
 import java.io.BufferedReader;
 //import java.io.BufferedWriter; //Uncomment later when we figure out the stream problem
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
