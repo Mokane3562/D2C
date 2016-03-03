@@ -20,8 +20,7 @@ public class FileResource {
 	@GET
 	@Path("/{course_id}/{assignment}/{file_name}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getFileInfo(@PathParam("course_id") String courseID, @PathParam("assignment") String assignment,
-			@PathParam("file_name") String fileName) {
+	public Response getFileInfo(@PathParam("course_id") String courseID, @PathParam("assignment") String assignment, @PathParam("file_name") String fileName) {
 		// Some sql shit to get my object
 
 		// check that object exists
@@ -39,9 +38,7 @@ public class FileResource {
 	@POST
 	@Path("/{course_id}/{assignment}/{file_name}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response uploadOrUpdateFile(@PathParam("course_id") String courseID,
-			@PathParam("assignment") String assignment, @PathParam("file_name") String fileName,
-			TransferableFile file) {
+	public Response uploadOrUpdateFile(@PathParam("course_id") String courseID, @PathParam("assignment") String assignment, @PathParam("file_name") String fileName, TransferableFile file) {
 		// TODO make this post the course info to the DB
 
 		try {

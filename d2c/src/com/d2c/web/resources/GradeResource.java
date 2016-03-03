@@ -20,8 +20,7 @@ public class GradeResource {
 	@GET
 	@Path("/{course_id}/{student_user_name}/{assignment}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getGrade(@PathParam("course_id") String courseID,
-			@PathParam("student_user_name") String studentUserName, @PathParam("assignment") String assignment) {
+	public Response getGrade(@PathParam("course_id") String courseID, @PathParam("student_user_name") String studentUserName, @PathParam("assignment") String assignment) {
 		// Some sql shit to get my object
 
 		// check that object exists
@@ -39,9 +38,7 @@ public class GradeResource {
 	@POST
 	@Path("/{course_id}/{student_user_name}/{assignment}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response postGrade(@PathParam("course_id") String courseID,
-			@PathParam("student_user_name") String studentUserName, @PathParam("assignment") String assignment,
-			TransferableGrade grade) {
+	public Response postGrade(@PathParam("course_id") String courseID, @PathParam("student_user_name") String studentUserName, @PathParam("assignment") String assignment, TransferableGrade grade) {
 		// TODO make this post the course info to the DB
 
 		try {

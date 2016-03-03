@@ -38,8 +38,7 @@ public class StudentResource {
 	@POST
 	@Path("/{student_user_name}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createOrUpdateStudent(@PathParam("student_user_name") String studentUserName,
-			TransferableStudent student) {
+	public Response createOrUpdateStudent(@PathParam("student_user_name") String studentUserName, TransferableStudent student) {
 		// TODO make this post the course info to the DB
 
 		try {

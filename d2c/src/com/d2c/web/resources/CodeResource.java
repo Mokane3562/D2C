@@ -25,8 +25,7 @@ public class CodeResource {
 	@Path("/c")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response compileCCode(@PathParam("user") String user, @PathParam("path") String path,
-			Map<String, String> code) {
+	public Response compileCCode(@PathParam("user") String user, @PathParam("path") String path, Map<String, String> code) {
 		String proper_path = path.replace('_', '/');
 		try {
 			ArrayList<String> args = new ArrayList<>();
@@ -56,13 +55,12 @@ public class CodeResource {
 			return serverError("returning server error response from InterruptedException", "Error waiting for process", e);
 		}
 	}
-	
+
 	@POST
 	@Path("/javac")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response compileJavaCode(@PathParam("user") String user, @PathParam("path") String path,
-			Map<String, String> code) {
+	public Response compileJavaCode(@PathParam("user") String user, @PathParam("path") String path, Map<String, String> code) {
 		String proper_path = path.replace('_', '/');
 		try {
 			ArrayList<String> args = new ArrayList<>();
@@ -92,13 +90,12 @@ public class CodeResource {
 			return serverError("returning server error response from InterruptedException", "Error waiting for process", e);
 		}
 	}
-	
+
 	@POST
 	@Path("/java")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response runJavaClass(@PathParam("user") String user, @PathParam("path") String path,
-			Map<String, String> code) {
+	public Response runJavaClass(@PathParam("user") String user, @PathParam("path") String path, Map<String, String> code) {
 		String proper_path = path.replace('_', '/');
 		try {
 			ArrayList<String> args = new ArrayList<>();
@@ -128,13 +125,12 @@ public class CodeResource {
 			return serverError("returning server error response from InterruptedException", "Error waiting for process", e);
 		}
 	}
-	
+
 	@POST
 	@Path("/out")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response runCompiledClass(@PathParam("user") String user, @PathParam("path") String path,
-			Map<String, String> code) {
+	public Response runCompiledClass(@PathParam("user") String user, @PathParam("path") String path, Map<String, String> code) {
 		String proper_path = path.replace('_', '/');
 		try {
 			ArrayList<String> args = new ArrayList<>();
@@ -173,21 +169,21 @@ public class CodeResource {
 		}
 		return asArrayList;
 	}
-	
-	private String stringContentsOfBuffer(BufferedReader br) throws IOException{
+
+	private String stringContentsOfBuffer(BufferedReader br) throws IOException {
 		String line = "";
 		while ((line = br.readLine()) != null) {
 			line += line + "\n";
 		}
 		return line;
 	}
-	
-	private void logError(String console, Exception e){
+
+	private void logError(String console, Exception e) {
 		System.out.println(console);
 		System.out.println(e.getMessage());
 	}
-	
-	private Response serverError(String console, String client, Exception e){
+
+	private Response serverError(String console, String client, Exception e) {
 		logError(console, e);
 		return Response.serverError().entity(client).build();
 	}
