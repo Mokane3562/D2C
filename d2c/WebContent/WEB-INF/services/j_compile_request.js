@@ -4,10 +4,10 @@
 app.factory('j_compile_request',[ '$q', '$http', function($q, $http){
 	return function(code, user, path){
 		var deferred = $q.defer();
-		console.log('/d2c/code/'+user+'/'+path.split("/").join("_")+'/j');
+		console.log('/d2c/code/'+user+'/'+path.split("/").join("_")+'/javac');
 		$http({
 			method: 'POST',
-			url: '/d2c/code/'+user+'/'+path.split("/").join("_")+'/j',
+			url: '/d2c/code/'+user+'/'+path.split("/").join("_")+'/javac',
 			headers: {
 				'Content-Type': 'application/json;charset=utf-8;',
 				'accept': 'text/plain',
