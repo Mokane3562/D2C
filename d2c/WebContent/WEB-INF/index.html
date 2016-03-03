@@ -50,29 +50,42 @@
             </div><!--end of holder div -->
         </div><!--end of navbar div -->
         <h1>Welcome Students!</h1>
-        <h2>Select a Course: </h2>
+        <!--<h2>Select a Course: </h2>-->
         <div class="course_div" ng-repeat="course in courseList" ng-click="courseHandler(course)">
             {{course.subject + " " + course.number + ": " + course.name}}
         </div>
-        <h2>Action: </h2>
+        <!--<h2>Action: </h2>
         <div class="button" id="courseInfo" ng-click="">Course Information</div>
         <div class="button" id="assignments" ng-click="">Assignments</div>
         <div class="button" id="workspace" ng-click="">Workspace</div><br>
         <div class="button" id="testing" ng-click="">Testing</div>
         <div class="button" id="submissions" ng-click="">Submissions</div>
-        <div class="button" id="grades" ng-click="">Grades</div>
+        <div class="button" id="grades" ng-click="">Grades</div>-->
         <br>
-        <div class="button" id="compile_c" ng-click="c_compile_function()">Compile C Code</div>
-        <div class="button" id="compile_java" ng-click="">Compile Java Code</div>
-        <div class="button" id="run_c" ng-click="">Run C Code</div>
-        <div class="button" id="run_java" ng-click="">Run Java Code</div>
-        <textarea id="path" rows="1" cols="50">
-        </textarea>
-	    <textarea id="code" rows="40" cols="80">
-			Code Here!
-	    </textarea>
-	    <div>
-			{{output}}
-	    </div> 
+  
+        <div id="button">
+        	<div class="button green" id="compile_c" ng-click="c_compile_function()">Compile C Code</div>
+        	<div class="button green" id="compile_java" ng-click="">Compile Java Code</div>
+        	<div class="button green" id="run_c" ng-click="">Run C Code</div>
+        	<div class="button green" id="run_java" ng-click="">Run Java Code</div>
+	   </div>
+	   
+	    <div id="codeandoutput">
+	    	<div>
+	    	<textarea id="path"></textarea>
+	    	</div>
+	    	<div id="codebox">
+	    		<textarea id="textcodebox" rows="23">
+					Code Here!
+	    		</textarea>
+	    	</div>
+	   		<div id="output">
+	    		<textarea id="textoutput" rows="23">
+					{{output}}
+				</textarea>
+			</div>
+		</div> 
+		
+		
     </body>
 </html> 
