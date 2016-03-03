@@ -17,39 +17,28 @@
         <div id="wrapper">
             <div id="menubar">
                 <ul>
-                    <li><a href="#">Menu</a>
-                        <ul>
+            
                             <li><a href="#">Course Info</a></li>
                             <li><a href="#">Assignments</a></li>
                             <li><a href="#">Workspace</a></li>
                             <li><a href="#">Testing</a></li>
                             <li><a href="#">Submissions</a></li>
                             <li><a href="#">Grades</a></li>
-                        </ul>
-                    </li>
                 </ul>
             </div><!--end of menubar div -->
-            <div id="signbar">
-                <ul>
-                    <li><a href="#">Sign In</a>
-                        <ul>
-                            <li><a href="#"><textarea id="user_name" rows="1" cols="25">User Name</textarea></a></li>
-                            <li><a href="#">Sign Out</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div><!--end of signbar div -->
 	    </div><!--end of wrapper div -->
         <div id="navbar">
             <div id="holder">
                 <ul>
-                    <li><a href="#" id="onlink">Students</a></li>
-                    <li><a href="ta.html">Teaching Assistant</a></li>
-                    <li><a href="prof.html" >Professor</a></li>
+                    <li><a href="#" id="onlink">Course 1</a></li>
+                    <li><a href="#">Course 2</a></li>
+                    <li><a href="#" >Course 3</a></li>
+                    <li><a href="#" >Course 4</a></li>
+                    <li><a href="#" >Course 5</a></li>
                 </ul>
             </div><!--end of holder div -->
         </div><!--end of navbar div -->
-        <h1>Welcome Students!</h1>
+        <h1>Workspace</h1>
         <!--<h2>Select a Course: </h2>-->
         <div class="course_div" ng-repeat="course in courseList" ng-click="courseHandler(course)">
             {{course.subject + " " + course.number + ": " + course.name}}
