@@ -11,7 +11,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	});
 	$scope.c_compile_function = function(){
 		var code = {
-			"text": document.getElementById("code").value
+			"text": document.getElementById("textcodebox").value
 		};
 		var path = document.getElementById("path").value;
 		var user = document.getElementById("user_name").value;
@@ -22,7 +22,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 			},
 			function(errors){
 				console.log("failure");
-				$scope.output = "server error during compilation";
+				$scope.output = errors.data;
 			}
 		);
 		console.log("c_compile_function starting");
