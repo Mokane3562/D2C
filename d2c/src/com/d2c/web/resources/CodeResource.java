@@ -94,7 +94,7 @@ public class CodeResource {
 	}
 	
 	@POST
-	@Path("/c")
+	@Path("/java")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response runJavaClass(@PathParam("user") String user, @PathParam("path") String path,
@@ -130,7 +130,7 @@ public class CodeResource {
 	}
 	
 	@POST
-	@Path("/c")
+	@Path("/run")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response runCompiledClass(@PathParam("user") String user, @PathParam("path") String path,
