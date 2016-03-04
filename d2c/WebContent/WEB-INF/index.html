@@ -1,78 +1,85 @@
 <!doctype html>
 <html ng-app="d2c_main">
-    <head>
-        <title> G-Unit:Student </title>
-        <link rel="shortcut icon" href="http://i67.tinypic.com/2hzk5xw.png">
-        <link rel="stylesheet" href="style/style.css">
-        <script type="text/javascript" src="shared/angular.js"></script>
-        <script src="http://code.angularjs.org/1.1.3/angular.js"></script>
-        <script type="text/javascript" src="shared/d3.v3.js"></script>
-        <script type="text/javascript" src="apps/main.js"></script>
-        <script type="text/javascript" src="controllers/main_controller.js"></script>
-        <script type="text/javascript" src="services/example_service.js"></script>
-        <script type="text/javascript" src="services/c_compile_request.js"></script>
-    </head>
-    <body bgcolor="#262626" ng-controller="main_controller">
-        <div id="header"><img src="http://i67.tinypic.com/2hzk5xw.png" border="0"></div><!--end of header div -->
-        <div id="wrapper">
-            <div id="menubar">
-                <ul>
-                    <li><a href="#">Menu</a>
-                        <ul>
-                            <li><a href="#">Course Info</a></li>
-                            <li><a href="#">Assignments</a></li>
-                            <li><a href="#">Workspace</a></li>
-                            <li><a href="#">Testing</a></li>
-                            <li><a href="#">Submissions</a></li>
-                            <li><a href="#">Grades</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div><!--end of menubar div -->
-            <div id="signbar">
-                <ul>
-                    <li><a href="#">Sign In</a>
-                        <ul>
-                            <li><a href="#"><textarea id="user_name" rows="1" cols="25">User Name</textarea></a></li>
-                            <li><a href="#">Sign Out</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div><!--end of signbar div -->
-	    </div><!--end of wrapper div -->
-        <div id="navbar">
-            <div id="holder">
-                <ul>
-                    <li><a href="#" id="onlink">Students</a></li>
-                    <li><a href="ta.html">Teaching Assistant</a></li>
-                    <li><a href="prof.html" >Professor</a></li>
-                </ul>
-            </div><!--end of holder div -->
-        </div><!--end of navbar div -->
-        <h1>Welcome Students!</h1>
-        <h2>Select a Course: </h2>
-        <div class="course_div" ng-repeat="course in courseList" ng-click="courseHandler(course)">
-            {{course.subject + " " + course.number + ": " + course.name}}
-        </div>
-        <h2>Action: </h2>
+<head>
+<title>D2C</title>
+<link rel="shortcut icon"
+	href="http://1.bp.blogspot.com/_1y0y_NlpiZc/TA4jzBJgbLI/AAAAAAAAAAw/eDyCKf2wZnU/s1600/G-Team+FINAL+LG.png">
+<link rel="stylesheet" href="style/style.css">
+<script type="text/javascript" src="shared/angular.js"></script>
+<script src="http://code.angularjs.org/1.1.3/angular.js"></script>
+<script type="text/javascript" src="shared/d3.v3.js"></script>
+<script type="text/javascript" src="apps/main.js"></script>
+<script type="text/javascript" src="controllers/main_controller.js"></script>
+<script type="text/javascript" src="services/example_service.js"></script>
+<script type="text/javascript" src="services/c_compile_request.js"></script>
+</head>
+<body bgcolor="#262626" ng-controller="main_controller">
+	<div id="header">
+		<img src="http://i67.tinypic.com/2hzk5xw.png" border="0">
+	</div>
+	<!--end of header div -->
+	<div id="wrapper">
+		<div id="menubar">
+			<ul>
+
+				<li><a href="#">Course Info</a></li>
+				<li><a href="#">Assignments</a></li>
+				<li><a href="#">Workspace</a></li>
+				<li><a href="#">Testing</a></li>
+				<li><a href="#">Submissions</a></li>
+				<li><a href="#">Grades</a></li>
+			</ul>
+		</div>
+		<!--end of menubar div -->
+	</div>
+	<!--end of wrapper div -->
+	<div id="navbar">
+		<div id="holder">
+			<div class="course_div" ng-repeat="course in courseList"
+				ng-click="courseHandler(course)">{{course.subject + " " +
+				course.number + ": " + course.name}}</div>
+		</div>
+		<!--end of holder div -->
+	</div>
+	<!--end of navbar div -->
+	<h1>Workspace</h1>
+	<!--<h2>Select a Course: </h2>-->
+
+	<!--<h2>Action: </h2>
         <div class="button" id="courseInfo" ng-click="">Course Information</div>
         <div class="button" id="assignments" ng-click="">Assignments</div>
         <div class="button" id="workspace" ng-click="">Workspace</div><br>
         <div class="button" id="testing" ng-click="">Testing</div>
         <div class="button" id="submissions" ng-click="">Submissions</div>
-        <div class="button" id="grades" ng-click="">Grades</div>
-        <br>
-        <div class="button" id="compile_c" ng-click="c_compile_function()">Compile C Code</div>
-        <div class="button" id="compile_java" ng-click="">Compile Java Code</div>
-        <div class="button" id="run_c" ng-click="">Run C Code</div>
-        <div class="button" id="run_java" ng-click="">Run Java Code</div>
-        <textarea id="path" rows="1" cols="50">
-        </textarea>
-	    <textarea id="code" rows="40" cols="80">
-			Code Here!
-	    </textarea>
-	    <div>
-			{{output}}
-	    </div> 
-    </body>
-</html> 
+        <div class="button" id="grades" ng-click="">Grades</div>-->
+	<br>
+
+	<div id="button">
+		<div class="button green" id="compile_c"
+			ng-click="c_compile_function()">Compile C Code</div>
+		<div class="button green" id="compile_java"
+			ng-click="j_compile_function()">Compile Java Code</div>
+		<div class="button green" id="run_c" ng-click="">Run C Code</div>
+		<div class="button green" id="run_java" ng-click="">Run Java
+			Code</div>
+	</div>
+
+	<div id="codeandoutput">
+		<div>
+			<textarea id="path"></textarea>
+		</div>
+		<div id="codebox">
+			<textarea id="textcodebox" rows="23">
+					Code Here!
+	    		</textarea>
+		</div>
+		<div id="output">
+			<textarea id="textoutput" rows="23">
+					{{output}}
+				</textarea>
+		</div>
+	</div>
+
+
+</body>
+</html>

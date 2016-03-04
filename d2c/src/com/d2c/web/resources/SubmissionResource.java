@@ -20,8 +20,7 @@ public class SubmissionResource {
 	@GET
 	@Path("/{course_id}/{student_user_name}/{assignment}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getSubmissionInfo(@PathParam("course_id") String courseID,
-			@PathParam("student_user_name") String studentUserName, @PathParam("assignment") String assignment) {
+	public Response getSubmissionInfo(@PathParam("course_id") String courseID, @PathParam("student_user_name") String studentUserName, @PathParam("assignment") String assignment) {
 		// TODO Some sql shit to get my object
 
 		// TODO check that object exists
@@ -39,9 +38,7 @@ public class SubmissionResource {
 	@POST
 	@Path("/{course_id}/{student_user_name}/{assignment}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response uploadOrUpdateSubmission(@PathParam("course_id") String courseID,
-			@PathParam("student_user_name") String studentUserName, @PathParam("assignment") String assignment,
-			TransferableSubmission submission) {
+	public Response uploadOrUpdateSubmission(@PathParam("course_id") String courseID, @PathParam("student_user_name") String studentUserName, @PathParam("assignment") String assignment, TransferableSubmission submission) {
 		// TODO make this post the course info to the DB
 
 		try {

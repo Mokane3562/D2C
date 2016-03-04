@@ -1,0 +1,53 @@
+Group G.
+
+Domain Model:  Missing some entities:  Submissions, file, comment, marks, ...
+Extra associations (e.g. Student to TA and so on).
+
+Data Dictionary: Missing
+
+Advice:  As a desk check of the domatin model and the data dictionary, go through user stories and use cases and underline each noun and verb. For each one consider whether it should be included in the domain model and or data dictionary.  At the same time, ensure that everything in the DM & DD actually belongs there and that you are using the same word each time for the same concept and no word for more than one concept.
+
+DM & DD: 15 /30  -- Supply the data dictionary in next iteration and I will retroactively cahnge the mark.
+
+User stories: 
+
+Very good,
+
+
+Use cases:
+
+Could use more flexibility on key use cases.  Take Using Systems Editor for example.  Is it always the case that a new file needs to be created just before it is edited.  Could I edit a file that I created yesterday?  Having saved the file do I need to submit it or could I wait until tomorrow to submit it.  Really this is not so much a use case as an example of using the system.  For this one, I would break it into a number of use cases. Create file, edit file, compile and submission file, submit submission?
+
+
+
+
+Collaboration diagrams:
+
+For requirements treat the system as a black box. You are getting into archetectural design when you start looking at messages within the system.  There is nothing wrong with this, I just want to note that you are getting a head start on architectural design.  Move these to the high-level design document and revise in light of your high-level design work.
+
+US, UC, & CD: 20 /30
+
+Wireframes: 
+
+Statechart is good.  Can Prof or TA get to Student Homepage so they can act as a student?
+
+Wireframes are very well done.  I think they reveal some issues.  As a Prof, can I do anything a student an do?
+
+
+9 / 10
+
+Test plan/Technology selection:   Good.  I wonder if the client tests are all really unit tests.  For example you mention verifying communication with the database. That sounds like an integration test to me.  It is good to have integration tests, but make it clear that that is what they are.
+
+9 /10
+
+Workplan:  List the features somewhere.
+
+9 / 10
+
+Presentation:
+
+   Good
+
+9 / 10
+
+71 / 100

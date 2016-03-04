@@ -27,8 +27,7 @@ public class MainPageResource {
 		String fileAsString = "";
 		try {
 			// Get a Buffered Reader of your file as below
-			BufferedReader br = new BufferedReader(
-					new InputStreamReader(context.getResourceAsStream("/WEB-INF/index.html")));
+			BufferedReader br = new BufferedReader(new InputStreamReader(context.getResourceAsStream("/WEB-INF/index.html")));
 			// Get a stream of the contents
 			Stream<String> contents = br.lines();
 			// Collect the contents into a string, without dividing them (empty
@@ -57,8 +56,8 @@ public class MainPageResource {
 	public Response getCSSFile(@Context ServletContext context, @PathParam("css") String cssFileName) {
 		String fileAsString = "";
 		try {
-			BufferedReader br = new BufferedReader(
-					new InputStreamReader(context.getResourceAsStream("/WEB-INF/style/" + cssFileName + ".css")));
+			BufferedReader br = new BufferedReader(new InputStreamReader(context.getResourceAsStream("/WEB-INF/style/"
+					+ cssFileName + ".css")));
 			Stream<String> contents = br.lines();
 			fileAsString = contents.collect(Collectors.joining("\n"));
 			br.close();
@@ -76,8 +75,7 @@ public class MainPageResource {
 	@Path("{folder}/{js}.js")
 	// This method gets the a CSS file. Uncommented, but more or less a copy of
 	// getMainPage
-	public Response getJSfile(@Context ServletContext context, @PathParam("folder") String jsFolderName,
-			@PathParam("js") String jsFileName) {
+	public Response getJSfile(@Context ServletContext context, @PathParam("folder") String jsFolderName, @PathParam("js") String jsFileName) {
 		String fileAsString = "";
 		InputStream i = context.getResourceAsStream("/WEB-INF/" + jsFolderName + "/" + jsFileName + ".js");
 		if (i == null) {
@@ -85,8 +83,8 @@ public class MainPageResource {
 			return Response.serverError().entity("null file resource").build();
 		}
 		try {
-			BufferedReader br = new BufferedReader(new InputStreamReader(
-					context.getResourceAsStream("/WEB-INF/" + jsFolderName + "/" + jsFileName + ".js")));
+			BufferedReader br = new BufferedReader(new InputStreamReader(context.getResourceAsStream("/WEB-INF/"
+					+ jsFolderName + "/" + jsFileName + ".js")));
 			Stream<String> contents = br.lines();
 			fileAsString = contents.collect(Collectors.joining("\n"));
 			br.close();

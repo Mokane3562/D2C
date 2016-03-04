@@ -70,10 +70,9 @@ public class TerminalCaller {
 		return call(user, path, command);
 	}
 
-	private static IOPipe call(String user, String path, List<String> command)
-			throws IOException, InterruptedException {
-		ProcessBuilder processBuilder = new ProcessBuilder(command).redirectErrorStream(true)
-				.directory(new File("/tmp/" + user + path));
+	private static IOPipe call(String user, String path, List<String> command) throws IOException, InterruptedException {
+		ProcessBuilder processBuilder = new ProcessBuilder(command).redirectErrorStream(true).directory(new File("/tmp/"
+				+ user + path));
 		System.out.println(processBuilder.command().get(0));
 		Process process = processBuilder.start();
 		process.waitFor();

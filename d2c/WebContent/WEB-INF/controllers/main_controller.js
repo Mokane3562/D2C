@@ -11,7 +11,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	});
 	$scope.c_compile_function = function(){
 		var code = {
-			"text": document.getElementById("code").value
+			"text": document.getElementById("textcodebox").value
 		};
 		var path = document.getElementById("path").value;
 		var user = document.getElementById("user_name").value;
@@ -22,11 +22,35 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 			},
 			function(errors){
 				console.log("failure");
-				$scope.output = "server error during compilation";
+				$scope.output = errors.data;
 			}
 		);
 		console.log("c_compile_function starting");
 	};
+	
+	//START j_compile_function
+	
+	$scope.j_compile_function = function(){
+		var code = {
+			"text": document.getElementById("textcodebox").value
+		};
+		var path = document.getElementById("path").value;
+		var user = document.getElementById("user_name").value;
+		j_compile_request(code, user, path).then(
+			function(response){
+				console.log("success");
+				$scope.output = response.data;
+			},
+			function(errors){
+				console.log("failure");
+				$scope.output = errors.data;
+			}
+		);
+		console.log("j_compile_function starting");
+	};
+	
+	//END of j_compile_function
+	
 	$scope.courseList = [];
 	$scope.getCourseList = function(){
 		var user = document.getElementById("user_name").value;

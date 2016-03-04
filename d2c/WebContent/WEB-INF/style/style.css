@@ -1,229 +1,263 @@
-#wrapper{
-        border:1px solid;
-        width:100%;
-        height:55px;
-        margin:0;
-        background-color: #4D4D4D;
-        overflow: auto;        
-    }
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
 
-    #header{
-        font-family:"Arial Black", Gadget, sans-serif;
-        font-size:40px;
-        text-shadow:3px 3px 3px #000;
-        font-weight: bold;
-        text-align:center;
-        padding: 5px;
-        color: #31B404;
-       
-    }
+#wrapper {
+	border: 1px solid;
+	width: 100%;
+	height: 55px;
+	margin: 0;
+	background-color: #4D4D4D;
+	overflow: auto;
+}
 
-    #menubar{
-        margin:0;
-        padding:0;
-    }
+#header {
+	font-family: "Arial Black", Gadget, sans-serif;
+	font-size: 40px;
+	text-shadow: 3px 3px 3px #000;
+	font-weight: bold;
+	text-align: center;
+	padding: 5px;
+	color: #31B404;
+}
 
-    #menubar ul{
-        margin:0;
-        padding:10px;
-        line-height:30px;
-        position:absolute;
-        font-size:20px;
-    }
+#menubar {
+	margin: 0;
+	padding: 0;
+}
 
-    #menubar li{
-        margin:0;
-        padding:0;
-        list-style:none;
-        float:left;
-        postion:relative;
-        background:#999;
-    }
+#menubar ul {
+	margin: 0;
+	padding: 10px;
+	line-height: 30px;
+	position: absolute;
+	font-size: 20px;
+}
 
-    #menubar ul li a {
-        text-align:center;
-        font-family:"Arial Black", Gadget, sans-serif;
-        font-weight: bold;
-        text-decoration:none;
-        height:30px;
-        width:150px;
-        display:block;
-        color:#FFF;
-        border:1px solid #000;
-        text-shadow:1px 1px 1px #000;
-        padding: 1px;
-    }
-    
-    #menubar ul ul{
-        visibility:hidden;
-        top:32px;
- 
-    }
- 
-    #menubar ul li:hover ul{
-        visibility:visible;
-    }
+#menubar li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	float: left;
+	postion: relative;
+	background: #999;
+}
 
-    #menubar li:hover {
-        background:#31B404;
-    }
+#menubar ul li a {
+	text-align: center;
+	font-family: "Arial Black", Gadget, sans-serif;
+	font-weight: bold;
+	text-decoration: none;
+	height: 30px;
+	width: 150px;
+	display: block;
+	color: #FFF;
+	border: 1px solid #000;
+	text-shadow: 1px 1px 1px #000;
+	padding: 1px;
+}
 
-    #menubar ul li:hover ul li a:hover {
-        background:#CCC;
-        color:#000;
+#menubar ul ul {
+	visibility: hidden;
+	top: 32px;
+}
 
-    }
+#menubar ul li:hover ul {
+	visibility: visible;
+}
 
-    #navbar {
-       width: 100%;
-       border-bottom:1px solid #FFF;
-       height:60px;
-       padding-left:5%;
-       padding-right:10%;
-       margin: 5px;
-      
-    }
+#menubar li:hover {
+	background: #31B404;
+}
 
-    #holder {
-        height:60px;
-        width:100%;
-        
-    }
+#menubar ul li:hover ul li a:hover {
+	background: #CCC;
+	color: #000;
+}
 
-    #navbar #holder ul {
-        list-style:none;
-        margin:0;
-        padding:0;
-    }
+#navbar {
+	width: 100%;
+	border-bottom: 1px solid #FFF;
+	height: 60px;
+	padding-left: 5%;
+	padding-right: 10%;
+	margin: 5px;
+}
 
-    #navbar #holder ul li a {
-        text-decoration:none;
-        float:left;
-        margin-right:5px;
-        font-family:"Arial Black", Gadget, sans-serif;
-        font-weight: bold;
-        color:#FFF;
-        border:1px solid #FFF;
-        border-bottom:none;
-        text-shadow:1px 1px 1px #000;
-        padding:20px;
-        width:25%;
-        text-align:center;
-        display:block;
-        background:#31B404;
-    }
+#holder {
+	height: 60px;
+	width: 100%;
+}
 
-    #navbar #holder ul li a:hover {
-        background:#00e600;
-        color:#FFF;
-        text-shadow:4px 4px 4px #000;
+#navbar #holder ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
 
-    }
+#navbar #holder ul li a {
+	text-decoration: none;
+	float: left;
+	margin-right: 5px;
+	font-family: "Arial Black", Gadget, sans-serif;
+	font-weight: bold;
+	color: #FFF;
+	border: 1px solid #FFF;
+	border-bottom: none;
+	text-shadow: 1px 1px 1px #000;
+	padding: 20px;
+	width: 15%;
+	text-align: center;
+	display: block;
+	background: #31B404;
+}
 
-    #holder ul li a#onlink {
-        background:#262626;
-        color:#31B404;
-        border-bottom:1px solid #262626;
+#navbar #holder ul li a:hover {
+	background: #00e600;
+	color: #FFF;
+	text-shadow: 4px 4px 4px #000;
+}
 
-    }
+#holder ul li a#onlink {
+	background: #262626;
+	color: #31B404;
+	border-bottom: 1px solid #262626;
+}
 
-    #holder ul li a#onlink:hover {
-        background:#262626;
-        color:#FFF;
-        text-shadow:4px 4px 4px #000; 
-    }
-    
-    .button{
-      background-color: #31B404;
-      width:15%;
-      height:50px;
-      padding: 10px;
-      margin: 10px;    
-      font-weight: bold; 
-      color:#FFF;
-      text-shadow: 2px 2px 2px #000; 
-    }
-    .button:hover{
-      background-color: #00e600;
-      width:15%;
-      height:50px;
-      padding: 10px;
-      margin: 10px;    
-      font-weight: bold; 
-      color:#FFF;
-      text-shadow: 4px 4px 4px #000; 
-    }
-    h1{
-     color:#FFF;
-     font-weight: bold;
-     text-shadow:3px 3px 3px #000;
-    }
-    h2{
-     color:#31B404;
-     text-shadow:3px 3px 3px #000;
-    }
-    span{
-     font-weight:bold;
-     color:#FFF;
-     text-shadow:2px 2px 2px #000;
-    }
+#holder ul li a#onlink:hover {
+	background: #262626;
+	color: #FFF;
+	text-shadow: 4px 4px 4px #000;
+}
 
+.button {
+	border-radius: 5px;
+	padding: 15px 25px;
+	font-size: 12px;
+	text-decoration: none;
+	margin: 15px;
+	color: #000;
+	position: relative;
+	display: inline-block;
+	left: 14%;
+}
 
+.button:active {
+	transform: translate(0px, 5px);
+	-webkit-transform: translate(0px, 5px);
+	box-shadow: 0px 1px 0px 0px;
+}
 
-    #signbar{
-        margin-left:80%;
-        padding:0;
-        position:absolute;
-    }
+.green {
+	background-color: #00e600;
+	box-shadow: 0px 5px 0px 0px #00b300;
+}
 
-    #signbar ul{
-        margin:0;
-        padding:10px;
-        line-height:30px;
-        position:absolute;
-        font-size:20px;
-    }
+.green:hover {
+	background-color: #34ff34;
+}
 
-    #signbar li{
-        margin:0;
-        padding:0;
-        list-style:none;
+h1 {
+	color: #FFF;
+	font-weight: bold;
+	text-shadow: 3px 3px 3px #000;
+}
 
-        background:#999;
-    }
+h2 {
+	color: #31B404;
+	text-shadow: 3px 3px 3px #000;
+}
 
-    #signbar ul li a {
-        text-align:center;
-        font-family:"Arial Black", Gadget, sans-serif;
-        font-weight: bold;
-        text-decoration:none;
-        height:30px;
-        width:150px;
-        display:block;
-        color:#FFF;
-        border:1px solid #000;
-        text-shadow:1px 1px 1px #000;
-        padding: 1px;
-    }
-    
-    #signbar ul ul{
-        visibility:hidden;
-        top:32px;
- 
-    }
- 
-    #signbar ul li:hover ul{
-        visibility:visible;
-    }
+span {
+	font-weight: bold;
+	color: #FFF;
+	text-shadow: 2px 2px 2px #000;
+}
 
-    #signbar li:hover {
-        background:#31B404;
-    }
+#signbar {
+	margin-left: 80%;
+	padding: 0;
+	position: absolute;
+}
 
-    #signbar ul li:hover ul li a:hover {
-        background:#CCC;
-        color:#000;
+#signbar ul {
+	margin: 0;
+	padding: 10px;
+	line-height: 30px;
+	position: absolute;
+	font-size: 20px;
+}
 
-    }
+#signbar li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	background: #999;
+}
 
+#signbar ul li a {
+	text-align: center;
+	font-family: "Arial Black", Gadget, sans-serif;
+	font-weight: bold;
+	text-decoration: none;
+	height: 30px;
+	width: 150px;
+	display: block;
+	color: #FFF;
+	border: 1px solid #000;
+	text-shadow: 1px 1px 1px #000;
+	padding: 1px;
+}
 
+#signbar ul ul {
+	visibility: hidden;
+	top: 32px;
+}
+
+#signbar ul li:hover ul {
+	visibility: visible;
+}
+
+#signbar li:hover {
+	background: #31B404;
+}
+
+#signbar ul li:hover ul li a:hover {
+	background: #CCC;
+	color: #000;
+}
+
+#codeandoutput {
+	margin: auto;
+	width: 70%;
+	height: 400px;
+	border: 3px solid #00e600;
+	padding: 15px;
+}
+
+#path {
+	resize: none;
+	width: 100%;
+}
+
+#codebox {
+	float: left;
+	resize: none;
+	width: 48%;
+	height: 100px;
+}
+
+#textcodebox {
+	resize: none;
+	width: 100%;
+}
+
+#output {
+	float: right;
+	resize: none;
+	width: 48%;
+}
+
+#textoutput {
+	resize: none;
+	width: 100%;
+	color: black;
+}

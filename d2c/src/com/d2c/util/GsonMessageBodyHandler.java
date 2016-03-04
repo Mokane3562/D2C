@@ -38,14 +38,12 @@ public final class GsonMessageBodyHandler implements MessageBodyWriter<Object>, 
 	}
 
 	@Override
-	public boolean isReadable(Class<?> type, Type genericType, java.lang.annotation.Annotation[] annotations,
-			MediaType mediaType) {
+	public boolean isReadable(Class<?> type, Type genericType, java.lang.annotation.Annotation[] annotations, MediaType mediaType) {
 		return true;
 	}
 
 	@Override
-	public Object readFrom(Class<Object> type, Type genericType, Annotation[] annotations, MediaType mediaType,
-			MultivaluedMap<String, String> httpHeaders, InputStream entityStream) throws IOException {
+	public Object readFrom(Class<Object> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, String> httpHeaders, InputStream entityStream) throws IOException {
 		InputStreamReader streamReader = new InputStreamReader(entityStream, UTF_8);
 		try {
 			Type jsonType;
@@ -71,9 +69,7 @@ public final class GsonMessageBodyHandler implements MessageBodyWriter<Object>, 
 	}
 
 	@Override
-	public void writeTo(Object object, Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType,
-			MultivaluedMap<String, Object> httpHeaders, OutputStream entityStream)
-					throws IOException, WebApplicationException {
+	public void writeTo(Object object, Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, Object> httpHeaders, OutputStream entityStream) throws IOException, WebApplicationException {
 		OutputStreamWriter writer = new OutputStreamWriter(entityStream, UTF_8);
 		try {
 			Type jsonType;

@@ -38,8 +38,7 @@ public class AssignmentResource {
 	@POST
 	@Path("/{course_id}/{assignment}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createOrUpdateAssignment(@PathParam("course_id") String courseID,
-			@PathParam("assignment") String assignment, TransferableAssignment context) {
+	public Response createOrUpdateAssignment(@PathParam("course_id") String courseID, @PathParam("assignment") String assignment, TransferableAssignment context) {
 		// TODO make this post the course info to the DB
 
 		try {
