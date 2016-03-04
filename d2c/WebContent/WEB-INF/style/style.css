@@ -155,6 +155,10 @@
 	background-color: #34ff34;
 }
 
+#user_name {
+	visibility: hidden;
+}
+
 h1 {
 	color: #FFF;
 	font-weight: bold;
