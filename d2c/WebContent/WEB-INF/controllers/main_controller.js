@@ -9,6 +9,9 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	$scope.$watch( function () { return $location.path(); }, function (path) {
 	    $scope.path = path;
 	});
+	
+	//START c_compile_function
+	
 	$scope.c_compile_function = function(){
 		var code = {
 			"text": document.getElementById("textcodebox").value
@@ -27,6 +30,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		);
 		console.log("c_compile_function starting");
 	};
+	//END c_compile_function
 	
 	//START j_compile_function
 	
@@ -51,11 +55,12 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	
 	//END of j_compile_function
 	
+	//COURSE LIST GRABBER
 	$scope.courseList = [];
 	$scope.getCourseList = function(){
 		var user = document.getElementById("user_name").value;
 		var password = document.getElementById("user_name").value;
-		getMeMYMotherFuckingCourses(user, password).then(
+		getMeMYCourses(user, password).then(
 				function(response){
 					$scope.courseList = response.data.courseList;
 				},
@@ -68,4 +73,29 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		//TODO something fucking useful with a course i guess?
 	}
 	console.log("main controller loaded");
+	
+	//END COURSE LIST GRABBER
+	
+	//MENUBAR GRABBER
+	
+	$scope.menuList = [];
+	$scope.getMenuList = function(){
+		var user = document.getElementById("user_name").value;
+		var password = document.getElementById("user_name").value;
+		getMeMYMenubar(user, password).then(
+				function(response){
+					$scope.menuList = response.data.menuList;
+				},
+				function(errors){
+					//TODO deal with the error
+				}
+		);
+	}
+	$scope.menuHandler = function(menu){
+		//TODO something fucking useful with a course i guess?
+	}
+	console.log("main controller loaded");
+	
+	//END MENUBAR GRABBER
+	
 }]);

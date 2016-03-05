@@ -1,76 +1,41 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans);
 
-#wrapper {
-	border: 1px solid;
-	width: 100%;
-	height: 55px;
-	margin: 0;
-	background-color: #4D4D4D;
-	overflow: auto;
-}
-
 #header {
-	font-family: "Arial Black", Gadget, sans-serif;
-	font-size: 40px;
-	text-shadow: 3px 3px 3px #000;
-	font-weight: bold;
 	text-align: center;
 	padding: 5px;
 	color: #31B404;
 }
 
-#menubar {
+#wrapper {
+	border: 1px solid;
+	width: 100%;
 	margin: 0;
-	padding: 0;
+	background-color: #4D4D4D;
+	overflow: auto;
+	height:40%;
+    line-height:40%;
+    display: table;
 }
 
-#menubar ul {
-	margin: 0;
-	padding: 10px;
-	line-height: 30px;
-	position: absolute;
-	font-size: 20px;
-}
-
-#menubar li {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-	float: left;
-	postion: relative;
-	background: #999;
-}
-
-#menubar ul li a {
-	text-align: center;
-	font-family: "Arial Black", Gadget, sans-serif;
+#menubar .button{
+    color: #FFF;
 	font-weight: bold;
-	text-decoration: none;
-	height: 30px;
-	width: 150px;
-	display: block;
-	color: #FFF;
-	border: 1px solid #000;
 	text-shadow: 1px 1px 1px #000;
-	padding: 1px;
-}
+    font-family: "Arial Black", Gadget, sans-serif;
+    text-align: center;
+    float:left;
+    display: table-cell; 
 
-#menubar ul ul {
-	visibility: hidden;
-	top: 32px;
 }
+#menubar .button:hover{
+    color: #31B404;
+	font-weight: bold;
+	text-shadow: 2px 2px 2px #000;
+    font-family: "Arial Black", Gadget, sans-serif;
+    text-align: center;
+    float:left;
+    display: table-cell; 
 
-#menubar ul li:hover ul {
-	visibility: visible;
-}
-
-#menubar li:hover {
-	background: #31B404;
-}
-
-#menubar ul li:hover ul li a:hover {
-	background: #CCC;
-	color: #000;
 }
 
 #navbar {
@@ -78,7 +43,7 @@
 	border-bottom: 1px solid #FFF;
 	height: 60px;
 	padding-left: 5%;
-	padding-right: 10%;
+	padding-right: %;
 	margin: 5px;
 }
 
