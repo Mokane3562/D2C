@@ -36,13 +36,13 @@ public class CodeResource {
 				pipe = TerminalCaller.gcc(user, proper_path, stringToList("-c " + name + ".c"));
 				args.add(name + ".o");
 				// BufferedWriter bw = pipe.getInput();
-				BufferedReader br = pipe.getOutput();
+				BufferedReader br = pipe.getReader();
 				output += stringContentsOfBuffer(br);
 			}
 			args.add("-o");
 			args.add("a.out");
 			pipe = TerminalCaller.gcc(user, proper_path, args);
-			BufferedReader br = pipe.getOutput();
+			BufferedReader br = pipe.getReader();
 			output += stringContentsOfBuffer(br);
 			System.out.println("returning ok response");
 			// TerminalCaller.clearTempUserFiles(user, proper_path);
@@ -71,13 +71,13 @@ public class CodeResource {
 				pipe = TerminalCaller.gcc(user, proper_path, stringToList("-c " + name + ".c"));
 				args.add(name + ".o");
 				// BufferedWriter bw = pipe.getInput();
-				BufferedReader br = pipe.getOutput();
+				BufferedReader br = pipe.getReader();
 				output += stringContentsOfBuffer(br);
 			}
 			args.add("-o");
 			args.add("a.out");
 			pipe = TerminalCaller.gcc(user, proper_path, args);
-			BufferedReader br = pipe.getOutput();
+			BufferedReader br = pipe.getReader();
 			output += stringContentsOfBuffer(br);
 			System.out.println("returning ok response");
 			// TerminalCaller.clearTempUserFiles(user, proper_path);
@@ -106,13 +106,13 @@ public class CodeResource {
 				pipe = TerminalCaller.gcc(user, proper_path, stringToList("-c " + name + ".c"));
 				args.add(name + ".o");
 				// BufferedWriter bw = pipe.getInput();
-				BufferedReader br = pipe.getOutput();
+				BufferedReader br = pipe.getReader();
 				output += stringContentsOfBuffer(br);
 			}
 			args.add("-o");
 			args.add("a.out");
 			pipe = TerminalCaller.gcc(user, proper_path, args);
-			BufferedReader br = pipe.getOutput();
+			BufferedReader br = pipe.getReader();
 			output += stringContentsOfBuffer(br);
 			System.out.println("returning ok response");
 			// TerminalCaller.clearTempUserFiles(user, proper_path);
@@ -141,13 +141,13 @@ public class CodeResource {
 				pipe = TerminalCaller.gcc(user, proper_path, stringToList("-c " + name + ".c"));
 				args.add(name + ".o");
 				// BufferedWriter bw = pipe.getInput();
-				BufferedReader br = pipe.getOutput();
+				BufferedReader br = pipe.getReader();
 				output += stringContentsOfBuffer(br);
 			}
 			args.add("-o");
 			args.add("a.out");
 			pipe = TerminalCaller.gcc(user, proper_path, args);
-			BufferedReader br = pipe.getOutput();
+			BufferedReader br = pipe.getReader();
 			output += stringContentsOfBuffer(br);
 			System.out.println("returning ok response");
 			// TerminalCaller.clearTempUserFiles(user, proper_path);

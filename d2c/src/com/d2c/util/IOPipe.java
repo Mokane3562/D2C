@@ -18,11 +18,11 @@ public class IOPipe {
 		this.br = new BufferedReader(new InputStreamReader(process.getInputStream(), "UTF-8"));
 	}
 
-	public BufferedReader getOutput() {
+	public BufferedReader getReader() {
 		return this.br;
 	}
 
-	public BufferedWriter getInput() {
+	public BufferedWriter getWriter() {
 		return this.bw;
 	}
 
