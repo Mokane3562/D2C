@@ -30,7 +30,7 @@ public class MainPageResource {
 			BufferedReader br = new BufferedReader(new InputStreamReader(context.getResourceAsStream("/WEB-INF/index.html")));
 			// Get a stream of the contents
 			Stream<String> contents = br.lines();
-			// Collect the contents into a string, without dividing them (empty
+			// Collect the contents into a string, without dividing them (newline
 			// string arg)
 			fileAsString = contents.collect(Collectors.joining("\n"));
 			// Close the Buffered Reader

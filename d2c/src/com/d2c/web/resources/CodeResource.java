@@ -44,7 +44,7 @@ public class CodeResource {
 			pipe = TerminalCaller.gcc(user, proper_path, args);
 			BufferedReader br = pipe.getReader();
 			output += stringContentsOfBuffer(br);
-			System.out.println("returning ok response");
+			System.out.println("returning ok response: "+ output);
 			// TerminalCaller.clearTempUserFiles(user, proper_path);
 			return Response.ok().entity(output).build();
 		} catch (IOException e) {
