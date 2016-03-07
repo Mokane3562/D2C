@@ -74,11 +74,11 @@
 	width: 15%;
 	text-align: center;
 	display: block;
-	background: #31B404;
+	background: #00e600;
 }
 
 #navbar #holder ul li a:hover {
-	background: #00e600;
+	background: #34ff34;
 	color: #FFF;
 	text-shadow: 4px 4px 4px #000;
 }
