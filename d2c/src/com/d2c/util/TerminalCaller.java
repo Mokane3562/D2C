@@ -53,7 +53,7 @@ public class TerminalCaller {
 	}
 
 	/**
-	 * Comiles C code the 'gcc' terminal command 
+	 * Comiles C code using the 'gcc' terminal command 
 	 * 
 	 * @param user
 	 * @param path
@@ -138,8 +138,9 @@ public class TerminalCaller {
 	 * @throws InterruptedException
 	 */
 	private static IOPipe call(String user, String path, List<String> command) throws IOException, InterruptedException {
-		ProcessBuilder processBuilder = new ProcessBuilder(command).redirectErrorStream(true).directory(new File("/tmp/"
-				+ user + path));
+		ProcessBuilder processBuilder = new ProcessBuilder(command)
+				.redirectErrorStream(true)
+				.directory(new File("/tmp/"+ user + path));
 		System.out.println(processBuilder.command().get(0));
 		Process process = processBuilder.start();
 		process.waitFor();
