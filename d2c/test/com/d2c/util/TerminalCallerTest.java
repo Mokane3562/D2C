@@ -13,7 +13,7 @@ public class TerminalCallerTest {
 	public void testSaveFile() {
 		try {
 			//Setup
-			TerminalCaller.saveFile("DrLmao69", "/yes/by", "bestrailroadmuseums.txt", "Oh how I do love trains. Oh me oh my!");	
+			TerminalCaller.saveFile("DrLmao69", "yes/by", "bestrailroadmuseums.txt", "Oh how I do love trains. Oh me oh my!");	
 			File testFile = new File("/tmp/yes/by/bestrailroadmuseums.txt");
 			
 			//Assertions

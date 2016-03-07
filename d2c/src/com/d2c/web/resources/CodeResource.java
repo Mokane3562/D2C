@@ -38,12 +38,14 @@ public class CodeResource {
 				// BufferedWriter bw = pipe.getInput();
 				BufferedReader br = pipe.getReader();
 				output += stringContentsOfBuffer(br);
+				pipe.close();
 			}
 			args.add("-o");
 			args.add("a.out");
 			pipe = TerminalCaller.gcc(user, proper_path, args);
 			BufferedReader br = pipe.getReader();
 			output += stringContentsOfBuffer(br);
+			pipe.close();
 			System.out.println("returning ok response: "+ output);
 			// TerminalCaller.clearTempUserFiles(user, proper_path);
 			return Response.ok().entity(output).build();
@@ -142,13 +144,15 @@ public class CodeResource {
 				args.add(name + ".o");
 				// BufferedWriter bw = pipe.getInput();
 				BufferedReader br = pipe.getReader();
-				output += stringContentsOfBuffer(br);
+				output = stringContentsOfBuffer(br);
+				pipe.close();
 			}
 			args.add("-o");
 			args.add("a.out");
 			pipe = TerminalCaller.gcc(user, proper_path, args);
 			BufferedReader br = pipe.getReader();
-			output += stringContentsOfBuffer(br);
+			output = stringContentsOfBuffer(br);
+			pipe.close();
 			System.out.println("returning ok response");
 			// TerminalCaller.clearTempUserFiles(user, proper_path);
 			return Response.ok().entity(output).build();
@@ -171,11 +175,12 @@ public class CodeResource {
 	}
 
 	private String stringContentsOfBuffer(BufferedReader br) throws IOException {
-		String line = "";
+		String line;
+		String output = "";
 		while ((line = br.readLine()) != null) {
-			line += line + "\n";
+			output += line + "\n";
 		}
-		return line;
+		return output;
 	}
 
 	private void logError(String console, Exception e) {

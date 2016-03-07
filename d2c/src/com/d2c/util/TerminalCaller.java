@@ -1,9 +1,11 @@
 package com.d2c.util;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,8 +22,8 @@ public class TerminalCaller {
 	 */
 	public static void saveFile(String user, String path, String name, String contents) throws IOException {
 		// make temporary file
-		File dir = new File("/tmp/" + user + path);
-		File file = new File("/tmp/" + user + path + "/" + name);
+		File dir = new File("/tmp/" + user + "/" + path);
+		File file = new File("/tmp/" + user + "/" + path + "/" + name);
 		dir.mkdirs();
 		file.createNewFile();
 		
@@ -140,8 +142,12 @@ public class TerminalCaller {
 	private static IOPipe call(String user, String path, List<String> command) throws IOException, InterruptedException {
 		ProcessBuilder processBuilder = new ProcessBuilder(command)
 				.redirectErrorStream(true)
-				.directory(new File("/tmp/"+ user + path));
-		System.out.println(processBuilder.command().get(0));
+				.directory(new File("/tmp/"+ user + "/" + path));
+		System.out.println("Executing command in directory: " + "/tmp/"+ user + "/" + path);
+		for(String out : processBuilder.command()){
+			System.out.print(out+" ");
+		}
+		System.out.println();
 		Process process = processBuilder.start();
 		process.waitFor();
 		return new IOPipe(process);
