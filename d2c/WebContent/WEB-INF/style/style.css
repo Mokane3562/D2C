@@ -17,21 +17,24 @@
     display: table;
 }
 
+#menubar{
+	padding: 0px 20% 0px 25%;
+}
 
-.menubutton{
+#menubar .menubutton{
     color: #FFF;
-	font-weight: bold;
 	text-shadow: 1px 1px 1px #000;
     font-family: "Arial Black", Gadget, sans-serif;
     text-align: center;
-    float:left;
-    display: table-cell; 
+    float:none;
+    display: inline-block; 
     padding: 1px 1%;
     -webkit-user-select: none;    
     -moz-user-select: none; 
     -ms-user-select: none; 
     cursor: pointer;
     left:0%;
+    
 }
 .menubutton:active {
 	transform: translate(0px, 5px);
@@ -44,8 +47,8 @@
 	text-shadow: 2px 2px 2px #000;
     font-family: "Arial Black", Gadget, sans-serif;
     text-align: center;
-    float:left;
-    display: table-cell; 
+    float:none;
+    display: inline-block; 
 
 }
 
