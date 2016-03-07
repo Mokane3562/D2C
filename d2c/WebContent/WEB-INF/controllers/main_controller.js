@@ -14,6 +14,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	
 	$scope.c_compile_function = function(){
 		var code = {
+			"text": document.getElementById("codebox").value,
 			"text": document.getElementById("textcodebox").value
 		};
 		var path = document.getElementById("path").value;
