@@ -1,59 +1,78 @@
 GET /course/{course_id}
 :returns a JSON object with course information
+XXX
 
 POST /course/{course_id}
 :creates a new course or edits an existing course using a JSON
 :object in the request body
+XXX
 
 GET /file/{course_id}/{assignment}/{file_name}
 :returns a JSON object with file information from an assignment
+XXX
 
 POST /file/{course_id}/{assignment}/{file_name}
 :uploads a file to an assignment using a JSON object in the 
 :request body
+XXX
 
 GET /assignment/{course_id}/{assignment}
 :returns a JSON object with assignment information
+XXX
 
 POST /assignment/{course_id}/{assignment}
 :creates a new assignment or edits and existing one using a JSON 
 :object in the request body
+XXX
 
 GET /grade/{course_id}/{student_user_name}/{assignment}
 :returns a JSON object with grade information
+XXX
 
 POST /grade/{course_id}/{student_user_name}/{assignment}
 :posts a grade and any comments relavent to a submission using 
 :a JSON object in the request body
+XXX
 
-POST /grade/{course_id}/{assignment}
-:allows all students to view their grade for an assignment
+
 
 GET /student/{student_user_name}
 :returns a JSON object with student information for a given course
+XXX
 
 POST /student/{student_user_name}
 :edits or creates a student
+XXX
 
 GET /TA/{student_user_name}/{course_id}
 :returns a JSON object with TA information for a given course
+XXX
 
 POST /TA/{student_user_name}/{course_id}
 :sets the student user as a TA for the given course 
+XXX
 
 GET /professor/{prof_user_name}
 :returns a JSON object with prof information
+XXX
 
 POST /professor/{prof_user_name}
 :gives a given user the abilities of a professor, or creates a new account
 :with professor abilities
+XXX
 
 GET /submission/{course_id}/{student_user_name}/{assignment}
 :returns a JSON object with sudmission information
+XXX
 
 POST /submission/{course_id}/{student_user_name}/{assignment}
 :uploads all files and submission information for a students assignment
 :using a JSON object in the request body
+XXX
+
+POST/SubmisionFile/{file_id, submission_id}
+:attaches a file to a particular submission
+XXX
 
 GET /main/index.html
 :returns the main pages html file

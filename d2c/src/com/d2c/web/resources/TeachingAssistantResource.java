@@ -20,8 +20,7 @@ public class TeachingAssistantResource {
 	@GET
 	@Path("/{student_user_name}/{course_id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getTAInfo(@PathParam("student_user_name") String studentUserName,
-			@PathParam("course_id") String courseID) {
+	public Response getTAInfo(@PathParam("student_user_name") String studentUserName, @PathParam("course_id") String courseID) {
 		// TODO Some sql shit to get my object
 
 		// TODO check that object exists
@@ -39,8 +38,7 @@ public class TeachingAssistantResource {
 	@POST
 	@Path("/{course_id}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response setTA(@PathParam("student_user_name") String studentUserName,
-			@PathParam("course_id") String courseID, TransferableTA ta) {
+	public Response setTA(@PathParam("student_user_name") String studentUserName, @PathParam("course_id") String courseID, TransferableTA ta) {
 		// TODO make this post the course info to the DB
 
 		try {
