@@ -27,6 +27,7 @@
     float:left;
     display: table-cell; 
     padding: 1px 1%;
+    left: 0%;
 }
 #menubar .menubutton:hover{
     color: #31B404;
