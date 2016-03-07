@@ -13,6 +13,8 @@
 <script type="text/javascript" src="services/example_service.js"></script>
 <script type="text/javascript" src="services/c_compile_request.js"></script>
 <script type="text/javascript" src="services/j_compile_request.js"></script>
+<script type="text/javascript" src="services/java_request.js"></script>
+<script type="text/javascript" src="services/run_request.js"></script>
 </head>
 
 <body bgcolor="#262626" ng-controller="main_controller">
@@ -73,8 +75,8 @@
 			ng-click="c_compile_function()">Compile C Code</div>
 		<div class="button green" id="compile_java"
 			ng-click="j_compile_function()">Compile Java Code</div>
-		<div class="button green" id="run_c" ng-click="">Run C Code</div>
-		<div class="button green" id="run_java" ng-click="">Run Java Code</div>
+		<div class="button green" id="run_c" ng-click="aout_function()">Run C Code</div>
+		<div class="button green" id="run_java" ng-click="java_function()">Run Java Code</div>
 	</div>
 
 	<div id="codeandoutput">
@@ -82,14 +84,10 @@
 			<textarea id="path"></textarea>
 		</div>
 		<div id="codebox">
-			<textarea id="textcodebox" rows="23">
-					Code Here!
-	    		</textarea>
+			<textarea id="textcodebox" rows="23">Code Here!</textarea>
 		</div>
 		<div id="output">
-			<textarea id="textoutput" rows="23">
-					{{output}}
-				</textarea>
+			<textarea id="textoutput" rows="23">{{output}}</textarea>
 		</div>
 	</div>
 

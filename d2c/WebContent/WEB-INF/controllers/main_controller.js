@@ -4,7 +4,9 @@
  * and add the name as a variable to the function.
  */
 app.controller('main_controller',['$scope', '$location', 'example_service', 'c_compile_request', 'j_compile_request',
-                          function($scope, $location, example_service, c_compile_request, j_compile_request){
+                                  'java_request', 'run_request',
+                          function($scope, $location, example_service, c_compile_request, j_compile_request,
+                        		  java_request, run_request){
 	console.log("main controller loading");
 	$scope.$watch( function () { return $location.path(); }, function (path) {
 	    $scope.path = path;
@@ -13,11 +15,13 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	//START c_compile_function
 	
 	$scope.c_compile_function = function(){
-		var code = {
-			"text": document.getElementById("codebox").value,
-			"text": document.getElementById("textcodebox").value
-		};
-		var path = document.getElementById("path").value;
+		var absolute_path = document.getElementById("path").value;
+		var path_array = absolute_path.split("/");
+		var name = path_array[path_array.length-1];
+		path_array.pop();
+		var path = path_array.join("/");
+		var code = {};
+		code[name]= document.getElementById("textcodebox").value;
 		var user = document.getElementById("user_name").value;
 		c_compile_request(code, user, path).then(
 			function(response){
@@ -36,10 +40,13 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	//START j_compile_function
 	
 	$scope.j_compile_function = function(){
-		var code = {
-			"text": document.getElementById("textcodebox").value
-		};
-		var path = document.getElementById("path").value;
+		var absolute_path = document.getElementById("path").value;
+		var path_array = absolute_path.split("/");
+		var name = path_array[path_array.length-1];
+		path_array.pop();
+		var path = path_array.join("/");
+		var code = {};
+		code[name]= document.getElementById("textcodebox").value;
 		var user = document.getElementById("user_name").value;
 		j_compile_request(code, user, path).then(
 			function(response){
@@ -55,6 +62,50 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	};
 	
 	//END of j_compile_function
+	
+	$scope.java_function = function(){
+		var absolute_path = document.getElementById("path").value;
+		var path_array = absolute_path.split("/");
+		var name = path_array[path_array.length-1];
+		path_array.pop();
+		var path = path_array.join("/");
+		var code = {};
+		code[name]= "";
+		var user = document.getElementById("user_name").value;
+		java_request(code, user, path).then(
+			function(response){
+				console.log("success");
+				$scope.output = response.data;
+			},
+			function(errors){
+				console.log("failure");
+				$scope.output = errors.data;
+			}
+		);
+		console.log("java_function starting");
+	};
+	
+	$scope.aout_function = function(){
+		var absolute_path = document.getElementById("path").value;
+		var path_array = absolute_path.split("/");
+		var name = path_array[path_array.length-1];
+		path_array.pop();
+		var path = path_array.join("/");
+		var code = {};
+		code[name]= "";
+		var user = document.getElementById("user_name").value;
+		run_request(code, user, path).then(
+			function(response){
+				console.log("success");
+				$scope.output = response.data;
+			},
+			function(errors){
+				console.log("failure");
+				$scope.output = errors.data;
+			}
+		);
+		console.log("aout_function starting");
+	};
 	
 	//COURSE LIST GRABBER
 	$scope.courseList = [];

@@ -65,23 +65,15 @@ public class CodeResource {
 	public Response compileJavaCode(@PathParam("user") String user, @PathParam("path") String path, Map<String, String> code) {
 		String proper_path = path.replace('_', '/');
 		try {
-			ArrayList<String> args = new ArrayList<>();
 			IOPipe pipe;
 			String output = "";
 			for (String name : code.keySet()) {
-				TerminalCaller.saveFile(user, proper_path, name + ".c", code.get(name));
-				pipe = TerminalCaller.gcc(user, proper_path, stringToList("-c " + name + ".c"));
-				args.add(name + ".o");
+				TerminalCaller.saveFile(user, proper_path, name + ".java", code.get(name));
+				pipe = TerminalCaller.javac(user, proper_path, stringToList(name + ".java"));
 				// BufferedWriter bw = pipe.getInput();
 				BufferedReader br = pipe.getReader();
 				output += stringContentsOfBuffer(br);
 			}
-			args.add("-o");
-			args.add("a.out");
-			pipe = TerminalCaller.gcc(user, proper_path, args);
-			BufferedReader br = pipe.getReader();
-			output += stringContentsOfBuffer(br);
-			System.out.println("returning ok response");
 			// TerminalCaller.clearTempUserFiles(user, proper_path);
 			return Response.ok().entity(output).build();
 		} catch (IOException e) {
@@ -103,20 +95,11 @@ public class CodeResource {
 			ArrayList<String> args = new ArrayList<>();
 			IOPipe pipe;
 			String output = "";
-			for (String name : code.keySet()) {
-				TerminalCaller.saveFile(user, proper_path, name + ".c", code.get(name));
-				pipe = TerminalCaller.gcc(user, proper_path, stringToList("-c " + name + ".c"));
-				args.add(name + ".o");
-				// BufferedWriter bw = pipe.getInput();
-				BufferedReader br = pipe.getReader();
-				output += stringContentsOfBuffer(br);
-			}
-			args.add("-o");
-			args.add("a.out");
-			pipe = TerminalCaller.gcc(user, proper_path, args);
+			args.add(code.keySet().iterator().next());
+			pipe = TerminalCaller.java(user, proper_path, args);
 			BufferedReader br = pipe.getReader();
 			output += stringContentsOfBuffer(br);
-			System.out.println("returning ok response");
+			System.out.println("returning ok response with content: " + output);
 			// TerminalCaller.clearTempUserFiles(user, proper_path);
 			return Response.ok().entity(output).build();
 		} catch (IOException e) {
@@ -138,18 +121,7 @@ public class CodeResource {
 			ArrayList<String> args = new ArrayList<>();
 			IOPipe pipe;
 			String output = "";
-			for (String name : code.keySet()) {
-				TerminalCaller.saveFile(user, proper_path, name + ".c", code.get(name));
-				pipe = TerminalCaller.gcc(user, proper_path, stringToList("-c " + name + ".c"));
-				args.add(name + ".o");
-				// BufferedWriter bw = pipe.getInput();
-				BufferedReader br = pipe.getReader();
-				output = stringContentsOfBuffer(br);
-				pipe.close();
-			}
-			args.add("-o");
-			args.add("a.out");
-			pipe = TerminalCaller.gcc(user, proper_path, args);
+			pipe = TerminalCaller.aout(user, proper_path, args);
 			BufferedReader br = pipe.getReader();
 			output = stringContentsOfBuffer(br);
 			pipe.close();
