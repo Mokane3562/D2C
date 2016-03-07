@@ -24,8 +24,11 @@
     font-family: "Arial Black", Gadget, sans-serif;
     text-align: center;
     float:left;
-    display: table-cell; 
-    padding: 1px 50px;
+    
+    resize: auto;
+    width: 5%;
+    display: inline-block;
+    
 }
 #menubar .button:hover{
     color: #31B404;
@@ -103,6 +106,7 @@
 	position: relative;
 	display: inline-block;
 	left: 14%;
+	
 }
 
 .button:active {
