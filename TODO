@@ -1,8 +1,8 @@
-1: Make prepared sql statements for every insert, update, and select required
-	to get information from the database to the server.
-2: Add calls to the sql statements (through the SQLHandler) to get the results
+- Add calls to the sql statements (through the SQLHandler) to get the results
 	from the SQL selects/updates/inserts for each WebAPI call that POSTs
 	or GETs information from the database.
-3: Using the c_compile_request, c_compile_service, and 
+- Using the c_compile_request, c_compile_service, and 
 	CodeResource.compileCCode path as an example, make the angular services
 	required to call all Resource Class methods.
+- Make sure passwords are stored in a secure way on the database. It seems a 		common way to do this is to hash them first.
+
