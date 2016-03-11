@@ -8,12 +8,71 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
                           function($scope, $location, example_service, c_compile_request, j_compile_request,
                         		  java_request, run_request){
 	console.log("main controller loading");
-	$scope.$watch( function () { return $location.path(); }, function (path) {
-	    $scope.path = path;
-	});
+	
+    //intial veiw object set up	
+	view = {};
+	$scope.view = view;
+
+	//Setting view invisible
+	view["courseInfo"] = false;
+	view["assignments"] = false;
+	view["workspace"] = false;
+	view["testing"] = false;	
+	view["submissions"] = false;
+	view["grades"] = false;
+	
+	//Setting view visible on click
+	
+	$scope.courseInfo_click = function(){
+		view["courseInfo"] = true;
+		view["assignments"] = false;
+		view["workspace"] = false;
+		view["testing"] = false;	
+		view["submissions"] = false;
+		view["grades"] = false;
+	}
+	$scope.assignments_click = function(){
+		view["courseInfo"] = false;
+		view["assignments"] = true;
+		view["workspace"] = false;
+		view["testing"] = false;	
+		view["submissions"] = false;
+		view["grades"] = false;
+	}
+	$scope.workspace_click = function(){
+		view["courseInfo"] = false;
+		view["assignments"] = false;
+		view["workspace"] = true;
+		view["testing"] = false;	
+		view["submissions"] = false;
+		view["grades"] = false;
+	}
+	$scope.testing_click = function(){
+		view["courseInfo"] = false;
+		view["assignments"] = false;
+		view["workspace"] = false;
+		view["testing"] = true;	
+		view["submissions"] = false;
+		view["grades"] = false;
+	}
+	$scope.submissions_click = function(){
+		view["courseInfo"] = false;
+		view["assignments"] = false;
+		view["workspace"] = false;
+		view["testing"] = false;	
+		view["submissions"] = true;
+		view["grades"] = false;
+	}
+	$scope.grades_click = function(){
+		view["courseInfo"] = false;
+		view["assignments"] = false;
+		view["workspace"] = false;
+		view["testing"] = false;	
+		view["submissions"] = false;
+		view["grades"] = true;
+	}
 	
 	//START c_compile_function
-	
 	$scope.c_compile_function = function(){
 		var absolute_path = document.getElementById("path").value;
 		var path_array = absolute_path.split("/");

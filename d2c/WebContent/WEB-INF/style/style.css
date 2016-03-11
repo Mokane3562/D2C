@@ -18,14 +18,14 @@
 }
 
 #menubar{
-	padding: 0px 20% 0px 25%;
+	padding: 0px 3% 0px 3%;
 }
 
-#menubar .menubutton{
+#menubar .menubutton{	
     color: #FFF;
 	text-shadow: 1px 1px 1px #000;
     font-family: "Arial Black", Gadget, sans-serif;
-    text-align: center;
+    text-align: left;
     float:none;
     display: inline-block; 
     padding: 1px 1%;
@@ -33,7 +33,7 @@
     -moz-user-select: none; 
     -ms-user-select: none; 
     cursor: pointer;
-    left:0%;
+    left:1%;
     
 }
 .menubutton:active {
@@ -57,7 +57,6 @@
 	border-bottom: 1px solid #FFF;
 	height: 60px;
 	padding-left: 5%;
-	padding-right: %;
 	margin: 5px;
 }
 
