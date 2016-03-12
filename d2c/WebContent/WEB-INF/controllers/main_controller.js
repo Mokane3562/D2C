@@ -14,6 +14,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	$scope.view = view;
 
 	//Setting view invisible
+	view["login"] = true;
 	view["courseInfo"] = false;
 	view["assignments"] = false;
 	view["workspace"] = false;
@@ -24,6 +25,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	//Setting view visible on click
 	
 	$scope.courseInfo_click = function(){
+		view["login"] = false;
 		view["courseInfo"] = true;
 		view["assignments"] = false;
 		view["workspace"] = false;
@@ -32,6 +34,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["grades"] = false;
 	}
 	$scope.assignments_click = function(){
+		view["login"] = false;
 		view["courseInfo"] = false;
 		view["assignments"] = true;
 		view["workspace"] = false;
@@ -40,6 +43,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["grades"] = false;
 	}
 	$scope.workspace_click = function(){
+		view["login"] = false;
 		view["courseInfo"] = false;
 		view["assignments"] = false;
 		view["workspace"] = true;
@@ -48,6 +52,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["grades"] = false;
 	}
 	$scope.testing_click = function(){
+		view["login"] = false;
 		view["courseInfo"] = false;
 		view["assignments"] = false;
 		view["workspace"] = false;
@@ -56,6 +61,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["grades"] = false;
 	}
 	$scope.submissions_click = function(){
+		view["login"] = false;
 		view["courseInfo"] = false;
 		view["assignments"] = false;
 		view["workspace"] = false;
@@ -64,6 +70,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["grades"] = false;
 	}
 	$scope.grades_click = function(){
+		view["login"] = false;
 		view["courseInfo"] = false;
 		view["assignments"] = false;
 		view["workspace"] = false;

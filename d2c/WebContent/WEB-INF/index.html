@@ -15,9 +15,10 @@
 <script type="text/javascript" src="services/j_compile_request.js"></script>
 <script type="text/javascript" src="services/java_request.js"></script>
 <script type="text/javascript" src="services/run_request.js"></script>
+<script type="text/javascript" src="services/login.js"></script>
 </head>
 
-<body bgcolor="#262626" ng-controller="main_controller">
+<body bgcolor="#262626" ng-controller="main_controller" onLoad="popup('popup.html','Login')">
     
     <div id="user_name">sy6746</div>
 	<div id="header">
@@ -53,57 +54,62 @@
 	
 	 -->
 	 
-<!-- COURSE INFO PAGE -->
-<div ng-show="view['courseInfo']">
-	<h1>Course Information</h1>
-</div>
+	 <!-- LOG IN PAGE  -->
+	 <div ng-show="view['login']">
 
-<!-- ASSIGNMENTS PAGE -->
-<div ng-show="view['assignments']">
-	<h1>Assignments</h1>
-</div>
+	 </div>
+	 
+     <!-- COURSE INFO PAGE -->
+     <div ng-show="view['courseInfo']">
+         <h1>Course Information</h1>
+     </div>
 
-<!-- WORKSPACE PAGE -->
-<div ng-show="view['workspace']">	
-	<h1>Workspace</h1>
-	<br>
+     <!-- ASSIGNMENTS PAGE -->
+     <div ng-show="view['assignments']">
+	    <h1>Assignments</h1>
+     </div>
 
-	<div id="button">
+     <!-- WORKSPACE PAGE -->
+     <div ng-show="view['workspace']">	
+	    <h1>Workspace</h1>
+	    <br>
+
+	 <div id="button">
 		<div class="button green" id="compile_c"
 			ng-click="c_compile_function()">Compile C Code</div>
 		<div class="button green" id="compile_java"
 			ng-click="j_compile_function()">Compile Java Code</div>
 		<div class="button green" id="run_c" ng-click="aout_function()">Run C Code</div>
 		<div class="button green" id="run_java" ng-click="java_function()">Run Java Code</div>
-	</div>
+	 </div>
 
-	<div id="codeandoutput">
+	 <div id="codeandoutput">
 		<div>
-			<textarea id="path"></textarea>
+			<textarea id="path" placeholder="Enter Path!"></textarea>
 		</div>
 		<div id="codebox">
-			<textarea id="textcodebox" rows="23">Code Here!</textarea>
+			<textarea id="textcodebox" rows="23" placeholder="Code Here!"></textarea>
 		</div>
 		<div id="output">
-			<textarea id="textoutput" rows="23">{{output}}</textarea>
+			<textarea id="textoutput" rows="23" placeholder="Output!">{{output}}</textarea>
 		</div>
-	</div>
-</div>
+	 </div>
+     </div>
 
-<!-- TESTING PAGE -->
-<div ng-show="view['testing']">
-	<h1>Testing</h1>
-</div>
+     <!-- TESTING PAGE -->
+     <div ng-show="view['testing']">
+	     <h1>Testing</h1>
+     </div>
 
-<!-- SUBMISSIONS PAGE -->
-<div ng-show="view['submissions']">
-	<h1>Submissions</h1>
-</div>
+     <!-- SUBMISSIONS PAGE -->
+     <div ng-show="view['submissions']">
+	     <h1>Submissions</h1>
+     </div>
 
-<!-- GRADES PAGE -->
-<div ng-show="view['grades']">
-	<h1>Grades</h1>
-</div>
+     <!-- GRADES PAGE -->
+     <div ng-show="view['grades']">
+	     <h1>Grades</h1>
+     </div>
 
 </body>
 </html>
