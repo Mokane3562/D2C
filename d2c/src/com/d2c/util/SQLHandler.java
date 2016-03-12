@@ -30,7 +30,7 @@ public class SQLHandler {
 			+ 	"FROM assignment "
 			+ 	"WHERE assign_id = ? ";
 	//Get a course's subject, number, and name, using it's course ID.
-	private static final String GET_COURSE_SQL = 	
+	private static final String GET_COURSE_INFO_SQL = 	
 				"SELECT subject, number, name "
 			+ 	"FROM course "
 			+ 	"WHERE course_id = ? ";
@@ -129,7 +129,7 @@ public class SQLHandler {
 
 		// this.example_statement = connection.prepareStatement(EXAMPLE_SQL);
 		this.getAccountStatement = connection.prepareStatement(GET_ACCOUNT_SQL);
-		this.getAccountStatement = connection.prepareStatement(GET_COURSE_SQL);
+		this.getAccountStatement = connection.prepareStatement(GET_COURSE_INFO_SQL);
 		this.getAssignmentStatement = connection.prepareStatement(GET_ASSIGNMENT_SQL);
 		this.getFilesStatement = connection.prepareStatement(GET_FILES_SQL);
 		this.getFileStatement = connection.prepareStatement(GET_FILE_SQL);
