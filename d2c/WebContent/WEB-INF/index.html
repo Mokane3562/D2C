@@ -1,32 +1,37 @@
 <!doctype html>
 <html ng-app="d2c_main">
-<head>
-<title>D2C</title>
-<link rel="shortcut icon"
-	href="http://1.bp.blogspot.com/_1y0y_NlpiZc/TA4jzBJgbLI/AAAAAAAAAAw/eDyCKf2wZnU/s1600/G-Team+FINAL+LG.png">
-<link rel="stylesheet" href="style/style.css">
-<script type="text/javascript" src="shared/angular.js"></script>
-<script src="http://code.angularjs.org/1.1.3/angular.js"></script>
-<script type="text/javascript" src="shared/d3.v3.js"></script>
-<script type="text/javascript" src="apps/main.js"></script>
-<script type="text/javascript" src="controllers/main_controller.js"></script>
-<script type="text/javascript" src="services/example_service.js"></script>
-<script type="text/javascript" src="services/c_compile_request.js"></script>
-<script type="text/javascript" src="services/j_compile_request.js"></script>
-<script type="text/javascript" src="services/java_request.js"></script>
-<script type="text/javascript" src="services/run_request.js"></script>
-</head>
+  <head>
+    <title>D2C</title>
+    <link rel="shortcut icon"
+	href="http://1.bp.blogspot.com/_1y0y_NlpiZc/TA4jzBJgbLI/AAAAAAAAAAw/eDyCKf2wZnU/s1600/G-Team+FINAL+LG.png"/>
+    <link rel="stylesheet" href="style/style.css"/>
+    <script type="text/javascript" src="shared/angular.js"></script>
+    <script src="http://code.angularjs.org/1.1.3/angular.js"></script>
+    <script type="text/javascript" src="shared/d3.v3.js"></script>
+    <script type="text/javascript" src="apps/main.js"></script>
+    <script type="text/javascript" src="controllers/main_controller.js"></script>
+    <script type="text/javascript" src="services/example_service.js"></script>
+    <script type="text/javascript" src="services/c_compile_request.js"></script>
+    <script type="text/javascript" src="services/j_compile_request.js"></script>
+    <script type="text/javascript" src="services/java_request.js"></script>
+    <script type="text/javascript" src="services/run_request.js"></script>
+  </head>
 
-<body bgcolor="#262626" ng-controller="main_controller">
-    
-    <div id="user_name">sy6746</div>
-	<div id="header">
-		<img src="http://i67.tinypic.com/2hzk5xw.png" border="0">
-	</div>
-	<!--end of header div -->
+  <body bgcolor="#262626" ng-controller="main_controller">
+    <div id="grey_out">
+      <div id="log_in">
+        <textarea id=user_name></textarea>
+        <textarea id=password></textarea>
+      </div>
+    </div>
+    <div id=main_page>
+	  <div id="header">
+		  <img src="http://i67.tinypic.com/2hzk5xw.png" border="0">
+	  </div>
+	  <!--end of header div -->
 	
-	<div id="wrapper">
-	<div id= "menubar">
+	  <div id="wrapper">
+	    <div id= "menubar">
           <div class="menubutton" id="courseInfo" ng-click="courseInfo_click()"><h3>Course Information</h3></div>
           <div class="menubutton" id="assignments" ng-click="assignments_click()"><h3>Assignments</h3></div>
           <div class="menubutton" id="workspace" ng-click="workspace_click()"><h3>Workspace</h3></div>
@@ -40,75 +45,75 @@
                ng-click="menuHandler(menu)">{{menu.name}}</div>
           
           
-         END MENUBAR GENERATOR -->
+          END MENUBAR GENERATOR -->
          
-	</div><!-- end of menubar div -->
-	</div><!--end of wrapper div -->
+        </div><!-- end of menubar div -->
+	  </div><!--end of wrapper div -->
 	
-	<!-- COURSE TABS GENERATOR
+	  <!-- COURSE TABS GENERATOR
 	
-	<div class="course_div" ng-repeat="course in courseList"
-		 ng-click="courseHandler(course)">{{course.subject + " " +
-	     course.number + ": " + course.name}}</div>
+	  <div class="course_div" ng-repeat="course in courseList"
+		   ng-click="courseHandler(course)">{{course.subject + " " +
+	       course.number + ": " + course.name}}</div>
 	
-	 -->
+	  -->
 	 
-	 <!-- LOG IN PAGE  -->
-	 <div ng-show="view['login']">
+	  <!-- LOG IN PAGE  -->
+	  <div ng-show="view['login']">
 
-	 </div>
+	  </div>
 	 
-     <!-- COURSE INFO PAGE -->
-     <div ng-show="view['courseInfo']">
-         <h1>Course Information</h1>
-     </div>
+      <!-- COURSE INFO PAGE -->
+      <div ng-show="view['courseInfo']">
+        <h1>Course Information</h1>
+      </div>
 
-     <!-- ASSIGNMENTS PAGE -->
-     <div ng-show="view['assignments']">
+      <!-- ASSIGNMENTS PAGE -->
+      <div ng-show="view['assignments']">
 	    <h1>Assignments</h1>
-     </div>
+      </div>
 
-     <!-- WORKSPACE PAGE -->
-     <div ng-show="view['workspace']">	
+      <!-- WORKSPACE PAGE -->
+      <div ng-show="view['workspace']">	
 	    <h1>Workspace</h1>
 	    <br>
 
-	 <div id="button">
-		<div class="button green" id="compile_c"
-			ng-click="c_compile_function()">Compile C Code</div>
-		<div class="button green" id="compile_java"
-			ng-click="j_compile_function()">Compile Java Code</div>
-		<div class="button green" id="run_c" ng-click="aout_function()">Run C Code</div>
-		<div class="button green" id="run_java" ng-click="java_function()">Run Java Code</div>
-	 </div>
+        <div id="button">
+          <div class="button green" id="compile_c"
+		       ng-click="c_compile_function()">Compile C Code</div>
+          <div class="button green" id="compile_java"
+			  ng-click="j_compile_function()">Compile Java Code</div>
+		  <div class="button green" id="run_c" ng-click="aout_function()">Run C Code</div>
+		  <div class="button green" id="run_java" ng-click="java_function()">Run Java Code</div>
+	    </div>
 
-	 <div id="codeandoutput">
-		<div>
-			<textarea id="path" placeholder="Enter Path!"></textarea>
-		</div>
-		<div id="codebox">
-			<textarea id="textcodebox" rows="23" placeholder="Code Here!"></textarea>
-		</div>
-		<div id="output">
-			<textarea id="textoutput" rows="23" placeholder="Output!">{{output}}</textarea>
-		</div>
-	 </div>
-     </div>
+	    <div id="codeandoutput">
+		  <div>
+		    <textarea id="path" placeholder="Enter Path!"></textarea>
+		  </div>
+		  <div id="codebox">
+		    <textarea id="textcodebox" rows="23" placeholder="Code Here!"></textarea>
+		  </div>
+          <div id="output">
+            <textarea id="textoutput" rows="23" placeholder="Output!">{{output}}</textarea>
+	      </div>
+	    </div>
+      </div>
 
-     <!-- TESTING PAGE -->
-     <div ng-show="view['testing']">
-	     <h1>Testing</h1>
-     </div>
+      <!-- TESTING PAGE -->
+      <div ng-show="view['testing']">
+	    <h1>Testing</h1>
+      </div>
 
-     <!-- SUBMISSIONS PAGE -->
-     <div ng-show="view['submissions']">
-	     <h1>Submissions</h1>
-     </div>
+      <!-- SUBMISSIONS PAGE -->
+      <div ng-show="view['submissions']">
+	    <h1>Submissions</h1>
+      </div>
 
-     <!-- GRADES PAGE -->
-     <div ng-show="view['grades']">
-	     <h1>Grades</h1>
-     </div>
-
-</body>
+      <!-- GRADES PAGE -->
+      <div ng-show="view['grades']">
+	    <h1>Grades</h1>
+      </div>
+    </div>
+  </body>
 </html>
