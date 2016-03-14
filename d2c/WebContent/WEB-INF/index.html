@@ -15,16 +15,21 @@
     <script type="text/javascript" src="services/j_compile_request.js"></script>
     <script type="text/javascript" src="services/java_request.js"></script>
     <script type="text/javascript" src="services/run_request.js"></script>
+    <script type="text/javascript" src="services/login_service.js"></script>
   </head>
 
   <body bgcolor="#262626" ng-controller="main_controller">
-    <div id="grey_out">
-      <div id="log_in">
-        <textarea id=user_name></textarea>
-        <textarea id=password></textarea>
+    <div id="grey_out" ng-show="view['login']">
+      <div id="login">
+        <p id=login_fail_text>{{login_failure}}</p>
+        <form>
+          <input type="text" ng-model="user" name="user_name"/>
+          <input type="password" ng-model="password" name="password"/>
+          <div class="button green" ng-click="login()" value="Login">Log In</div>
+        </form>
       </div>
     </div>
-    <div id=main_page>
+    <div id=main_page ng-hide="view['login']">
 	  <div id="header">
 		  <img src="http://i67.tinypic.com/2hzk5xw.png" border="0">
 	  </div>
@@ -57,11 +62,6 @@
 	       course.number + ": " + course.name}}</div>
 	
 	  -->
-	 
-	  <!-- LOG IN PAGE  -->
-	  <div ng-show="view['login']">
-
-	  </div>
 	 
       <!-- COURSE INFO PAGE -->
       <div ng-show="view['courseInfo']">

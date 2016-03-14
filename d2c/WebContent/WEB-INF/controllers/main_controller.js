@@ -4,14 +4,17 @@
  * and add the name as a variable to the function.
  */
 app.controller('main_controller',['$scope', '$location', 'example_service', 'c_compile_request', 'j_compile_request',
-                                  'java_request', 'run_request',
+                                  'java_request', 'run_request', 'login_service',
                           function($scope, $location, example_service, c_compile_request, j_compile_request,
-                        		  java_request, run_request){
+                        		  java_request, run_request, login_service){
 	console.log("main controller loading");
 	
     //intial veiw object set up	
-	view = {};
+	var view = {};
 	$scope.view = view;
+	$scope.login_failure = "";
+	$scope.user = "";
+	$scope.password = "";
 
 	//Setting view invisible
 	view["login"] = true;
@@ -21,8 +24,36 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	view["testing"] = false;	
 	view["submissions"] = false;
 	view["grades"] = false;
+	var user_auth = "";
 	
 	//Setting view visible on click
+	$scope.login = function(){
+		console.log("login event triggered");
+		var to_encode = $scope.user+":"+$scope.password;
+		console.log($scope.user);
+		console.log($scope.password);
+		console.log(to_encode);
+		var auth = window.btoa(to_encode);
+		console.log(auth);
+		login_service(auth).then(
+			function(response){
+				user_auth = auth;
+				view["login"] = false;
+				view["courseInfo"] = true;
+				view["assignments"] = false;
+				view["workspace"] = false;
+				view["testing"] = false;	
+				view["submissions"] = false;
+				view["grades"] = false;
+		},
+		function(errors){
+			if(errors.status === 403){
+				$scope.login_failure = "invalid username/password";
+			} else {
+				$scope.login_failure = "Server problems, please contact administrator";
+			}
+		});
+	}
 	
 	$scope.courseInfo_click = function(){
 		view["login"] = false;

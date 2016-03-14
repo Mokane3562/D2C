@@ -117,19 +117,20 @@ public class SQLHandler {
 	private PreparedStatement postSubmissionStatement;
 	private PreparedStatement postSubmissionFileStatement;
 
-	public SQLHandler() throws SQLException {
+	public SQLHandler() throws SQLException, ClassNotFoundException {
+		Class.forName("com.mysql.jdbc.Driver");
 		// TODO replace placeholder string literals with real host and port
 		this.host = "localhost";
-		this.port = "50000";
+		this.port = "3306";
 		this.connectionProperties = new Properties();
 		// TODO replace placeholder string literals with real user and password
 		this.connectionProperties.put("user", "root");
 		this.connectionProperties.put("password", "password");
-		this.connection = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/", connectionProperties);
-
+		System.out.println("attempting to get connection");
+		this.connection = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" +"d2c", connectionProperties);
 		// this.example_statement = connection.prepareStatement(EXAMPLE_SQL);
 		this.getAccountStatement = connection.prepareStatement(GET_ACCOUNT_SQL);
-		this.getAccountStatement = connection.prepareStatement(GET_COURSE_INFO_SQL);
+		this.getCourseStatement = connection.prepareStatement(GET_COURSE_INFO_SQL);
 		this.getAssignmentStatement = connection.prepareStatement(GET_ASSIGNMENT_SQL);
 		this.getFilesStatement = connection.prepareStatement(GET_FILES_SQL);
 		this.getFileStatement = connection.prepareStatement(GET_FILE_SQL);
@@ -155,112 +156,137 @@ public class SQLHandler {
 
 	// returns the account info based on user and password
 	public ResultSet getAccountInfo(String user, String password) throws SQLException {
-		this.getAccountStatement.setString(0, user);
-		this.getAccountStatement.setString(1, password);
+		System.out.println(this.getAccountStatement);
+		this.getAccountStatement.setString(1, user);
+		System.out.println("set user name");
+		this.getAccountStatement.setString(2, password);
+		System.out.println("set password");
+		System.out.println("initialized account statement");
 		return this.getAccountStatement.executeQuery();
 	}
 
 	public ResultSet getAssignment(String assign_id) throws SQLException {
-		this.postCourseStatement.setString(0, assign_id);
+		this.postCourseStatement.setString(1, assign_id);
 		return this.getAssignmentStatement.executeQuery();
 	}
 
 	// returns the course info based on the course_id
 	public ResultSet getCoursetInfo(int course_id) throws SQLException {
-		this.getCourseStatement.setString(0, Integer.toString(course_id));
+		this.getCourseStatement.setString(1, Integer.toString(course_id));
 		return this.getCourseStatement.executeQuery();
 	}
 
 	// returns the file based on the file_id
 	public ResultSet getFile(int file_id) throws SQLException {
-		this.getFileStatement.setString(0, Integer.toString(file_id));
+		this.getFileStatement.setString(1, Integer.toString(file_id));
 		return this.getFileStatement.executeQuery();
 	}
 
 	public ResultSet getFiles(int account_id) throws SQLException {
-		this.getFilesStatement.setString(0, Integer.toString(account_id));
+		this.getFilesStatement.setString(1, Integer.toString(account_id));
 		return this.getFilesStatement.executeQuery();
 	}
 
 	public ResultSet getGrade(int submission_id) throws SQLException {
-		this.getGradeStatement.setString(0, Integer.toString(submission_id));
+		this.getGradeStatement.setString(1, Integer.toString(submission_id));
 		return this.getGradeStatement.executeQuery();
 	}
 
 	public ResultSet getSubmission(int submission_id) throws SQLException {
-		this.getSubmissionStatement.setString(0, Integer.toString(submission_id));
+		this.getSubmissionStatement.setString(1, Integer.toString(submission_id));
 		return this.getSubmissionStatement.executeQuery();
 	}
 
 	// private PreparedStatement get_submission_file_statement;
 	public ResultSet getSubmissionFile(int submission_id) throws SQLException {
-		this.getSubmissionFileStatement.setString(0, Integer.toString(submission_id));
+		this.getSubmissionFileStatement.setString(1, Integer.toString(submission_id));
 
 		return this.getSubmissionFileStatement.executeQuery();
 	}
 
 	public ResultSet getTA(String course_id) throws SQLException {
-		this.getParticipantsStatement.setString(0, course_id);
+		this.getParticipantsStatement.setString(1, course_id);
 		return this.getParticipantsStatement.executeQuery();
 	}
 
 	public ResultSet postAccount(String username, String password, String fname, String lname) throws SQLException {
-		this.postAccountStatement.setString(0, username);
-		this.postAccountStatement.setString(1, password);
-		this.postAccountStatement.setString(2, fname);
-		this.postAccountStatement.setString(3, lname);
+		this.postAccountStatement.setString(1, username);
+		this.postAccountStatement.setString(2, password);
+		this.postAccountStatement.setString(3, fname);
+		this.postAccountStatement.setString(4, lname);
 
 		return this.postAccountStatement.executeQuery();
 	}
 
 	public ResultSet postAssignment(String num, int course_id, Date date, int test_id, String assign)
 			throws SQLException {
-		this.postAssignmentStatement.setString(0, num);
-		this.postAssignmentStatement.setString(1, Integer.toString(course_id));
-		// this.post_assignment_statement.setString(2, date);
-		this.postAssignmentStatement.setString(3, Integer.toString(test_id));
+		this.postAssignmentStatement.setString(1, num);
+		this.postAssignmentStatement.setString(2, Integer.toString(course_id));
+		// this.post_assignment_statement.setString(3, date);
+		this.postAssignmentStatement.setString(4, Integer.toString(test_id));
 		this.postAssignmentStatement.setString(5, assign);
 		return this.postAssignmentStatement.executeQuery();
 	}
 
 	// returns posting a course
 	public ResultSet postCourse(String number, String subject, String name) throws SQLException {
-		this.postCourseStatement.setString(0, number);
-		this.postCourseStatement.setString(1, subject);
-		this.postCourseStatement.setString(2, name);
+		this.postCourseStatement.setString(1, number);
+		this.postCourseStatement.setString(2, subject);
+		this.postCourseStatement.setString(3, name);
 		return this.postCourseStatement.executeQuery();
 	}
 
 	public ResultSet postFile(String name, Date date, String text) throws SQLException {
-		this.postFileStatement.setString(0, name);
-		// this.post_course_statement.setString(1, date);
-		this.postFileStatement.setString(2, text);
+		this.postFileStatement.setString(1, name);
+		// this.post_course_statement.setString(2, date);
+		this.postFileStatement.setString(3, text);
 		return this.postFileStatement.executeQuery();
 	}
 
 	public ResultSet postGrade(double grade) throws SQLException {
-		this.postGradeStatement.setString(0, Double.toString(grade));
+		this.postGradeStatement.setString(1, Double.toString(grade));
 		return this.postGradeStatement.executeQuery();
 	}
 
 	public ResultSet postRole(int course_id, int account_id, String type) throws SQLException {
-		this.postParticipantStatement.setString(0, Integer.toString(course_id));
-		this.postParticipantStatement.setString(1, Integer.toString(account_id));
-		this.postParticipantStatement.setString(2, type);
+		this.postParticipantStatement.setString(1, Integer.toString(course_id));
+		this.postParticipantStatement.setString(2, Integer.toString(account_id));
+		this.postParticipantStatement.setString(3, type);
 		return this.postParticipantStatement.executeQuery();
 
 	}
 
 	// private PreparedStatement post_submission_statement;
 	public ResultSet postSubmission(int account_id, int assign_id) throws SQLException {
-		this.postSubmissionStatement.setString(0, Integer.toString(account_id));
-		this.postSubmissionStatement.setString(1, Integer.toString(assign_id));
+		this.postSubmissionStatement.setString(1, Integer.toString(account_id));
+		this.postSubmissionStatement.setString(2, Integer.toString(assign_id));
 		return this.postSubmissionStatement.executeQuery();
 	}
 
 	// private PreparedStatement post_submission_file_statement;
 	public ResultSet postSubmissionFile(int file_id) throws SQLException {
-		this.postSubmissionFileStatement.setString(0, Integer.toString(file_id));
+		this.postSubmissionFileStatement.setString(1, Integer.toString(file_id));
 		return this.postSubmissionFileStatement.executeQuery();
+	}
+	
+	public void close() throws SQLException{
+		this.getAccountStatement.close();
+		this.getCourseStatement.close();
+		this.getAssignmentStatement.close();
+		this.getFilesStatement.close();
+		this.getFileStatement.close();
+		this.getGradeStatement.close();
+		this.getSubmissionFileStatement.close();
+		this.getSubmissionStatement.close();
+		this.postAccountStatement.close();
+		this.postAccountStatement.close();
+		this.postAssignmentStatement.close();
+		this.postCourseStatement.close();
+		this.postFileStatement.close();
+		this.postGradeStatement.close();
+		this.postParticipantStatement.close();
+		this.postSubmissionFileStatement.close();
+		this.postSubmissionStatement.close();
+		this.connection.close();
 	}
 }
