@@ -8,11 +8,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public class SQLHandler {
-	private String host;
-	private String port;
-	private Properties connectionProperties;
+public class SQLHandler implements AutoCloseable{
+	// TODO replace placeholder host and port with real host and port;
+	// TODO replace placeholder user and password with real user and password
+	private static final String DB_DRIVER = "com.mysql.jdbc.Driver";
+	private static final String DB_CONNECTION = "jdbc:mysql://localhost:3306/d2c";
+	private static final String DB_USER = "root";
+	private static final String DB_PASSWORD = "password";
+	
 	private Connection connection;
+	private Properties connectionProperties;
 	
 	/*private static final String EXAMPLE_SQL = 
 	 * 			"SELECT ? " 
@@ -20,81 +25,98 @@ public class SQLHandler {
 	 * 		+	"WHERE SOME_COLUMN = ?";
 	 */
 	//Get a user's first name, last name, and account ID using their user-name and password. 
+	//TODO:Verify this works.
 	private static final String GET_ACCOUNT_SQL = 
 				"SELECT fname, lname, account_id "
 			+ 	"FROM account "
 			+ 	"WHERE username = ? AND password = ?";
 	//Get an assignment's number, due date, and contents using it's assignment ID.
+	//TODO:Verify this works.
 	private static final String GET_ASSIGNMENT_SQL = 	
 				"SELECT number, due_date, assign "
 			+ 	"FROM assignment "
 			+ 	"WHERE assign_id = ? ";
-	//Get a course's subject, number, and name, using it's course ID.
-	private static final String GET_COURSE_INFO_SQL = 	
+	//Get a course's subject, number, and name, using it's crn.
+	private static final String GET_COURSE_SQL = 	
 				"SELECT subject, number, name "
-			+ 	"FROM course "
-			+ 	"WHERE course_id = ? ";
+			+ 	"FROM course, course_inst "
+			+ 	"WHERE crn = ? "
+			+ 	"AND course.course_id = course_inst.course_id";
 	//Get a file's name, date of creation, and contents using it's file ID.
+	//TODO:Verify this works.
 	private static final String GET_FILE_SQL = 	
 				"SELECT name, date_added, contents "
 			+ 	"FROM file "
 			+ 	"WHERE file_id = ?";
 	//Get the name, date of creation, and contents of every file a user created using that user's ID.
+	//TODO:Verify this works.
 	private static final String GET_FILES_SQL = 	
 				"SELECT file_id, name, date_added, contents "
 			+ 	"FROM file "
 			+ 	"WHERE account_id = ?";
 	//Get a submission's grade using it's ID.
+	//TODO:Verify this works.
 	private static final String GET_GRADE_SQL = 
 				"SELECT grade "
 			+ 	"FROM submission "
 			+ 	"WHERE submission_id = ?";
 	//Get the account ID and role of every user participating in a certain course.
+	//TODO:Verify this works.
 	private static final String GET_PARTICIPANTS_SQL = 
 				"SELECT account_id, type"
 			+ 	"FROM role "
 			+ 	"WHERE course_id = ?";
 	//Get a submission's submitter, associated assignment, and grade using it's submission ID.
+	//TODO:Verify this works.
 	private static final String GET_SUBMISSION_SQL = 
 				"SELECT account_id, assign_id, grade "
 			+ 	"FROM submission "
 			+ 	"WHERE submission_id= ?";
 	//Get the file ID's of files associated with a submission using that submission's ID.
+	//TODO:Verify this works.
 	private static final String GET_SUBMISSION_FILES_SQL = 
 				"SELECT file_id "
 			+ 	"FROM submission_file "
 			+ 	"WHERE submission_id = ?";
 	//Store a new account in the database. Other fields will be generated automatically.
+	//TODO:Verify this works.
 	private static final String POST_ACCOUNT_SQL = 
 				"INSERT INTO account (username, password, fname, lname) "
 			+ 	"VALUES (?, ?, ?, ?)";
 	//Store a new assignment in the database. Other fields will be generated automatically.
+	//TODO:Verify this works.
 	private static final String POST_ASSIGNMENT_SQL = 
 				"INSERT INTO assignment (number, course_id, file_id ,due_date, assign) "
 			+ 	"VALUES (?, ?, ?, ?, ?)";
 	//Store a new course in the database. Other fields will be generated automatically.
+	//TODO:Verify this works.
 	private static final String POST_COURSE_SQL = 
 				"INSERT INTO course (number, subject, name) "
 			+ 	"VALUES ( ?, ?, ? )";
 	//Store a file in the database. Other fields will be generated automatically.
+	//TODO:Verify this works.
 	private static final String POST_FILE_SQL = 
 				"INSERT INTO file (name, contents) "
 			+ 	"VALUES (?, ?)";
 	//Change/update a grade for a submission.
+	//TODO:Verify this works.
 	private static final String POST_GRADE_SQL = 
 				"UPDATE submission "
 			+ 	"SET grade = ? "
 			+ 	"WHERE submission_id = ?";
 	//Add a participant to a course. Other fields will be generated automatically.
+	//TODO:Verify this works.
 	private static final String POST_PARTICIPANT_SQL = 
 				"INSERT INTO role (course_id, account_id, type) "
 			+ 	"VALUES (?, ?, ?)";
 	//TODO:Make sure all the files attached to a submission are reachable
+	//TODO:Verify this works.
 	private static final String POST_SUBMISSION_SQL = 
 				"INSERT INTO submission (account_id, assign_id)"
 			+ 	"VALUES (?, ?)";
 	//Add a file to a submission.
-	private static final String POST_SUBMISSION_FILE_SQL = 
+	//TODO:Verify this works.
+	private static final String POST_SUBMISSION_FILES_SQL = 
 				"INSERT INTO submission_file (submission_id,file_id) "
 			+ 	"VALUES(?, ?)";
 
@@ -107,7 +129,7 @@ public class SQLHandler {
 	private PreparedStatement getGradeStatement;
 	private PreparedStatement getParticipantsStatement;
 	private PreparedStatement getSubmissionStatement;
-	private PreparedStatement getSubmissionFileStatement;
+	private PreparedStatement getSubmissionFilesStatement;
 	private PreparedStatement postAccountStatement;
 	private PreparedStatement postAssignmentStatement;
 	private PreparedStatement postCourseStatement;
@@ -115,37 +137,36 @@ public class SQLHandler {
 	private PreparedStatement postGradeStatement;
 	private PreparedStatement postParticipantStatement;
 	private PreparedStatement postSubmissionStatement;
-	private PreparedStatement postSubmissionFileStatement;
+	private PreparedStatement postSubmissionFilesStatement;
 
 	public SQLHandler() throws SQLException, ClassNotFoundException {
-		Class.forName("com.mysql.jdbc.Driver");
-		// TODO replace placeholder string literals with real host and port
-		this.host = "localhost";
-		this.port = "3306";
+		//Make a connection
+		Class.forName(DB_DRIVER);
 		this.connectionProperties = new Properties();
-		// TODO replace placeholder string literals with real user and password
-		this.connectionProperties.put("user", "root");
-		this.connectionProperties.put("password", "password");
+		this.connectionProperties.put("user", DB_USER);
+		this.connectionProperties.put("password", DB_PASSWORD);
 		System.out.println("attempting to get connection");
-		this.connection = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" +"d2c", connectionProperties);
+		this.connection = DriverManager.getConnection(DB_CONNECTION, connectionProperties);
+		
+		//Set up statements
 		// this.example_statement = connection.prepareStatement(EXAMPLE_SQL);
 		this.getAccountStatement = connection.prepareStatement(GET_ACCOUNT_SQL);
-		this.getCourseStatement = connection.prepareStatement(GET_COURSE_INFO_SQL);
 		this.getAssignmentStatement = connection.prepareStatement(GET_ASSIGNMENT_SQL);
-		this.getFilesStatement = connection.prepareStatement(GET_FILES_SQL);
+		this.getCourseStatement = connection.prepareStatement(GET_COURSE_SQL);
 		this.getFileStatement = connection.prepareStatement(GET_FILE_SQL);
+		this.getFilesStatement = connection.prepareStatement(GET_FILES_SQL);
 		this.getGradeStatement = connection.prepareStatement(GET_GRADE_SQL);
-		this.getSubmissionFileStatement = connection.prepareStatement(GET_SUBMISSION_FILES_SQL);
+		this.getParticipantsStatement = connection.prepareStatement(GET_PARTICIPANTS_SQL);
 		this.getSubmissionStatement = connection.prepareStatement(GET_SUBMISSION_SQL);
-		this.postAccountStatement = connection.prepareStatement(GET_PARTICIPANTS_SQL);
+		this.getSubmissionFilesStatement = connection.prepareStatement(GET_SUBMISSION_FILES_SQL);
 		this.postAccountStatement = connection.prepareStatement(POST_ACCOUNT_SQL);
 		this.postAssignmentStatement = connection.prepareStatement(POST_ASSIGNMENT_SQL);
 		this.postCourseStatement = connection.prepareStatement(POST_COURSE_SQL);
 		this.postFileStatement = connection.prepareStatement(POST_FILE_SQL);
 		this.postGradeStatement = connection.prepareStatement(POST_GRADE_SQL);
 		this.postParticipantStatement = connection.prepareStatement(POST_PARTICIPANT_SQL);
-		this.postSubmissionFileStatement = connection.prepareStatement(POST_SUBMISSION_FILE_SQL);
 		this.postSubmissionStatement = connection.prepareStatement(POST_SUBMISSION_SQL);
+		this.postSubmissionFilesStatement = connection.prepareStatement(POST_SUBMISSION_FILES_SQL);
 	}
 	/*
 	 * public ResultSet getExample(String column, String value) throws
@@ -156,12 +177,10 @@ public class SQLHandler {
 
 	// returns the account info based on user and password
 	public ResultSet getAccountInfo(String user, String password) throws SQLException {
-		System.out.println(this.getAccountStatement);
+		//Set username and password
 		this.getAccountStatement.setString(1, user);
-		System.out.println("set user name");
 		this.getAccountStatement.setString(2, password);
-		System.out.println("set password");
-		System.out.println("initialized account statement");
+		//Execute the query
 		return this.getAccountStatement.executeQuery();
 	}
 
@@ -171,8 +190,8 @@ public class SQLHandler {
 	}
 
 	// returns the course info based on the course_id
-	public ResultSet getCoursetInfo(int course_id) throws SQLException {
-		this.getCourseStatement.setString(1, Integer.toString(course_id));
+	public ResultSet getCourseInfo(int crn) throws SQLException {
+		this.getCourseStatement.setString(1, Integer.toString(crn));
 		return this.getCourseStatement.executeQuery();
 	}
 
@@ -199,9 +218,9 @@ public class SQLHandler {
 
 	// private PreparedStatement get_submission_file_statement;
 	public ResultSet getSubmissionFile(int submission_id) throws SQLException {
-		this.getSubmissionFileStatement.setString(1, Integer.toString(submission_id));
+		this.getSubmissionFilesStatement.setString(1, Integer.toString(submission_id));
 
-		return this.getSubmissionFileStatement.executeQuery();
+		return this.getSubmissionFilesStatement.executeQuery();
 	}
 
 	public ResultSet getTA(String course_id) throws SQLException {
@@ -265,8 +284,8 @@ public class SQLHandler {
 
 	// private PreparedStatement post_submission_file_statement;
 	public ResultSet postSubmissionFile(int file_id) throws SQLException {
-		this.postSubmissionFileStatement.setString(1, Integer.toString(file_id));
-		return this.postSubmissionFileStatement.executeQuery();
+		this.postSubmissionFilesStatement.setString(1, Integer.toString(file_id));
+		return this.postSubmissionFilesStatement.executeQuery();
 	}
 	
 	public void close() throws SQLException{
@@ -276,7 +295,7 @@ public class SQLHandler {
 		this.getFilesStatement.close();
 		this.getFileStatement.close();
 		this.getGradeStatement.close();
-		this.getSubmissionFileStatement.close();
+		this.getSubmissionFilesStatement.close();
 		this.getSubmissionStatement.close();
 		this.postAccountStatement.close();
 		this.postAccountStatement.close();
@@ -285,7 +304,7 @@ public class SQLHandler {
 		this.postFileStatement.close();
 		this.postGradeStatement.close();
 		this.postParticipantStatement.close();
-		this.postSubmissionFileStatement.close();
+		this.postSubmissionFilesStatement.close();
 		this.postSubmissionStatement.close();
 		this.connection.close();
 	}
