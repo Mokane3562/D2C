@@ -25,9 +25,8 @@ public class SQLHandler implements AutoCloseable{
 	 * 		+	"WHERE SOME_COLUMN = ?";
 	 */
 	//Get a user's first name, last name, and account ID using their user-name and password. 
-	//TODO:Verify this works.
 	private static final String GET_ACCOUNT_SQL = 
-				"SELECT fname, lname, account_id "
+				"SELECT fname, lname, create_time, account_id "
 			+ 	"FROM account "
 			+ 	"WHERE username = ? AND password = ?";
 	//Get an assignment's number, due date, and contents using it's assignment ID.

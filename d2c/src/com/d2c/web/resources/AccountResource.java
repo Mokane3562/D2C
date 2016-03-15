@@ -19,15 +19,15 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.d2c.util.SQLHandler;
-import com.d2c.web.beans.TransferableStudent;
+import com.d2c.web.beans.TransferableAccount;
 
-@Path("/student")
-public class StudentResource {
+@Path("/account")
+public class AccountResource {
 
 	@GET
-	@Path("/{student_user_name}")
+	@Path("/{account_user_name}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getStudentInfo(@PathParam("student_user_name") String studentUserName) {
+	public Response getStudentInfo(@PathParam("account_user_name") String accountUserName) {
 		// TODO Some sql shit to get my object
 
 		// TODO check that object exists
@@ -35,21 +35,21 @@ public class StudentResource {
 		// if it exists then save it to a java object and return through
 		// response
 		if (check) {
-			TransferableStudent s = new TransferableStudent();
-			return Response.ok().entity(s).build();
+			TransferableAccount account = new TransferableAccount();
+			return Response.ok().entity(account).build();
 		} else { // else return a not found
 			return Response.noContent().build();
 		}
 	}
 
 	@POST
-	@Path("/{student_user_name}")
+	@Path("/{account_user_name}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createOrUpdateStudent(@PathParam("student_user_name") String studentUserName, TransferableStudent student) {
+	public Response createOrUpdateStudent(@PathParam("account_user_name") String accountUserName, TransferableAccount account) {
 		// TODO make this post the course info to the DB
 
 		try {
-			return Response.created(new URI("/" + studentUserName)).build();
+			return Response.created(new URI("/" + accountUserName)).build();
 		} catch (URISyntaxException e) {
 			return Response.serverError().build();
 		}
