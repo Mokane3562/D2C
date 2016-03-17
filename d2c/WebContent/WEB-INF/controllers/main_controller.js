@@ -3,8 +3,8 @@
  * To do so, add the name as a string to the start of the array,
  * and add the name as a variable to the function.
  */
-app.controller('main_controller',['$scope', '$location', 'example_service', 'c_compile_request', 'j_compile_request',
-                                  'java_request', 'run_request', 'login_service',
+app.controller('main_controller',['$scope', '$location', 'example_service', 'c_compile_request',
+                                  'j_compile_request', 'java_request', 'run_request', 'login_service',
                           function($scope, $location, example_service, c_compile_request, j_compile_request,
                         		  java_request, run_request, login_service){
 	console.log("main controller loading");

@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Base64;
 
-import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
@@ -14,7 +13,6 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -27,7 +25,7 @@ public class AccountResource {
 	@GET
 	@Path("/{account_user_name}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getAccountInfo(@PathParam("account_user_name") String accountUserName, @HeaderParam("Authorization") String encodedLogin) {
+	public Response getAccountInfo(@PathParam("account_u				sql.close();ser_name") String accountUserName, @HeaderParam("Authorization") String encodedLogin) {
 		//decode login info
 		String decodedUser = decodeUser(encodedLogin);
 		String decodedPassword = decodePassword(encodedLogin);
@@ -83,18 +81,16 @@ public class AccountResource {
 		//decode login info
 		String user = decodeUser(encodedLogin);
 		String password = decodePassword(encodedLogin);
+		
 		//start sql
-		SQLHandler sql;
-		try {
-			sql = new SQLHandler();
+		try (SQLHandler sql = new SQLHandler();) {
 			ResultSet results = sql.getAccountInfo(user, password);
+			
 			//verify login info is legit (non null result set)
 			boolean isValid = results.first(); //true if valid
 			if(isValid){
-				sql.close();
 				return Response.ok().build();
 			} else {
-				sql.close();
 				return Response.status(403).build();
 			}
 		} catch (SQLException | ClassNotFoundException e) {

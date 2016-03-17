@@ -1,11 +1,10 @@
 app.factory('transferable_account', [function(){
-	return function(username, password, fname, lname, create_time){
+	return function(userName, firstName, lastName, createTime){
 		return {
-			'username': username,
-			'password': password,
-			'fname': fname,
-			'lname': lname,
-			'create_time': create_time
+			'userName': userName,
+			'firstName': firstName,
+			'lastName': lastName,
+			'createTime': createTime
 		};
 	};
 }]);
