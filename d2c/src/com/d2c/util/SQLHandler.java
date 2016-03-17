@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import javax.ws.rs.core.Response;
+
 public class SQLHandler implements AutoCloseable{
 	// TODO replace placeholder host and port with real host and port;
 	// TODO replace placeholder user and password with real user and password
@@ -147,9 +149,25 @@ public class SQLHandler implements AutoCloseable{
 		this.connectionProperties.put("password", DB_PASSWORD);
 		System.out.println("attempting to get connection");
 		this.connection = DriverManager.getConnection(DB_CONNECTION, connectionProperties);	
+		System.out.println(connection.isValid(30000));
 	}
 	
-	//CLAS METHODS
+	//CLASS METHODS
+	public static void main(String[] args) throws SQLException {
+		SQLHandler sql = null;
+		try {
+			sql = new SQLHandler();
+			ResultSet results = sql.getAccountInfo("mlc258", "please");
+			results.next();
+			System.out.println(results.getString(1));
+			
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			sql.close();
+		}
+	}
+	
 	/**
 	 * Commit the pending transaction. This will execute it.
 	 * @throws SQLException
@@ -311,24 +329,10 @@ public class SQLHandler implements AutoCloseable{
 	}
 	
 	//INHERITED/IMPLEMENTED METHODS
+	/* (non-Javadoc)
+	 * @see java.lang.AutoCloseable#close()
+	 */
 	public void close() throws SQLException{
-		this.getAccountStatement.close();
-		this.getCourseStatement.close();
-		this.getAssignmentStatement.close();
-		this.getFilesStatement.close();
-		this.getFileStatement.close();
-		this.getGradeStatement.close();
-		this.getSubmissionFilesStatement.close();
-		this.getSubmissionStatement.close();
-		this.postAccountStatement.close();
-		this.postAccountStatement.close();
-		this.postAssignmentStatement.close();
-		this.postCourseStatement.close();
-		this.postFileStatement.close();
-		this.postGradeStatement.close();
-		this.postParticipantStatement.close();
-		this.postSubmissionFileStatement.close();
-		this.postSubmissionStatement.close();
 		this.connection.close();
 	}
 }
