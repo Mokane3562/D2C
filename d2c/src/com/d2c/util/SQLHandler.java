@@ -115,7 +115,7 @@ public class SQLHandler implements AutoCloseable{
 			+ 	"VALUES (?, ?)";
 	//Add a file to a submission.
 	//TODO:Verify this works.
-	private static final String POST_SUBMISSION_FILES_SQL = 
+	private static final String POST_SUBMISSION_FILE_SQL = 
 				"INSERT INTO submission_file (submission_id,file_id) "
 			+ 	"VALUES(?, ?)";
 
@@ -136,8 +136,9 @@ public class SQLHandler implements AutoCloseable{
 	private PreparedStatement postGradeStatement;
 	private PreparedStatement postParticipantStatement;
 	private PreparedStatement postSubmissionStatement;
-	private PreparedStatement postSubmissionFilesStatement;
+	private PreparedStatement postSubmissionFileStatement;
 
+	//CONSTRUCTOR(S)
 	public SQLHandler() throws SQLException, ClassNotFoundException {
 		//Make a connection
 		Class.forName(DB_DRIVER);
@@ -145,37 +146,48 @@ public class SQLHandler implements AutoCloseable{
 		this.connectionProperties.put("user", DB_USER);
 		this.connectionProperties.put("password", DB_PASSWORD);
 		System.out.println("attempting to get connection");
-		this.connection = DriverManager.getConnection(DB_CONNECTION, connectionProperties);
-		
-		//Set up statements
-		// this.example_statement = connection.prepareStatement(EXAMPLE_SQL);
-		this.getAccountStatement = connection.prepareStatement(GET_ACCOUNT_SQL);
-		this.getAssignmentStatement = connection.prepareStatement(GET_ASSIGNMENT_SQL);
-		this.getCourseStatement = connection.prepareStatement(GET_COURSE_SQL);
-		this.getFileStatement = connection.prepareStatement(GET_FILE_SQL);
-		this.getFilesStatement = connection.prepareStatement(GET_FILES_SQL);
-		this.getGradeStatement = connection.prepareStatement(GET_GRADE_SQL);
-		this.getParticipantsStatement = connection.prepareStatement(GET_PARTICIPANTS_SQL);
-		this.getSubmissionStatement = connection.prepareStatement(GET_SUBMISSION_SQL);
-		this.getSubmissionFilesStatement = connection.prepareStatement(GET_SUBMISSION_FILES_SQL);
-		this.postAccountStatement = connection.prepareStatement(POST_ACCOUNT_SQL);
-		this.postAssignmentStatement = connection.prepareStatement(POST_ASSIGNMENT_SQL);
-		this.postCourseStatement = connection.prepareStatement(POST_COURSE_SQL);
-		this.postFileStatement = connection.prepareStatement(POST_FILE_SQL);
-		this.postGradeStatement = connection.prepareStatement(POST_GRADE_SQL);
-		this.postParticipantStatement = connection.prepareStatement(POST_PARTICIPANT_SQL);
-		this.postSubmissionStatement = connection.prepareStatement(POST_SUBMISSION_SQL);
-		this.postSubmissionFilesStatement = connection.prepareStatement(POST_SUBMISSION_FILES_SQL);
+		this.connection = DriverManager.getConnection(DB_CONNECTION, connectionProperties);	
 	}
+	
+	//CLAS METHODS
+	/**
+	 * Commit the pending transaction. This will execute it.
+	 * @throws SQLException
+	 */
+	public void commit() throws SQLException{
+		connection.commit();
+	}
+	
+	/**
+	 * Roll back the most recent committed transaction.
+	 * @throws SQLException
+	 */
+	public void rollback() throws SQLException{
+		connection.rollback();
+	}
+	
+	/**
+	 * Start a transaction.
+	 * @param autoCommit set to true to make queries within transactions 
+	 * @throws SQLException
+	 */
+	public void setAutoCommit(boolean autoCommit) throws SQLException{
+		connection.setAutoCommit(autoCommit);
+	}
+	
+	//GETTERS AND SETTERS
 	/*
-	 * public ResultSet getExample(String column, String value) throws
-	 * SQLException { this.example_statement.setString(0, column);
-	 * this.example_statement.setString(1, value); return
-	 * this.example_statement.executeQuery(); }
+	 * public ResultSet getExample(String column, String value) throws SQLException { 
+	 *     this.example_statement = connection.prepareStatement(EXAMPLE_SQL);
+	 *     this.example_statement.setString(1, column);
+	 *     this.example_statement.setString(2, value); 
+	 *     return this.example_statement.executeQuery(); 
+	 * }
 	 */
 
 	// returns the account info based on user and password
 	public ResultSet getAccountInfo(String user, String password) throws SQLException {
+		this.getAccountStatement = connection.prepareStatement(GET_ACCOUNT_SQL);
 		//Set username and password
 		this.getAccountStatement.setString(1, user);
 		this.getAccountStatement.setString(2, password);
@@ -184,50 +196,58 @@ public class SQLHandler implements AutoCloseable{
 	}
 
 	public ResultSet getAssignment(String assign_id) throws SQLException {
+		this.getAssignmentStatement = connection.prepareStatement(GET_ASSIGNMENT_SQL);
 		this.postCourseStatement.setString(1, assign_id);
 		return this.getAssignmentStatement.executeQuery();
 	}
 
 	// returns the course info based on the course_id
 	public ResultSet getCourseInfo(int crn) throws SQLException {
+		this.getCourseStatement = connection.prepareStatement(GET_COURSE_SQL);
 		this.getCourseStatement.setString(1, Integer.toString(crn));
 		return this.getCourseStatement.executeQuery();
 	}
 
 	// returns the file based on the file_id
 	public ResultSet getFile(int file_id) throws SQLException {
+		this.getFileStatement = connection.prepareStatement(GET_FILE_SQL);
 		this.getFileStatement.setString(1, Integer.toString(file_id));
 		return this.getFileStatement.executeQuery();
 	}
 
 	public ResultSet getFiles(int account_id) throws SQLException {
+		this.getFilesStatement = connection.prepareStatement(GET_FILES_SQL);
 		this.getFilesStatement.setString(1, Integer.toString(account_id));
 		return this.getFilesStatement.executeQuery();
 	}
 
 	public ResultSet getGrade(int submission_id) throws SQLException {
+		this.getGradeStatement = connection.prepareStatement(GET_GRADE_SQL);
 		this.getGradeStatement.setString(1, Integer.toString(submission_id));
 		return this.getGradeStatement.executeQuery();
 	}
 
+	public ResultSet getParticipants(int crn) throws SQLException {
+		this.getParticipantsStatement = connection.prepareStatement(GET_PARTICIPANTS_SQL);
+		this.getParticipantsStatement.setString(1, Integer.toString(crn));
+		return this.getParticipantsStatement.executeQuery();
+	}
+
 	public ResultSet getSubmission(int submission_id) throws SQLException {
+		this.getSubmissionStatement = connection.prepareStatement(GET_SUBMISSION_SQL);
 		this.getSubmissionStatement.setString(1, Integer.toString(submission_id));
 		return this.getSubmissionStatement.executeQuery();
 	}
-
-	// private PreparedStatement get_submission_file_statement;
-	public ResultSet getSubmissionFile(int submission_id) throws SQLException {
+	
+	public ResultSet getSubmissionFiles(int submission_id) throws SQLException {
+		this.getSubmissionFilesStatement = connection.prepareStatement(GET_SUBMISSION_FILES_SQL);
 		this.getSubmissionFilesStatement.setString(1, Integer.toString(submission_id));
 
 		return this.getSubmissionFilesStatement.executeQuery();
 	}
 
-	public ResultSet getTA(String course_id) throws SQLException {
-		this.getParticipantsStatement.setString(1, course_id);
-		return this.getParticipantsStatement.executeQuery();
-	}
-
 	public ResultSet postAccount(String username, String password, String fname, String lname) throws SQLException {
+		this.postAccountStatement = connection.prepareStatement(POST_ACCOUNT_SQL);
 		this.postAccountStatement.setString(1, username);
 		this.postAccountStatement.setString(2, password);
 		this.postAccountStatement.setString(3, fname);
@@ -236,8 +256,8 @@ public class SQLHandler implements AutoCloseable{
 		return this.postAccountStatement.executeQuery();
 	}
 
-	public ResultSet postAssignment(String num, int course_id, Date date, int test_id, String assign)
-			throws SQLException {
+	public ResultSet postAssignment(String num, int course_id, Date date, int test_id, String assign) throws SQLException {
+		this.postAssignmentStatement = connection.prepareStatement(POST_ASSIGNMENT_SQL);
 		this.postAssignmentStatement.setString(1, num);
 		this.postAssignmentStatement.setString(2, Integer.toString(course_id));
 		// this.post_assignment_statement.setString(3, date);
@@ -248,6 +268,7 @@ public class SQLHandler implements AutoCloseable{
 
 	// returns posting a course
 	public ResultSet postCourse(String number, String subject, String name) throws SQLException {
+		this.postCourseStatement = connection.prepareStatement(POST_COURSE_SQL);
 		this.postCourseStatement.setString(1, number);
 		this.postCourseStatement.setString(2, subject);
 		this.postCourseStatement.setString(3, name);
@@ -255,6 +276,7 @@ public class SQLHandler implements AutoCloseable{
 	}
 
 	public ResultSet postFile(String name, Date date, String text) throws SQLException {
+		this.postFileStatement = connection.prepareStatement(POST_FILE_SQL);
 		this.postFileStatement.setString(1, name);
 		// this.post_course_statement.setString(2, date);
 		this.postFileStatement.setString(3, text);
@@ -262,31 +284,33 @@ public class SQLHandler implements AutoCloseable{
 	}
 
 	public ResultSet postGrade(double grade) throws SQLException {
+		this.postGradeStatement = connection.prepareStatement(POST_GRADE_SQL);
 		this.postGradeStatement.setString(1, Double.toString(grade));
 		return this.postGradeStatement.executeQuery();
 	}
 
-	public ResultSet postRole(int course_id, int account_id, String type) throws SQLException {
+	public ResultSet postParticipant(int course_id, int account_id, String type) throws SQLException {
+		this.postParticipantStatement = connection.prepareStatement(POST_PARTICIPANT_SQL);
 		this.postParticipantStatement.setString(1, Integer.toString(course_id));
 		this.postParticipantStatement.setString(2, Integer.toString(account_id));
 		this.postParticipantStatement.setString(3, type);
 		return this.postParticipantStatement.executeQuery();
-
 	}
 
-	// private PreparedStatement post_submission_statement;
 	public ResultSet postSubmission(int account_id, int assign_id) throws SQLException {
+		this.postSubmissionStatement = connection.prepareStatement(POST_SUBMISSION_SQL);
 		this.postSubmissionStatement.setString(1, Integer.toString(account_id));
 		this.postSubmissionStatement.setString(2, Integer.toString(assign_id));
 		return this.postSubmissionStatement.executeQuery();
 	}
 
-	// private PreparedStatement post_submission_file_statement;
 	public ResultSet postSubmissionFile(int file_id) throws SQLException {
-		this.postSubmissionFilesStatement.setString(1, Integer.toString(file_id));
-		return this.postSubmissionFilesStatement.executeQuery();
+		this.postSubmissionFileStatement = connection.prepareStatement(POST_SUBMISSION_FILE_SQL);
+		this.postSubmissionFileStatement.setString(1, Integer.toString(file_id));
+		return this.postSubmissionFileStatement.executeQuery();
 	}
 	
+	//INHERITED/IMPLEMENTED METHODS
 	public void close() throws SQLException{
 		this.getAccountStatement.close();
 		this.getCourseStatement.close();
@@ -303,7 +327,7 @@ public class SQLHandler implements AutoCloseable{
 		this.postFileStatement.close();
 		this.postGradeStatement.close();
 		this.postParticipantStatement.close();
-		this.postSubmissionFilesStatement.close();
+		this.postSubmissionFileStatement.close();
 		this.postSubmissionStatement.close();
 		this.connection.close();
 	}
