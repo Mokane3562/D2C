@@ -32,9 +32,8 @@ public class SQLHandler implements AutoCloseable{
 			+ 	"FROM account "
 			+ 	"WHERE username = ? AND password = ?";
 	//Get an assignment's number, due date, and contents using it's assignment ID.
-	//TODO:Verify this works.
 	private static final String GET_ASSIGNMENT_SQL = 	
-				"SELECT number, due_date, assign "
+				"SELECT number, due_date, course_inst_id "
 			+ 	"FROM assignment "
 			+ 	"WHERE assign_id = ? ";
 	//Get a course's subject, number, and name, using it's crn.
