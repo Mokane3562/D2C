@@ -81,7 +81,7 @@ public class AccountResource {
 		//decode login info
 		String user = decodeUser(encodedLogin);
 		String password = decodePassword(encodedLogin);
-		
+		System.out.println(user+":"+password);
 		//start sql
 		try (SQLHandler sql = new SQLHandler();) {
 			ResultSet results = sql.getAccountInfo(user, password);

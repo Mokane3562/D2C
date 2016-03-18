@@ -3,7 +3,7 @@ app.factory('login_service',['$q', '$http', function($q, $http){
 		var deferred = $q.defer();
 		$http({
 			method: 'GET',
-			url: '/d2c/student',
+			url: '/d2c/account',
 			headers: {
 				'access-control-allow-origin': '*',
 				'Authorization': "Basic " + user_auth

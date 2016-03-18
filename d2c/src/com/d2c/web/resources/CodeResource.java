@@ -46,6 +46,9 @@ public class CodeResource {
 			BufferedReader br = pipe.getReader();
 			output += stringContentsOfBuffer(br);
 			pipe.close();
+			if(output.trim().equals("")){
+				output = "Compilation Successful!";
+			}
 			System.out.println("returning ok response: "+ output);
 			// TerminalCaller.clearTempUserFiles(user, proper_path);
 			return Response.ok().entity(output).build();
@@ -73,6 +76,9 @@ public class CodeResource {
 				// BufferedWriter bw = pipe.getInput();
 				BufferedReader br = pipe.getReader();
 				output += stringContentsOfBuffer(br);
+			}
+			if(output.trim().equals("")){
+				output = "Compilation Successful!";
 			}
 			// TerminalCaller.clearTempUserFiles(user, proper_path);
 			return Response.ok().entity(output).build();

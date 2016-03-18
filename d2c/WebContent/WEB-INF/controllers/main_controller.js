@@ -47,6 +47,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 				view["grades"] = false;
 		},
 		function(errors){
+			console.log(errors);
 			if(errors.status === 403){
 				$scope.login_failure = "invalid username/password";
 			} else {
@@ -119,7 +120,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		var path = path_array.join("/");
 		var code = {};
 		code[name]= document.getElementById("textcodebox").value;
-		var user = document.getElementById("user_name").value;
+		var user = $scope.user;
 		c_compile_request(code, user, path).then(
 			function(response){
 				console.log("success");
@@ -144,7 +145,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		var path = path_array.join("/");
 		var code = {};
 		code[name]= document.getElementById("textcodebox").value;
-		var user = document.getElementById("user_name").value;
+		var user = $scope.user;
 		j_compile_request(code, user, path).then(
 			function(response){
 				console.log("success");
@@ -168,7 +169,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		var path = path_array.join("/");
 		var code = {};
 		code[name]= "";
-		var user = document.getElementById("user_name").value;
+		var user = $scope.user;
 		java_request(code, user, path).then(
 			function(response){
 				console.log("success");
@@ -190,7 +191,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		var path = path_array.join("/");
 		var code = {};
 		code[name]= "";
-		var user = document.getElementById("user_name").value;
+		var user = $scope.user;
 		run_request(code, user, path).then(
 			function(response){
 				console.log("success");
