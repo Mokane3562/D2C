@@ -1,0 +1,59 @@
+
+Javascript Objects:
+
+file{
+	fileName: String;
+	fileContent: String;	
+}
+
+grade{
+	marks: Map<String, int>;
+}
+
+student{
+	name: String;
+	number: String;
+	email: String;
+	courseList: [course];
+}
+
+TA{
+	student: Student;
+	course: course;
+}
+
+prof{
+	name: String;
+	num: String;
+	email: String;
+	courseList: [course];
+}
+
+assignment{
+	files: [file]; //A list of files
+	assignmentName: String;
+	dueDate: date;
+	content: String;
+}
+
+Submission{
+	files: [file]; //Alist of files
+	assignment: assignmnet
+	submitting_student: student
+}
+
+date{
+	month: String;
+	day: String;
+	time: String;
+	year: String;
+}
+
+course{
+	courseNumber: String;
+	classList: [student]; //A list of enrolled students
+	assignments: [assignment]; //A list of assignments
+	subject: String;
+	courseName: String;
+	TAs: [TA]; //A list of TAs 
+}

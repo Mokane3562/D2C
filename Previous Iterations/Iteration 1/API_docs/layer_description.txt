@@ -1,0 +1,34 @@
+User-Interface Layer
+      ^
+      |
+Service Layer
+      ^
+      |
+RESTful WebAPI Layer
+      ^
+      |
+SQL Database
+
+    The user interface will consist of the divs and buttons
+required to allow user interaction with the system.
+Each clickable element will recieve an event handler
+that will be added to it through an angular controller. 
+
+    The handlers will implement their behavior through using
+the services provided by the service layer as described in the 
+AngularJS_services.txt file
+
+    The services will be implemented by making http requests to
+the server back-end, using the Web API as described in the
+WebAPI.txt file. These http requests will be handled asynchornously
+to allow the web app to never lag or stall.
+
+    The WebAPI is implemented as a series of Jax-RS resources
+which use the java classes in JavaClasses.txt as Java decodings
+of the JSON objects in the javascriptObjects.txt file.
+Each resource will have methods that use prepared SQL statements
+and the arguments to the method to insert, update, or select a row
+in the database.
+
+    The Database will be a MySQL database, whose schema is described
+in the files located in the Database folder
