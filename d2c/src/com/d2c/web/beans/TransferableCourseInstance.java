@@ -8,7 +8,6 @@ public class TransferableCourseInstance {
 	public Semester semester;
 	public int year;
 	public int courseReferenceNumber; //00001
-	public List<TransferableAssignment> assignments;
 	public Map<TransferableAccount, Role> participants;
 	
 	enum Semester {
