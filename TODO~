@@ -6,3 +6,5 @@
 	required to call all Resource Class methods.
 - Make sure passwords are stored in a secure way on the database. It seems a 		common way to do this is to hash them first.
 
+
+In the Documentation folder, place our (Updated) higher level design pdf.
