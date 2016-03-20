@@ -1,0 +1,93 @@
+20-Mar-2016 20:40:10.493 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version:        Apache Tomcat/8.0.32
+20-Mar-2016 20:40:10.496 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Feb 2 2016 19:34:53 UTC
+20-Mar-2016 20:40:10.496 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server number:         8.0.32.0
+20-Mar-2016 20:40:10.496 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Linux
+20-Mar-2016 20:40:10.497 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            4.2.0-34-generic
+20-Mar-2016 20:40:10.497 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          amd64
+20-Mar-2016 20:40:10.497 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             /usr/lib/jvm/java-8-openjdk-amd64/jre
+20-Mar-2016 20:40:10.497 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           1.8.0_66-internal-b17
+20-Mar-2016 20:40:10.497 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Oracle Corporation
+20-Mar-2016 20:40:10.498 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /home/scott/4770_workspace/teamg/Deployment/apache-tomcat-8.0.32
+20-Mar-2016 20:40:10.498 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /home/scott/4770_workspace/teamg/Deployment/apache-tomcat-8.0.32
+20-Mar-2016 20:40:10.498 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/home/scott/4770_workspace/teamg/Deployment/apache-tomcat-8.0.32/conf/logging.properties
+20-Mar-2016 20:40:10.499 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+20-Mar-2016 20:40:10.499 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.endorsed.dirs=/home/scott/4770_workspace/teamg/Deployment/apache-tomcat-8.0.32/endorsed
+20-Mar-2016 20:40:10.499 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/home/scott/4770_workspace/teamg/Deployment/apache-tomcat-8.0.32
+20-Mar-2016 20:40:10.500 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/home/scott/4770_workspace/teamg/Deployment/apache-tomcat-8.0.32
+20-Mar-2016 20:40:10.500 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/home/scott/4770_workspace/teamg/Deployment/apache-tomcat-8.0.32/temp
+20-Mar-2016 20:40:10.500 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: /usr/java/packages/lib/amd64:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib
+20-Mar-2016 20:40:10.693 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+20-Mar-2016 20:40:10.778 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+20-Mar-2016 20:40:10.781 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["ajp-nio-8009"]
+20-Mar-2016 20:40:10.782 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+20-Mar-2016 20:40:10.785 INFO [main] org.apache.catalina.startup.Catalina.load Initialization processed in 840 ms
+20-Mar-2016 20:40:10.862 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service Catalina
+20-Mar-2016 20:40:10.862 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet Engine: Apache Tomcat/8.0.32
+20-Mar-2016 20:40:10.882 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory /home/scott/4770_workspace/teamg/Deployment/apache-tomcat-8.0.32/webapps/examples
+20-Mar-2016 20:40:11.714 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory /home/scott/4770_workspace/teamg/Deployment/apache-tomcat-8.0.32/webapps/examples has finished in 832 ms
+20-Mar-2016 20:40:11.714 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory /home/scott/4770_workspace/teamg/Deployment/apache-tomcat-8.0.32/webapps/host-manager
+20-Mar-2016 20:40:11.739 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory /home/scott/4770_workspace/teamg/Deployment/apache-tomcat-8.0.32/webapps/host-manager has finished in 25 ms
+20-Mar-2016 20:40:11.740 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory /home/scott/4770_workspace/teamg/Deployment/apache-tomcat-8.0.32/webapps/manager
+20-Mar-2016 20:40:11.776 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory /home/scott/4770_workspace/teamg/Deployment/apache-tomcat-8.0.32/webapps/manager has finished in 36 ms
+20-Mar-2016 20:40:11.776 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory /home/scott/4770_workspace/teamg/Deployment/apache-tomcat-8.0.32/webapps/ROOT
+20-Mar-2016 20:40:11.801 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory /home/scott/4770_workspace/teamg/Deployment/apache-tomcat-8.0.32/webapps/ROOT has finished in 25 ms
+20-Mar-2016 20:40:11.801 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory /home/scott/4770_workspace/teamg/Deployment/apache-tomcat-8.0.32/webapps/docs
+20-Mar-2016 20:40:11.827 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory /home/scott/4770_workspace/teamg/Deployment/apache-tomcat-8.0.32/webapps/docs has finished in 26 ms
+20-Mar-2016 20:40:11.830 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+20-Mar-2016 20:40:11.838 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["ajp-nio-8009"]
+20-Mar-2016 20:40:11.839 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 1054 ms
+20-Mar-2016 20:42:47.343 INFO [http-nio-8080-exec-4] org.apache.catalina.startup.HostConfig.deployWAR Deploying web application archive /home/scott/4770_workspace/teamg/Deployment/apache-tomcat-8.0.32/webapps/d2c.war
+20-Mar-2016 20:42:48.291 INFO [http-nio-8080-exec-4] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+20-Mar-2016 20:42:49.225 INFO [http-nio-8080-exec-4] org.apache.catalina.startup.HostConfig.deployWAR Deployment of web application archive /home/scott/4770_workspace/teamg/Deployment/apache-tomcat-8.0.32/webapps/d2c.war has finished in 1,882 ms
+20-Mar-2016 20:51:58.115 INFO [main] org.apache.catalina.core.StandardServer.await A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+20-Mar-2016 20:51:58.116 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["http-nio-8080"]
+20-Mar-2016 20:51:58.168 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["ajp-nio-8009"]
+20-Mar-2016 20:51:58.219 INFO [main] org.apache.catalina.core.StandardService.stopInternal Stopping service Catalina
+20-Mar-2016 20:51:58.509 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["http-nio-8080"]
+20-Mar-2016 20:51:58.520 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["ajp-nio-8009"]
+20-Mar-2016 20:51:58.521 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["http-nio-8080"]
+20-Mar-2016 20:51:58.522 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["ajp-nio-8009"]
+20-Mar-2016 20:53:29.151 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version:        Apache Tomcat/8.0.32
+20-Mar-2016 20:53:29.154 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Feb 2 2016 19:34:53 UTC
+20-Mar-2016 20:53:29.154 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server number:         8.0.32.0
+20-Mar-2016 20:53:29.154 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Linux
+20-Mar-2016 20:53:29.155 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            4.2.0-34-generic
+20-Mar-2016 20:53:29.155 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          amd64
+20-Mar-2016 20:53:29.155 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             /usr/lib/jvm/java-8-openjdk-amd64/jre
+20-Mar-2016 20:53:29.155 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           1.8.0_66-internal-b17
+20-Mar-2016 20:53:29.156 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Oracle Corporation
+20-Mar-2016 20:53:29.156 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /home/scott/4770_workspace/teamg/Deployment/apache-tomcat-8.0.32
+20-Mar-2016 20:53:29.156 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /home/scott/4770_workspace/teamg/Deployment/apache-tomcat-8.0.32
+20-Mar-2016 20:53:29.157 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/home/scott/4770_workspace/teamg/Deployment/apache-tomcat-8.0.32/conf/logging.properties
+20-Mar-2016 20:53:29.157 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+20-Mar-2016 20:53:29.157 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.endorsed.dirs=/home/scott/4770_workspace/teamg/Deployment/apache-tomcat-8.0.32/endorsed
+20-Mar-2016 20:53:29.158 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/home/scott/4770_workspace/teamg/Deployment/apache-tomcat-8.0.32
+20-Mar-2016 20:53:29.158 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/home/scott/4770_workspace/teamg/Deployment/apache-tomcat-8.0.32
+20-Mar-2016 20:53:29.158 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/home/scott/4770_workspace/teamg/Deployment/apache-tomcat-8.0.32/temp
+20-Mar-2016 20:53:29.158 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: /usr/java/packages/lib/amd64:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib
+20-Mar-2016 20:53:29.318 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+20-Mar-2016 20:53:29.355 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+20-Mar-2016 20:53:29.360 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["ajp-nio-8009"]
+20-Mar-2016 20:53:29.363 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+20-Mar-2016 20:53:29.367 INFO [main] org.apache.catalina.startup.Catalina.load Initialization processed in 703 ms
+20-Mar-2016 20:53:29.413 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service Catalina
+20-Mar-2016 20:53:29.413 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet Engine: Apache Tomcat/8.0.32
+20-Mar-2016 20:53:29.449 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployWAR Deploying web application archive /home/scott/4770_workspace/teamg/Deployment/apache-tomcat-8.0.32/webapps/d2c.war
+20-Mar-2016 20:53:30.494 INFO [localhost-startStop-1] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+20-Mar-2016 20:53:31.585 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployWAR Deployment of web application archive /home/scott/4770_workspace/teamg/Deployment/apache-tomcat-8.0.32/webapps/d2c.war has finished in 2,135 ms
+20-Mar-2016 20:53:31.586 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory /home/scott/4770_workspace/teamg/Deployment/apache-tomcat-8.0.32/webapps/examples
+20-Mar-2016 20:53:31.860 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory /home/scott/4770_workspace/teamg/Deployment/apache-tomcat-8.0.32/webapps/examples has finished in 274 ms
+20-Mar-2016 20:53:31.861 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory /home/scott/4770_workspace/teamg/Deployment/apache-tomcat-8.0.32/webapps/host-manager
+20-Mar-2016 20:53:31.883 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory /home/scott/4770_workspace/teamg/Deployment/apache-tomcat-8.0.32/webapps/host-manager has finished in 21 ms
+20-Mar-2016 20:53:31.883 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory /home/scott/4770_workspace/teamg/Deployment/apache-tomcat-8.0.32/webapps/manager
+20-Mar-2016 20:53:31.919 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory /home/scott/4770_workspace/teamg/Deployment/apache-tomcat-8.0.32/webapps/manager has finished in 36 ms
+20-Mar-2016 20:53:31.919 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory /home/scott/4770_workspace/teamg/Deployment/apache-tomcat-8.0.32/webapps/ROOT
+20-Mar-2016 20:53:31.933 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory /home/scott/4770_workspace/teamg/Deployment/apache-tomcat-8.0.32/webapps/ROOT has finished in 14 ms
+20-Mar-2016 20:53:31.933 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory /home/scott/4770_workspace/teamg/Deployment/apache-tomcat-8.0.32/webapps/docs
+20-Mar-2016 20:53:31.947 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory /home/scott/4770_workspace/teamg/Deployment/apache-tomcat-8.0.32/webapps/docs has finished in 14 ms
+20-Mar-2016 20:53:31.950 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+20-Mar-2016 20:53:31.961 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["ajp-nio-8009"]
+20-Mar-2016 20:53:31.962 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 2594 ms
+sy6746:password
+attempting to get connection
+true
