@@ -2,7 +2,6 @@ package com.d2c.web.resources;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Base64;
 
@@ -16,89 +15,148 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.d2c.util.EmptySetException;
 import com.d2c.util.SQLHandler;
 import com.d2c.web.beans.TransferableAccount;
 
 @Path("/account")
 public class AccountResource {
 
+	//GETS
 	@GET
 	@Path("/{account_user_name}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getAccountInfo(@PathParam("account_u				sql.close();ser_name") String accountUserName, @HeaderParam("Authorization") String encodedLogin) {
+	public Response getAccountInfo(@PathParam("account_user_name") String accountUserName, @HeaderParam("Authorization") String encodedLogin) {
 		//decode login info
 		String decodedUser = decodeUser(encodedLogin);
 		String decodedPassword = decodePassword(encodedLogin);
-		
-		//continue only if the user has authority to view this info
-		if (decodedUser.equals(accountUserName)) {
-			//start SQL shit	
-			try (SQLHandler sql = new SQLHandler();) {
-				//TODO:Set up encrypted passwords
-				ResultSet results = sql.getAccountInfo(accountUserName, decodedPassword);
-				
-				//check if the user exists on the database
-				boolean userExists = results.first();
-				if (userExists) {//if the account exists you're good to go
-					//create the account object
-					TransferableAccount account = new TransferableAccount();
-					account.userName = results.getString(1);
-					account.firstName = results.getString(2);
-					account.lastName = results.getString(3);
-					account.createTime = results.getTimestamp(4);
-					
-					//send created account object to client
-					return Response.ok().entity(account).build();
-				} else {//otherwise you're done because the page doesn't exist
-					return Response.noContent().build();
-				}
-			} catch (SQLException | ClassNotFoundException e) {
-				e.printStackTrace();
-				
-				//when shit goes FUBAR
-				return Response.serverError().build();
+		//start SQL shit	
+		try (SQLHandler sql = new SQLHandler();) {
+		//TODO:Set up encrypted passwords
+			Object[] results = sql.getAccountInfo(accountUserName);
+			//continue only if the user has authority to view this info
+			if (decodedUser.equals(accountUserName) && decodedPassword.equals(results[1])) {
+				//create the account object
+				TransferableAccount account = new TransferableAccount();
+				account.userName = accountUserName;
+				account.password = (String) results[1];
+				account.firstName = (String) results[2];
+				account.lastName = (String) results[3];
+				account.createTime = (java.sql.Timestamp) results[4];
+				//send created account object to client
+				return Response.ok().entity(account).build();
+			} else {//otherwise you're done because the page doesn't exist
+				return Response.status(403).build(); //this happens when access to this page is denied
 			} 
-		} else {
-			return Response.status(403).build(); //this happens when access to this page is denied
-		}
-	}
-
-	@POST
-	@Path("/{account_user_name}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createOrUpdateAccount(@PathParam("account_user_name") String accountUserName, TransferableAccount account) {
-		// TODO make this post the course info to the DB
-
-		try {
-			return Response.created(new URI("/" + accountUserName)).build();
-		} catch (URISyntaxException e) {
+		} catch (EmptySetException e) {
+			e.printStackTrace();
+			return Response.noContent().build();
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+			//when shit goes FUBAR
 			return Response.serverError().build();
-		}
+		} 
 	}
 	
 	@GET
 	public Response validateLogIn(@HeaderParam("Authorization") String encodedLogin){
 		//decode login info
-		String user = decodeUser(encodedLogin);
-		String password = decodePassword(encodedLogin);
-		System.out.println(user+":"+password);
+		String decodedUser = decodeUser(encodedLogin);
+		String decodedPassword = decodePassword(encodedLogin);
 		//start sql
 		try (SQLHandler sql = new SQLHandler();) {
-			ResultSet results = sql.getAccountInfo(user, password);
-			
+			Object[] results = sql.getAccountInfo(decodedUser);	
 			//verify login info is legit (non null result set)
-			boolean isValid = results.first(); //true if valid
-			if(isValid){
+			if(decodedPassword.equals(results[1])){
 				return Response.ok().build();
 			} else {
-				return Response.status(403).build();
+				return Response.status(403).build(); //this happens when access to this page is denied
 			}
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 			return Response.serverError().build();
+		} catch (EmptySetException e) {
+			e.printStackTrace();
+			return Response.noContent().build();
+		}
+	}
+
+	//POSTS
+	@POST
+	@Path("/new/{account_user_name}") //CHECKME:What if there's a / in the username or password?
+	@Consumes(MediaType.APPLICATION_JSON)
+	//CHECKME:Can we make POSTs safer? Is this overkill?
+	public Response createAccount(@PathParam("account_user_name") String accountUserName, TransferableAccount account) {
+		//start sql shit
+		SQLHandler sql = null;
+		try {
+			sql = new SQLHandler();
+			sql.setAutoCommit(false); //enable transactions
+			sql.makeAccount(account.userName, account.password, account.firstName, account.lastName);
+			sql.commit();
+			return Response.created(new URI("/" + account.userName)).build();
+		} catch (SQLException | ClassNotFoundException | URISyntaxException e) {
+			try {
+				sql.rollback();
+			} catch (SQLException e1) {
+				System.err.println("\nROLLBACK FAILED\n");
+				e1.printStackTrace();
+				return Response.serverError().build();
+			}
+			e.printStackTrace();
+			return Response.serverError().build();
+		} finally {
+			try {
+				sql.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
+	@POST
+	@Path("/{account_user_name}") 
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response updateAccount(@PathParam("account_user_name") String accountUserName, TransferableAccount account, @HeaderParam("Authorization") String encodedLogin) {
+		//decode login info
+		String decodedUser = decodeUser(encodedLogin);
+		String decodedPassword = decodePassword(encodedLogin);
+		//start sql shit
+		SQLHandler sql = null;
+		try {
+			sql = new SQLHandler();
+			Object[] results = sql.getAccountInfo(accountUserName);
+			if (decodedUser.equals(accountUserName) && decodedPassword.equals(results[1])) {
+				sql.setAutoCommit(false); //enable transactions
+				sql.updateAccount(accountUserName, account.password, account.firstName, account.lastName);
+				sql.commit();
+				return Response.created(new URI("/" + accountUserName)).build();//CHECKME: Is this the correct response?
+			} else {
+				return Response.status(403).build();
+			}
+		} catch (SQLException | ClassNotFoundException | URISyntaxException e) {
+			try {
+				sql.rollback();
+			} catch (SQLException e1) {
+				System.err.println("\nROLLBACK FAILED\n");
+				e1.printStackTrace();
+				return Response.serverError().build();
+			}
+			e.printStackTrace();
+			return Response.serverError().build();
+		} catch (EmptySetException e) {
+			e.printStackTrace();
+			return Response.noContent().build();
+		} finally {
+			try {
+				sql.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	//HELPERS
 	private static String decodeUser(String encodedLogin) {
 		String[] decoded = new String(Base64.getDecoder().decode(encodedLogin.split(" ")[1])).split(":");
 		String user = new String(decoded[0]);

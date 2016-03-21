@@ -8,8 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import javax.ws.rs.core.Response;
-
 public class SQLHandler implements AutoCloseable{
 	// TODO replace placeholder host and port with real host and port;
 	// TODO replace placeholder user and password with real user and password
@@ -27,10 +25,10 @@ public class SQLHandler implements AutoCloseable{
 	 * 		+	"WHERE SOME_COLUMN = ?";
 	 */
 	//Get a user's first name, last name, and account ID using their user-name and password. 
-	private static final String GET_ACCOUNT_SQL = 
-				"SELECT fname, lname, create_time, account_id "
+	private static final String SELECT_ACCOUNT_SQL = 
+				"SELECT username, password, fname, lname, create_time, account_id "
 			+ 	"FROM account "
-			+ 	"WHERE username = ? AND password = ?";
+			+ 	"WHERE username = ?";
 	//Get an assignment's number, due date, and contents using it's assignment ID.
 	private static final String GET_ASSIGNMENT_SQL = 	
 				"SELECT number, due_date, course_inst_id "
@@ -79,8 +77,7 @@ public class SQLHandler implements AutoCloseable{
 			+ 	"FROM submission_file "
 			+ 	"WHERE submission_id = ?";
 	//Store a new account in the database. Other fields will be generated automatically.
-	//TODO:Verify this works.
-	private static final String POST_ACCOUNT_SQL = 
+	private static final String INSERT_ACCOUNT_SQL = 
 				"INSERT INTO account (username, password, fname, lname) "
 			+ 	"VALUES (?, ?, ?, ?)";
 	//Store a new assignment in the database. Other fields will be generated automatically.
@@ -119,7 +116,11 @@ public class SQLHandler implements AutoCloseable{
 	private static final String POST_SUBMISSION_FILE_SQL = 
 				"INSERT INTO submission_file (submission_id,file_id) "
 			+ 	"VALUES(?, ?)";
-
+	//update an account
+	private static final String UPDATE_ACCOUNT_SQL = 
+				"UPDATE account "
+			+ 	"SET password=?, fname=?, lname=?"
+			+ 	"WHERE username = ?";
 	// private PreparedStatement exampleStatement;
 	private PreparedStatement getAccountStatement;
 	private PreparedStatement getAssignmentStatement;
@@ -147,23 +148,22 @@ public class SQLHandler implements AutoCloseable{
 		this.connectionProperties.put("user", DB_USER);
 		this.connectionProperties.put("password", DB_PASSWORD);
 		System.out.println("attempting to get connection");
-		this.connection = DriverManager.getConnection(DB_CONNECTION, connectionProperties);	
-		System.out.println(connection.isValid(30000));
+		this.connection = DriverManager.getConnection(DB_CONNECTION, connectionProperties);
+		
+		if (connection.isValid(30000)) {
+			System.out.println("connected at " + DB_CONNECTION);
+		}
 	}
 	
 	//CLASS METHODS
-	public static void main(String[] args) throws SQLException {
-		SQLHandler sql = null;
-		try {
-			sql = new SQLHandler();
-			ResultSet results = sql.getAccountInfo("mlc258", "please");
-			results.next();
-			System.out.println(results.getString(1));
-			
-		} catch (SQLException | ClassNotFoundException e) {
+	public static void main(String[] args) {
+		try (SQLHandler sql = new SQLHandler();) {
+			Object[] results = sql.getAccountInfo("mlc258");
+			for (Object o: results) {
+				System.out.println(o);
+			}	
+		} catch (SQLException | ClassNotFoundException | EmptySetException e) {
 			e.printStackTrace();
-		} finally {
-			sql.close();
 		}
 	}
 	
@@ -203,13 +203,23 @@ public class SQLHandler implements AutoCloseable{
 	 */
 
 	// returns the account info based on user and password
-	public ResultSet getAccountInfo(String user, String password) throws SQLException {
-		this.getAccountStatement = connection.prepareStatement(GET_ACCOUNT_SQL);
-		//Set username and password
-		this.getAccountStatement.setString(1, user);
-		this.getAccountStatement.setString(2, password);
-		//Execute the query
-		return this.getAccountStatement.executeQuery();
+	public Object[] getAccountInfo(String user) throws EmptySetException, SQLException {
+		Object[] dataToReturn = new Object[6];
+		try (PreparedStatement selectAccountStatement = connection.prepareStatement(SELECT_ACCOUNT_SQL);) {
+			selectAccountStatement.setString(1, user);
+			try (ResultSet results = selectAccountStatement.executeQuery();) {
+				if (!results.first()) {throw new EmptySetException();}
+				else {
+					dataToReturn[0] = results.getString(1);
+					dataToReturn[1] = results.getString(2);
+					dataToReturn[2] = results.getString(3);
+					dataToReturn[3] = results.getString(4);
+					dataToReturn[4] = results.getTimestamp(5);
+					dataToReturn[5] = results.getInt(6);
+				}
+			}
+		}
+		return dataToReturn;
 	}
 
 	public ResultSet getAssignment(String assign_id) throws SQLException {
@@ -262,15 +272,15 @@ public class SQLHandler implements AutoCloseable{
 
 		return this.getSubmissionFilesStatement.executeQuery();
 	}
-
-	public ResultSet postAccount(String username, String password, String fname, String lname) throws SQLException {
-		this.postAccountStatement = connection.prepareStatement(POST_ACCOUNT_SQL);
-		this.postAccountStatement.setString(1, username);
-		this.postAccountStatement.setString(2, password);
-		this.postAccountStatement.setString(3, fname);
-		this.postAccountStatement.setString(4, lname);
-
-		return this.postAccountStatement.executeQuery();
+	
+	public void makeAccount(String username, String password, String fname, String lname) throws SQLException {
+		try (PreparedStatement insertAccountStatement = connection.prepareStatement(INSERT_ACCOUNT_SQL);) {
+			insertAccountStatement.setString(1, username);
+			insertAccountStatement.setString(2, password);
+			insertAccountStatement.setString(3, fname);
+			insertAccountStatement.setString(4, lname);
+			insertAccountStatement.executeUpdate();
+		}
 	}
 
 	public ResultSet postAssignment(String num, int course_id, Date date, int test_id, String assign) throws SQLException {
@@ -325,6 +335,16 @@ public class SQLHandler implements AutoCloseable{
 		this.postSubmissionFileStatement = connection.prepareStatement(POST_SUBMISSION_FILE_SQL);
 		this.postSubmissionFileStatement.setString(1, Integer.toString(file_id));
 		return this.postSubmissionFileStatement.executeQuery();
+	}
+	
+	public void updateAccount(String username, String newPassword, String newFirstName, String newLastName) throws SQLException {
+		try (PreparedStatement updateAccountStatement = connection.prepareStatement(UPDATE_ACCOUNT_SQL);) {
+			updateAccountStatement.setString(1, newPassword);
+			updateAccountStatement.setString(2, newFirstName);
+			updateAccountStatement.setString(3, newLastName);
+			updateAccountStatement.setString(4, username);
+			updateAccountStatement.executeUpdate();
+		}
 	}
 	
 	//INHERITED/IMPLEMENTED METHODS
