@@ -20,6 +20,10 @@ import javax.ws.rs.ext.Provider;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+/**
+ * Handles GSON objects?
+ *
+ */
 @Provider
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -37,11 +41,17 @@ public final class GsonMessageBodyHandler implements MessageBodyWriter<Object>, 
 		return gson;
 	}
 
+	/**
+	 * @see javax.ws.rs.ext.MessageBodyReader#isReadable(java.lang.Class, java.lang.reflect.Type, java.lang.annotation.Annotation[], javax.ws.rs.core.MediaType)
+	 */
 	@Override
 	public boolean isReadable(Class<?> type, Type genericType, java.lang.annotation.Annotation[] annotations, MediaType mediaType) {
 		return true;
 	}
 
+	/**
+	 * @see javax.ws.rs.ext.MessageBodyReader#readFrom(java.lang.Class, java.lang.reflect.Type, java.lang.annotation.Annotation[], javax.ws.rs.core.MediaType, javax.ws.rs.core.MultivaluedMap, java.io.InputStream)
+	 */
 	@Override
 	public Object readFrom(Class<Object> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, String> httpHeaders, InputStream entityStream) throws IOException {
 		InputStreamReader streamReader = new InputStreamReader(entityStream, UTF_8);
@@ -58,16 +68,25 @@ public final class GsonMessageBodyHandler implements MessageBodyWriter<Object>, 
 		}
 	}
 
+	/**
+	 * @see javax.ws.rs.ext.MessageBodyWriter#isWriteable(java.lang.Class, java.lang.reflect.Type, java.lang.annotation.Annotation[], javax.ws.rs.core.MediaType)
+	 */
 	@Override
 	public boolean isWriteable(Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType) {
 		return true;
 	}
 
+	/**
+	 * @see javax.ws.rs.ext.MessageBodyWriter#getSize(java.lang.Object, java.lang.Class, java.lang.reflect.Type, java.lang.annotation.Annotation[], javax.ws.rs.core.MediaType)
+	 */
 	@Override
 	public long getSize(Object object, Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType) {
 		return -1;
 	}
 
+	/**
+	 * @see javax.ws.rs.ext.MessageBodyWriter#writeTo(java.lang.Object, java.lang.Class, java.lang.reflect.Type, java.lang.annotation.Annotation[], javax.ws.rs.core.MediaType, javax.ws.rs.core.MultivaluedMap, java.io.OutputStream)
+	 */
 	@Override
 	public void writeTo(Object object, Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, Object> httpHeaders, OutputStream entityStream) throws IOException, WebApplicationException {
 		OutputStreamWriter writer = new OutputStreamWriter(entityStream, UTF_8);

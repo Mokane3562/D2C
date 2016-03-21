@@ -8,6 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
+/**
+ * Contains tools and methods to interact with a database using JDBC
+ */
 public class SQLHandler implements AutoCloseable{
 	// TODO replace placeholder host and port with real host and port;
 	// TODO replace placeholder user and password with real user and password
@@ -141,6 +144,12 @@ public class SQLHandler implements AutoCloseable{
 	private PreparedStatement postSubmissionFileStatement;
 
 	//CONSTRUCTOR(S)
+	/**
+	 * Creates a new SQLHandler connected to a MySQL database on localhost port 3306 with username "root" and password "password".
+	 * 
+	 * @throws SQLException if a database access error occurs
+	 * @throws ClassNotFoundException if the driver class cannot be located
+	 */
 	public SQLHandler() throws SQLException, ClassNotFoundException {
 		//Make a connection
 		Class.forName(DB_DRIVER);
@@ -168,25 +177,21 @@ public class SQLHandler implements AutoCloseable{
 	}
 	
 	/**
-	 * Commit the pending transaction. This will execute it.
-	 * @throws SQLException
+	 * @see java.sql.Connection#commit()
 	 */
 	public void commit() throws SQLException{
 		connection.commit();
 	}
 	
 	/**
-	 * Roll back the most recent committed transaction.
-	 * @throws SQLException
+	 * @see java.sql.Connection#rollback()
 	 */
 	public void rollback() throws SQLException{
 		connection.rollback();
 	}
 	
 	/**
-	 * Start a transaction.
-	 * @param autoCommit set to true to make queries within transactions 
-	 * @throws SQLException
+	 * @see java.sql.Connection#setAutoCommit(boolean)
 	 */
 	public void setAutoCommit(boolean autoCommit) throws SQLException{
 		connection.setAutoCommit(autoCommit);
@@ -203,6 +208,20 @@ public class SQLHandler implements AutoCloseable{
 	 */
 
 	// returns the account info based on user and password
+	/**
+	 * Gets an account's information from the database using a user name input.
+	 * Object[0] is the user name as a string,
+	 * Object[1] is the password as a string,
+	 * Object[2] is the first name of the account holder as a string,
+	 * Object[3] is the last name of the account holder as a string,
+	 * Object[4] is the date and time the account was created as a java.sql.Timestamp,
+	 * Object[5] is the account's identifier in the database as an int.
+	 * 
+	 * @param user the user name of the account to be retrieved
+	 * @return an object array containing the data of the account searched
+	 * @throws EmptySetException if the call to the database returns nothing
+	 * @throws SQLException if a database error occurs
+	 */
 	public Object[] getAccountInfo(String user) throws EmptySetException, SQLException {
 		Object[] dataToReturn = new Object[6];
 		try (PreparedStatement selectAccountStatement = connection.prepareStatement(SELECT_ACCOUNT_SQL);) {
@@ -273,6 +292,15 @@ public class SQLHandler implements AutoCloseable{
 		return this.getSubmissionFilesStatement.executeQuery();
 	}
 	
+	/**
+	 * Creates a new account on the database.
+	 * 
+	 * @param username the account user name
+	 * @param password the account password
+	 * @param fname the first name of the account holder
+	 * @param lname the last name of the account holder
+	 * @throws SQLException if a database error occurs
+	 */
 	public void makeAccount(String username, String password, String fname, String lname) throws SQLException {
 		try (PreparedStatement insertAccountStatement = connection.prepareStatement(INSERT_ACCOUNT_SQL);) {
 			insertAccountStatement.setString(1, username);
@@ -337,6 +365,15 @@ public class SQLHandler implements AutoCloseable{
 		return this.postSubmissionFileStatement.executeQuery();
 	}
 	
+	/**
+	 * Updates the information of a user on the database. Note: the user name cannot be updated or changed.
+	 * 
+	 * @param username the user name of the account to be updated
+	 * @param newPassword the new password of the account
+	 * @param newFirstName the new first name on the account
+	 * @param newLastName the new last name on the account
+	 * @throws SQLException
+	 */
 	public void updateAccount(String username, String newPassword, String newFirstName, String newLastName) throws SQLException {
 		try (PreparedStatement updateAccountStatement = connection.prepareStatement(UPDATE_ACCOUNT_SQL);) {
 			updateAccountStatement.setString(1, newPassword);
@@ -348,7 +385,9 @@ public class SQLHandler implements AutoCloseable{
 	}
 	
 	//INHERITED/IMPLEMENTED METHODS
-	/* (non-Javadoc)
+	/**
+	 * Gracefully releases this SQLHandler's resources.
+	 * 
 	 * @see java.lang.AutoCloseable#close()
 	 */
 	public void close() throws SQLException{
