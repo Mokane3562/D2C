@@ -18,32 +18,27 @@
     <script type="text/javascript" src="services/run_request.js"></script>
     <script type="text/javascript" src="services/login_service.js"></script>
   </head>
-
-  <body bgcolor="#262626" ng-controller="main_controller">
-    <div id="grey_out" ng-show="view['login']">
-     	<div id="outer">
-     	<div id="middle">
-     	<div id="inner">
-      		<div id="login">
-      			<img id="login_logo" src="http://i67.tinypic.com/2hzk5xw.png" border="0" align="middle">
-        		<p id=login_fail_text>{{login_failure}}</p>
-        		<form>
-          			<input type="text" ng-model="user" name="user_name" placeholder="Username"/>
-          			<input type="password" ng-model="password" name="password" placeholder="Password"/>
-          			<div class="loginbutton colour" ng-click="login()" value="Login">Log In</div>
-        		</form>
-      		</div>
-      </div>
-      </div>
-      </div>
-      
+  
+	<body bgcolor="#262626" ng-controller="main_controller">
+	<div id="grey_out" ng-show="view['login']">
+  		<div class="login-page">
+  		<div class="form">
+    		<form class="login-form">
+    			<img id="login_logo" src="http://i67.tinypic.com/2hzk5xw.png" border="0" align="middle">
+    			<p id=login_fail_text>{{login_failure}}</p>
+      			<input type="text" ng-model="user" name="user_name" placeholder="username"/>
+      			<input type="password" ng-model="password" name="password" placeholder="password"/>
+      			<button><div ng-click="login()" value="Login">log in</div></button>
+    		</form>
+      	</div>
+     	</div> 
     </div>
     
-    <div id=main_page ng-hide="view['login']">
+ 	<div id=main_page ng-hide="view['login']">
 	  <div id="header">
 		  <img src="http://i67.tinypic.com/2hzk5xw.png" border="0">
 	  </div>
-	  <!--end of header div -->
+	<!--end of header div -->
 	
 	  <div id="wrapper">
 	    <div id= "menubar">
