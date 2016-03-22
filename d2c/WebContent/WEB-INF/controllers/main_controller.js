@@ -17,7 +17,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	$scope.password = "";
 
 	//Setting view invisible
-	view["login"] = false;
+	view["login"] = true;
 	view["signup"] = false;
 	view["courseInfo"] = false;
 	view["assignments"] = false;
