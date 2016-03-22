@@ -5,9 +5,8 @@
  */
 app.controller('main_controller',['$scope', '$location', 'example_service', 'c_compile_request',
                                   'j_compile_request', 'java_request', 'run_request', 'login_service',
-                                  'signup_service',
                           function($scope, $location, example_service, c_compile_request, j_compile_request,
-                        		  java_request, run_request, login_service, signup_service){
+                        		  java_request, run_request, login_service){
 	console.log("main controller loading");
 	
     //initial view object set up	
