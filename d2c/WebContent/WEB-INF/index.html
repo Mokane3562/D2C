@@ -57,27 +57,28 @@
 	  <div id="header">
 		  <img src="http://i67.tinypic.com/2hzk5xw.png" border="0">
 	  </div>
+	  
+	  
 	<!--end of header div -->
-	
-	  <div id="wrapper">
-	    <div id= "menubar">
-          <div class="menubutton" id="courseInfo" ng-click="courseInfo_click()"><h3>Course Information</h3></div>
-          <div class="menubutton" id="assignments" ng-click="assignments_click()"><h3>Assignments</h3></div>
-          <div class="menubutton" id="workspace" ng-click="workspace_click()"><h3>Workspace</h3></div>
-          <div class="menubutton" id="testing" ng-click="testing_click()"><h3>Testing</h3></div>
-          <div class="menubutton" id="submissions" ng-click="submissions_click()"><h3>Submissions</h3></div>
-          <div class="menubutton" id="grades" ng-click="grades_click()"><h3>Grades</h3></div>
-          
+	    
+	    <ul>
+          	<li><a href="#" id="courseInfo" runat="server" ng-click="courseInfo_click()"><b>Course Information</b></a></li>
+          	<li><a href="#" id="assignments" runat="server" ng-click="assignments_click()"><b>Assignments</b></a></li>
+          	<li><a href="#" id="workspace" runat="server" ng-click="workspace_click()"><b>Workspace</b></a></li>
+          	<li><a href="#" id="testing" runat="server" ng-click="testing_click()"><b>Testing</b></a></li>
+          	<li><a href="#" id="submissions" runat="server" ng-click="submissions_click()"><b>Submissions</b></a></li>
+          	<li><a href="#" id="grades" runat="server" ng-click="grades_click()"><b>Grades</b></a></li>
+        </ul>
+        <br>
+        <!--
+        <div id="welcome"><h1>WELCOME TO D2C</h1>
+        <h3>Blah blah blah welcome stuff. talk about page. tell them what to do</h3>
+        </div>
+        -->
           <!-- MENUBAR GENERATOR 
           
           <div class="menubutton" ng-repeat="menu in menuList"
                ng-click="menuHandler(menu)">{{menu.name}}</div>
-          
-          
-          END MENUBAR GENERATOR -->
-         
-        </div><!-- end of menubar div -->
-	  </div><!--end of wrapper div -->
 	
 	  <!-- COURSE TABS GENERATOR
 	
@@ -91,27 +92,25 @@
       <div ng-show="view['courseInfo']">
         <h1>Course Information</h1>
       </div>
-
+      
       <!-- ASSIGNMENTS PAGE -->
       <div ng-show="view['assignments']">
-	    <h1>Assignments</h1>
-      </div>
-
+	    	<h1>Assignments</h1>
+	  </div>
+      
+		
       <!-- WORKSPACE PAGE -->
       <div ng-show="view['workspace']">	
-	    <h1>Workspace</h1>
-	    <br>
-
-        <div id="button">
-          <div class="button green" id="compile_c"
-		       ng-click="c_compile_function()">Compile C Code</div>
-          <div class="button green" id="compile_java"
-			  ng-click="j_compile_function()">Compile Java Code</div>
-		  <div class="button green" id="run_c" ng-click="aout_function()">Run C Code</div>
-		  <div class="button green" id="run_java" ng-click="java_function()">Run Java Code</div>
-	    </div>
-
+	  <br>
+	    
 	    <div id="codeandoutput">
+	    <h1>Workspace</h1>
+	      <ul>
+	      	<li><a href="#" id="compile_c" ng-click="c_compile_function()">Compile C Code</a></li>
+          	<li><a href="#" id="compile_java" ng-click="j_compile_function()">Compile Java Code</a></li>
+		  	<li><a href="#" id="run_c" ng-click="aout_function()">Run C Code</a></li>
+		  	<li><a href="#" id="run_java" ng-click="java_function()">Run Java Code</a></li>
+		 </ul>
 		  <div>
 		    <textarea id="path" placeholder="Enter Path!"></textarea>
 		  </div>
@@ -123,21 +122,22 @@
 	      </div>
 	    </div>
       </div>
-
+	
       <!-- TESTING PAGE -->
       <div ng-show="view['testing']">
-	    <h1>Testing</h1>
-      </div>
-
+	    	<h1>Testing</h1>
+	  </div>
+	  
       <!-- SUBMISSIONS PAGE -->
       <div ng-show="view['submissions']">
-	    <h1>Submissions</h1>
-      </div>
-
+	   	   <h1>Submissions</h1>
+	  </div>
+	  
       <!-- GRADES PAGE -->
       <div ng-show="view['grades']">
-	    <h1>Grades</h1>
+	    	<h1>Grades</h1>
       </div>
+    	
     </div>
     </div>
   </body>

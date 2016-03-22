@@ -159,7 +159,8 @@
 }
 
 h1 {
-	color: #FFF;
+	font-family: "Helvetica";
+	color: #33cc33;
 	font-weight: bold;
 	text-shadow: 3px 3px 3px #000;
 }
@@ -229,11 +230,16 @@ span {
 }
 
 #codeandoutput {
-	margin: auto;
-	width: 70%;
-	height: 400px;
-	border: 3px solid #00e600;
-	padding: 15px;
+	position: relative;
+  	z-index: 1;
+  	background: #333333;
+  	max-width: 600px;
+  	margin: 0 auto 100px;
+  	padding: 30px;
+  	text-align: center;
+  	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+	height: 550px;
+	
 }
 
 #path {
@@ -263,6 +269,35 @@ span {
 	resize: none;
 	width: 100%;
 	color: black;
+}
+
+.codeandoutput ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #33cc33;
+}
+
+.codeandoutput li {
+    float: left;
+    
+}
+
+.codeandoutput li:last-child {
+    border-right: none;
+}
+
+.codeandoutput li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.codeandoutput li a:hover:not(.active) {
+    background-color: #111;
 }
 
 .btn{	
@@ -296,6 +331,16 @@ span {
 
 }
 
+#welcome {
+  position: relative;
+  z-index: 1;
+  background: #333333;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
 
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
@@ -397,3 +442,33 @@ span {
 	font-size: 12px;
 	color: #ffffff;
 }
+
+ul {
+	font-family: "Helvetica";
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    background-color: #33cc33;
+}
+
+.active {
+    background-color: #33cc33;
+}
+
