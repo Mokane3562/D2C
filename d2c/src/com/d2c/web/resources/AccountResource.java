@@ -83,10 +83,10 @@ public class AccountResource {
 
 	//POSTS
 	@POST
-	@Path("/new/{account_user_name}") //CHECKME:What if there's a / in the username or password?
+	@Path("/new") //CHECKME:What if there's a / in the username or password?
 	@Consumes(MediaType.APPLICATION_JSON)
 	//CHECKME:Can we make POSTs safer? Is this overkill?
-	public Response createAccount(@PathParam("account_user_name") String accountUserName, TransferableAccount account) {
+	public Response createAccount(TransferableAccount account) {
 		//start sql shit
 		SQLHandler sql = null;
 		try {

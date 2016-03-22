@@ -4,9 +4,9 @@
  * and add the name as a variable to the function.
  */
 app.controller('main_controller',['$scope', '$location', 'example_service', 'c_compile_request',
-                                  'j_compile_request', 'java_request', 'run_request', 'login_service',
+                                  'j_compile_request', 'java_request', 'run_request', 'login_service', 'signup_service',
                           function($scope, $location, example_service, c_compile_request, j_compile_request,
-                        		  java_request, run_request, login_service){
+                        		  java_request, run_request, login_service, signup_service){
 	console.log("main controller loading");
 	
     //initial view object set up	
@@ -14,6 +14,9 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	$scope.view = view;
 	$scope.login_failure = "";
 	$scope.user = "";
+	$scope.first = "";
+	$scope.last = "";
+	$scope.confirm = "";
 	$scope.password = "";
 
 	//Setting view invisible
@@ -68,7 +71,24 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["grades"] = false; 
 	}
 	$scope.signUpUser =function(){
-		
+		if($scope.password !== $scope.confirm){
+			return
+		}
+		var account = transferable_account(
+				$scope.user,
+				$scope.password,
+				$scope.first,
+				$scope.last,
+				new Date()
+		);
+		signup_service(account).then(
+			function(response){
+				$scope.login();
+			},
+			function(response){
+				$scope.login_failure = "";
+			}
+		);
 	}
 	$scope.back = function(){
 		view["login"] = true;
