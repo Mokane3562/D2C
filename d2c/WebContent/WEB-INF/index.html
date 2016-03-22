@@ -17,6 +17,7 @@
     <script type="text/javascript" src="services/java_request.js"></script>
     <script type="text/javascript" src="services/run_request.js"></script>
     <script type="text/javascript" src="services/login_service.js"></script>
+    <script type="text/javascript" src="services/signup_service.js"></script>
   </head>
   
 	<body bgcolor="#262626" ng-controller="main_controller">
@@ -29,12 +30,30 @@
       			<input type="text" ng-model="user" name="user_name" placeholder="username"/>
       			<input type="password" ng-model="password" name="password" placeholder="password"/>
       			<button><div ng-click="login()" value="Login">log in</div></button>
+      			<button><div ng-click="signUp()" value="SignUp">sign up</div></button>
     		</form>
       	</div>
      	</div> 
-    </div>
+     </div>
+	<div id="greyout" ng-show="view['signup']">
+  		<div class="login-page">
+  		<div class="form">
+    		<form class="signup-form">
+    			<img id="signup_logo" src="http://i67.tinypic.com/2hzk5xw.png" border="0" align="middle">
+      			<input type="text" ng-model="user" name="user_name" placeholder="username"/>
+      			<input type="text" ng-model="first" name="first_name" placeholder="firstname"/>
+      			<input type="text" ng-model="last" name="last_name" placeholder="lastname"/>
+      			<input type="password" ng-model="password" name="password" placeholder="password"/>
+      			<input type="password" ng-model="password" name="password" placeholder="retype password"/>
+      			<button><div ng-click="signUpUser()" value="SignUp">sign up</div></button>
+      			<button><div ng-click="back()" value="back">back</div></button>
+    		</form>
+      	</div>
+     	</div> 
+    </div>   
     
  	<div id=main_page ng-hide="view['login']">
+ 	<div id=mainPage ng-hide="view['signup']">
 	  <div id="header">
 		  <img src="http://i67.tinypic.com/2hzk5xw.png" border="0">
 	  </div>
@@ -119,6 +138,7 @@
       <div ng-show="view['grades']">
 	    <h1>Grades</h1>
       </div>
+    </div>
     </div>
   </body>
 </html>
