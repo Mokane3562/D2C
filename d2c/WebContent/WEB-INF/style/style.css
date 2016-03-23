@@ -372,7 +372,7 @@ span {
   box-sizing: border-box;
   font-size: 14px;
 }
-.form button {
+.login_button {
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   outline: 0;
@@ -390,7 +390,7 @@ span {
     -ms-user-select: none; 
     cursor: pointer;
 }
-.form button:hover,.form button:active,.form button:focus {
+.login_button:hover,.login_button:active,.login_button:focus {
   background: #43A047;
 }
 .form .message {

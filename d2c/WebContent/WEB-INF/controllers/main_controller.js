@@ -4,9 +4,10 @@
  * and add the name as a variable to the function.
  */
 app.controller('main_controller',['$scope', '$location', 'example_service', 'c_compile_request',
-                                  'j_compile_request', 'java_request', 'run_request', 'login_service', 'signup_service',
+                                  'j_compile_request', 'java_request', 'run_request', 'login_service',
+                                  'signup_service', 'transferable_account',
                           function($scope, $location, example_service, c_compile_request, j_compile_request,
-                        		  java_request, run_request, login_service, signup_service){
+                        		  java_request, run_request, login_service, signup_service, transferable_account){
 	console.log("main controller loading");
 	
     //initial view object set up	
@@ -22,7 +23,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	
 
 	//Setting view invisible
-	view["login"] = false;
+	view["login"] = true;
 	view["signup"] = false;
 	view["courseInfo"] = false;
 	view["assignments"] = false;

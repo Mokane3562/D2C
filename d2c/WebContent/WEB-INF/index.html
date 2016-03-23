@@ -19,6 +19,7 @@
     <script type="text/javascript" src="services/run_request.js"></script>
     <script type="text/javascript" src="services/login_service.js"></script>
     <script type="text/javascript" src="services/signup_service.js"></script>
+    <script type="text/javascript" src="services/transferable_account.js"></script>
   </head>
   
 	<body bgcolor="#262626" ng-controller="main_controller">
@@ -30,8 +31,8 @@
     			<p id=login_fail_text>{{login_failure}}</p>
       			<input type="text" ng-model="user" name="user_name" placeholder="username"/>
       			<input type="password" ng-model="password" name="password" placeholder="password"/>
-      			<button><div ng-click="login()" value="Login">log in</div></button>
-      			<button><div ng-click="signUp()" value="SignUp">sign up</div></button>
+      			<div class="login_button" ng-click="login()" value="Login">log in</div>
+      			<div class="login_button" ng-click="signUp()" value="SignUp">sign up</div>
     		</form>
       	</div>
      	</div> 
@@ -46,8 +47,8 @@
       			<input type="text" ng-model="last" name="last_name" placeholder="lastname"/>
       			<input type="password" ng-model="password" name="password" placeholder="password"/>
       			<input type="password" ng-model="confirm" name="password" placeholder="retype password"/>
-      			<button><div ng-click="signUpUser()" value="SignUp">sign up</div></button>
-      			<button><div ng-click="back()" value="back">back</div></button>
+      			<div class="login_button" ng-click="signUpUser()" value="SignUp">sign up</div>
+      			<div class="login_button" ng-click="back()" value="back">back</div>
     		</form>
       	</div>
      	</div> 
@@ -120,7 +121,6 @@
 		  <div id="codebox">
 <!--  begining of stupid formatting to make the java code look nice in the editor -->
 		    <div id="textcodebox">import static java.lang.System.out;
-		    
 public class HelloWorld{
     public static void main(String[] args){
         out.println("Hello World!");
