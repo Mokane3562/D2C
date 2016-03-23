@@ -1,0 +1,201 @@
+* rmp255, 9 hours ago : Style changes: New login page, main page changes
+* Mike, 18 hours ago : Documented the util package and generated javadoc
+* Mike, 19 hours ago : AccountResource is fully functional
+* sy6746, 23 hours ago : added deployment description and war file of current project state
+* Michelle Croke, 28 hours ago : remove comment
+* Tyler, 28 hours ago : The Love
+* Tyler, 28 hours ago : The Love of Miek
+* Tyler, 2 days ago : Added a readme into the deployment folder(It has a todo in it) and did some more minor moves
+* Tyler, 2 days ago : Organized our git a tiny bit
+* Mike, 2 days ago : sdfghj
+* Tyler, 2 days ago : I am the transferables
+* Theodore Norvell, 2 days ago : Added feedback for iteration 2
+* sy6746, 3 days ago : fixed compilation, added "Compilation successful!" output, fixed login
+* Mike, 4 days ago : yaaaaaaaa
+* Mike, 4 days ago : bunch o stuff
+* Mike, 4 days ago : Unit testing SQLHandler
+* Mike, 4 days ago : Added support for transactions to SQLHandler.
+* Mike, 4 days ago : Added TransferableAccount
+* rmp255, 5 days ago : Login page style small fix
+* rmp255, 5 days ago : New login page css style
+* rmp255, 5 days ago : Index changes
+*   Mike, 6 days ago : Merge remote-tracking branch 'origin/master'
+|\  
+| * sy6746, 6 days ago : added services for constructing transferables
+* | Mike, 6 days ago : Refactored and worked on course functionality
+|/  
+* Mike Singleton, 7 days ago : Database stuff again.
+* Mike Singleton, 7 days ago : database stuff
+* sy6746, 7 days ago : First Database call working for login!
+* sy6746, 7 days ago : Fixed indent of html and added divs for login
+* Michelle Croke, 7 days ago : removal of pop up stuff
+* Michelle Croke, 9 days ago : Working on adding pop up login
+* Mike Singleton, 9 days ago : Small database changes. Sample data added. Preparing to link courses to front-end.
+* Michelle Croke, 10 days ago : Menu buttons are now working :D
+* Mike Singleton, 13 days ago : Small fixes and general improvments made to database and SQLHandler.
+* Mike Singleton, 2 weeks ago : populating database with sample data
+* sy6746, 2 weeks ago : final commit of iteration 2
+* sy6746, 2 weeks ago : IT FUCKING WORKS EH BUDDY BY WA!
+*   sy6746, 2 weeks ago : Merge branch 'master' of https://www.cs.mun.ca/cgi-bin/user-cgi/~theo/auth/git/cs4770/teamg.git
+|\  
+| *   rmp255, 2 weeks ago : Merge branch 'master' of https://www.cs.mun.ca/cgi-bin/user-cgi/~theo/auth/git/cs4770/teamg.git
+| |\  
+| * | Rebecca, 2 weeks ago : Menubar css update
+| * | rmp255, 2 weeks ago : Menubar css change
+* | | sy6746, 2 weeks ago : Fixed code c compile
+| |/  
+|/|   
+* | sy6746, 2 weeks ago : Attempting to fix compilation output
+|/  
+*   rmp255, 2 weeks ago : Merge branch 'master' of https://www.cs.mun.ca/cgi-bin/user-cgi/~theo/auth/git/cs4770/teamg.git
+|\  
+| * Michelle Croke, 2 weeks ago : push
+| *   Michelle Croke, 2 weeks ago : Merge branch 'master' of https://www.cs.mun.ca/cgi-bin/user-cgi/~theo/auth/git/cs4770/teamg.git
+| |\  
+| * | Michelle Croke, 2 weeks ago : button stuff
+* | | rmp255, 2 weeks ago : Colour change
+| |/  
+|/|   
+* |   Rebecca, 2 weeks ago : ARE YOU FUCKING SORRY
+|\ \  
+| |/  
+| * Michelle Croke, 2 weeks ago : changes
+| *   Michelle Croke, 2 weeks ago : Merge branch 'master' of https://www.cs.mun.ca/cgi-bin/user-cgi/~theo/auth/git/cs4770/teamg.git
+| |\  
+| * | Michelle Croke, 2 weeks ago : changes to menubar and buttons
+* | | rmp255, 2 weeks ago : Changes for merge
+| |/  
+|/|   
+* |   Rebecca, 2 weeks ago : Merge complete
+|\ \  
+| |/  
+| * Tyler, 2 weeks ago : Updated database... again
+| * Mike Singleton, 2 weeks ago : Creates a couple unit tests
+| * Michelle Croke, 2 weeks ago : front end changes
+| * Michelle Croke, 2 weeks ago : set up some angular stuff for menubar
+| * Mike Singleton, 2 weeks ago : Added some comments to TerminalCaller
+| * Michelle Croke, 2 weeks ago : changes and stuff, super meaningful
+| *   sy6746, 2 weeks ago : Merge branch 'master' of https://www.cs.mun.ca/cgi-bin/user-cgi/~theo/auth/git/cs4770/teamg.git
+| |\  
+| | * Michelle Croke, 2 weeks ago : added j_compile_request to main_controller.js
+| * |   sy6746, 2 weeks ago : Merge branch 'master' of https://www.cs.mun.ca/cgi-bin/user-cgi/~theo/auth/git/cs4770/teamg.git
+| |\ \  
+| | |/  
+| | * Theodore Norvell, 3 weeks ago : Iteration 1 feedback.
+| | * Tyler, 3 weeks ago : did SQL handler
+| | * Mike Singleton, 3 weeks ago : Formatted
+| | * Michelle Croke, 3 weeks ago : edit j_compile_request
+| | * Michelle Croke, 3 weeks ago : Adding j_compile_request & changes to main_controller and J compile code button
+| | *   Michelle Croke, 3 weeks ago : Merge branch 'master' of https://www.cs.mun.ca/cgi-bin/user-cgi/~theo/auth/git/cs4770/teamg
+| | |\  
+| | | * Michelle Croke, 3 weeks ago : new look
+| | | * Michelle Croke, 3 weeks ago : Rebecca changes + error fix(hopefully)
+| | | * Michelle Croke, 3 weeks ago : CodeResource update
+| | * | Michelle Croke, 3 weeks ago : TODO list created
+| | |/  
+| * | sy6746, 2 weeks ago : Fixed a problem with path information
+| |/  
+| * sy6746, 3 weeks ago : Making changes to CodeResource.java
+* | rmp255, 3 weeks ago : new look!
+|/  
+* sy6746, 3 weeks ago : added tomcat tar.gz to git folder
+* sy6746, 3 weeks ago : Removed unused imports, all java classes now warning free
+* Tyler, 3 weeks ago : Fixed the database all Ids are int and auto increment
+* Mike Singleton, 3 weeks ago : Formatted Java classes
+* Mike Singleton, 3 weeks ago : More package stuff
+* Mike Singleton, 3 weeks ago : Refactored packages
+*   sy6746, 3 weeks ago : Merge branch 'master' of https://www.cs.mun.ca/cgi-bin/user-cgi/~theo/auth/git/cs4770/teamg.git
+|\  
+| * rmp255, 3 weeks ago : Logo resize
+| *   Rebecca, 3 weeks ago : Trying to fix
+| |\  
+| * | rmp255, 3 weeks ago : Commit
+* | | sy6746, 3 weeks ago : Some example stuff for implementing a service and using it in scope
+| |/  
+|/|   
+* | sy6746, 3 weeks ago : Remote compilation of c code using gcc added.
+* | sy6746, 3 weeks ago : Example service changed back to blank service
+* | Michelle Croke, 3 weeks ago : added angular go-click in example_service.js
+* | sy6746, 3 weeks ago : added the service to call the c code compile request
+* | sy6746, 3 weeks ago : Fixed some issues with index.html
+* | sy6746, 3 weeks ago : Started work on web-api call and angular service to call gcc on the server by client
+* | sy6746, 3 weeks ago : Fixed indentation on index.html to help readability
+* | sy6746, 4 weeks ago : Two classes added for process creation.
+* | sy6746, 4 weeks ago : Added a SQLHandler class, SQLHandlerTest class to come
+* | sy6746, 4 weeks ago : Added MainPageResourceTest Unit Test Class
+* | Tyler, 4 weeks ago : Exported the database
+* | Michelle Croke, 4 weeks ago : removed some style
+* | Michelle Croke, 4 weeks ago : SignOut button and style changes
+* | Michelle Croke, 4 weeks ago : Resources and Transferable (prof and subs)
+* | Michelle Croke, 4 weeks ago : Prof resource and transferable
+|/  
+* Rebecca, 4 weeks ago : Changes to web interface (new logo and other small changes)
+* sy6746, 5 weeks ago : Added service example and made the index.html file get information from the controller
+* sy6746, 5 weeks ago : Removed unused imports
+* sy6746, 5 weeks ago : MainPageResource now supplies the index.html and style.css files
+*   sy6746, 5 weeks ago : Merge branch 'master' of https://www.cs.mun.ca/cgi-bin/user-cgi/~theo/auth/git/cs4770/teamg.git
+|\  
+| * Michelle Croke, 5 weeks ago : TeachingAssistantResource.java and TransferableTA.java
+| * Michelle Croke, 5 weeks ago : StudentResource.java
+| * Michelle Croke, 5 weeks ago : Edited AssignmentResource and GradeResource
+* | sy6746, 5 weeks ago : Updating files and locations to get web service up and running
+|/  
+*   sy6746, 5 weeks ago : Merge branch 'master' of https://www.cs.mun.ca/cgi-bin/user-cgi/~theo/auth/git/cs4770/teamg
+|\  
+| * Michelle Croke, 5 weeks ago : GradeResource.java and TransferableGrade.java and AssignmentResource.java
+| * Michelle Croke, 5 weeks ago : AssignmentResource.java
+| * Michelle Croke, 5 weeks ago : FileResource.java and TransferableFile.java
+* | sy6746, 5 weeks ago : Tyler's Work Record/
+* | sy6746, 5 weeks ago : MainPageResource created and using STREAMS! #fancy
+|/  
+* sy6746, 5 weeks ago : Added the main app and an empty main controller.
+* sy6746, 5 weeks ago : setting up the folder hierarchy for the client side of the project
+* Tyler, 5 weeks ago : Added the Things_to_make.txt. Thanks Scott
+*   sy6746, 5 weeks ago : Merge branch 'master' of https://www.cs.mun.ca/cgi-bin/user-cgi/~theo/auth/git/cs4770/teamg.git
+|\  
+| * Michelle Croke, 5 weeks ago : WorkRecord
+* | sy6746, 5 weeks ago : Initial set-up of Jersey and an example resource
+|/  
+* Michelle Croke, 6 weeks ago : HTML Stuff
+* Mike Singleton, 6 weeks ago : Modified readme to properly reflect improvments made to iteration 0
+*   imafella, 6 weeks ago : git Merge http://www.cs.mun.ca/cgi-bin/user-cgi/~theo/auth/git/cs4770/teamg
+|\  
+| * imafella, 6 weeks ago : added files to iteration 1. PDF and the html files.
+* | imafella, 6 weeks ago : re-adding PDF because apparetny it didn't push last night.
+|/  
+* imafella, 6 weeks ago : created a style.css for the main site pages.
+* imafella, 6 weeks ago : created a style.css for the main site pages. Thanks Scott.
+* Rebecca Price, 6 weeks ago : Additions to README description
+* Michelle Croke, 6 weeks ago : Adding work rec
+* sy6746, 6 weeks ago : clean up of project folder
+*   sy6746, 6 weeks ago : Merge branch 'master' of https://www.cs.mun.ca/cgi-bin/user-cgi/~theo/auth/git/cs4770/teamg
+|\  
+| * Rebecca Price, 6 weeks ago : Updated the README file
+| * Rebecca Price, 6 weeks ago : Updated README
+| * Michelle Croke, 6 weeks ago : database update
+| * Rebecca Price, 6 weeks ago : Added Iteration 0 document with additions and changes to Data Dictionary, Use Cases, Statechart, etc.
+| * Rebecca Price, 6 weeks ago : Renamed folders
+| * Rebecca Price, 6 weeks ago : Added README Iteration 0/1 description
+* | sy6746, 6 weeks ago : added databse file locatons to layer description file
+|/  
+* Michelle Croke, 6 weeks ago : scott is looking over my shoulder
+* Rebecca Price, 6 weeks ago : Organizing
+* Michelle Croke, 6 weeks ago : Michelles push
+* Michelle Croke, 6 weeks ago : Michelles push
+* sy6746, 6 weeks ago : finished the software breakdown a la text files in the API_docs folder
+* sy6746, 7 weeks ago : Added java API, added new methods to WebAPI for main page resources, and made changes to storage of data in JSON objects
+* sy6746, 7 weeks ago : untracked old locations for doc files
+*   sy6746, 7 weeks ago : Merge branch 'master' of https://www.cs.mun.ca/cgi-bin/user-cgi/~theo/auth/git/cs4770/teamg
+|\  
+| * Rebecca Price, 7 weeks ago : February work record update
+* | sy6746, 7 weeks ago : Moved API documentation to a seperate folder and added WebAPI docs. Small changes made to javascript objects doc to add clarity.
+|/  
+* Rebecca Price, 7 weeks ago : Work records for Jan and Feb
+* sy6746, 7 weeks ago : added high level layered architecture diagram text file
+*   sy6746, 7 weeks ago : Merge branch 'master' of https://www.cs.mun.ca/cgi-bin/user-cgi/~theo/auth/git/cs4770/teamg.git
+|\  
+| * imafella, 7 weeks ago : created a folder for me and added my work record
+* | sy6746, 7 weeks ago : Initial Project setup
+|/  
+* imafella, 7 weeks ago : created a document listing all javascript objects
+* Theodore S Norvell, 9 weeks ago : first

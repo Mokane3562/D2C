@@ -9,6 +9,9 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class is designed to emulate the Linux terminal.
+ */
 public class TerminalCaller {
 
 	/**
@@ -34,8 +37,10 @@ public class TerminalCaller {
 	}
 
 	/**
-	 * @param user
-	 * @param path
+	 * Clears temporary user files.
+	 * 
+	 * @param user the user running the process
+	 * @param path the path of the user
 	 */
 	public static void clearTempUserFiles(String user, String path) {
 		File file = new File("/tmp/" + user);
@@ -43,7 +48,9 @@ public class TerminalCaller {
 	}
 
 	/**
-	 * @param file
+	 * Deletes a file or directory. If the location is a directory, it recursively deletes all sub-files and sub-directories.
+	 * 
+	 * @param file the file or directory to delete.
 	 */
 	private static void delete(File file) {
 		if (file.isDirectory()) {
@@ -55,12 +62,12 @@ public class TerminalCaller {
 	}
 
 	/**
-	 * Comiles C code using the 'gcc' terminal command 
+	 * Comiles C code using the 'gcc' terminal command.
 	 * 
-	 * @param user
-	 * @param path
-	 * @param args
-	 * @return
+	 * @param user the user running the process
+	 * @param path the path of the user
+	 * @param args arguments to be fed to the gcc compiler
+	 * @return a the executing compiler's IOPipe
 	 * @throws IOException
 	 * @throws InterruptedException
 	 */
@@ -72,10 +79,12 @@ public class TerminalCaller {
 	}
 
 	/**
-	 * @param user
-	 * @param path
-	 * @param args
-	 * @return
+	 * Runs C code using the 'a.out' terminal command.
+	 * 
+	 * @param user the user running the process
+	 * @param path the path of the user
+	 * @param args arguments to be fed to a.out
+	 * @return a the executing code's IOPipe
 	 * @throws IOException
 	 * @throws InterruptedException
 	 */
@@ -87,10 +96,12 @@ public class TerminalCaller {
 	}
 
 	/**
-	 * @param user
-	 * @param path
-	 * @param args
-	 * @return
+	 * Comiles Java code using the 'javac' terminal command.
+	 * 
+	 * @param user the user running the process
+	 * @param path the path of the user
+	 * @param args arguments to be fed to the javac compiler
+	 * @return a the executing compiler's IOPipe
 	 * @throws IOException
 	 * @throws InterruptedException
 	 */
@@ -102,10 +113,12 @@ public class TerminalCaller {
 	}
 
 	/**
-	 * @param user
-	 * @param path
-	 * @param args
-	 * @return
+	 * Runs Java code using the 'java' terminal command.
+	 * 
+	 * @param user the user running the process
+	 * @param path the path of the user
+	 * @param args arguments to be fed to the java terminal command
+	 * @return a the executing codes's IOPipe
 	 * @throws IOException
 	 * @throws InterruptedException
 	 */
@@ -117,10 +130,12 @@ public class TerminalCaller {
 	}
 
 	/**
-	 * @param user
-	 * @param path
-	 * @param args
-	 * @return
+	 * Runs the terminal command 'ls'.
+	 * 
+	 * @param user the user running the process
+	 * @param path the path of the user
+	 * @param args arguments to be fed to the ls terminal command
+	 * @return a the executing command's IOPipe
 	 * @throws IOException
 	 * @throws InterruptedException
 	 */
@@ -132,10 +147,12 @@ public class TerminalCaller {
 	}
 
 	/**
-	 * @param user
-	 * @param path
-	 * @param command
-	 * @return
+	 * Creates a process and it's IOPipe from a terminal command.
+	 * 
+	 * @param user the user running the process
+	 * @param path the path of the user
+	 * @param command the command to run
+	 * @return an IOPipe for the created process
 	 * @throws IOException
 	 * @throws InterruptedException
 	 */

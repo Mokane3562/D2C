@@ -4,22 +4,26 @@
  * and add the name as a variable to the function.
  */
 app.controller('main_controller',['$scope', '$location', 'example_service', 'c_compile_request',
-                                  'j_compile_request', 'java_request', 'run_request', 'login_service',
+                                  'j_compile_request', 'java_request', 'run_request', 'login_service', 'signup_service',
                           function($scope, $location, example_service, c_compile_request, j_compile_request,
-                        		  java_request, run_request, login_service){
+                        		  java_request, run_request, login_service, signup_service){
 	console.log("main controller loading");
 	
-    //intial veiw object set up	
+    //initial view object set up	
 	var view = {};
 	var editor;
 	$scope.view = view;
 	$scope.login_failure = "";
 	$scope.user = "";
+	$scope.first = "";
+	$scope.last = "";
+	$scope.confirm = "";
 	$scope.password = "";
 	
 
 	//Setting view invisible
-	view["login"] = true;
+	view["login"] = false;
+	view["signup"] = false;
 	view["courseInfo"] = false;
 	view["assignments"] = false;
 	view["workspace"] = false;
@@ -41,6 +45,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 			function(response){
 				user_auth = auth;
 				view["login"] = false;
+				view["signup"] = false;
 				view["courseInfo"] = true;
 				view["assignments"] = false;
 				view["workspace"] = false;
@@ -57,9 +62,49 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 			}
 		});
 	}
-	
+	$scope.signUp = function(){
+		view["login"] = false;
+		view["signup"] = true;
+		view["courseInfo"] = false;
+		view["assignments"] = false;
+		view["workspace"] = false;
+		view["testing"] = false;	
+		view["submissions"] = false;
+		view["grades"] = false; 
+	}
+	$scope.signUpUser =function(){
+		if($scope.password !== $scope.confirm){
+			return
+		}
+		var account = transferable_account(
+				$scope.user,
+				$scope.password,
+				$scope.first,
+				$scope.last,
+				new Date()
+		);
+		signup_service(account).then(
+			function(response){
+				$scope.login();
+			},
+			function(response){
+				$scope.login_failure = "";
+			}
+		);
+	}
+	$scope.back = function(){
+		view["login"] = true;
+		view["signup"] = false;
+		view["courseInfo"] = false;
+		view["assignments"] = false;
+		view["workspace"] = false;
+		view["testing"] = false;	
+		view["submissions"] = false;
+		view["grades"] = false;
+	}
 	$scope.courseInfo_click = function(){
 		view["login"] = false;
+		view["signup"] = false;
 		view["courseInfo"] = true;
 		view["assignments"] = false;
 		view["workspace"] = false;
@@ -69,6 +114,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	}
 	$scope.assignments_click = function(){
 		view["login"] = false;
+		view["signup"] = false;
 		view["courseInfo"] = false;
 		view["assignments"] = true;
 		view["workspace"] = false;
@@ -78,6 +124,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	}
 	$scope.workspace_click = function(){
 		view["login"] = false;
+		view["signup"] = false;
 		view["courseInfo"] = false;
 		view["assignments"] = false;
 		view["workspace"] = true;
@@ -91,6 +138,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	}
 	$scope.testing_click = function(){
 		view["login"] = false;
+		view["signup"] = false;
 		view["courseInfo"] = false;
 		view["assignments"] = false;
 		view["workspace"] = false;
@@ -100,6 +148,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	}
 	$scope.submissions_click = function(){
 		view["login"] = false;
+		view["signup"] = false;
 		view["courseInfo"] = false;
 		view["assignments"] = false;
 		view["workspace"] = false;
@@ -109,6 +158,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	}
 	$scope.grades_click = function(){
 		view["login"] = false;
+		view["signup"] = false;
 		view["courseInfo"] = false;
 		view["assignments"] = false;
 		view["workspace"] = false;
