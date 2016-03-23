@@ -31,6 +31,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	view["testing"] = false;	
 	view["submissions"] = false;
 	view["grades"] = false;
+	view["welcome"]= false;
 	var user_auth = "";
 	
 	//Setting view visible on click
@@ -53,6 +54,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 				view["testing"] = false;	
 				view["submissions"] = false;
 				view["grades"] = false;
+				view["welcome"]= true;
 		},
 		function(errors){
 			console.log(errors);
@@ -102,6 +104,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["testing"] = false;	
 		view["submissions"] = false;
 		view["grades"] = false;
+		view["welcome"] = false;
 	}
 	$scope.courseInfo_click = function(){
 		view["login"] = false;
@@ -112,6 +115,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["testing"] = false;	
 		view["submissions"] = false;
 		view["grades"] = false;
+		view["welcome"] = false;
 	}
 	$scope.assignments_click = function(){
 		view["login"] = false;
@@ -122,6 +126,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["testing"] = false;	
 		view["submissions"] = false;
 		view["grades"] = false;
+		view["welcome"] = false;
 	}
 	$scope.workspace_click = function(){
 		view["login"] = false;
@@ -132,6 +137,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["testing"] = false;	
 		view["submissions"] = false;
 		view["grades"] = false;
+		view["welcome"] = false;
 		editor = ace.edit("textcodebox");
 		editor.getSession().setUseWorker(false);
 		editor.setTheme("ace/theme/twilight");
@@ -146,6 +152,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["testing"] = true;	
 		view["submissions"] = false;
 		view["grades"] = false;
+		view["welcome"] = false;
 	}
 	$scope.submissions_click = function(){
 		view["login"] = false;
@@ -156,6 +163,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["testing"] = false;	
 		view["submissions"] = true;
 		view["grades"] = false;
+		view["welcome"] = false;
 	}
 	$scope.grades_click = function(){
 		view["login"] = false;
@@ -166,6 +174,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["testing"] = false;	
 		view["submissions"] = false;
 		view["grades"] = true;
+		view["welcome"] = false;
 	}
 	
 	//START c_compile_function

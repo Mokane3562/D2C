@@ -57,6 +57,7 @@
  	<div id=main_page ng-hide="view['login']">
  	<div id=mainPage ng-hide="view['signup']">
 	  <div id="header">
+	  	<!--<input type="image" src="http://i67.tinypic.com/2hzk5xw.png" alt="Submit" border="0">-->
 		  <img src="http://i67.tinypic.com/2hzk5xw.png" border="0">
 	  </div>
 	  
@@ -72,11 +73,11 @@
           	<li><a href="#" id="grades" runat="server" ng-click="grades_click()"><b>Grades</b></a></li>
         </ul>
         <br>
-        <!--
-        <div id="welcome"><h1>WELCOME TO D2C</h1>
-        <h3>Blah blah blah welcome stuff. talk about page. tell them what to do</h3>
+        
+        <div id="welcome" ng-show="view['welcome']"><h1>WELCOME TO D2C</h1>
+        <h3>Welcome to Desire to Code.</h3>
         </div>
-        -->
+       
           <!-- MENUBAR GENERATOR 
           
           <div class="menubutton" ng-repeat="menu in menuList"
@@ -92,7 +93,6 @@
 	 
       <!-- COURSE INFO PAGE -->
       <div ng-show="view['courseInfo']">
-      <!--<div id=main_page ng-hide="view['welcome']"> This stupid thing here-->
         <h1>Course Information</h1>
       </div>
 
