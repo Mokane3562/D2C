@@ -11,10 +11,12 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	
     //intial veiw object set up	
 	var view = {};
+	var editor;
 	$scope.view = view;
 	$scope.login_failure = "";
 	$scope.user = "";
 	$scope.password = "";
+	
 
 	//Setting view invisible
 	view["login"] = true;
@@ -82,6 +84,10 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["testing"] = false;	
 		view["submissions"] = false;
 		view["grades"] = false;
+		editor = ace.edit("textcodebox");
+		editor.getSession().setUseWorker(false);
+		editor.setTheme("ace/theme/twilight");
+		editor.getSession().setMode("ace/mode/java");
 	}
 	$scope.testing_click = function(){
 		view["login"] = false;
@@ -119,7 +125,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		path_array.pop();
 		var path = path_array.join("/");
 		var code = {};
-		code[name]= document.getElementById("textcodebox").value;
+		code[name]= editor.getValue();
 		var user = $scope.user;
 		c_compile_request(code, user, path).then(
 			function(response){
@@ -144,7 +150,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		path_array.pop();
 		var path = path_array.join("/");
 		var code = {};
-		code[name]= document.getElementById("textcodebox").value;
+		code[name]= editor.getValue();
 		var user = $scope.user;
 		j_compile_request(code, user, path).then(
 			function(response){

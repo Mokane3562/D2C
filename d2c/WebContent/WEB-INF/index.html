@@ -7,7 +7,8 @@
     </div>
     <link rel="stylesheet" href="style/style.css"/>
     <script type="text/javascript" src="shared/angular.js"></script>
-    <script src="http://code.angularjs.org/1.1.3/angular.js"></script>
+    <!--script src="http://code.angularjs.org/1.1.3/angular.js"></script-->
+    <script type="text/javascript" src="shared/ace/ace.js"></script>
     <script type="text/javascript" src="shared/d3.v3.js"></script>
     <script type="text/javascript" src="apps/main.js"></script>
     <script type="text/javascript" src="controllers/main_controller.js"></script>
@@ -102,10 +103,18 @@
 		    <textarea id="path" placeholder="Enter Path!"></textarea>
 		  </div>
 		  <div id="codebox">
-		    <textarea id="textcodebox" rows="23" placeholder="Code Here!"></textarea>
+<!--  begining of stupid formatting to make the java code look nice in the editor -->
+		    <div id="textcodebox">import static java.lang.System.out;
+		    
+public class HelloWorld{
+    public static void main(String[] args){
+        out.println("Hello World!");
+    }
+}</div>
+<!-- end of shit formatting -->
 		  </div>
           <div id="output">
-            <textarea id="textoutput" rows="23" placeholder="Output!">{{output}}</textarea>
+            <textarea id="textoutput" rows="23" readonly>{{output}}</textarea>
 	      </div>
 	    </div>
       </div>

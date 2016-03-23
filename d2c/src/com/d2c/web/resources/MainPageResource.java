@@ -83,8 +83,33 @@ public class MainPageResource {
 			return Response.serverError().entity("null file resource").build();
 		}
 		try {
-			BufferedReader br = new BufferedReader(new InputStreamReader(context.getResourceAsStream("/WEB-INF/"
-					+ jsFolderName + "/" + jsFileName + ".js")));
+			BufferedReader br = new BufferedReader(new InputStreamReader(i));
+			Stream<String> contents = br.lines();
+			fileAsString = contents.collect(Collectors.joining("\n"));
+			br.close();
+			return Response.ok().entity(fileAsString).build();
+		} catch (FileNotFoundException e) {
+			return Response.serverError().build();
+		} catch (IOException e) {
+			// This may be wrong, not sure yet.
+			return Response.ok().entity(fileAsString).build();
+		}
+	}
+	
+	@GET
+	@Produces(MediaType.TEXT_PLAIN)
+	@Path("{folder}/{subfolder}/{js}.js")
+	// This method gets the a CSS file. Uncommented, but more or less a copy of
+	// getMainPage
+	public Response getAcefile(@Context ServletContext context, @PathParam("folder") String jsFolderName, @PathParam("subfolder") String subFolder, @PathParam("js") String jsFileName) {
+		String fileAsString = "";
+		InputStream i = context.getResourceAsStream("/WEB-INF/" + jsFolderName + "/" + subFolder +"/" +jsFileName + ".js");
+		if (i == null) {
+			System.out.println("You found the null!" + jsFolderName + "/" + jsFileName + ".js");
+			return Response.serverError().entity("null file resource").build();
+		}
+		try {
+			BufferedReader br = new BufferedReader(new InputStreamReader(i));
 			Stream<String> contents = br.lines();
 			fileAsString = contents.collect(Collectors.joining("\n"));
 			br.close();
