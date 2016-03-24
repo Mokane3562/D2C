@@ -5,9 +5,9 @@
  */
 app.controller('main_controller',['$scope', '$location', 'example_service', 'c_compile_request',
                                   'j_compile_request', 'java_request', 'run_request', 'login_service',
-                                  'signup_service', 'transferable_account',
+                                  'signup_service', 'transferable_account', 'dir_creator',
                           function($scope, $location, example_service, c_compile_request, j_compile_request,
-                        		  java_request, run_request, login_service, signup_service, transferable_account){
+                        		  java_request, run_request, login_service, signup_service, transferable_account, dir_creator){
 	console.log("main controller loading");
 	
     //initial view object set up	
@@ -20,14 +20,16 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	$scope.last = "";
 	$scope.confirm = "";
 	$scope.password = "";
-	
+	$scope.dirs = [];
+	$scope.dir = "";
 
 	//Setting view invisible
-	view["login"] = true;
+	view["login"] = false;
 	view["signup"] = false;
 	view["courseInfo"] = false;
 	view["assignments"] = false;
 	view["workspace"] = false;
+	view["path"] = false;
 	view["testing"] = false;	
 	view["submissions"] = false;
 	view["grades"] = false;
@@ -134,6 +136,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["courseInfo"] = false;
 		view["assignments"] = false;
 		view["workspace"] = true;
+		view["path"] = true;
 		view["testing"] = false;	
 		view["submissions"] = false;
 		view["grades"] = false;

@@ -22,6 +22,20 @@ import com.d2c.util.TerminalCaller;
 public class CodeResource {
 
 	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response saveFile(@PathParam("user") String user, @PathParam("path") String path, Map<String, String> code){
+		try{
+			for(String name : code.keySet()){
+				TerminalCaller.saveFile(user, path, name, code.get(name));
+			}
+			return Response.accepted().build();
+		} catch (IOException e){
+			e.printStackTrace();
+			return Response.serverError().build();
+		}
+	}
+	
+	@POST
 	@Path("/c")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
