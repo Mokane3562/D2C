@@ -24,7 +24,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	$scope.dir = "";
 
 	//Setting view invisible
-	view["login"] = false;
+	view["login"] = true;
 	view["signup"] = false;
 	view["courseInfo"] = false;
 	view["assignments"] = false;

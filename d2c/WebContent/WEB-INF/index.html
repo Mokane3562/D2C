@@ -93,12 +93,18 @@
       <!-- COURSE INFO PAGE -->
       <div ng-show="view['courseInfo']">
         <h1>Course Information</h1>
+        <div id="courseContainer">
+
+	    </div>
       </div>
 
       
       <!-- ASSIGNMENTS PAGE -->
       <div ng-show="view['assignments']">
 	    	<h1>Assignments</h1>
+	    	<div id="assignContainer">
+	    	   
+	    	</div>
 	  </div>
       
 		
@@ -107,9 +113,9 @@
 	    <h1>Workspace</h1>
 	    <div id="codeandoutput">
 	      <div id="dirContainer">
+	      <h2>Directory</h2>
 	        <div ng-repeat="x in dirs" ng-dbl-click="x.onDblClick()">{{x.name}}</div>
 	      </div>
-	      <div id="right-side">
             <div id="button">
               <div class="button green" id="create_d" ng-click="">Add Directory</div>
               <div class="button green" id="create_f" ng-click="">Add File</div>
@@ -119,7 +125,7 @@
 		      <div class="button green" id="run_java" ng-click="java_function()">Run Java Code</div>
 	        </div>
 		    <div id="pathContainer">
-		      <div><textarea id="path" rows="2" placeholder="{{dir}}" ng-show="view['path']"></textarea></div>
+		      <textarea id="path" rows="2" placeholder="{{dir}}" ng-show="view['path']"></textarea>
 		      <div id="okay_button">OK</div>
 		    </div>
 		    <div id="codebox">
@@ -132,8 +138,8 @@
 }</div>
 <!-- end of shit formatting -->
 		    </div>
-           </div>
           <div id="output">
+            <h2>Output</h2>
             <textarea id="textoutput" rows="10" readonly>{{output}}</textarea>
 	      </div>
 	    </div>

@@ -108,7 +108,7 @@ h1 {
 }
 
 h2 {
-	color: #31B404;
+	color: #ffffff;
 	text-shadow: 3px 3px 3px #000;
 }
 
@@ -129,8 +129,6 @@ span {
 }
 
 #dirContainer{
-	border-radius: 25px;
-	border: 2px solid #73AD21;
 	float: left;
 	resize: none;
 	width: 20%;
