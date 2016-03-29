@@ -24,9 +24,9 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	$scope.dir = "";
 
 	//Setting view invisible
-	view["login"] = false;
+	view["login"] = true;
 	view["signup"] = false;
-	view["firstNav"] = true;
+	view["firstNav"] = false;
 	view["courses"] = false;
 	view["register"] = false;
 	view['courseSelect'] = false;
@@ -36,7 +36,6 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	view["testing"] = false;	
 	view["submissions"] = false;
 	view["grades"] = false;
-	view["welcome"]= false;
 	var user_auth = "";
 	
 	//Setting view visible on click
@@ -54,6 +53,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 				view["login"] = false;
 				view["signup"] = false;
 				view["courses"] = true;
+				view["firstNav"] = true;
 				view["register"] = false;
 				view["assignments"] = false;
 				view['courseSelect'] = false;
@@ -61,7 +61,6 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 				view["testing"] = false;	
 				view["submissions"] = false;
 				view["grades"] = false;
-				view["welcome"]= true;
 		},
 		function(errors){
 			console.log(errors);

@@ -133,6 +133,14 @@
 		
       <!-- WORKSPACE PAGE -->
       <div ng-show="view['workspace']">	
+        <div id="wrapper">
+          <div id= "menubar">
+            <div class="menubutton" id="back" ng-click="submissions_click()"><h3>Back</h3></div>
+            <div class="menubutton" id="assignments" ng-click="assignments_click()"><h3>Assignments</h3></div>
+            <div class="menubutton" id="testing" ng-click="testing_click()"><h3>Testing</h3></div>
+            <div class="menubutton" id="submissions" ng-click="submissions_click()"><h3>Submissions</h3></div>
+          </div>
+        </div>
 	    <h1>Workspace</h1>
 	    <div id="codeandoutput">
 	      <div id="dirContainer">
@@ -166,12 +174,32 @@
 	
       <!-- TESTING PAGE -->
       <div ng-show="view['testing']">
+        <div id="wrapper">
+          <div id= "menubar">
+            <div class="menubutton" id="back" ng-click="workspace_click()"><h3>Back</h3></div>
+            <div class="menubutton" id="assignments" ng-click="assignments_click()"><h3>Assignments</h3></div>
+            <div class="menubutton" id="workspace" ng-click="workspace_click()"><h3>Workspace</h3></div>
+            <div class="menubutton" id="testing" ng-click="testing_click()"><h3>Testing</h3></div>
+          </div>
+        </div>      
 	    	<h1>Testing</h1>
 	  </div>
 	  
       <!-- SUBMISSIONS PAGE -->
       <div ng-show="view['submissions']">
-	   	   <h1>Submissions</h1>
+        <div id="wrapper">
+          <div id= "menubar">
+            <div class="menubutton" id="back" ng-click="assignments_click()"><h3>Back</h3></div>
+            <div class="menubutton" id="assignments" ng-click="assignments_click()"><h3>Assignments</h3></div>
+            <div class="menubutton" id="grades" ng-click=""><h3>Grades</h3></div>
+          </div>
+        </div>
+	   	<h1>Submissions</h1>
+	   	  <div class="button green" id="subButton" ng-click="workspace_click()">Submissions</div><br>
+	   	  <div class="button green" id="subButton" ng-click="workspace_click()">Submissions</div><br>
+	   	  <div class="button green" id="subButton" ng-click="workspace_click()">Submissions</div><br>
+	   	  <div class="button green" id="subButton" ng-click="workspace_click()">Submissions</div><br>
+	   	  <div class="button green" id="subButton" ng-click="workspace_click()">Submissions</div><br>
 	  </div>
 	  
       <!-- GRADES PAGE -->
