@@ -27,31 +27,34 @@
 
 #wrapper {
 	border: 1px solid;
-	width: 1000px;
+	width: 100%;
 	margin: 0 auto;
 	background-color: #4D4D4D;
-	overflow: auto;
 	height:40%;
     line-height:40%;
     display: table;
+    border-color: #4d4d4d;
 }
 
 #menubar{
 	width: 1000px;
-	margin:0 auto;
+	border-color: #4d4d4d;
 }
 
 #menubar .menubutton{
+    display: inline-block; 
+    float: left;
     color: #FFF;
 	text-shadow: 1px 1px 1px #000;
     font-family: "Arial Black", Gadget, sans-serif;
-    display: inline-block; 
-    padding: 1px 1%;
+	padding: 6px;
     -webkit-user-select: none;    
     -moz-user-select: none; 
     -ms-user-select: none; 
     cursor: pointer;
-    left:0%;
+    background-color: #4D4D4D;
+    
+ 
 }
 
 .menubutton:active {
@@ -61,13 +64,9 @@
 }
 
 #menubar .menubutton:hover{
-    color: #31B404;
-	font-weight: bold;
-	text-shadow: 2px 2px 2px #000;
-    font-family: "Arial Black", Gadget, sans-serif;
-    text-align: center;
-    float:none;
-    display: inline-block; 
+	background-color: lighten(#4d4d4d, 10%);
+  	transition: all 250ms linear;
+  
 }
 
 .button {
