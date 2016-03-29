@@ -62,29 +62,21 @@
 	  	<!--<input type="image" src="http://i67.tinypic.com/2hzk5xw.png" alt="Submit" border="0">-->
 		  <img src="http://i67.tinypic.com/2hzk5xw.png" border="0">
 	  </div>
-	  
-	  
-	<!--end of header div -->
+	  <div id="firstNav" ng-show="view['firstNav']">
+        <div id="wrapper">
+          <div id= "menubar">
+            <div class="menubutton" id="courses" ng-click="courses_click()"><h3>Courses</h3></div>
+            <div class="menubutton" id="register" ng-click="register_click()"><h3>Register</h3></div>
+          </div>
+        </div>
+      </div>	  
 	    
-	<div id="wrapper">
-      <div id= "menubar">
-        <div class="menubutton" id="courses" ng-click="courses_click()"><h3>Courses</h3></div>
-        <div class="menubutton" id="register" ng-click="register_click()"><h3>Register</h3></div>
-       <!--  <div class="menubutton" id="assignments" ng-click="assignments_click()"><h3>Assignments</h3></div>
-        <div class="menubutton" id="workspace" ng-click="workspace_click()"><h3>Workspace</h3></div>
-        <div class="menubutton" id="testing" ng-click="testing_click()"><h3>Testing</h3></div>
-        <div class="menubutton" id="submissions" ng-click="submissions_click()"><h3>Submissions</h3></div>
-        <div class="menubutton" id="grades" ng-click="grades_click()"><h3>Grades</h3></div> -->
-      </div>
-    </div>    
-	 
-	 
       <!-- COURSE INFO PAGE -->
-      <div ng-show="view['courses']">
+      <div ng-show="view['courses']">  
         <h1>Courses</h1>
         <div id="courseContainer">
-        <h2>Welcome to D2C</h2>
-        <h2>Select a Course to get started: </h2>
+          <h2>Welcome to D2C</h2>
+          <h2>Select a Course to get started: </h2>
           <div class="button green" id="coursesButton" ng-click="courseSelect()">Course</div>
           <div class="button green" id="coursesButton" ng-click="courseSelect()">Course</div>
           <div class="button green" id="coursesButton" ng-click="courseSelect()">Course</div>  
@@ -106,23 +98,35 @@
       </div>
       
       <!-- COURSE SELECTED PAGE -->
-      <div ng-show="view['courseSelect']">
+      <div ng-show="view['courseSelect']" ng-hide="view['firstNav']">
       	<div id="wrapper">
           <div id= "menubar">
-            <div class="menubutton" id="back" ng-click=""><h3>Back</h3></div>
-            <div class="menubutton" id="assignments" ng-click=""><h3>Assignments</h3></div>
+            <div class="menubutton" id="back" ng-click="courses_click()"><h3>Back</h3></div>
+            <div class="menubutton" id="assignments" ng-click="assignments_click()"><h3>Assignments</h3></div>
             <div class="menubutton" id="grades" ng-click=""><h3>Grades</h3></div>
           </div>
         </div>  
         <h1>Let's get started with "COURSE NAME HERE"</h1>
-                  <div class="button green" id="nextDue" ng-click="">Next Due Assignment</div> 
+                  <div class="button green" id="nextDue" ng-click="assignments_click()">Next Due Assignment</div> 
       </div>
       
       <!-- ASSIGNMENTS PAGE -->
       <div ng-show="view['assignments']">
+      	<div id="wrapper">
+          <div id= "menubar">
+            <div class="menubutton" id="back" ng-click="courseSelect()"><h3>Back</h3></div>
+            <div class="menubutton" id="assignments" ng-click="assignments_click()"><h3>Assignments</h3></div>
+            <div class="menubutton" id="grades" ng-click="grades_click()"><h3>Grades</h3></div>
+          </div>
+        </div>      
 	    	<h1>Assignments</h1>
 	    	<div id="assignContainer">
-	    	   
+	    	  <div class="button green" id="assignButton" ng-click="submissions_click()">Assignment</div><br>
+	    	  <div class="button green" id="assignButton" ng-click="submissions_click()">Assignment</div><br>
+	    	  <div class="button green" id="assignButton" ng-click="submissions_click()">Assignment</div><br>
+	    	  <div class="button green" id="assignButton" ng-click="submissions_click()">Assignment</div><br>
+	    	  <div class="button green" id="assignButton" ng-click="submissions_click()">Assignment</div><br>
+	    	  <div class="button green" id="assignButton" ng-click="submissions_click()">Assignment</div><br>
 	    	</div>
 	  </div>
       
@@ -172,6 +176,13 @@
 	  
       <!-- GRADES PAGE -->
       <div ng-show="view['grades']">
+      	<div id="wrapper">
+          <div id= "menubar">
+            <div class="menubutton" id="back" ng-click="courseSelect()"><h3>Back</h3></div>
+            <div class="menubutton" id="assignments" ng-click="assignments_click()"><h3>Assignments</h3></div>
+            <div class="menubutton" id="grades" ng-click="grades_click()"><h3>Grades</h3></div>
+          </div>
+        </div>      
 	    	<h1>Grades</h1>
       </div>
     	

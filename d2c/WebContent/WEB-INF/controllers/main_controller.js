@@ -26,6 +26,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	//Setting view invisible
 	view["login"] = false;
 	view["signup"] = false;
+	view["firstNav"] = true;
 	view["courses"] = false;
 	view["register"] = false;
 	view['courseSelect'] = false;
@@ -119,6 +120,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	$scope.courses_click = function(){
 		view["login"] = false;
 		view["register"] = false;
+		view["firstNav"] = true;
 		view["signup"] = false;
 		view["courses"] = true;
 		view["register"] = false;
@@ -144,10 +146,11 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["grades"] = false;
 		view["welcome"] = false;
 	}
-	$scope.courseSelect_click = function(){
+	$scope.courseSelect = function(){
 		view["login"] = false;
 		view["register"] = false;
 		view["signup"] = false;
+		view["firstNav"] = false;
 		view["courses"] = false;
 		view['courseSelect'] = true;
 		view["register"] = false;
