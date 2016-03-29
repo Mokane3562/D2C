@@ -57,6 +57,20 @@
  
 }
 
+.backbutton{
+	display: inline-block; 
+    float: left;
+    color: #33cc33;
+	text-shadow: 1px 1px 1px #000;
+    font-family: "Arial Black", Gadget, sans-serif;
+	padding: 6px;
+    -webkit-user-select: none;    
+    -moz-user-select: none; 
+    -ms-user-select: none; 
+    cursor: pointer;
+    background-color: #4D4D4D;
+}
+
 .menubutton:active {
 	transform: translate(0px, 5px);
 	-webkit-transform: translate(0px, 5px);
@@ -68,6 +82,19 @@
   	transition: all 250ms linear;
   
 }
+
+.backbutton:active {
+	transform: translate(0px, 5px);
+	-webkit-transform: translate(0px, 5px);
+	box-shadow: 0px 0px 0px 0px;
+}
+
+#menubar .backbutton:hover{
+	background-color: lighten(#4d4d4d, 10%);
+  	transition: all 250ms linear;
+  
+}
+
 
 .button {
 	border-radius: 5px;
@@ -321,4 +348,37 @@ span {
 
 #okay_button:hover {
 	background-color: #34ff34;
+}
+
+#courseContainer{
+  position: relative;
+  z-index: 1;
+  background: #333333;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+#registerContainer{
+  position: relative;
+  z-index: 1;
+  background: #333333;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+#nextdueContainer{
+  position: relative;
+  z-index: 1;
+  background: #333333;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
