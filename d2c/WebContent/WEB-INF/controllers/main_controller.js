@@ -26,7 +26,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	//Setting view invisible
 	view["login"] = true;
 	view["signup"] = false;
-	view["firstNav"] = false;
+	view["firstNav"] = true;
 	view["courses"] = false;
 	view["register"] = false;
 	view['courseSelect'] = false;
@@ -36,6 +36,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	view["testing"] = false;	
 	view["submissions"] = false;
 	view["grades"] = false;
+	view["signout"] = false;
 	var user_auth = "";
 	
 	//Setting view visible on click
@@ -61,6 +62,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 				view["testing"] = false;	
 				view["submissions"] = false;
 				view["grades"] = false;
+				view["signout"] = false;
 		},
 		function(errors){
 			console.log(errors);
@@ -81,7 +83,8 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["workspace"] = false;
 		view["testing"] = false;	
 		view["submissions"] = false;
-		view["grades"] = false; 
+		view["grades"] = false;
+		view["signout"] = false;
 	}
 	$scope.signUpUser =function(){
 		if($scope.password !== $scope.confirm){
@@ -115,6 +118,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["submissions"] = false;
 		view["grades"] = false;
 		view["welcome"] = false;
+		view["signout"] = false;
 	}
 	$scope.courses_click = function(){
 		view["login"] = false;
@@ -130,6 +134,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["submissions"] = false;
 		view["grades"] = false;
 		view["welcome"] = false;
+		view["signout"] = false;
 	}
 	$scope.register_click = function(){
 		view["login"] = false;
@@ -144,6 +149,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["submissions"] = false;
 		view["grades"] = false;
 		view["welcome"] = false;
+		view["signout"] = false;
 	}
 	$scope.courseSelect = function(){
 		view["login"] = false;
@@ -159,6 +165,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["submissions"] = false;
 		view["grades"] = false;
 		view["welcome"] = false;
+		view["signout"] = false;
 	}
 	$scope.assignments_click = function(){
 		view["login"] = false;
@@ -172,6 +179,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["submissions"] = false;
 		view["grades"] = false;
 		view["welcome"] = false;
+		view["signout"] = false;
 	}
 	$scope.workspace_click = function(){
 		view["login"] = false;
@@ -186,6 +194,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["submissions"] = false;
 		view["grades"] = false;
 		view["welcome"] = false;
+		view["signout"] = false;
 		editor = ace.edit("textcodebox");
 		editor.getSession().setUseWorker(false);
 		editor.setTheme("ace/theme/twilight");
@@ -203,6 +212,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["submissions"] = false;
 		view["grades"] = false;
 		view["welcome"] = false;
+		view["signout"] = false;
 	}
 	$scope.submissions_click = function(){
 		view["login"] = false;
@@ -216,6 +226,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["submissions"] = true;
 		view["grades"] = false;
 		view["welcome"] = false;
+		view["signout"] = false;
 	}
 	$scope.grades_click = function(){
 		view["login"] = false;
@@ -229,6 +240,37 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["submissions"] = false;
 		view["grades"] = true;
 		view["welcome"] = false;
+		view["signout"] = false;
+	}
+	
+	$scope.signout_click = function(){
+		view["login"] = false;
+		view["signup"] = false;
+		view["courses"] = false;
+		view["register"] = false;
+		view["assignments"] = false;
+		view['courseSelect'] = false;
+		view["workspace"] = false;
+		view["testing"] = false;	
+		view["submissions"] = false;
+		view["grades"] = false;
+		view["welcome"] = false;
+		view["signout"] = true;
+	}
+	
+	$scope.yes_click = function(){
+		view["login"] = true;
+		view["signup"] = false;
+		view["courses"] = false;
+		view["register"] = false;
+		view["assignments"] = false;
+		view['courseSelect'] = false;
+		view["workspace"] = false;
+		view["testing"] = false;	
+		view["submissions"] = false;
+		view["grades"] = false;
+		view["welcome"] = false;
+		view["signout"] = false;
 	}
 	
 	//START c_compile_function
