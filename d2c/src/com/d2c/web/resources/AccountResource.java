@@ -60,6 +60,7 @@ public class AccountResource {
 		} 
 	}
 	
+	//returns a list of (crn, role type) pairs that an account is associated with. IE. all the courses and respective roles an account is in.
 	@GET
 	@Path("/{account_user_name}/roles")
 	@Produces(MediaType.APPLICATION_JSON)

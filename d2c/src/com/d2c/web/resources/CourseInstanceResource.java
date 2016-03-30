@@ -2,7 +2,6 @@ package com.d2c.web.resources;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
@@ -27,7 +26,8 @@ import com.d2c.web.beans.TransferableCourseInstance.Semester;
 
 @Path("/course")
 public class CourseInstanceResource {
-
+	
+	//returns comprehensive course information given a 5-digit crn
 	@GET
 	@Path("/{crn}")
 	@Produces(MediaType.APPLICATION_JSON)
