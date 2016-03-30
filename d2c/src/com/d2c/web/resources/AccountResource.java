@@ -4,6 +4,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.util.Base64;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -45,6 +47,40 @@ public class AccountResource {
 				account.createTime = (java.sql.Timestamp) results[4];
 				//send created account object to client
 				return Response.ok().entity(account).build();
+			} else {//otherwise you're done because the page doesn't exist
+				return Response.status(403).build(); //this happens when access to this page is denied
+			} 
+		} catch (EmptySetException e) {
+			e.printStackTrace();
+			return Response.noContent().build();
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+			//when shit goes FUBAR
+			return Response.serverError().build();
+		} 
+	}
+	
+	@GET
+	@Path("/{account_user_name}/roles")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getRoles(@PathParam("account_user_name") String accountUserName, @HeaderParam("Authorization") String encodedLogin) {
+		//decode login info
+		String decodedUser = decodeUser(encodedLogin);
+		String decodedPassword = decodePassword(encodedLogin);
+		//start SQL shit	
+		try (SQLHandler sql = new SQLHandler();) {
+		//TODO:Set up encrypted passwords
+			List<Object[]> results = sql.getAccountRoles(accountUserName);
+			//continue only if the user has authority to view this info
+			Object[] account = sql.getAccountInfo(accountUserName);
+			if (decodedUser.equals(accountUserName) && decodedPassword.equals(account[1])) {
+				//create the map
+				HashMap<String,String> roles = new HashMap<String,String>();
+				for (Object[] row: results) {
+					roles.put((String) row[0], (String) row[1]);
+				}
+
+				return Response.ok().entity(roles).build();
 			} else {//otherwise you're done because the page doesn't exist
 				return Response.status(403).build(); //this happens when access to this page is denied
 			} 

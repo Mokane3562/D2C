@@ -2,14 +2,11 @@ package com.d2c.util;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.Test;
 
 public class SQLHandlerTest {
-	
-	@Test
-	public void testSQLHandler() {
-		fail("Not yet implemented");
-	}
 
 	@Test
 	public void testGetAccountInfo() throws Exception{
@@ -23,69 +20,69 @@ public class SQLHandlerTest {
 			assertTrue("ID mismatch", (int) results[5] == 4);
 		}
 	}
-
+	
 	@Test
-	public void testGetAssignment() {
-		fail("Not yet implemented");
-	}
-
-//	@Test
-//	public void testGetCourseInfo() {
-//		try {
-//			sql = new SQLHandler();
-//			ResultSet results = sql.getCourseInfo(00001);
-//			results.next();
-//			assertTrue("String mismatch", results.getString(1).equals("COMP"));
-//			assertTrue("String mismatch", results.getString(2).equals("1710"));
-//			assertTrue("String mismatch", results.getString(3).equals("Object-Oriented Programming I"));
-//			assertFalse("Found multiple rows, expected one", results.next());
-//		} catch (ClassNotFoundException | SQLException e) {
-//			e.printStackTrace();
-//			if(e.getMessage() != null) {
-//				System.err.println(e.getMessage());
-//			}
-//			fail("Exception thrown");
-//		} finally {
-//			try {
-//				sql.close();
-//			} catch (SQLException e) {
-//				e.printStackTrace();
-//			}
-//		}
-//	}
-
-	@Test
-	public void testGetFile() {
-		fail("Not yet implemented");
+	public void testGetAccountRoles() throws Exception{
+		try (SQLHandler sql = new SQLHandler();) {
+			List<Object[]> results = sql.getAccountRoles("mnjs51");
+			
+			Object[] row1 = results.get(0); 
+			assertTrue("String mismatch", row1[0].equals("00001"));
+			assertTrue("String mismatch", row1[1].equals("PROFESSOR"));
+			
+			Object[] row2 = results.get(1); 
+			assertTrue("String mismatch", row2[0].equals("00002"));
+			assertTrue("String mismatch", row2[1].equals("PROFESSOR"));
+			
+			Object[] row3 = results.get(2); 
+			assertTrue("String mismatch", row3[0].equals("00004"));
+			assertTrue("String mismatch", row3[1].equals("STUDENT"));
+		}
 	}
 
 	@Test
-	public void testGetFiles() {
-		fail("Not yet implemented");
+	public void testGetCourseInst() throws Exception {
+		try (SQLHandler sql = new SQLHandler();) {
+			Object[] results = sql.getCourseInst("00001");
+			assertTrue("String mismatch", results[0].equals("COMP"));
+			assertTrue("String mismatch", results[1].equals("1710"));
+			assertTrue("String mismatch", results[2].equals("Object-Oriented Programming I"));
+			assertTrue("String mismatch", results[3].equals("WINTER"));
+			assertTrue("String mismatch", results[4].equals("2016"));
+			assertTrue("String mismatch", results[5].equals("Mike and Scott"));
+			assertTrue("String mismatch", results[6].equals("00001"));
+		}
+	}
+	
+	@Test
+	public void testGetParticipants() throws Exception{
+		try (SQLHandler sql = new SQLHandler();) {
+			List<Object[]> results = sql.getParticipants("00001");
+			
+			Object[] row1 = results.get(0); 
+			assertTrue("String mismatch", row1[0].equals("mlc258"));
+			assertTrue("String mismatch", row1[1].equals("STUDENT"));
+			
+			Object[] row2 = results.get(1); 
+			assertTrue("String mismatch", row2[0].equals("mnjs51"));
+			assertTrue("String mismatch", row2[1].equals("PROFESSOR"));
+			
+			Object[] row3 = results.get(2); 
+			assertTrue("String mismatch", row3[0].equals("rmp255"));
+			assertTrue("String mismatch", row3[1].equals("TA"));
+			
+			Object[] row4 = results.get(3); 
+			assertTrue("String mismatch", row4[0].equals("sy6746"));
+			assertTrue("String mismatch", row4[1].equals("PROFESSOR"));
+			
+			Object[] row5 = results.get(4); 
+			assertTrue("String mismatch", row5[0].equals("tmb063"));
+			assertTrue("String mismatch", row5[1].equals("STUDENT"));
+		}
 	}
 
 	@Test
-	public void testGetGrade() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetSubmission() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetSubmissionFile() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetTA() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testPostAccount() throws Exception{
+	public void testMakeAccount() throws Exception{
 		SQLHandler sql = null;
 		try {
 			sql = new SQLHandler();
@@ -103,41 +100,6 @@ public class SQLHandlerTest {
 	}
 
 	@Test
-	public void testPostAssignment() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testPostCourse() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testPostFile() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testPostGrade() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testPostRole() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testPostSubmission() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testPostSubmissionFile() {
-		fail("Not yet implemented");
-	}
-	
-	@Test
 	public void testUpdateAccount() throws Exception{
 		SQLHandler sql = null;
 		try {
@@ -154,10 +116,4 @@ public class SQLHandlerTest {
 			sql.close();
 		}
 	}
-
-	@Test
-	public void testClose() {
-		fail("Not yet implemented");
-	}
-
 }

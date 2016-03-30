@@ -6,6 +6,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -32,14 +34,21 @@ public class SQLHandler implements AutoCloseable{
 				"SELECT username, password, fname, lname, create_time, account_id "
 			+ 	"FROM account "
 			+ 	"WHERE username = ?";
+	//Get an accounts roles in courses
+	private static final String SELECT_ACCOUNT_ROLES_SQL = 
+				"SELECT crn, type "
+			+ 	"FROM account, role, course_inst "
+			+ 	"WHERE username = ? "
+			+ 	"AND account.account_id = role.account_id "
+			+ 	"AND role.course_inst_id = course_inst.course_inst_id";
 	//Get an assignment's number, due date, and contents using it's assignment ID.
 	private static final String GET_ASSIGNMENT_SQL = 	
 				"SELECT number, due_date, course_inst_id "
 			+ 	"FROM assignment "
 			+ 	"WHERE assign_id = ? ";
 	//Get a course's subject, number, and name, using it's crn.
-	private static final String GET_COURSE_SQL = 	
-				"SELECT subject, number, name "
+	private static final String SELECT_COURSE_INST_SQL = 	
+				"SELECT subject, number, name, semester, year_offered, prof_name, crn "
 			+ 	"FROM course, course_inst "
 			+ 	"WHERE crn = ? "
 			+ 	"AND course.course_id = course_inst.course_id";
@@ -64,9 +73,12 @@ public class SQLHandler implements AutoCloseable{
 	//Get the account ID and role of every user participating in a certain course.
 	//TODO:Verify this works.
 	private static final String GET_PARTICIPANTS_SQL = 
-				"SELECT account_id, type"
-			+ 	"FROM role "
-			+ 	"WHERE course_id = ?";
+				"SELECT username, type "
+			+ 	"FROM role, account, course_inst "
+			+ 	"WHERE crn = ? "
+			+ 	"AND account.account_id = role.account_id "
+			+ 	"AND role.course_inst_id = course_inst.course_inst_id "
+			+ 	"ORDER BY username ASC";
 	//Get a submission's submitter, associated assignment, and grade using it's submission ID.
 	//TODO:Verify this works.
 	private static final String GET_SUBMISSION_SQL = 
@@ -240,6 +252,28 @@ public class SQLHandler implements AutoCloseable{
 		}
 		return dataToReturn;
 	}
+	
+	public List<Object[]> getAccountRoles(String user) throws EmptySetException, SQLException {
+		List<Object[]> dataToReturn = new ArrayList<Object[]>();
+		try (PreparedStatement selectAccountRolesStatement = connection.prepareStatement(SELECT_ACCOUNT_ROLES_SQL);) {
+			selectAccountRolesStatement.setString(1, user);
+			try (ResultSet results = selectAccountRolesStatement.executeQuery();) {
+				if (!results.first()) {throw new EmptySetException();}
+				else {
+					results.beforeFirst();
+					while (results.next()){
+						Object[] item = new Object[2];
+						
+						item[0] = results.getString(1);
+						item[1] = results.getString(2);	
+						
+						dataToReturn.add(item);
+					}
+				}
+			}
+		}
+		return dataToReturn;
+	}
 
 	public ResultSet getAssignment(String assign_id) throws SQLException {
 		this.getAssignmentStatement = connection.prepareStatement(GET_ASSIGNMENT_SQL);
@@ -248,10 +282,24 @@ public class SQLHandler implements AutoCloseable{
 	}
 
 	// returns the course info based on the course_id
-	public ResultSet getCourseInfo(int crn) throws SQLException {
-		this.getCourseStatement = connection.prepareStatement(GET_COURSE_SQL);
-		this.getCourseStatement.setString(1, Integer.toString(crn));
-		return this.getCourseStatement.executeQuery();
+	public Object[] getCourseInst(String crn) throws SQLException, EmptySetException {
+		Object[] dataToReturn = new Object[7];
+		try (PreparedStatement selectCourseInstStatement = connection.prepareStatement(SELECT_COURSE_INST_SQL);) {
+			selectCourseInstStatement.setString(1, crn);
+			try (ResultSet results = selectCourseInstStatement.executeQuery();) {
+				if (!results.first()) {throw new EmptySetException();}
+				else {
+					dataToReturn[0] = results.getString(1);
+					dataToReturn[1] = results.getString(2);
+					dataToReturn[2] = results.getString(3);
+					dataToReturn[3] = results.getString(4);
+					dataToReturn[4] = results.getString(5);
+					dataToReturn[5] = results.getString(6);
+					dataToReturn[6] = results.getString(7);
+				}
+			}
+		}
+		return dataToReturn;
 	}
 
 	// returns the file based on the file_id
@@ -273,10 +321,26 @@ public class SQLHandler implements AutoCloseable{
 		return this.getGradeStatement.executeQuery();
 	}
 
-	public ResultSet getParticipants(int crn) throws SQLException {
-		this.getParticipantsStatement = connection.prepareStatement(GET_PARTICIPANTS_SQL);
-		this.getParticipantsStatement.setString(1, Integer.toString(crn));
-		return this.getParticipantsStatement.executeQuery();
+	public List<Object[]> getParticipants(String crn) throws SQLException, EmptySetException {
+		List<Object[]> dataToReturn = new ArrayList<Object[]>();
+		try (PreparedStatement getParticipantsStatement = connection.prepareStatement(GET_PARTICIPANTS_SQL);) {
+			getParticipantsStatement.setString(1, crn);
+			try (ResultSet results = getParticipantsStatement.executeQuery();) {
+				if (!results.first()) {throw new EmptySetException();}
+				else {
+					results.beforeFirst();
+					while (results.next()){
+						Object[] item = new Object[2];
+						
+						item[0] = results.getString(1);
+						item[1] = results.getString(2);	
+						
+						dataToReturn.add(item);
+					}
+				}
+			}
+		}
+		return dataToReturn;
 	}
 
 	public ResultSet getSubmission(int submission_id) throws SQLException {
