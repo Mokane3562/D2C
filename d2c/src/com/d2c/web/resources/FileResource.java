@@ -17,7 +17,26 @@ import com.d2c.web.beans.TransferableFile;
 @Path("/file")
 public class FileResource {
 
+	//TODO: Finish this when you're more awake
 	@GET
+	@Path("/assignment/{assignment_ref_id}/all")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAllFilesInAssignment(@PathParam("assignment_ref_id") int assignRefID) {
+		// Some sql shit to get my object
+
+		// check that object exists
+		boolean check = true;
+		// if it exists then save it to a java object and return through
+		// response
+		if (check) {
+			TransferableFile f = new TransferableFile();
+			return Response.ok().entity(f).build();
+		} else { // else return a not found
+			return Response.noContent().build();
+		}
+	}
+	
+	/*@GET
 	@Path("/{course_id}/{assignment}/{file_name}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getFileInfo(@PathParam("course_id") String courseID, @PathParam("assignment") String assignment, @PathParam("file_name") String fileName) {
@@ -33,9 +52,9 @@ public class FileResource {
 		} else { // else return a not found
 			return Response.noContent().build();
 		}
-	}
+	}*/
 
-	@POST
+	/*@POST
 	@Path("/{course_id}/{assignment}/{file_name}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response uploadOrUpdateFile(@PathParam("course_id") String courseID, @PathParam("assignment") String assignment, @PathParam("file_name") String fileName, TransferableFile file) {
@@ -46,6 +65,6 @@ public class FileResource {
 		} catch (URISyntaxException e) {
 			return Response.serverError().build();
 		}
-	}
+	}*/
 
 }

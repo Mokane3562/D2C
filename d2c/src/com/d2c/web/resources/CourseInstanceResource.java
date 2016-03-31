@@ -52,6 +52,34 @@ public class CourseInstanceResource {
 		}
 	}
 	
+	//returns all assignments in a course
+	//TODO: Finish this when you're more awake
+	@GET
+	@Path("/assignments/{crn}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getCourseInstAssignments(@PathParam("crn") String crn) {
+		try (SQLHandler sql = new SQLHandler();) {
+			Object[] results = sql.getCourseInst(crn);
+			//create the course instance
+			TransferableCourseInstance courseInstance = new TransferableCourseInstance();
+			courseInstance.semester = (Semester) results[0];
+			courseInstance.year = (String) results[1];
+			courseInstance.profName = (String) results[2];
+			courseInstance.courseReferenceNumber = (String) results[3];
+			courseInstance.courseID = (int) results[4];
+			courseInstance.refID = (int) results[5];
+			//send created course instance object to client
+			return Response.ok().entity(courseInstance).build();
+		} catch (EmptySetException e) {
+			e.printStackTrace();
+			return Response.noContent().build();
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+			//when shit goes FUBAR
+			return Response.serverError().build();
+		}
+	}
+	
 	//returns comprehensive course information given a 5-digit crn
 		@GET
 		@Path("/refid/{id}")
