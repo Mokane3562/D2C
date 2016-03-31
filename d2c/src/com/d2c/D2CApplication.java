@@ -10,7 +10,6 @@ import com.d2c.web.resources.AssignmentResource;
 import com.d2c.web.resources.CodeResource;
 import com.d2c.web.resources.CourseInstanceResource;
 import com.d2c.web.resources.FileResource;
-import com.d2c.web.resources.GradeResource;
 import com.d2c.web.resources.MainPageResource;
 import com.d2c.web.resources.AccountResource;
 import com.d2c.web.resources.SubmissionResource;
@@ -23,7 +22,6 @@ public class D2CApplication extends Application {
 		s.add(CodeResource.class);
 		s.add(CourseInstanceResource.class);
 		s.add(FileResource.class);
-		s.add(GradeResource.class);
 		s.add(MainPageResource.class);
 		s.add(AccountResource.class);
 		s.add(SubmissionResource.class);
