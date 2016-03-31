@@ -1,7 +1,10 @@
 package com.d2c.web.resources;
 
-import java.net.URI;
 import java.net.URISyntaxException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -12,12 +15,39 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.d2c.util.EmptySetException;
+import com.d2c.util.SQLHandler;
 import com.d2c.web.beans.TransferableAssignment;
 
 @Path("/assignment")
 public class AssignmentResource {
 
-	@GET
+	/*@GET
+	@Path("/{crn}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAssignments(@PathParam("crn") String crn) {
+		//start SQL shit	
+		try (SQLHandler sql = new SQLHandler();) {
+			List<Object[]> results = sql.getAssignments(crn);
+			//create the map
+			List<TransferableAssignment> assignments = new ArrayList<>();
+			for (Object[] row: results) {
+				TransferableAssignment assignment = new TransferableAssignment();
+				assignment
+				//assignments.add(assignment);
+			}
+			return Response.ok().entity(roles).build(); 
+		} catch (EmptySetException e) {
+			e.printStackTrace();
+			return Response.noContent().build();
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+			//when shit goes FUBAR
+			return Response.serverError().build();
+		} 
+	}*/
+	
+	/*@GET
 	@Path("/{course_id}/{assignment}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getCourseInfo(@PathParam("course_id") String courseID, @PathParam("assignment") String assignment) {
@@ -33,9 +63,9 @@ public class AssignmentResource {
 		} else { // else return a not found
 			return Response.noContent().build();
 		}
-	}
+	}*/
 
-	@POST
+	/*@POST
 	@Path("/{course_id}/{assignment}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createOrUpdateAssignment(@PathParam("course_id") String courseID, @PathParam("assignment") String assignment, TransferableAssignment context) {
@@ -46,5 +76,5 @@ public class AssignmentResource {
 		} catch (URISyntaxException e) {
 			return Response.serverError().build();
 		}
-	}
+	}*/
 }

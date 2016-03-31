@@ -20,6 +20,7 @@ import javax.ws.rs.core.Response;
 import com.d2c.util.EmptySetException;
 import com.d2c.util.SQLHandler;
 import com.d2c.web.beans.TransferableAccount;
+import com.d2c.web.beans.TransferableAccount.Role;
 
 @Path("/account")
 public class AccountResource {
@@ -45,6 +46,7 @@ public class AccountResource {
 				account.firstName = (String) results[2];
 				account.lastName = (String) results[3];
 				account.createTime = (java.sql.Timestamp) results[4];
+				account.refID = (int) results[5];
 				//send created account object to client
 				return Response.ok().entity(account).build();
 			} else {//otherwise you're done because the page doesn't exist
@@ -60,7 +62,8 @@ public class AccountResource {
 		} 
 	}
 	
-	//returns a list of (crn, role type) pairs that an account is associated with. IE. all the courses and respective roles an account is in.
+	//returns a list of (refID, role type) pairs that an account is associated with.
+	//IE. all the courses and respective roles an account is in.
 	@GET
 	@Path("/{account_user_name}/roles")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -76,9 +79,9 @@ public class AccountResource {
 			Object[] account = sql.getAccountInfo(accountUserName);
 			if (decodedUser.equals(accountUserName) && decodedPassword.equals(account[1])) {
 				//create the map
-				HashMap<String,String> roles = new HashMap<String,String>();
+				HashMap<Integer, Role> roles = new HashMap<>();
 				for (Object[] row: results) {
-					roles.put((String) row[0], (String) row[1]);
+					roles.put((int) row[0], (Role) row[1]);
 				}
 
 				return Response.ok().entity(roles).build();

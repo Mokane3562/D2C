@@ -27,30 +27,71 @@ public class SQLHandlerTest {
 			List<Object[]> results = sql.getAccountRoles("mnjs51");
 			
 			Object[] row1 = results.get(0); 
-			assertTrue("String mismatch", row1[0].equals("00001"));
+			assertTrue("id mismatch", row1[0].equals(1));
 			assertTrue("String mismatch", row1[1].equals("PROFESSOR"));
 			
 			Object[] row2 = results.get(1); 
-			assertTrue("String mismatch", row2[0].equals("00002"));
+			assertTrue("id mismatch", row2[0].equals(2));
 			assertTrue("String mismatch", row2[1].equals("PROFESSOR"));
 			
 			Object[] row3 = results.get(2); 
-			assertTrue("String mismatch", row3[0].equals("00004"));
+			assertTrue("id mismatch", row3[0].equals(4));
 			assertTrue("String mismatch", row3[1].equals("STUDENT"));
 		}
 	}
 
 	@Test
+	public void testGetAssignments() throws Exception{
+		try (SQLHandler sql = new SQLHandler();) {
+			List<Object[]> results = sql.getAssignments("00002");
+			
+			Object[] row1 = results.get(0); 
+			assertTrue("Integer mismatch", row1[0].equals(1));
+			assertTrue("String mismatch", row1[1].toString().equals("2016-01-14 00:00:00.0"));
+			
+			Object[] row2 = results.get(1); 
+			assertTrue("Integer mismatch", row2[0].equals(2));
+			assertTrue("String mismatch", row2[1].toString().equals("2016-02-07 00:00:00.0"));
+			
+			Object[] row3 = results.get(2); 
+			assertTrue("Integer mismatch", row3[0].equals(3));
+			assertTrue("String mismatch", row3[1].toString().equals("3016-01-14 00:00:00.0"));
+		}
+	}
+	
+	@Test
+	public void testGetCourseByRefID() throws Exception {
+		try (SQLHandler sql = new SQLHandler();) {
+			Object[] results = sql.getCourseByRefID(4);
+			assertTrue("String mismatch", results[0].equals("ENGI"));//subject
+			assertTrue("String mismatch", results[1].equals("1020"));//number
+			assertTrue("String mismatch", results[2].equals("Intro to Programming"));//name
+			assertTrue("ID mismatch", (int) results[3] == 4);//course_id
+		}
+	}
+	
+	@Test
 	public void testGetCourseInst() throws Exception {
 		try (SQLHandler sql = new SQLHandler();) {
 			Object[] results = sql.getCourseInst("00001");
-			assertTrue("String mismatch", results[0].equals("COMP"));
-			assertTrue("String mismatch", results[1].equals("1710"));
-			assertTrue("String mismatch", results[2].equals("Object-Oriented Programming I"));
-			assertTrue("String mismatch", results[3].equals("WINTER"));
-			assertTrue("String mismatch", results[4].equals("2016"));
-			assertTrue("String mismatch", results[5].equals("Mike and Scott"));
-			assertTrue("String mismatch", results[6].equals("00001"));
+			assertTrue("String mismatch", results[0].equals("WINTER"));//semester
+			assertTrue("String mismatch", results[1].equals("2016"));//year_offered
+			assertTrue("String mismatch", results[2].equals("Mike and Scott"));//profname
+			assertTrue("String mismatch", results[3].equals("00001"));//crn
+			assertTrue("ID mismatch", (int) results[4] == 1);//course_id
+			assertTrue("ID mismatch", (int) results[5] == 1);//course_inst_id
+		}
+	}
+	@Test
+	public void testGetCourseInstByRefID() throws Exception {
+		try (SQLHandler sql = new SQLHandler();) {
+			Object[] results = sql.getCourseInstByRefID(1);
+			assertTrue("String mismatch", results[0].equals("WINTER"));//semester
+			assertTrue("String mismatch", results[1].equals("2016"));//year_offered
+			assertTrue("String mismatch", results[2].equals("Mike and Scott"));//profname
+			assertTrue("String mismatch", results[3].equals("00001"));//crn
+			assertTrue("ID mismatch", (int) results[4] == 1);//course_id
+			assertTrue("ID mismatch", (int) results[5] == 1);//course_inst_id
 		}
 	}
 	
