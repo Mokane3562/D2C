@@ -5,9 +5,8 @@ import java.sql.Timestamp;
 public class TransferableSubmission {
 	public Timestamp time_submitted;
 	public Double grade;
-	public TransferableAccount author;
-	public TransferableAssignment assign;
-	
-	
-
+	public int authorAccountID;
+	public int assignmentID;
+	public int[] fileIDs;
+	public int refID;
 }

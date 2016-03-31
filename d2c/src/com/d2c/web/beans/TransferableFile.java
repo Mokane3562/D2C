@@ -7,6 +7,6 @@ public class TransferableFile {
 	public String fileType;
 	public String fileContent;
 	public Timestamp dateAdded;
-	public TransferableAccount author;
-	
+	public int authorAccountID;
+	public int refID;
 }
