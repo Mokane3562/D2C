@@ -17,7 +17,7 @@ import com.d2c.web.beans.TransferableSubmission;
 @Path("/submission")
 public class SubmissionResource {
 
-	@GET
+	/*@GET
 	@Path("/{course_id}/{student_user_name}/{assignment}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getSubmissionInfo(@PathParam("course_id") String courseID, @PathParam("student_user_name") String studentUserName, @PathParam("assignment") String assignment) {
@@ -33,9 +33,9 @@ public class SubmissionResource {
 		} else { // else return a not found
 			return Response.noContent().build();
 		}
-	}
+	}*/
 
-	@POST
+	/*@POST
 	@Path("/{course_id}/{student_user_name}/{assignment}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response uploadOrUpdateSubmission(@PathParam("course_id") String courseID, @PathParam("student_user_name") String studentUserName, @PathParam("assignment") String assignment, TransferableSubmission submission) {
@@ -46,5 +46,5 @@ public class SubmissionResource {
 		} catch (URISyntaxException e) {
 			return Response.serverError().build();
 		}
-	}
+	}*/
 }

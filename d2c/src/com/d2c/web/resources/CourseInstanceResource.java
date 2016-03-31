@@ -52,8 +52,7 @@ public class CourseInstanceResource {
 		}
 	}
 	
-	//returns all assignments in a course
-	//TODO: Finish this when you're more awake
+	/*//returns all assignments in a course
 	@GET
 	@Path("/assignments/{crn}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -78,7 +77,7 @@ public class CourseInstanceResource {
 			//when shit goes FUBAR
 			return Response.serverError().build();
 		}
-	}
+	}*/
 	
 	//returns comprehensive course information given a 5-digit crn
 		@GET

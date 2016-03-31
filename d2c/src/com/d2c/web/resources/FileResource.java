@@ -17,8 +17,8 @@ import com.d2c.web.beans.TransferableFile;
 @Path("/file")
 public class FileResource {
 
-	//TODO: Finish this when you're more awake
-	@GET
+	
+	/*@GET
 	@Path("/assignment/{assignment_ref_id}/all")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAllFilesInAssignment(@PathParam("assignment_ref_id") int assignRefID) {
@@ -34,7 +34,7 @@ public class FileResource {
 		} else { // else return a not found
 			return Response.noContent().build();
 		}
-	}
+	}*/
 	
 	/*@GET
 	@Path("/{course_id}/{assignment}/{file_name}")
