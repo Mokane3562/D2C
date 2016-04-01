@@ -1,7 +1,10 @@
 package com.d2c.web.resources;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -12,12 +15,14 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.d2c.util.EmptySetException;
+import com.d2c.util.SQLHandler;
+import com.d2c.web.beans.TransferableCourse;
 import com.d2c.web.beans.TransferableFile;
 
 @Path("/file")
 public class FileResource {
 
-	
 	/*@GET
 	@Path("/assignment/{assignment_ref_id}/all")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -53,6 +58,32 @@ public class FileResource {
 			return Response.noContent().build();
 		}
 	}*/
+	
+	@GET
+	@Path("/refid/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getFileByRefID(@PathParam("id") int refID) {
+		try (SQLHandler sql = new SQLHandler();) {
+			Object[] results = sql.getFileByRefID(refID);
+			//create the file
+			TransferableFile file = new TransferableFile();
+			file.fileName = (String) results[0];
+			file.fileType = (String) results[1];
+			file.content = (char[]) results[2];
+			file.dateAdded = (Timestamp) results[3];
+			file.authorAccountID = (int) results[4];
+			file.refID = (int) results[5];
+			//send created course object to client
+			return Response.ok().entity(file).build();
+		} catch (EmptySetException e) {
+			e.printStackTrace();
+			return Response.noContent().build();
+		} catch (SQLException | ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+			//when shit goes FUBAR
+			return Response.serverError().build();
+		}
+	}
 
 	/*@POST
 	@Path("/{course_id}/{assignment}/{file_name}")

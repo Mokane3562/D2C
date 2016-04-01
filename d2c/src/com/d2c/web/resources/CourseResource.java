@@ -30,7 +30,6 @@ public class CourseResource {
 	@Path("/refid/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getCourseByRefID(@PathParam("id") int refID) {
-		//WARNING: STARTING SOME HEAVY SQL SHIT. ALSO MAGIC.
 		try (SQLHandler sql = new SQLHandler();) {
 			Object[] results = sql.getCourseByRefID(refID);
 			//create the course
