@@ -46,7 +46,7 @@ public class SQLHandlerTest {
 			List<Object[]> results = sql.getAssignments("00002");
 			
 			Object[] row1 = results.get(0); 
-			assertTrue("Integer mismatch", row1[0].equals(1));
+			assertTrue(" mismatch", row1[0].equals(1));
 			assertTrue("String mismatch", row1[1].toString().equals("2016-01-14 00:00:00.0"));
 			
 			Object[] row2 = results.get(1); 
@@ -83,6 +83,20 @@ public class SQLHandlerTest {
 		}
 	}
 	@Test
+	public void testGetFileByRefID() throws Exception {
+		try (SQLHandler sql = new SQLHandler();) {
+			Object[] results = sql.getFileByRefID(4);
+			assertTrue("String mismatch", results[0].equals("HelloWorld"));//name
+			assertTrue("String mismatch", results[1].equals("java"));//type
+			//assertTrue("String mismatch", results[2].equals(""));//contents
+			System.out.println(results[2]);
+			//assertTrue("Timestamp mismatch", results[3].equals(?));//date_added
+			System.out.println(results[3]);
+			assertTrue("ID mismatch", (int) results[4] == 2);//account_id
+			assertTrue("ID mismatch", (int) results[5] == 4);//file_id
+		}
+	}
+	
 	public void testGetCourseInstByRefID() throws Exception {
 		try (SQLHandler sql = new SQLHandler();) {
 			Object[] results = sql.getCourseInstByRefID(1);
@@ -100,24 +114,24 @@ public class SQLHandlerTest {
 		try (SQLHandler sql = new SQLHandler();) {
 			List<Object[]> results = sql.getParticipants("00001");
 			
-			Object[] row1 = results.get(0); 
-			assertTrue("String mismatch", row1[0].equals("mlc258"));
-			assertTrue("String mismatch", row1[1].equals("STUDENT"));
+			Object[] row1 = results.get(0);
+			assertTrue("ID mismatch", row1[0].equals(1));
+			assertTrue("String mismatch", row1[1].equals("PROFESSOR"));
 			
 			Object[] row2 = results.get(1); 
-			assertTrue("String mismatch", row2[0].equals("mnjs51"));
+			assertTrue("ID mismatch", row2[0].equals(2));
 			assertTrue("String mismatch", row2[1].equals("PROFESSOR"));
 			
 			Object[] row3 = results.get(2); 
-			assertTrue("String mismatch", row3[0].equals("rmp255"));
+			assertTrue("ID mismatch", row3[0].equals(3));
 			assertTrue("String mismatch", row3[1].equals("TA"));
 			
 			Object[] row4 = results.get(3); 
-			assertTrue("String mismatch", row4[0].equals("sy6746"));
-			assertTrue("String mismatch", row4[1].equals("PROFESSOR"));
+			assertTrue("ID mismatch", row4[0].equals(4));
+			assertTrue("String mismatch", row4[1].equals("STUDENT"));
 			
 			Object[] row5 = results.get(4); 
-			assertTrue("String mismatch", row5[0].equals("tmb063"));
+			assertTrue("ID mismatch", row5[0].equals(5));
 			assertTrue("String mismatch", row5[1].equals("STUDENT"));
 		}
 	}

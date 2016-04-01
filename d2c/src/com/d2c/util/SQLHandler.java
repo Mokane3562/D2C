@@ -1,5 +1,8 @@
 package com.d2c.util;
 
+import java.io.BufferedReader;
+import java.io.CharArrayWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -62,8 +65,8 @@ public class SQLHandler implements AutoCloseable{
 			+ 	"FROM course "
 			+ 	"WHERE course_id = ? ";
 	//Get a file's name, date of creation, and contents using it's file ID.
-	private static final String SELECT_FILE_SQL = 	
-				"SELECT name, date_added, contents "
+	private static final String SELECT_FILE_BY_ID_SQL = 	
+				"SELECT name, type, contents, date_added, account_id, file_id "
 			+ 	"FROM file "
 			+ 	"WHERE file_id = ?";
 	//Get the name, date of creation, and contents of every file a user created using that user's ID.
@@ -78,12 +81,10 @@ public class SQLHandler implements AutoCloseable{
 			+ 	"WHERE submission_id = ?";
 	//Get the account ID and role of every user participating in a certain course.
 	private static final String SELECT_PARTICIPANTS_SQL = 
-				"SELECT username, type "
-			+ 	"FROM role, account, course_inst "
+				"SELECT account_id, type "
+			+ 	"FROM role, course_inst "
 			+ 	"WHERE crn = ? "
-			+ 	"AND account.account_id = role.account_id "
-			+ 	"AND role.course_inst_id = course_inst.course_inst_id "
-			+ 	"ORDER BY username ASC";
+			+ 	"AND role.course_inst_id = course_inst.course_inst_id";
 	//Get a submission's submitter, associated assignment, and grade using it's submission ID.
 	private static final String GET_SUBMISSION_SQL = 
 				"SELECT account_id, assign_id, grade "
@@ -284,7 +285,6 @@ public class SQLHandler implements AutoCloseable{
 						
 						item[0] = results.getInt(1);//number
 						item[1] = results.getTimestamp(2);	//due_date
-						item[1] = results.getTimestamp(2);	//due_date
 						
 						dataToReturn.add(item);
 					}
@@ -353,19 +353,42 @@ public class SQLHandler implements AutoCloseable{
 	}
 
 	// returns the file based on the file_id
-	public Object[] getFile(int file_id) throws SQLException, EmptySetException {
+	public Object[] getFileByRefID(int file_id) throws SQLException, EmptySetException, IOException {
 		Object[] dataToReturn = new Object[6];
-		try (PreparedStatement selectFileStatement = connection.prepareStatement(SELECT_FILE_SQL);) {
+		try (PreparedStatement selectFileStatement = connection.prepareStatement(SELECT_FILE_BY_ID_SQL);) {
 			selectFileStatement.setInt(1, file_id);
 			try (ResultSet results = selectFileStatement.executeQuery();) {
 				if (!results.first()) {throw new EmptySetException();}
 				else {
-					dataToReturn[0] = results.getString(1);
-					dataToReturn[1] = results.getString(2);
-					dataToReturn[2] = results.getString(3);
-					dataToReturn[3] = results.getString(4);
-					dataToReturn[4] = results.getTimestamp(5);
-					dataToReturn[5] = results.getInt(6);
+					dataToReturn[0] = results.getString(1);//name
+					dataToReturn[1] = results.getString(2);//type
+					//Sorry this is going to get weird for a second!
+					//This is a "try-with-resources" if you haven't seen it before.
+					//The purpose of this whole big dilly is to store the file contents as a character array.
+					//I'm pretty sure the db is bringing it over in utf-8.
+					try (
+						BufferedReader reader = 
+							new BufferedReader(results.getCharacterStream(3));//contents
+						CharArrayWriter writer = 
+							new CharArrayWriter()
+					) {
+						int character;
+						while ((character = reader.read()) != -1) {
+							writer.write(character);
+						}
+						dataToReturn[2] = writer.toCharArray();//contents
+					}
+					dataToReturn[3] = results.getTimestamp(4);//date_added
+					dataToReturn[4] = results.getInt(5);//account_id
+					dataToReturn[5] = results.getInt(6);//file_id
+					BufferedReader reader = new BufferedReader(results.getCharacterStream(3));//contents
+					CharArrayWriter writer = new CharArrayWriter();
+					int character;
+					while ((character = reader.read()) != -1) {
+						writer.write(character);
+					}
+					char[] fileContents = writer.toCharArray();
+					System.out.print(fileContents);
 				}
 			}
 		}
@@ -395,8 +418,8 @@ public class SQLHandler implements AutoCloseable{
 					while (results.next()){
 						Object[] item = new Object[2];
 						
-						item[0] = results.getString(1);
-						item[1] = results.getString(2);	
+						item[0] = results.getInt(1);//account_id
+						item[1] = results.getString(2);//role type
 						
 						dataToReturn.add(item);
 					}
