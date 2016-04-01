@@ -54,7 +54,7 @@ public class CourseInstanceResource {
 		}
 	}
 	
-	//returns (assignment number, refID) pairs
+	//returns (assignment number, assignment refID) pairs
 	@GET
 	@Path("/{crn}/assignments")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -63,7 +63,9 @@ public class CourseInstanceResource {
 			List<Object[]> results = sql.getAssignments(crn);
 			HashMap<Integer, Integer> assignments = new HashMap<>();
 			for (Object[] row: results) {
-				assignments.put((int) row[0], (int) row[1]);
+				int assignmentNumber = (int) row[0];
+				int assignmentID = (int) row[1];
+				assignments.put(assignmentNumber, assignmentID);
 			}
 			return Response.ok().entity(assignments).build();
 		} catch (EmptySetException e) {
@@ -103,6 +105,7 @@ public class CourseInstanceResource {
 		}
 	}
 	
+	//returns a list of (account refID, role) pairs from a crn
 	@GET
 	@Path("/{crn}/participants")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -120,7 +123,9 @@ public class CourseInstanceResource {
 				//create the map
 				HashMap<Integer, Role> participants = new HashMap<>();
 				for (Object[] row: results) {
-					participants.put((int) row[0], (Role) row[1]);
+					int accountID = (int) row[0];
+					Role accountRole = (Role) row[1];
+					participants.put(accountID, accountRole);
 				}
 
 				return Response.ok().entity(participants).build();

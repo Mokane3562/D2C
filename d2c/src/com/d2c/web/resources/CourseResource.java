@@ -25,6 +25,7 @@ import com.d2c.web.beans.TransferableCourseInstance.Semester;
 @Path("/course")
 public class CourseResource {
 	
+	//get an abstract course from its id
 	@GET
 	@Path("/refid/{id}")
 	@Produces(MediaType.APPLICATION_JSON)

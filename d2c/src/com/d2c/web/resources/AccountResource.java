@@ -26,6 +26,7 @@ import com.d2c.web.beans.TransferableAccount.Role;
 public class AccountResource {
 
 	//GETS
+	//get an account from the username
 	@GET
 	@Path("/{account_user_name}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -62,7 +63,7 @@ public class AccountResource {
 		} 
 	}
 	
-	//returns a list of (refID, role type) pairs that an account is associated with.
+	//returns a list of (course instance refID, role type) pairs that an account is associated with.
 	//IE. all the courses and respective roles an account is in.
 	@GET
 	@Path("/{account_user_name}/roles")
@@ -81,7 +82,9 @@ public class AccountResource {
 				//create the map
 				HashMap<Integer, Role> roles = new HashMap<>();
 				for (Object[] row: results) {
-					roles.put((int) row[0], (Role) row[1]);
+					int courseInstID = (int) row[0];
+					Role accountRole = (Role) row[1];
+					roles.put(courseInstID, accountRole);
 				}
 
 				return Response.ok().entity(roles).build();
@@ -98,6 +101,7 @@ public class AccountResource {
 		} 
 	}
 	
+	//validate a users login credentials
 	@GET
 	public Response validateLogIn(@HeaderParam("Authorization") String encodedLogin){
 		//decode login info
@@ -122,6 +126,7 @@ public class AccountResource {
 	}
 
 	//POSTS
+	//create a new account
 	@POST
 	@Path("/new") //CHECKME:What if there's a / in the username or password?
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -154,6 +159,7 @@ public class AccountResource {
 		}
 	}
 	
+	//update an account's info
 	@POST
 	@Path("/{account_user_name}") 
 	@Consumes(MediaType.APPLICATION_JSON)
