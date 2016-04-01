@@ -197,13 +197,13 @@ public class AccountResource {
 	}
 	
 	//HELPERS
-	private static String decodeUser(String encodedLogin) {
+	public static String decodeUser(String encodedLogin) {
 		String[] decoded = new String(Base64.getDecoder().decode(encodedLogin.split(" ")[1])).split(":");
 		String user = new String(decoded[0]);
 		return user;
 	}
 	
-	private static String decodePassword(String encodedLogin) {
+	public static String decodePassword(String encodedLogin) {
 		String[] decoded = new String(Base64.getDecoder().decode(encodedLogin.split(" ")[1])).split(":");
 		String pass = new String(decoded[1]);
 		return pass;
