@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="d2c/src"/>
+	<classpathentry kind="src" path="d2c/test"/>
+	<classpathentry kind="src" path="Previous Iterations/Iteration 2/d2c/src"/>
+	<classpathentry kind="src" path="Previous Iterations/Iteration 2/d2c/test"/>
+	<classpathentry kind="lib" path="d2c/WebContent/WEB-INF/lib/aopalliance-repackaged-2.4.0-b31.jar"/>
+	<classpathentry kind="lib" path="d2c/WebContent/WEB-INF/lib/asm-debug-all-5.0.4.jar"/>
+	<classpathentry kind="lib" path="d2c/WebContent/WEB-INF/lib/gson-2.6.2.jar"/>
+	<classpathentry kind="lib" path="d2c/WebContent/WEB-INF/lib/hk2-api-2.4.0-b31.jar"/>
+	<classpathentry kind="lib" path="d2c/WebContent/WEB-INF/lib/hk2-locator-2.4.0-b31.jar"/>
+	<classpathentry kind="lib" path="d2c/WebContent/WEB-INF/lib/hk2-utils-2.4.0-b31.jar"/>
+	<classpathentry kind="lib" path="d2c/WebContent/WEB-INF/lib/javassist-3.18.1-GA.jar"/>
+	<classpathentry kind="lib" path="d2c/WebContent/WEB-INF/lib/javax.annotation-api-1.2.jar"/>
+	<classpathentry kind="lib" path="d2c/WebContent/WEB-INF/lib/javax.inject-2.4.0-b31.jar"/>
+	<classpathentry kind="lib" path="d2c/WebContent/WEB-INF/lib/javax.servlet-api-3.0.1.jar"/>
+	<classpathentry kind="lib" path="d2c/WebContent/WEB-INF/lib/javax.ws.rs-api-2.0.1.jar"/>
+	<classpathentry kind="lib" path="d2c/WebContent/WEB-INF/lib/jaxb-api-2.2.7.jar"/>
+	<classpathentry kind="lib" path="d2c/WebContent/WEB-INF/lib/jersey-client.jar"/>
+	<classpathentry kind="lib" path="d2c/WebContent/WEB-INF/lib/jersey-common.jar"/>
+	<classpathentry kind="lib" path="d2c/WebContent/WEB-INF/lib/jersey-container-servlet-core.jar"/>
+	<classpathentry kind="lib" path="d2c/WebContent/WEB-INF/lib/jersey-container-servlet.jar"/>
+	<classpathentry kind="lib" path="d2c/WebContent/WEB-INF/lib/jersey-guava-2.22.1.jar"/>
+	<classpathentry kind="lib" path="d2c/WebContent/WEB-INF/lib/jersey-media-jaxb.jar"/>
+	<classpathentry kind="lib" path="d2c/WebContent/WEB-INF/lib/jersey-server.jar"/>
+	<classpathentry kind="lib" path="d2c/WebContent/WEB-INF/lib/mysql-connector-java-5.1.38-bin.jar"/>
+	<classpathentry kind="lib" path="d2c/WebContent/WEB-INF/lib/org.osgi.core-4.2.0.jar"/>
+	<classpathentry kind="lib" path="d2c/WebContent/WEB-INF/lib/osgi-resource-locator-1.0.1.jar"/>
+	<classpathentry kind="lib" path="d2c/WebContent/WEB-INF/lib/persistence-api-1.0.jar"/>
+	<classpathentry kind="lib" path="d2c/WebContent/WEB-INF/lib/validation-api-1.1.0.Final.jar"/>
+	<classpathentry kind="lib" path="Previous Iterations/Iteration 2/d2c/WebContent/WEB-INF/lib/aopalliance-repackaged-2.4.0-b31.jar"/>
+	<classpathentry kind="lib" path="Previous Iterations/Iteration 2/d2c/WebContent/WEB-INF/lib/asm-debug-all-5.0.4.jar"/>
+	<classpathentry kind="lib" path="Previous Iterations/Iteration 2/d2c/WebContent/WEB-INF/lib/gson-2.6.2.jar"/>
+	<classpathentry kind="lib" path="Previous Iterations/Iteration 2/d2c/WebContent/WEB-INF/lib/hk2-api-2.4.0-b31.jar"/>
+	<classpathentry kind="lib" path="Previous Iterations/Iteration 2/d2c/WebContent/WEB-INF/lib/hk2-locator-2.4.0-b31.jar"/>
+	<classpathentry kind="lib" path="Previous Iterations/Iteration 2/d2c/WebContent/WEB-INF/lib/hk2-utils-2.4.0-b31.jar"/>
+	<classpathentry kind="lib" path="Previous Iterations/Iteration 2/d2c/WebContent/WEB-INF/lib/javassist-3.18.1-GA.jar"/>
+	<classpathentry kind="lib" path="Previous Iterations/Iteration 2/d2c/WebContent/WEB-INF/lib/javax.annotation-api-1.2.jar"/>
+	<classpathentry kind="lib" path="Previous Iterations/Iteration 2/d2c/WebContent/WEB-INF/lib/javax.inject-2.4.0-b31.jar"/>
+	<classpathentry kind="lib" path="Previous Iterations/Iteration 2/d2c/WebContent/WEB-INF/lib/javax.servlet-api-3.0.1.jar"/>
+	<classpathentry kind="lib" path="Previous Iterations/Iteration 2/d2c/WebContent/WEB-INF/lib/javax.ws.rs-api-2.0.1.jar"/>
+	<classpathentry kind="lib" path="Previous Iterations/Iteration 2/d2c/WebContent/WEB-INF/lib/jaxb-api-2.2.7.jar"/>
+	<classpathentry kind="lib" path="Previous Iterations/Iteration 2/d2c/WebContent/WEB-INF/lib/jersey-client.jar"/>
+	<classpathentry kind="lib" path="Previous Iterations/Iteration 2/d2c/WebContent/WEB-INF/lib/jersey-common.jar"/>
+	<classpathentry kind="lib" path="Previous Iterations/Iteration 2/d2c/WebContent/WEB-INF/lib/jersey-container-servlet-core.jar"/>
+	<classpathentry kind="lib" path="Previous Iterations/Iteration 2/d2c/WebContent/WEB-INF/lib/jersey-container-servlet.jar"/>
+	<classpathentry kind="lib" path="Previous Iterations/Iteration 2/d2c/WebContent/WEB-INF/lib/jersey-guava-2.22.1.jar"/>
+	<classpathentry kind="lib" path="Previous Iterations/Iteration 2/d2c/WebContent/WEB-INF/lib/jersey-media-jaxb.jar"/>
+	<classpathentry kind="lib" path="Previous Iterations/Iteration 2/d2c/WebContent/WEB-INF/lib/jersey-server.jar"/>
+	<classpathentry kind="lib" path="Previous Iterations/Iteration 2/d2c/WebContent/WEB-INF/lib/org.osgi.core-4.2.0.jar"/>
+	<classpathentry kind="lib" path="Previous Iterations/Iteration 2/d2c/WebContent/WEB-INF/lib/osgi-resource-locator-1.0.1.jar"/>
+	<classpathentry kind="lib" path="Previous Iterations/Iteration 2/d2c/WebContent/WEB-INF/lib/persistence-api-1.0.jar"/>
+	<classpathentry kind="lib" path="Previous Iterations/Iteration 2/d2c/WebContent/WEB-INF/lib/validation-api-1.1.0.Final.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
