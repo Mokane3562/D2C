@@ -117,7 +117,7 @@ public class CourseInstanceResource {
 		//String decodedPassword = AccountResource.decodePassword(encodedLogin);
 		//start SQL shit	
 		try (SQLHandler sql = new SQLHandler();) {
-		//TODO:Set up encrypted passwords
+		//TODO:Set up authorization in a meaningful way
 			List<Object[]> results = sql.getParticipants(crn);
 			//continue only if the user has authority to view this info
 			//Object[] account = sql.getAccountInfo(accountUserName);
