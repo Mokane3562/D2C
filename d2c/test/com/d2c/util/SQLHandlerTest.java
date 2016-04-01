@@ -40,6 +40,34 @@ public class SQLHandlerTest {
 		}
 	}
 
+	//TODO:make this less shit
+	@Test
+	public void testGetAssignmentByRefID() throws Exception{
+		try (SQLHandler sql = new SQLHandler();) {
+			Object[] results = sql.getAssignmentByRefID(2);
+			assertTrue("Integer mismatch", results[0].equals(2));//int
+			assertTrue("Timestamp mismatch", results[1].toString().equals("2016-02-07 00:00:00.0"));//ts
+			assertTrue("ID mismatch", results[2].equals(2));//int
+			//assertTrue("IDs mismatch", results[3].equals(?));//int[]
+			int[] arr = (int[]) results[3];
+			for (int id: arr) {
+				System.out.println(id);
+			}
+			assertTrue("ID mismatch", results[4].equals(2));//int
+		}
+	}
+	
+	//TODO:make this less shit
+	@Test
+	public void testGetAssignmentFiles() throws Exception{
+		try (SQLHandler sql = new SQLHandler();) {
+			int[] results = sql.getAssignmentFiles(2);
+			for (int id: results) {
+				System.out.println(id);
+			}
+		}
+	}
+	
 	@Test
 	public void testGetAssignments() throws Exception{
 		try (SQLHandler sql = new SQLHandler();) {
@@ -82,6 +110,19 @@ public class SQLHandlerTest {
 			assertTrue("ID mismatch", (int) results[5] == 1);//course_inst_id
 		}
 	}
+	public void testGetCourseInstByRefID() throws Exception {
+		try (SQLHandler sql = new SQLHandler();) {
+			Object[] results = sql.getCourseInstByRefID(1);
+			assertTrue("String mismatch", results[0].equals("WINTER"));//semester
+			assertTrue("String mismatch", results[1].equals("2016"));//year_offered
+			assertTrue("String mismatch", results[2].equals("Mike and Scott"));//profname
+			assertTrue("String mismatch", results[3].equals("00001"));//crn
+			assertTrue("ID mismatch", (int) results[4] == 1);//course_id
+			assertTrue("ID mismatch", (int) results[5] == 1);//course_inst_id
+		}
+	}
+	
+	//TODO:make this less shit
 	@Test
 	public void testGetFileByRefID() throws Exception {
 		try (SQLHandler sql = new SQLHandler();) {
@@ -96,19 +137,7 @@ public class SQLHandlerTest {
 			assertTrue("ID mismatch", (int) results[5] == 4);//file_id
 		}
 	}
-	
-	public void testGetCourseInstByRefID() throws Exception {
-		try (SQLHandler sql = new SQLHandler();) {
-			Object[] results = sql.getCourseInstByRefID(1);
-			assertTrue("String mismatch", results[0].equals("WINTER"));//semester
-			assertTrue("String mismatch", results[1].equals("2016"));//year_offered
-			assertTrue("String mismatch", results[2].equals("Mike and Scott"));//profname
-			assertTrue("String mismatch", results[3].equals("00001"));//crn
-			assertTrue("ID mismatch", (int) results[4] == 1);//course_id
-			assertTrue("ID mismatch", (int) results[5] == 1);//course_inst_id
-		}
-	}
-	
+
 	@Test
 	public void testGetParticipants() throws Exception{
 		try (SQLHandler sql = new SQLHandler();) {

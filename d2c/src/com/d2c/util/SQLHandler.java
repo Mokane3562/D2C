@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 
@@ -43,6 +44,16 @@ public class SQLHandler implements AutoCloseable{
 			+ 	"FROM account, role "
 			+ 	"WHERE username = ? "
 			+ 	"AND account.account_id = role.account_id";
+	//Get an assignment's number, due date, and contents using it's assignment ID.
+	private static final String SELECT_ASSIGNMENT_BY_ID_SQL = 	
+				"SELECT number, due_date, course_inst_id, assign_id "
+			+ 	"FROM assignment "
+			+ 	"WHERE assign_id = ?";
+	//Get an assignment's number, due date, and contents using it's assignment ID.
+	private static final String SELECT_ASSIGNMENT_FILES_SQL = 	
+				"SELECT file_id "
+			+ 	"FROM assignment_file "
+			+ 	"WHERE assign_id = ?";	
 	//Get an assignment's number, due date, and contents using it's assignment ID.
 	private static final String SELECT_ASSIGNMENTS_SQL = 	
 				"SELECT number, assign_id "
@@ -174,17 +185,6 @@ public class SQLHandler implements AutoCloseable{
 	}
 	
 	//CLASS METHODS
-	public static void main(String[] args) {
-		try (SQLHandler sql = new SQLHandler();) {
-			Object[] results = sql.getAccountInfo("mlc258");
-			for (Object o: results) {
-				System.out.println(o);
-			}	
-		} catch (SQLException | ClassNotFoundException | EmptySetException e) {
-			e.printStackTrace();
-		}
-	}
-	
 	/**
 	 * @see java.sql.Connection#commit()
 	 */
@@ -216,7 +216,6 @@ public class SQLHandler implements AutoCloseable{
 	 * }
 	 */
 
-	// returns the account info based on user and password
 	/**
 	 * Gets an account's information from the database using a user name input.
 	 * Object[0] is the user name as a string,
@@ -265,6 +264,50 @@ public class SQLHandler implements AutoCloseable{
 						item[1] = results.getString(2);	
 						
 						dataToReturn.add(item);
+					}
+				}
+			}
+		}
+		return dataToReturn;
+	}
+	
+	// returns the assignment based on the assign_id
+	public Object[] getAssignmentByRefID(int assignmentID) throws SQLException, EmptySetException {
+		Object[] dataToReturn = new Object[5];
+		try (PreparedStatement selectAssignmentByIDStatement = connection.prepareStatement(SELECT_ASSIGNMENT_BY_ID_SQL);) {
+			selectAssignmentByIDStatement.setInt(1, assignmentID);
+			try (ResultSet results = selectAssignmentByIDStatement.executeQuery();) {
+				if (!results.first()) {throw new EmptySetException();}
+				else {
+					
+					dataToReturn[0] = results.getInt(1);//number
+					dataToReturn[1] = results.getTimestamp(2);//due_date
+					dataToReturn[2] = results.getInt(3);//course_inst_id
+					dataToReturn[3] = getAssignmentFiles(assignmentID);//associated file ids
+					dataToReturn[4] = results.getInt(4);//assign_id
+				}
+			}
+		}
+		return dataToReturn;
+	}
+	
+	public int[] getAssignmentFiles(int assignmentID) throws SQLException, EmptySetException {
+		int[] dataToReturn = null;
+		try (PreparedStatement selectAssignmentFilesStatement = connection.prepareStatement(SELECT_ASSIGNMENT_FILES_SQL);) {
+			selectAssignmentFilesStatement.setInt(1, assignmentID);
+			try (ResultSet results = selectAssignmentFilesStatement.executeQuery();) {
+				if (!results.first()) {throw new EmptySetException();}
+				else {
+					results.beforeFirst();
+					List<Integer> files = new ArrayList<>();
+					while (results.next()){
+						int fileID = results.getInt(1);
+						files.add(fileID);
+					}
+					dataToReturn = new int[files.size()];
+					for (int i = 0; i < files.size(); i++) {
+						int fileID = files.get(i);
+						dataToReturn[i] = fileID;
 					}
 				}
 			}
@@ -381,14 +424,6 @@ public class SQLHandler implements AutoCloseable{
 					dataToReturn[3] = results.getTimestamp(4);//date_added
 					dataToReturn[4] = results.getInt(5);//account_id
 					dataToReturn[5] = results.getInt(6);//file_id
-					BufferedReader reader = new BufferedReader(results.getCharacterStream(3));//contents
-					CharArrayWriter writer = new CharArrayWriter();
-					int character;
-					while ((character = reader.read()) != -1) {
-						writer.write(character);
-					}
-					char[] fileContents = writer.toCharArray();
-					System.out.print(fileContents);
 				}
 			}
 		}
