@@ -45,7 +45,7 @@ public class SQLHandler implements AutoCloseable{
 			+ 	"AND account.account_id = role.account_id";
 	//Get an assignment's number, due date, and contents using it's assignment ID.
 	private static final String SELECT_ASSIGNMENTS_SQL = 	
-				"SELECT number, due_date, assign_id "
+				"SELECT number, assign_id "
 			+ 	"FROM assignment, course_inst "
 			+ 	"WHERE crn = ? "
 			+ 	"AND assignment.course_inst_id = course_inst.course_inst_id";
@@ -284,7 +284,7 @@ public class SQLHandler implements AutoCloseable{
 						Object[] item = new Object[2];
 						
 						item[0] = results.getInt(1);//number
-						item[1] = results.getTimestamp(2);	//due_date
+						item[1] = results.getInt(2);//assign_id
 						
 						dataToReturn.add(item);
 					}

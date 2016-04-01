@@ -46,16 +46,16 @@ public class SQLHandlerTest {
 			List<Object[]> results = sql.getAssignments("00002");
 			
 			Object[] row1 = results.get(0); 
-			assertTrue(" mismatch", row1[0].equals(1));
-			assertTrue("String mismatch", row1[1].toString().equals("2016-01-14 00:00:00.0"));
+			assertTrue("Integer mismatch", row1[0].equals(1));
+			assertTrue("ID mismatch", row1[1].equals(1));
 			
 			Object[] row2 = results.get(1); 
 			assertTrue("Integer mismatch", row2[0].equals(2));
-			assertTrue("String mismatch", row2[1].toString().equals("2016-02-07 00:00:00.0"));
+			assertTrue("ID mismatch", row2[1].equals(2));
 			
 			Object[] row3 = results.get(2); 
 			assertTrue("Integer mismatch", row3[0].equals(3));
-			assertTrue("String mismatch", row3[1].toString().equals("3016-01-14 00:00:00.0"));
+			assertTrue("ID mismatch", row3[1].equals(3));
 		}
 	}
 	
