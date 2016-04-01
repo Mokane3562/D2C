@@ -5,9 +5,11 @@
  */
 app.controller('main_controller',['$scope', '$location', 'example_service', 'c_compile_request',
                                   'j_compile_request', 'java_request', 'run_request', 'login_service',
-                                  'signup_service', 'transferable_account', 'dir_creator',
+                                  'signup_service', 'transferable_account', 'dir_creator', 'roles_request',
+                                  'course_instance_request',
                           function($scope, $location, example_service, c_compile_request, j_compile_request,
-                        		  java_request, run_request, login_service, signup_service, transferable_account, dir_creator){
+                        		  java_request, run_request, login_service, signup_service, transferable_account, dir_creator, 
+                        		  roles_request, course_instance_request){
 	console.log("main controller loading");
 	
     //initial view object set up	
@@ -22,9 +24,10 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	$scope.password = "";
 	$scope.dirs = [];
 	$scope.dir = "";
+	$scope.roles = [];
 
 	//Setting view invisible
-	view["login"] = true;
+	view["login"] = false;
 	view["signup"] = false;
 	view["firstNav"] = true;
 	view["courses"] = false;
@@ -73,6 +76,20 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 			}
 		});
 	}
+	
+	$scope.rolesRequest = function(){
+		var to_encode = $scope.user+":"+$scope.password;
+		var auth = window.btoa(to_encode);
+		roles_request(auth, $scope.user).then(
+			function(response){
+				$scope.roles = response.data;
+			},
+			function(errors){
+				console.log("failure");
+				$scope.roles = errors.data;
+		});
+	} 
+	
 	$scope.signUp = function(){
 		view["login"] = false;
 		view["signup"] = true;

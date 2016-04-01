@@ -104,11 +104,12 @@
           <h2>Welcome to <span class="greenword">D2C</span></h2>
           <h2>Select a Course to get started: </h2>
           <div class="button green" id="coursesButton" ng-click="courseSelect()">Course</div>
-          <div class="button green" id="coursesButton" ng-click="courseSelect()">Course</div>
-          <div class="button green" id="coursesButton" ng-click="courseSelect()">Course</div>  
-          <div class="button green" id="coursesButton" ng-click="courseSelect()">Course</div>
-          <div class="button green" id="coursesButton" ng-click="courseSelect()">Course</div>
-          <div class="button green" id="coursesButton" ng-click="courseSelect()">Course</div>     
+          
+          <!-- COURSE TABS GENERATOR
+	      <div class="button green" id="coursesButton" ng-repeat="course in courseList"
+		   ng-click="courseHandler(course)">{{course.subject + " " +
+	       course.number + ": " + course.name}}</div>
+          -->     
 	    </div>
       </div>
 
