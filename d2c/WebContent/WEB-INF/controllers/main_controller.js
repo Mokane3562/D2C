@@ -4,11 +4,11 @@
  * and add the name as a variable to the function.
  */
 app.controller('main_controller',['$scope', '$location', 'example_service', 'c_compile_request',
-                                  'j_compile_request', 'java_request', 'run_request', 'login_service',
+                                  'j_compile_request', 'java_request', 'run_request', 'login_request',
                                   'signup_service', 'transferable_account', 'dir_creator', 'roles_request',
                                   'course_instance_request',
                           function($scope, $location, example_service, c_compile_request, j_compile_request,
-                        		  java_request, run_request, login_service, signup_service, transferable_account, dir_creator, 
+                        		  java_request, run_request, login_request, signup_service, transferable_account, dir_creator, 
                         		  roles_request, course_instance_request){
 	console.log("main controller loading");
 	
@@ -51,7 +51,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		console.log(to_encode);
 		var auth = window.btoa(to_encode);
 		console.log(auth);
-		login_service(auth).then(
+		login_request(auth).then(
 			function(response){
 				user_auth = auth;
 				view["login"] = false;
