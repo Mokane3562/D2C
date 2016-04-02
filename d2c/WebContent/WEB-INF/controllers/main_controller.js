@@ -26,6 +26,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	$scope.dir = "";
 	$scope.roles = [];
 	$scope.courseInst = [];
+	
 
 	//Setting view invisible
 	view["login"] = false;
@@ -42,6 +43,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	view["grades"] = false;
 	view["signout"] = false;
 	var user_auth = "";
+	var crn ="";
 	
 	//Setting view visible on click
 	$scope.login = function(){
@@ -92,22 +94,9 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		});
 	} 
 	
-	$scope.courseInstRequest = function(){
-		var to_encode = $scope.user+":"+$scope.password;
-		var auth = window.btoa(to_encode);
-		course_instance_request(crn).then(
-		    function(response){
-		    	$scope.courseInst = response.data;
-		    },
-		    function(errors){
-		    	console.log("failure");
-				$scope.courseInst = errors.data;
-		    });
-	}
-	
 	$scope.signUp = function(){
-		view["login"] = false;
-		view["signup"] = true;
+		view["login"] = true;
+		view["signup"] = false;
 		view["courses"] = false;
 		view["register"] = false;
 		view["assignments"] = false;
