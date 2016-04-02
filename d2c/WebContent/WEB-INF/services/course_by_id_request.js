@@ -1,17 +1,18 @@
-app.factory('courseByID_request', ['$q', '$http', function($q,$http){
-	return function(refId){
+app.factory('course_by_id_request',['$q','$http',function($q,$http){
+	return function(refID){
 		var deffered= $q.deffer();
 		$http({
-			method: 'GET',
-			url:'/course_inst/refid/'+refId,
+			method:'GET',
+			url: '/course/refid/'+refID,
 			headers: {
-				'access-control-allow-origin': '*'
-			}
+				'access-control-allow-origin': '*',
+			},
+			
 		}).then(function(response){
 			deferred.resolve(response);
 		},function(response){
 			deferred.reject(response);
 		});
 		return deferred.promise;
-	}
+	}	
 }]);
