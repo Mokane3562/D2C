@@ -29,7 +29,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	
 
 	//Setting view invisible
-	view["login"] = false;
+	view["login"] = true;
 	view["signup"] = false;
 	view["firstNav"] = false;
 	view["courses"] = false;
