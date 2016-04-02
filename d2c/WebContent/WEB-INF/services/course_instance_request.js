@@ -3,7 +3,7 @@ app.factory('course_instance_request',['$q','$http', function($q, $http){
 		var deferred = $q.defer();
 		$http({
 			method: 'GET',
-		    url: 'd2c/course_inst/'+crn,
+		    url: '/d2c/course_inst/'+crn,
 		    headers:{
 		    	'access-control-allow-origin': '*',
 		    }

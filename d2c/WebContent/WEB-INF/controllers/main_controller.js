@@ -25,6 +25,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	$scope.dirs = [];
 	$scope.dir = "";
 	$scope.roles = [];
+	$scope.courseInst = [];
 
 	//Setting view invisible
 	view["login"] = false;
@@ -90,6 +91,19 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 				$scope.roles = errors.data;
 		});
 	} 
+	
+	$scope.courseInstRequest = function(){
+		var to_encode = $scope.user+":"+$scope.password;
+		var auth = window.btoa(to_encode);
+		course_instance_request(crn).then(
+		    function(response){
+		    	$scope.courseInst = response.data;
+		    },
+		    function(errors){
+		    	console.log("failure");
+				$scope.courseInst = errors.data;
+		    });
+	}
 	
 	$scope.signUp = function(){
 		view["login"] = false;
