@@ -27,7 +27,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	$scope.roles = [];
 
 	//Setting view invisible
-	view["login"] = true;
+	view["login"] = false;
 	view["signup"] = false;
 	view["firstNav"] = false;
 	view["courses"] = false;
@@ -77,12 +77,13 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		});
 	}
 	
-	$scope.roles_request = function(){
+	$scope.rolesRequest = function(){
 		var to_encode = $scope.user+":"+$scope.password;
 		var auth = window.btoa(to_encode);
 		roles_request(auth, $scope.user).then(
 			function(response){
 				$scope.roles = response.data;
+				console.log(response.data);
 			},
 			function(errors){
 				console.log("failure");
