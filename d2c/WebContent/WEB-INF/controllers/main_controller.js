@@ -5,10 +5,10 @@
  */
 app.controller('main_controller',['$scope', '$location', 'example_service', 'c_compile_request',
                                   'j_compile_request', 'java_request', 'run_request', 'login_request',
-                                  'signup_service', 'transferable_account', 'dir_creator', 'roles_request',
+                                  'signup_service', 'transferable_account', 'dir_creator', 'roles_request', 
                                   'course_instance_request',
                           function($scope, $location, example_service, c_compile_request, j_compile_request,
-                        		  java_request, run_request, login_request, signup_service, transferable_account, dir_creator, 
+                        		  java_request, run_request, login_request, signup_service, transferable_account, dir_creator,
                         		  roles_request, course_instance_request){
 	console.log("main controller loading");
 	
@@ -27,9 +27,9 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	$scope.roles = [];
 
 	//Setting view invisible
-	view["login"] = false;
+	view["login"] = true;
 	view["signup"] = false;
-	view["firstNav"] = true;
+	view["firstNav"] = false;
 	view["courses"] = false;
 	view["register"] = false;
 	view['courseSelect'] = false;
@@ -77,7 +77,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		});
 	}
 	
-	$scope.rolesRequest = function(){
+	$scope.roles_request = function(){
 		var to_encode = $scope.user+":"+$scope.password;
 		var auth = window.btoa(to_encode);
 		roles_request(auth, $scope.user).then(
