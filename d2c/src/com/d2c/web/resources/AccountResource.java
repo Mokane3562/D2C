@@ -20,7 +20,7 @@ import javax.ws.rs.core.Response;
 import com.d2c.util.EmptySetException;
 import com.d2c.util.SQLHandler;
 import com.d2c.web.beans.TransferableAccount;
-import com.d2c.web.beans.TransferableAccount.Role;
+//import com.d2c.web.beans.TransferableAccount.Role;
 
 @Path("/account")
 public class AccountResource {
@@ -80,10 +80,10 @@ public class AccountResource {
 			Object[] account = sql.getAccountInfo(accountUserName);
 			if (decodedUser.equals(accountUserName) && decodedPassword.equals(account[1])) {
 				//create the map
-				HashMap<Integer, Role> roles = new HashMap<>();
+				HashMap<Integer, String> roles = new HashMap<>();
 				for (Object[] row: results) {
 					int courseInstID = (int) row[0];
-					Role accountRole = (Role) row[1];
+					String accountRole = (String) row[1];
 					roles.put(courseInstID, accountRole);
 				}
 

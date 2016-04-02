@@ -21,7 +21,7 @@ import com.d2c.util.SQLHandler;
 import com.d2c.web.beans.TransferableAccount;
 import com.d2c.web.beans.TransferableCourse;
 import com.d2c.web.beans.TransferableCourseInstance;
-import com.d2c.web.beans.TransferableAccount.Role;
+//import com.d2c.web.beans.TransferableAccount.Role;
 import com.d2c.web.beans.TransferableCourseInstance.Semester;
 
 @Path("/course_inst")
@@ -121,10 +121,10 @@ public class CourseInstanceResource {
 			//Object[] account = sql.getAccountInfo(accountUserName);
 			if (true/*decodedUser.equals(accountUserName) && decodedPassword.equals(account[1])*/) {
 				//create the map
-				HashMap<Integer, Role> participants = new HashMap<>();
+				HashMap<Integer, String> participants = new HashMap<>();
 				for (Object[] row: results) {
 					int accountID = (int) row[0];
-					Role accountRole = (Role) row[1];
+					String accountRole = (String) row[1];
 					participants.put(accountID, accountRole);
 				}
 

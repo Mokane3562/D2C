@@ -11,9 +11,9 @@ public class TransferableAccount {
 	public Timestamp createTime;
 	public int refID;
 	
-	public enum Role {
+	/*public enum Role {
 		STUDENT,
 		PROFESSOR,
 		TA
-	}
+	}*/
 }
