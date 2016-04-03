@@ -14,6 +14,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 
+import com.d2c.web.beans.TransferableAccount.Role;
+
 /**
  * Contains tools and methods to interact with a database using JDBC
  */
@@ -128,8 +130,8 @@ public class SQLHandler implements AutoCloseable{
 			+ 	"SET grade = ? "
 			+ 	"WHERE submission_id = ?";
 	//Add a participant to a course. Other fields will be generated automatically.
-	private static final String POST_PARTICIPANT_SQL = 
-				"INSERT INTO role (course_id, account_id, type) "
+	private static final String INSERT_PARTICIPANT_SQL = 
+				"INSERT INTO role (course_inst_id, account_id, type) "
 			+ 	"VALUES (?, ?, ?)";
 	//TODO:Make sure all the files attached to a submission are reachable
 	private static final String POST_SUBMISSION_SQL = 
@@ -529,13 +531,14 @@ public class SQLHandler implements AutoCloseable{
 		return this.postGradeStatement.executeQuery();
 	}*/
 
-	/*public ResultSet postParticipant(int course_id, int account_id, String type) throws SQLException {
-		this.postParticipantStatement = connection.prepareStatement(POST_PARTICIPANT_SQL);
-		this.postParticipantStatement.setString(1, Integer.toString(course_id));
-		this.postParticipantStatement.setString(2, Integer.toString(account_id));
-		this.postParticipantStatement.setString(3, type);
-		return this.postParticipantStatement.executeQuery();
-	}*/
+	public void makeParticipant(int courseInstID, int accountID, Role roleType) throws SQLException {
+		try (PreparedStatement insertParticipantStatement = connection.prepareStatement(INSERT_PARTICIPANT_SQL);) {
+			insertParticipantStatement.setInt(1, courseInstID);
+			insertParticipantStatement.setInt(2, accountID);
+			insertParticipantStatement.setString(3, roleType.toString());
+			insertParticipantStatement.executeUpdate();
+		}
+	}
 
 	/*public ResultSet postSubmission(int account_id, int assign_id) throws SQLException {
 		this.postSubmissionStatement = connection.prepareStatement(POST_SUBMISSION_SQL);
