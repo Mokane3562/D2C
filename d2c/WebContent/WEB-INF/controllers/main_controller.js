@@ -79,7 +79,6 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 				view["signout"] = false;
 				view["results"] = false;
 				rolesRequest();
-				getAssignmets();
 		},
 		function(errors){
 			console.log(errors);
@@ -133,19 +132,13 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		);
 	} 
 	
-	var lookUpCourses = function(){
-		console.log(crn);
+	$scope.lookUpCourses = function(){
+		console.log($scope.crn);
 		course_instance_request($scope.crn).then(
 			function(response){
 				console.log(response.data);
-				courseLookUp = response.data;
-				for(var courseResultLists in courseLookUp){
-					if (!courseLookUp.hasOwnProperty(courseResultLists)) {
-					    continue;
-					}
-				console.log(courseLookUp[courseResultLists]);
-					
-				}
+				$scope.courseLookUp = response.data;
+				console.log($scope.courseLookUp.year);
 				results();
 			},
 			function(errors){
@@ -315,6 +308,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["register"] = false;
 		view["assignments"] = true;
 		view["workspace"] = false;
+		view["firstNav"] = false;
 		view['courseSelect'] = false;
 		view["testing"] = false;	
 		view["submissions"] = false;
