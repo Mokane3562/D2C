@@ -1,9 +1,9 @@
 app.factory('course_inst_by_id_request', ['$q', '$http', function($q,$http){
 	return function(refId){
-		var deffered= $q.deffer();
+		var deferred= $q.defer();
 		$http({
 			method: 'GET',
-			url:'/course_inst/refid/'+refId,
+			url:'/d2c/course_inst/refid/'+refId,
 			headers: {
 				'access-control-allow-origin': '*'
 			}

@@ -26,12 +26,12 @@ import com.d2c.web.beans.TransferableCourseInstance.Semester;
 
 @Path("/course_inst")
 public class CourseInstanceResource {
-	
 	//returns comprehensive course information given a 5-digit crn
 	@GET
 	@Path("/{crn}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getCourseInst(@PathParam("crn") String crn) {
+		System.out.println("yes buyyyyyyyyyy");
 		try (SQLHandler sql = new SQLHandler();) {
 			Object[] results = sql.getCourseInst(crn);
 			//create the course instance
@@ -87,7 +87,7 @@ public class CourseInstanceResource {
 			Object[] results = sql.getCourseInstByRefID(refID);
 			//create the course instance
 			TransferableCourseInstance courseInstance = new TransferableCourseInstance();
-			courseInstance.semester = (Semester) results[0];
+			courseInstance.semester = (Semester) Semester.valueOf((String) results[0]);
 			courseInstance.year = (String) results[1];
 			courseInstance.profName = (String) results[2];
 			courseInstance.courseReferenceNumber = (String) results[3];
@@ -96,6 +96,7 @@ public class CourseInstanceResource {
 			//send created course instance object to client
 			return Response.ok().entity(courseInstance).build();
 		} catch (EmptySetException e) {
+			System.out.println(e);
 			e.printStackTrace();
 			return Response.noContent().build();
 		} catch (SQLException | ClassNotFoundException e) {

@@ -6,15 +6,19 @@
 app.controller('main_controller',['$scope', '$location', 'example_service', 'c_compile_request',
                                   'j_compile_request', 'java_request', 'run_request', 'login_request',
                                   'signup_service', 'transferable_account', 'dir_creator', 'roles_request', 
-                                  'course_instance_request',
+                                  'course_instance_request', 'course_inst_by_id_request', 'course_by_id_request',
                           function($scope, $location, example_service, c_compile_request, j_compile_request,
                         		  java_request, run_request, login_request, signup_service, transferable_account, dir_creator,
-                        		  roles_request, course_instance_request){
+                        		  roles_request, course_instance_request, course_inst_by_id_request, course_by_id_request){
 	console.log("main controller loading");
 	
     //initial view object set up	
 	var view = {};
 	var editor;
+	//used for getting info from roles
+	var role_list = {};
+	var course_inst = {}
+	//the view
 	$scope.view = view;
 	$scope.login_failure = "";
 	$scope.user = "";
@@ -69,6 +73,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 				view["submissions"] = false;
 				view["grades"] = false;
 				view["signout"] = false;
+				rolesRequest();
 		},
 		function(errors){
 			console.log(errors);
@@ -79,19 +84,47 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 			}
 		});
 	}
-	
-	$scope.rolesRequest = function(){
+	//TODO: this is currently broken. probably some async shit 
+	var rolesRequest = function (){
 		var to_encode = $scope.user+":"+$scope.password;
 		var auth = window.btoa(to_encode);
+		$scope.courses_and_roles = [];
+		//execute roles service on the user info
 		roles_request(auth, $scope.user).then(
-			function(response){
-				$scope.roles = response.data;
-				console.log(response.data);
+			function (response){
+				//save the role list info
+				role_list = response.data;
+				for (var course_inst_id in role_list){//for each course instance id in the role list
+					if (!role_list.hasOwnProperty(course_inst_id)) {
+					    continue;
+					}
+
+					console.log(role_list[course_inst_id]);
+					//execute course instance by id service on the course instance id
+					course_inst_by_id_request(course_inst_id).then(
+						function(course_inst_response){
+							//save the course instance info
+							course_inst = course_inst_response.data;
+							//execute course by id service on the course id given from the course instance
+							course_by_id_request(course_inst.refID).then(
+								function(course_response){
+									course_response.data.role = role_list[course_inst_id];
+									course_response.data.clickHandler = function clickHandler(){
+										
+									}
+									$scope.courses_and_roles.push(course_response.data);
+									console.log(course_response.data);
+								}
+							);
+						}
+					);
+				}
 			},
 			function(errors){
 				console.log("failure");
-				$scope.roles = errors.data;
-		});
+				//TODO deal with the error
+			}
+		);
 	} 
 	
 	$scope.signUp = function(){
@@ -311,7 +344,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 			},
 			function(errors){
 				console.log("failure");
-				$scope.output = errors.data;
+				//TODO deal with the error
 			}
 		);
 		console.log("c_compile_function starting");
@@ -336,7 +369,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 			},
 			function(errors){
 				console.log("failure");
-				$scope.output = errors.data;
+				//TODO deal with the error
 			}
 		);
 		console.log("j_compile_function starting");
@@ -382,7 +415,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 			},
 			function(errors){
 				console.log("failure");
-				$scope.output = errors.data;
+				//TODO deal with the error
 			}
 		);
 		console.log("aout_function starting");

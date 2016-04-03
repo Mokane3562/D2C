@@ -9,6 +9,7 @@ import com.d2c.util.GsonMessageBodyHandler;
 import com.d2c.web.resources.AssignmentResource;
 import com.d2c.web.resources.CodeResource;
 import com.d2c.web.resources.CourseInstanceResource;
+import com.d2c.web.resources.CourseResource;
 import com.d2c.web.resources.FileResource;
 import com.d2c.web.resources.MainPageResource;
 import com.d2c.web.resources.AccountResource;
@@ -26,6 +27,7 @@ public class D2CApplication extends Application {
 		s.add(AccountResource.class);
 		s.add(SubmissionResource.class);
 		s.add(GsonMessageBodyHandler.class);
+		s.add(CourseResource.class);
 		return s;
 	}
 }

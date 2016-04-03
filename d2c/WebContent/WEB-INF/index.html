@@ -23,6 +23,8 @@
     <script type="text/javascript" src="/d2c/services/dir_creator.js"></script>
     <script type="text/javascript" src="/d2c/services/roles_request.js"></script> 
     <script type="text/javascript" src="/d2c/services/course_instance_request.js"></script> 
+    <script type="text/javascript" src="/d2c/services/course_inst_by_id_request.js"></script> 
+    <script type="text/javascript" src="/d2c/services/course_by_id_request.js"></script>
     
   </head>
   
@@ -105,12 +107,12 @@
         <div id="courseContainer">
           <h2>Welcome to <span class="greenword">D2C</span></h2>
           <h2>Select a Course to get started: </h2>
-          <div class="button green" id="coursesButton" ng-click="courseSelect()">Course</div>
+          <!-- <div class="button green" id="coursesButton" ng-click="courseSelect()">Course</div> -->
           
-          <!-- COURSE TABS GENERATOR 
-	      <div class="button green" id="coursesButton" ng-repeat="course in courseList"
-		   ng-click="courseHandler(course)">{{course.subject + " " +
-	       course.number + ": " + course.name}}</div>    -->
+          <!-- COURSE TABS GENERATOR --> <!-- ng-click="courseHandler(course)" -->
+	      <div class="button green" id="coursesButton" ng-repeat="course in courses_and_roles" ng-click="courseSelect()">
+	      	{{course.role + " for " + course.subject + " " + course.number + ": " + course.name}}
+	      </div> 
 	    </div>
       </div>
 
