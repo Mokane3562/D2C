@@ -113,7 +113,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 							//execute course by id service on the course id given from the course instance
 							course_by_id_request(course_inst.refID).then(
 								function(course_response){
-									course_response.data.role = role_list[course_inst_id];
+									course_response.data.role = role_list.data[course_inst_id];
 									course_response.data.clickHandler = function clickHandler(){
 										
 									}
@@ -140,6 +140,15 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 				$scope.courseLookUp = response.data;
 				console.log($scope.courseLookUp.year);
 				results();
+				console.log(response.data.courseID);
+				console.log($scope.courseLookUp.courseID);
+				course_by_id_request(response.data.courseID).then(
+					function(course_response){
+						console.log(course_response.data.subject);
+						console.log(course_response.data.name);
+						console.log(course_response.data.number);
+					}
+				);
 			},
 			function(errors){
 				console.log("failure");
