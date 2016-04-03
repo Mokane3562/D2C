@@ -1,10 +1,12 @@
-app.factory('transferable_course_instance',[function(){
+app.factory('transferable_course_inestance',[function(){
 	return function(year_offered, semester, crn, course){
 		return {
-			'year_offered': year_offered,
 			'semester': semester,
-			'crn': crn,
-			'course': course
+			'year_offered': year,
+			'profName': profName,
+			'crn': courseReferenceNumber,
+			'courseID': courseID,
+			'refID':refID
 		};
 	};
 }]);
