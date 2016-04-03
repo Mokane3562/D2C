@@ -122,10 +122,11 @@
         <div id="registerContainer">
         <h1>Register</h1>
         <h2>Enter a course below to look up and register!</h2>
-          <textarea id="reg_search" rows="2" ></textarea>
+          <form class="reg-form">
+          <input type="text" ng-model="reg" name="regForm" placeholder="lookup"/>
           <div class="button green" id="reg_search_btn" ng-click="lookUpCourses()">Look Up</div>
-        <h2></h2>
-        </div>
+          </form>
+         </div>
       </div>
       
       <!-- SIGNOUT PAGE -->
