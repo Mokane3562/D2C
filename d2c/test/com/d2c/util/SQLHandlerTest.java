@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.d2c.web.beans.TransferableAccount.Role;
+
 public class SQLHandlerTest {
 
 	@Test
@@ -177,6 +179,32 @@ public class SQLHandlerTest {
 			assertTrue("String mismatch", results[1].equals("bob"));
 			assertTrue("String mismatch", results[2].equals("bob"));
 			assertTrue("String mismatch", results[3].equals("bob"));
+		} finally {
+			sql.rollback();//roll back transaction
+			sql.close();
+		}
+	}
+	
+	@Test
+	public void testMakeParticipant() throws Exception{
+		SQLHandler sql = null;
+		try {
+			sql = new SQLHandler();
+			sql.setAutoCommit(false);//enable transactions
+			boolean accountWasThere = false;
+			boolean roleWasCorrect = false;
+			
+			sql.makeParticipant(3, 1, Role.ta);
+			List<Object[]> results = sql.getParticipants("00003");
+			for (Object[] row: results) {
+				accountWasThere = row[0].equals(1);
+				roleWasCorrect = row[0].equals("TA");
+				if (accountWasThere && roleWasCorrect){
+					break;
+				}
+			}
+			assertTrue("ID mismatch", accountWasThere);
+			assertTrue("Role mismatch", roleWasCorrect);
 		} finally {
 			sql.rollback();//roll back transaction
 			sql.close();

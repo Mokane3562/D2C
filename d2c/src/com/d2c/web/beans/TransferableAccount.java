@@ -12,8 +12,18 @@ public class TransferableAccount {
 	public int refID;
 	
 	public enum Role {
-		STUDENT,
-		PROFESSOR,
-		TA
+		student ("STUDENT"),
+		professor ("PROFESSOR"),
+		ta ("TA");
+		
+		private final String roleName;
+		
+		private Role(String roleName) {
+	        this.roleName = roleName;
+	    }
+		
+		public String toString() {
+		       return this.roleName;
+		}
 	}
 }
