@@ -131,8 +131,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	$scope.lookUpCourses = function(){
 		console.log("yaaas");
 		console.log(crn);
-		var to_encode = $scope.crn;
-		course_instance_request(crn).then(
+		course_instance_request($scope.crn).then(
 			function(response){
 				console.log(response.data);
 				$scope.courseLookUp = response.data;
