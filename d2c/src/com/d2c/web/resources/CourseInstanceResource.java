@@ -19,6 +19,7 @@ import javax.ws.rs.core.Response;
 import com.d2c.util.EmptySetException;
 import com.d2c.util.SQLHandler;
 import com.d2c.web.beans.TransferableAccount;
+import com.d2c.web.beans.TransferableAccount.Role;
 import com.d2c.web.beans.TransferableCourse;
 import com.d2c.web.beans.TransferableCourseInstance;
 //import com.d2c.web.beans.TransferableAccount.Role;
@@ -36,7 +37,7 @@ public class CourseInstanceResource {
 			Object[] results = sql.getCourseInst(crn);
 			//create the course instance
 			TransferableCourseInstance courseInstance = new TransferableCourseInstance();
-			courseInstance.semester = (Semester) results[0];
+			courseInstance.semester = (Semester) Semester.valueOf((String) results[0]);
 			courseInstance.year = (String) results[1];
 			courseInstance.profName = (String) results[2];
 			courseInstance.courseReferenceNumber = (String) results[3];
@@ -122,10 +123,10 @@ public class CourseInstanceResource {
 			//Object[] account = sql.getAccountInfo(accountUserName);
 			if (true/*decodedUser.equals(accountUserName) && decodedPassword.equals(account[1])*/) {
 				//create the map
-				HashMap<Integer, String> participants = new HashMap<>();
+				HashMap<Integer, Role> participants = new HashMap<>();
 				for (Object[] row: results) {
 					int accountID = (int) row[0];
-					String accountRole = (String) row[1];
+					Role accountRole = (Role) Role.valueOf((String) row[1]);
 					participants.put(accountID, accountRole);
 				}
 
