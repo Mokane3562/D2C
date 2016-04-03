@@ -17,6 +17,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	var editor;
 	//used for getting info from roles
 	var role_list = {};
+	var courseLookUp = {};
 	var course_inst = {}
 	//the view
 	$scope.view = view;
@@ -126,6 +127,17 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 			}
 		);
 	} 
+	
+	$scope.lookUpCourses = function(){
+		course_instance_request(crn).then(
+			function(response){
+				courseLookUp = response.data;
+			},
+			function(errors){
+				console.log("failure");
+			}
+		);
+	}
 	
 	$scope.signUp = function(){
 		view["login"] = true;
