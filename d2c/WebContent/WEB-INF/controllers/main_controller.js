@@ -47,6 +47,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	view["submissions"] = false;
 	view["grades"] = false;
 	view["signout"] = false;
+	view["results"] = false;
 	var user_auth = "";
 	var crn = "";
 	
@@ -74,6 +75,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 				view["submissions"] = false;
 				view["grades"] = false;
 				view["signout"] = false;
+				view["results"] = false;
 				rolesRequest();
 		},
 		function(errors){
@@ -129,12 +131,12 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	} 
 	
 	$scope.lookUpCourses = function(){
-		console.log("yaaas");
 		console.log(crn);
 		course_instance_request($scope.crn).then(
 			function(response){
 				console.log(response.data);
 				$scope.courseLookUp = response.data;
+				results();
 			},
 			function(errors){
 				console.log("failure");
@@ -142,9 +144,25 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		);
 	}
 	
-	$scope.signUp = function(){
-		view["login"] = true;
+	var results = function(){
+		view["login"] = false;
 		view["signup"] = false;
+		view["courses"] = false;
+		view["firstNav"] = false;
+		view["register"] = false;
+		view["assignments"] = false;
+		view['courseSelect'] = false;
+		view["workspace"] = false;
+		view["testing"] = false;	
+		view["submissions"] = false;
+		view["grades"] = false;
+		view["signout"] = false;
+		view["results"] = true;
+	}
+	
+	$scope.signUp = function(){
+		view["login"] = false;
+		view["signup"] = true;
 		view["courses"] = false;
 		view["register"] = false;
 		view["assignments"] = false;
@@ -154,6 +172,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["submissions"] = false;
 		view["grades"] = false;
 		view["signout"] = false;
+		view["results"] = false;
 	}
 	$scope.signUpUser =function(){
 		if($scope.password !== $scope.confirm){
@@ -188,6 +207,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["grades"] = false;
 		view["welcome"] = false;
 		view["signout"] = false;
+		view["results"] = false;
 	}
 	$scope.courses_click = function(){
 		view["login"] = false;
@@ -204,6 +224,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["grades"] = false;
 		view["welcome"] = false;
 		view["signout"] = false;
+		view["results"] = false;
 	}
 	$scope.register_click = function(){
 		view["login"] = false;
@@ -219,6 +240,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["grades"] = false;
 		view["welcome"] = false;
 		view["signout"] = false;
+		view["results"] = false;
 	}
 	$scope.courseSelect = function(){
 		view["login"] = false;
@@ -235,6 +257,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["grades"] = false;
 		view["welcome"] = false;
 		view["signout"] = false;
+		view["results"] = false;
 	}
 	$scope.assignments_click = function(){
 		view["login"] = false;
@@ -249,6 +272,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["grades"] = false;
 		view["welcome"] = false;
 		view["signout"] = false;
+		view["results"] = false;
 	}
 	$scope.workspace_click = function(){
 		view["login"] = false;
@@ -264,6 +288,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["grades"] = false;
 		view["welcome"] = false;
 		view["signout"] = false;
+		view["results"] = false;
 		editor = ace.edit("textcodebox");
 		editor.getSession().setUseWorker(false);
 		editor.setTheme("ace/theme/twilight");
@@ -277,6 +302,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["assignments"] = false;
 		view['courseSelect'] = false;
 		view["workspace"] = false;
+		view["results"] = false;
 		view["testing"] = true;	
 		view["submissions"] = false;
 		view["grades"] = false;
@@ -292,6 +318,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view['courseSelect'] = false;
 		view["workspace"] = false;
 		view["testing"] = false;	
+		view["results"] = false;
 		view["submissions"] = true;
 		view["grades"] = false;
 		view["welcome"] = false;
@@ -303,6 +330,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["courses"] = false;
 		view["register"] = false;
 		view["assignments"] = false;
+		view["results"] = false;
 		view['courseSelect'] = false;
 		view["workspace"] = false;
 		view["testing"] = false;	
@@ -319,6 +347,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["register"] = false;
 		view["assignments"] = false;
 		view['courseSelect'] = false;
+		view["results"] = false;
 		view["workspace"] = false;
 		view["testing"] = false;	
 		view["submissions"] = false;
@@ -335,6 +364,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["assignments"] = false;
 		view['courseSelect'] = false;
 		view["workspace"] = false;
+		view["results"] = false;
 		view["testing"] = false;	
 		view["submissions"] = false;
 		view["grades"] = false;
