@@ -31,6 +31,8 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	$scope.roles = [];
 	$scope.courseInst = [];
 	$scope.courseLookUp = [];
+	$scope.courseResults = [];
+	$scope.get_the_files = [];
 	
 
 	//Setting view invisible
@@ -47,7 +49,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	view["submissions"] = false;
 	view["grades"] = false;
 	view["signout"] = false;
-	view["results"] = false;
+	view["results"] = true;
 	var user_auth = "";
 	var crn = "";
 	
@@ -77,6 +79,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 				view["signout"] = false;
 				view["results"] = false;
 				rolesRequest();
+				getAssignmets();
 		},
 		function(errors){
 			console.log(errors);
@@ -130,17 +133,63 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		);
 	} 
 	
-	$scope.lookUpCourses = function(){
+	var lookUpCourses = function(){
 		console.log(crn);
 		course_instance_request($scope.crn).then(
 			function(response){
 				console.log(response.data);
-				$scope.courseLookUp = response.data;
+				courseLookUp = response.data;
+				for(var courseResultLists in courseLookUp){
+					if (!courseLookUp.hasOwnProperty(courseResultLists)) {
+					    continue;
+					}
+				console.log(courseLookUp[courseResultLists]);
+					
+				}
 				results();
 			},
 			function(errors){
 				console.log("failure");
 			}
+		);
+	}
+	
+	var getAssignments = function(){
+		var to_encode = $scope.user+":"+$scope.password;
+		var auth = window.btoa(to_encode);
+		console.log(crn);
+		courseAssignment_request(crn).then(
+			function(response){
+				console.log(response.data);
+				assignments = response.data;
+			},
+			function(errors){
+				console.log("failure");
+			}
+		);
+	}
+	
+	var getSubmissions = function(){
+		var to_encode = $scope.user+":"+$scope.password;
+		var auth = window.btoa(to_encode);
+		console.log(crn);
+		
+		
+	}
+	
+	var getFile = function(){
+		var to_encode = $scope.user+":"+$scope.password;
+		var auth = window.btoa(to_encode);
+		console.log(fileId);
+		file.request(fileId).then(
+			function(response){
+				console.log(response.data);
+				get_the_files = response.data;
+			},
+			function(errors){
+				console.log("failblog");
+			}
+			
 		);
 	}
 	
