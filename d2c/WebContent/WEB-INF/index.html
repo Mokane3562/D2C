@@ -196,36 +196,42 @@
             <div class="signoutbutton" id="signout" ng-click="signout_click()"><h3>Sign Out</h3></div>
           </div>
         </div>
-	    <h1>Workspace</h1>
-	    <div id="codeandoutput">
-	      <div id="dirContainer">
-	      <h2>Directory</h2>
-	        <div ng-repeat="x in dirs" ng-dbl-click="x.onDblClick()">{{x.name}}</div>
-	      </div>
-            <div id="button">
-              <div class="button green" id="create_d" ng-click="">Add Directory</div>
-              <div class="button green" id="create_f" ng-click="">Add File</div>
-              <div class="button green" id="compile_c" ng-click="c_compile_function()">Compile C Code</div>
-              <div class="button green" id="compile_java" ng-click="j_compile_function()">Compile Java Code</div>
-		      <div class="button green" id="run_c" ng-click="aout_function()">Run C Code</div>
-		      <div class="button green" id="run_java" ng-click="java_function()">Run Java Code</div>
-	        </div>
-		    <div id="codebox">
-<!--  begining of shit formatting to make the java code look nice in the editor -->
-		      <div id="textcodebox">import static java.lang.System.out;
+        <br><br>
+        <div id= "workspaceContainer">
+	    	<h1>Workspace</h1>
+	    	<div id="codeandoutput">
+	      		<div id="dirContainer">
+	      			<h2>Directory</h2>
+	        		<div ng-repeat="x in dirs" ng-dbl-click="x.onDblClick()">{{x.name}}</div>
+	      		</div>
+            	<div id="button">
+              		<div class="button green" id="create_d" ng-click="">Add Directory</div>
+              		<div class="button green" id="create_f" ng-click="">Add File</div>
+            		<div class="button green" id="compile_c" ng-click="c_compile_function()">Compile C Code</div>
+           		   	<div class="button green" id="compile_java" ng-click="j_compile_function()">Compile Java Code</div>
+		   		   	<div class="button green" id="run_c" ng-click="aout_function()">Run C Code</div>
+		   		   	<div class="button green" id="run_java" ng-click="java_function()">Run Java Code</div>
+	        	</div>
+		    	<div id="codebox">
+				<!--  begining of shit formatting to make the java code look nice in the editor -->
+		      <div id="textcodebox">
+import static java.lang.System.out;	      
   public class HelloWorld{
     public static void main(String[] args){
         out.println("Hello World!");
     }
-}</div>
-<!-- end of shit formatting -->
+}
+			</div>
+			<!-- end of shit formatting -->
 		    </div>
-          <div id="output">
-            <h2>Output</h2>
-            <textarea id="textoutput" rows="10" readonly>{{output}}</textarea>
-	      </div>
+          	<div id="output">
+            	<h2>Output</h2>
+            	<textarea id="textoutput" rows="10" readonly>{{output}}</textarea>
+	      	</div>
 	    </div>
       </div>
+	</div>
+	
 	
       <!-- TESTING PAGE -->
       <div ng-show="view['testing']">
@@ -265,8 +271,20 @@
             <div class="backbutton" id="back" ng-click="courseSelect()"><h3>&#8678;</h3></div>
             <div class="signoutbutton" id="signout" ng-click="signout_click()"><h3>Sign Out</h3></div>
           </div>
-        </div>      
+        </div>
+        <br><br>
+        <div id="gradesContainer">      
 	    	<h1>Grades</h1>
+	    	<h2>Showing grades for "COURSE NAME"</h2>
+	    	<div id="insideGrades">
+	    		<div>Test Grade</div>
+	    		<div>Test Grade</div>
+	    		<div>Test Grade</div>
+	    		<div>Test Grade</div>
+	    		<div>Test Grade</div>
+	    	</div>
+	    	
+	    </div>	
       </div>
        
     	

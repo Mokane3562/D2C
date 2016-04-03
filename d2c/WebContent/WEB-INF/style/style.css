@@ -209,6 +209,7 @@ span {
 }
 
 #dirContainer{
+	background: #CCCCCC;
 	float: left;
 	resize: none;
 	width: 20%;
@@ -238,6 +239,7 @@ span {
 }
 
 #codebox {
+	text-align: left;
 	float: left;
 	resize: none;
 	width: 80%;
@@ -251,6 +253,7 @@ span {
 }
 
 #output {
+	background: "#CCCCCC";
 	float: bottom;
 	resize: none;
 }
@@ -464,6 +467,35 @@ span {
   z-index: 1;
   background: #333333;
   max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+#gradesContainer{
+  position: relative;
+  z-index: 1;
+  background: #333333;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+#insideGrades{
+	background: #CCCCCC;
+	text-align: left;
+	font-family: "Helvetica";
+	 padding: 5px;
+}
+
+#workspaceContainer{
+  position: relative;
+  z-index: 1;
+  background: #333333;
+  max-width: 800px;
   margin: 0 auto 100px;
   padding: 45px;
   text-align: center;
