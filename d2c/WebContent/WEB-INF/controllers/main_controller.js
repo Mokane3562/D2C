@@ -48,7 +48,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	view["grades"] = false;
 	view["signout"] = false;
 	var user_auth = "";
-	var crn ="";
+	var crn = "";
 	
 	//Setting view visible on click
 	$scope.login = function(){
@@ -129,8 +129,12 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	} 
 	
 	$scope.lookUpCourses = function(){
+		console.log("yaaas");
+		console.log(crn);
+		var to_encode = $scope.crn;
 		course_instance_request(crn).then(
 			function(response){
+				console.log(response.data);
 				$scope.courseLookUp = response.data;
 			},
 			function(errors){
