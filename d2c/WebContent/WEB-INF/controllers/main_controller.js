@@ -33,6 +33,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	$scope.courseLookUp = [];
 	$scope.courseResults = [];
 	$scope.get_the_files = [];
+	$scope.finalResults = [];
 	
 
 	//Setting view invisible
@@ -145,9 +146,13 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 				console.log($scope.courseLookUp.courseID);
 				course_by_id_request(response.data.courseID).then(
 					function(course_response){
-						console.log(course_response.data.subject);
-						console.log(course_response.data.name);
-						console.log(course_response.data.number);
+						$scope.finalResults.push(course_response.data.name);
+						$scope.finalResults.push(course_response.data.subject);
+						$scope.finalResults.push(course_response.data.number);
+						$scope.finalResults.push(response.data.profName);
+						$scope.finalResults.push(response.data.semester);
+						$scope.finalResults.push(response.data.year);
+						console.log($finalResults);
 					}
 				);
 			},
