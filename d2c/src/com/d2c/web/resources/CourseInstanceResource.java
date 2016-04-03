@@ -144,10 +144,44 @@ public class CourseInstanceResource {
 		} 
 	}	
 
+	//POSTS
+	//create a new account
+	@POST
+	@Path("/{crn}/register/{user}/as/{role}") //CHECKME:What if there's a / in the username or password?
+	@Consumes(MediaType.APPLICATION_JSON)
+	//CHECKME:Can we make POSTs safer? Is this overkill?
+	public Response createAccount(TransferableAccount account) {
+		//start sql shit
+		SQLHandler sql = null;
+		try {
+			sql = new SQLHandler();
+			sql.setAutoCommit(false); //enable transactions
+			sql.makeAccount(account.userName, account.password, account.firstName, account.lastName);
+			sql.commit();
+			return Response.created(new URI("/" + account.userName)).build();
+		} catch (SQLException | ClassNotFoundException | URISyntaxException e) {
+			try {
+				sql.rollback();
+			} catch (SQLException e1) {
+				System.err.println("\nROLLBACK FAILED\n");
+				e1.printStackTrace();
+				return Response.serverError().build();
+			}
+			e.printStackTrace();
+			return Response.serverError().build();
+		} finally {
+			try {
+				sql.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	/*@POST
 	@Path("/{crn}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createOrUpdateCourse(@PathParam("crn") String crn, TransferableCourseInstance course) {
+	public Response register(@PathParam("crn") String crn, TransferableCourseInstance course) {
 		// TODO make this post the course info to the DB
 
 		try {

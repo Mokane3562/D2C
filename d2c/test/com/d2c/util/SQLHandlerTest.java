@@ -198,7 +198,7 @@ public class SQLHandlerTest {
 			List<Object[]> results = sql.getParticipants("00003");
 			for (Object[] row: results) {
 				accountWasThere = row[0].equals(1);
-				roleWasCorrect = row[0].equals("TA");
+				roleWasCorrect = row[1].equals("TA");
 				if (accountWasThere && roleWasCorrect){
 					break;
 				}
