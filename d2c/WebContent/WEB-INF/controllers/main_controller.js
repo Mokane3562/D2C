@@ -17,7 +17,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	var editor;
 	//used for getting info from roles
 	var role_list = {};
-	var course_inst = {}
+	var course_inst = [];
 	//the view
 	$scope.view = view;
 	$scope.login_failure = "";
@@ -100,27 +100,26 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 			function (response){
 				//save the role list info
 				role_list = response.data;
+				console.log(role_list);
 				for (var course_inst_id in role_list){//for each course instance id in the role list
 					if (!role_list.hasOwnProperty(course_inst_id)) {
 					    continue;
 					}
-
-					console.log(role_list[course_inst_id]);
 					//execute course instance by id service on the course instance id
 					course_inst_by_id_request(course_inst_id).then(
 						function(course_inst_response){
 							//save the course instance info
 							course_inst = course_inst_response.data;
 							//execute course by id service on the course id given from the course instance
-							course_by_id_request(course_inst.refID).then(
+							course_by_id_request(course_inst_response.data.refID).then(
 								function(course_response){
-									console.log(role_list[course_inst_id]);
-									course_response.data.role = role_list.data[course_inst_id];
+									//console.log("course_response");
+									console.log(course_response.data.role);
+									course_response.data.role = role_list[course_inst_id];
 									course_response.data.clickHandler = function clickHandler(){
 										
 									}
 									$scope.courses_and_roles.push(course_response.data);
-									console.log(course_response.data);
 								}
 							);
 						}
@@ -142,17 +141,15 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 				$scope.courseLookUp = response.data;
 				console.log($scope.courseLookUp.year);
 				results();
-				console.log(response.data.courseID);
-				console.log($scope.courseLookUp.courseID);
 				course_by_id_request(response.data.courseID).then(
 					function(course_response){
-						$scope.finalResults.push(course_response.data.name);
-						$scope.finalResults.push(course_response.data.subject);
-						$scope.finalResults.push(course_response.data.number);
-						$scope.finalResults.push(response.data.profName);
-						$scope.finalResults.push(response.data.semester);
-						$scope.finalResults.push(response.data.year);
-						console.log($finalResults);
+						$scope.coName = (course_response.data.name);
+						$scope.coSub = (course_response.data.subject);
+						$scope.coNum = (course_response.data.number);
+						$scope.coPro = (response.data.profName);
+						$scope.coSem = (response.data.semester);
+						$scope.coYea = (response.data.year);
+						console.log($scope.finalResults);
 					}
 				);
 			},
