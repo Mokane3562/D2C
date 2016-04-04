@@ -154,7 +154,6 @@
               <div id="resultsPage"><span class="greenword">Year:  </span><span>{{ coYea}}</span></div>
             </td>
           </tr>
-          <div class="button green" id="lookUpAgain" ng-click="register_click()">New Search</div>
           <div id="searchbutton" class="button green" id="regCourse" ng-click="regForCourse()">Register</div>
         </form>
         </div>
@@ -197,7 +196,6 @@
         <div id="wrapper">
           <div id= "menubar">
             <div class="backbutton" id="back" ng-click="submissions_click()"><h3>&#8678;</h3></div>
-            <div class="menubutton" id="testing" ng-click="testing_click()"><h3>Testing</h3></div>
             <div class="menubutton" id="submissions" ng-click="submissions_click()"><h3>Submissions</h3></div>
             <div class="signoutbutton" id="signout" ng-click="signout_click()"><h3>Sign Out</h3></div>
           </div>
@@ -207,8 +205,21 @@
 	    	<h1>Workspace</h1>
 	    	<div id="codeandoutput">
 	      		<div id="dirContainer">
-	      			<h2>Directory</h2>
+	      			<h2><span class="greenword">Directory</span></h2>
 	        		<div ng-repeat="x in dirs" ng-dbl-click="x.onDblClick()">{{x.name}}</div>
+	        		<div id="directory">assignment1&#8628;</div>
+	        		<div id="space">&nbsp;</div>
+	        		<div id="directory">&nbsp;&nbsp;&nbsp;code&#8628;</div>
+	        		<div id="space">&nbsp;</div>
+	        		<div id="directoryfile">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;helloworld.java</div>
+	        		<div id="space">&nbsp;</div>
+	        		<div id="directoryfile">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;test.java</div>
+	        		<div id="space">&nbsp;</div>
+	        		<div id="directory">&nbsp;&nbsp;&nbsp;text docs&#8628;</div>
+	        		<div id="space">&nbsp;</div>
+	        		<div id="directoryfile">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;test.txt</div>
+	        		<div id="space">&nbsp;</div>
+	        		<div id="directoryfile">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;README.txt</div>
 	      		</div>
             	<div id="button">
               		<div class="button green" id="create_d" ng-click="">Add Directory</div>
@@ -230,7 +241,7 @@
 			<!-- end of shit formatting -->
 		    </div>
           	<div id="output">
-            	<h2>Output</h2>
+            	<h2><span class="greenword">Output</span></h2>
             	<textarea id="textoutput" rows="10" readonly>{{output}}</textarea>
 	      	</div>
 	    </div>
@@ -281,13 +292,72 @@
         <br><br>
         <div id="gradesContainer">      
 	    	<h1>Grades</h1>
-	    	<h2>Showing grades for "COURSE NAME"</h2>
+	    	<h2>Showing grades for <span class="greenword">COMP 1710</span></h2>
 	    	<div id="insideGrades">
-	    		<div>Test Grade</div>
-	    		<div>Test Grade</div>
-	    		<div>Test Grade</div>
-	    		<div>Test Grade</div>
-	    		<div>Test Grade</div>
+	    		<table style="border-collapse: collapse; border: 1px solid #CCCCCC; font-size: 16;">
+					<tr style="color: #1f7a1f; font-weight: bold; text-decoration: underline;">
+						<td>Grade Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+						<td>Points&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+						<td>Grade</td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td>Assignment 1</td>
+						<td>19/20</td>
+						<td style="text-align: right;">95</td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td>Test 1</td>
+						<td>23/25</td>
+						<td style="text-align: right;">92</td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td>Test 2</td>
+						<td>24/25</td>
+						<td style="text-align: right;">96</td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td>Assignment 2</td>
+						<td>18/20</td>
+						<td style="text-align: right;">90</td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr style="color: #1f7a1f; font-weight: bold;">
+						<td>Course Grade Achieved:</td>
+						<td>84/90</td>
+						<td style="text-align: right;">93.3</td>
+					</tr>
+				</table>
 	    	</div>
 	    </div>	
       </div>
