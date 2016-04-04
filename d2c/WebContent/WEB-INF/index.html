@@ -12,6 +12,8 @@
     <script type="text/javascript" src="/d2c/shared/d3.v3.js"></script>
     <script type="text/javascript" src="/d2c/apps/main.js"></script>
     <script type="text/javascript" src="/d2c/controllers/main_controller.js"></script>
+    <script type="text/javascript" src="/d2c/directives/node.js"></script>
+    <script type="text/javascript" src="/d2c/directives/tree.js"></script>
     <script type="text/javascript" src="/d2c/services/example_service.js"></script>
     <script type="text/javascript" src="/d2c/services/c_compile_request.js"></script>
     <script type="text/javascript" src="/d2c/services/j_compile_request.js"></script>
@@ -204,26 +206,20 @@
         <div id= "workspaceContainer">
 	    	<h1>Workspace</h1>
 	    	<div id="codeandoutput">
+	    		<div id="dir_form" ng-show="making_a_file">
+	    			<form>
+	    				<input type="text" ng-model="dir_name" name="directory" placeholder="New Directory"/>
+      					<div class="button green" ng-click="dir_okay()" >Okay</div>
+      					<div class="button green" ng-click="dir_cancel()" >Cancel</div>
+	    			</form>
+	    		</div>
 	      		<div id="dirContainer">
 	      			<h2><span class="greenword">Directory</span></h2>
-	        		<div ng-repeat="x in dirs" ng-dbl-click="x.onDblClick()">{{x.name}}</div>
-	        		<div id="directory">assignment1&#8628;</div>
-	        		<div id="space">&nbsp;</div>
-	        		<div id="directory">&nbsp;&nbsp;&nbsp;code&#8628;</div>
-	        		<div id="space">&nbsp;</div>
-	        		<div id="directoryfile">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;helloworld.java</div>
-	        		<div id="space">&nbsp;</div>
-	        		<div id="directoryfile">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;test.java</div>
-	        		<div id="space">&nbsp;</div>
-	        		<div id="directory">&nbsp;&nbsp;&nbsp;text docs&#8628;</div>
-	        		<div id="space">&nbsp;</div>
-	        		<div id="directoryfile">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;test.txt</div>
-	        		<div id="space">&nbsp;</div>
-	        		<div id="directoryfile">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;README.txt</div>
+	        		<node node="root" ng-click="root.onClick($event)" ng-dblclick="root.onDblClick()" ></node>
 	      		</div>
             	<div id="button">
-              		<div class="button green" id="create_d" ng-click="">Add Directory</div>
-              		<div class="button green" id="create_f" ng-click="">Add File</div>
+              		<div class="button green" id="create_d" ng-click="create_dir()">Add Directory</div>
+              		<div class="button green" id="create_f" ng-click="create_file()">Add File</div>
             		<div class="button green" id="compile_c" ng-click="c_compile_function()">Compile C Code</div>
            		   	<div class="button green" id="compile_java" ng-click="j_compile_function()">Compile Java Code</div>
 		   		   	<div class="button green" id="run_c" ng-click="aout_function()">Run C Code</div>
@@ -247,7 +243,6 @@
 	    </div>
       </div>
 	</div>
-	
 	
       <!-- TESTING PAGE -->
       <div ng-show="view['testing']">

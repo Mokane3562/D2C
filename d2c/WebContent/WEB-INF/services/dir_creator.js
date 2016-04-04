@@ -1,24 +1,24 @@
 app.factory('dir_creator', [function(){
-	return function(name, contents, type, editor, display){
+	return function(name, contents, type, editor, node){
 		var obj = {
 			name: name,
 			contents: contents,
+			parent: node.node,
 			type: type,
-			visable: visable
+			visable: false
 		};
 		if(type === "file" || type === "f"){
 			obj.onDblClick = function(){
 				editor.setValue(obj.contents, -1);
 			};
-		} else {
-			obj.onDblClick = function(){
-				if(!visable){
-					display.push.apply(display, contents);
-				} else {
-					
-				}
-			}
 		}
+		obj.onClick = function($event){
+			$event.stopPropagation();
+			if(node.node === obj){
+				obj.visable = !obj.visable
+			}
+			node.node = obj;
+		};
 		return obj;
 	};
 }]);

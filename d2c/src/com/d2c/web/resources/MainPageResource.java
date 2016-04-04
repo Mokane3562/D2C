@@ -73,7 +73,7 @@ public class MainPageResource {
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
 	@Path("{folder}/{js}.js")
-	// This method gets the a CSS file. Uncommented, but more or less a copy of
+	// This method gets a JS file. Uncommented, but more or less a copy of
 	// getMainPage
 	public Response getJSfile(@Context ServletContext context, @PathParam("folder") String jsFolderName, @PathParam("js") String jsFileName) {
 		String fileAsString = "";
@@ -99,7 +99,7 @@ public class MainPageResource {
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
 	@Path("{folder}/{subfolder}/{js}.js")
-	// This method gets the a CSS file. Uncommented, but more or less a copy of
+	// This method gets a JS file. Uncommented, but more or less a copy of
 	// getMainPage
 	public Response getAcefile(@Context ServletContext context, @PathParam("folder") String jsFolderName, @PathParam("subfolder") String subFolder, @PathParam("js") String jsFileName) {
 		String fileAsString = "";

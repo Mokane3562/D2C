@@ -29,8 +29,6 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	$scope.last = "";
 	$scope.confirm = "";
 	$scope.password = "";
-	$scope.dirs = [];
-	$scope.dir = "";
 	$scope.roles = [];
 	$scope.courseInst = [];
 	$scope.courseLookUp = [];
@@ -38,6 +36,14 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	$scope.get_the_files = [];
 	$scope.finalResults = [];
 	var fileId = 4;
+	//For directory managment
+	var node = {node: null};
+	$scope.dir_name = "";
+	var file_or_dir = "";
+	var file_dir_contents = "";
+	$scope.making_a_file = false;
+	$scope.root = dir_creator("root", [], "dir", editor, node);
+	node.node = $scope.root;
 	
 
 	//Setting view invisible
@@ -135,6 +141,33 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 			}
 		);
 	} 
+	
+	$scope.create_file = function(){
+		file_or_dir = "file";
+		file_dir_contents = "";
+		$scope.making_a_file = true;
+	};
+	
+	$scope.create_dir = function(){
+		file_or_dir = "dir";
+		file_dir_contents = [].slice();
+		$scope.making_a_file = true;
+	};
+	
+	$scope.dir_okay = function(){
+		var new_file = dir_creator($scope.dir_name, file_dir_contents, file_or_dir, editor, node);
+		node.node.contents.push(new_file);
+		if(new_file.type === "file"){
+			$scope.making_a_file = false;
+			return;
+		}
+		node.node = new_file;
+		$scope.making_a_file = false;
+	};
+	
+	$scope.dir_cancel = function(){
+		$scope.making_a_file = false;
+	};
 	
 	$scope.lookUpCourses = function(){
 		console.log($scope.crn);
