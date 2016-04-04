@@ -162,11 +162,23 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	var getAssignments = function(){
 		var to_encode = $scope.user+":"+$scope.password;
 		var auth = window.btoa(to_encode);
-		console.log(crn);
-		courseAssignment_request(crn).then(
+		$scope.assignments = [];
+		
+		course_assignments_request(crn).then(
 			function(response){
-				console.log(response.data);
-				assignments = response.data;
+				assignmentS = response.data;
+				console.log(response.data);				
+				for(var assignNumber in assignmentS){
+					if(!assignmentS.hasOwnProperty(assignNumber)){
+						continue;
+					}
+					console.log(assignmentS[assignNumber]);
+					assignment_by_id_request(assignmentS[assignNumber]).then(//assignment_by_id_request
+							function(assign_response){
+								$scope.assignments.push(assign_response.data);
+							});
+				}
+				console.log(assignments);
 			},
 			function(errors){
 				console.log("failure");

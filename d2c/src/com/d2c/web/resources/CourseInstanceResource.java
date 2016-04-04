@@ -144,10 +144,51 @@ public class CourseInstanceResource {
 		} 
 	}	
 
+	//POSTS
+	//create a new account
+	@POST
+	@Path("/{crn}/register/{user}/as/{role}") //CHECKME:What if there's a / in the username or password?
+	@Consumes(MediaType.APPLICATION_JSON)
+	//CHECKME:Can we make POSTs safer? Is this overkill?
+	public Response createParticipant(@PathParam("crn") String crn, @PathParam("user") String user, @PathParam("role") String role) {
+		//start sql shit
+		SQLHandler sql = null;
+		try {
+			sql = new SQLHandler();
+			
+			Object[] accountInfo =  sql.getAccountInfo(user);
+			int accountID = (int) accountInfo[5];
+			
+			Object[] courseInstInfo =  sql.getCourseInst(crn);
+			int courseInstID = (int) courseInstInfo[6];
+			
+			sql.setAutoCommit(false); //enable transactions
+			sql.makeParticipant(courseInstID, accountID, Role.valueOf(role));
+			sql.commit();
+			return Response.created(new URI("/registered/" + user)).build();
+		} catch (SQLException | ClassNotFoundException | URISyntaxException | EmptySetException e) {
+			try {
+				sql.rollback();
+			} catch (SQLException e1) {
+				System.err.println("\nROLLBACK FAILED\n");
+				e1.printStackTrace();
+				return Response.serverError().build();
+			}
+			e.printStackTrace();
+			return Response.serverError().build();
+		} finally {
+			try {
+				sql.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	/*@POST
 	@Path("/{crn}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createOrUpdateCourse(@PathParam("crn") String crn, TransferableCourseInstance course) {
+	public Response register(@PathParam("crn") String crn, TransferableCourseInstance course) {
 		// TODO make this post the course info to the DB
 
 		try {

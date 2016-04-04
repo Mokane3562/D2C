@@ -2,6 +2,7 @@ package com.d2c.web.resources;
 
 import java.net.URISyntaxException;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,10 +19,38 @@ import javax.ws.rs.core.Response;
 import com.d2c.util.EmptySetException;
 import com.d2c.util.SQLHandler;
 import com.d2c.web.beans.TransferableAssignment;
+import com.d2c.web.beans.TransferableCourseInstance;
+import com.d2c.web.beans.TransferableCourseInstance.Semester;
 
 @Path("/assignment")
 public class AssignmentResource {
 
+	@GET
+	@Path("/refid/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAssignmentByRefID(@PathParam("id") int refID) {
+		try (SQLHandler sql = new SQLHandler();) {
+			Object[] results = sql.getCourseInstByRefID(refID);
+			//create the course instance
+			TransferableAssignment assignment = new TransferableAssignment();
+			assignment.assignmentNum = (int) results[0];
+			assignment.dueDate = (Timestamp) results[1];
+			assignment.fileIDs = (int[]) results[2];
+			assignment.courseInstID = (int) results[3];
+			assignment.refID = (int) results[4];
+			//send created course instance object to client
+			return Response.ok().entity(assignment).build();
+		} catch (EmptySetException e) {
+			System.out.println(e);
+			e.printStackTrace();
+			return Response.noContent().build();
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+			//when shit goes FUBAR
+			return Response.serverError().build();
+		}
+	}
+	
 	/*@GET
 	@Path("/{crn}")
 	@Produces(MediaType.APPLICATION_JSON)

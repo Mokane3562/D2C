@@ -1,9 +1,9 @@
-app.factory('courseAssignment_request', ['$q', '$http', function($q,$http){
+app.factory('course_assignments_request', ['$q', '$http', function($q,$http){
 	return function(crn){
-		var deffered= $q.deffer();
+		var deferred= $q.defer();
 		$http({
 			method: 'GET',
-			url:'/course_inst/'+crn+'/assignments',
+			url:'/d2c/course_inst/'+crn+'/assignments',
 			headers: {
 				'access-control-allow-origin': '*'
 			}

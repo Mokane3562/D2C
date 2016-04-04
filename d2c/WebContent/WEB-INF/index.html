@@ -180,6 +180,9 @@
 	    	<br><br>
 	    	<div id="assignContainer">
 	    	<h1>Assignments</h1>
+	    	<div class="button green" id="assignButton" ng-repeat="assign in assignments" ng-click="assignments_click()">
+	      	{{assign.number + ": " + assign.name}}
+	      	</div> 
 	    	  <div class="button green" id="assignButton" ng-click="submissions_click()">Assignment</div><br>
 	    	</div>
 	  </div>
