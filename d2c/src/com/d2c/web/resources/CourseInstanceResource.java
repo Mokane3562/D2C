@@ -150,16 +150,23 @@ public class CourseInstanceResource {
 	@Path("/{crn}/register/{user}/as/{role}") //CHECKME:What if there's a / in the username or password?
 	@Consumes(MediaType.APPLICATION_JSON)
 	//CHECKME:Can we make POSTs safer? Is this overkill?
-	public Response createAccount(TransferableAccount account) {
+	public Response createParticipant(@PathParam("crn") String crn, @PathParam("user") String user, @PathParam("role") String role) {
 		//start sql shit
 		SQLHandler sql = null;
 		try {
 			sql = new SQLHandler();
+			
+			Object[] accountInfo =  sql.getAccountInfo(user);
+			int accountID = (int) accountInfo[5];
+			
+			Object[] courseInstInfo =  sql.getCourseInst(crn);
+			int courseInstID = (int) courseInstInfo[6];
+			
 			sql.setAutoCommit(false); //enable transactions
-			sql.makeAccount(account.userName, account.password, account.firstName, account.lastName);
+			sql.makeParticipant(courseInstID, accountID, Role.valueOf(role));
 			sql.commit();
-			return Response.created(new URI("/" + account.userName)).build();
-		} catch (SQLException | ClassNotFoundException | URISyntaxException e) {
+			return Response.created(new URI("/registered/" + user)).build();
+		} catch (SQLException | ClassNotFoundException | URISyntaxException | EmptySetException e) {
 			try {
 				sql.rollback();
 			} catch (SQLException e1) {
