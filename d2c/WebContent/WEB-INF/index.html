@@ -25,7 +25,7 @@
     <script type="text/javascript" src="/d2c/services/course_instance_request.js"></script> 
     <script type="text/javascript" src="/d2c/services/course_inst_by_id_request.js"></script> 
     <script type="text/javascript" src="/d2c/services/course_by_id_request.js"></script>
-    
+    <script type="text/javascript" src="/d2c/services/file_request.js"></script>
   </head>
   
 	<body bgcolor="#262626" ng-controller="main_controller">
@@ -131,27 +131,27 @@
       
       <!-- RESULTS PAGE -->
       <div ng-show="view['results']" >
-      <div ng-hide="view['assignments']">
-        <br><br>
         <div id="wrapper">
           <div id= "menubar">
-            <div class="backbutton" id="back" ng-click="register_click()"><h3>&#8678;</h3></div>
+          <div class="backbutton" id="back" ng-click="courses_click()"><h3>&#8678;</h3></div>
             <div class="signoutbutton" id="signout" ng-click="signout_click()"><h3>Sign Out</h3></div>
           </div>
         </div>
+        <br><br>
         <div id="resultCont">
-        <h1>Search Results</h1>
+        <div id="searchheader"><h1>Search Results</h1></div>
         <form>
           <tr>
             <td>
-              <div id="resultsPage"><span class="greenword">Course Name:  </span><span>{{coName}}</span></div>
-              <div id="resultsPage"><span class="greenword">Course Number:  </span>{{coSub}} {{coNum}}</div>
-              <div id="resultsPage"><span class="greenword">Professor:  </span>{{coPro}}</div>
-              <div id="resultsPage"><span class="greenword">Term:  </span>{{coSem}}</div>
-              <div id="resultsPage"><span class="greenword">Year:  </span>{{coYea}}</div>
+              <div id="resultsPage"><span class="greenword">Course Name:  </span><span>{{ coName}}</span></div>
+              <div id="resultsPage"><span class="greenword">Course Number:  </span><span>{{ coSub}} {{ coNum}}</span></div>
+              <div id="resultsPage"><span class="greenword">Professor:  </span><span>{{ coPro}}</span></div>
+              <div id="resultsPage"><span class="greenword">Term:  </span><span>{{ coSem}}</span></div>
+              <div id="resultsPage"><span class="greenword">Year:  </span><span>{{ coYea}}</span></div>
             </td>
           </tr>
-          <div class="button green" id="regCourse" ng-click="">Register</div>
+          <div class="button green" id="lookUpAgain" ng-click="register_click()">New Search</div>
+          <div id="searchbutton" class="button green" id="regCourse" ng-click="">Register</div>
         </form>
         </div>
         </div>
@@ -168,10 +168,12 @@
       </div>
       
       <!-- ASSIGNMENTS PAGE -->
-      <div ng-show="view['assignments']" ng-hide="view['firstNav']">
+      <div ng-show="view['assignments']">
       	<div id="wrapper">
           <div id= "menubar">
             <div class="backbutton" id="back" ng-click="courses_click()"><h3>&#8678;</h3></div>
+            <div class="menubutton" id="workspace" ng-click="workspace_click()"><h3>Workspace</h3></div>
+            <div class="menubutton" id="grades" ng-click="grades_click()"><h3>Grades</h3></div>
             <div class="signoutbutton" id="signout" ng-click="signout_click()"><h3>Sign Out</h3></div>
           </div>
         </div>      
@@ -211,8 +213,7 @@
 	        	</div>
 		    	<div id="codebox">
 				<!--  begining of shit formatting to make the java code look nice in the editor -->
-		      <div id="textcodebox">
-import static java.lang.System.out;	      
+		      <div id="textcodebox">import static java.lang.System.out;	      
   public class HelloWorld{
     public static void main(String[] args){
         out.println("Hello World!");
@@ -247,13 +248,17 @@ import static java.lang.System.out;
         <div id="wrapper">
           <div id= "menubar">
             <div class="backbutton" id="back" ng-click="assignments_click()"><h3>&#8678;</h3></div>
+            <div class="menubutton" id="grades" ng-click="grades_click()"><h3>Grades</h3></div>
             <div class="signoutbutton" id="signout" ng-click="signout_click()"><h3>Sign Out</h3></div>
           </div>
         </div>
         <br><br>
         <div id="submissionContainer">
 	   	<h1>Submissions</h1>
-	   	  <div class="button green" id="subButton" ng-click="workspace_click()">Submissions</div><br>
+	   	  <div class="button green" id="subButton" ng-click="workspace_click()">{{get_the_files}}</div><br>
+	   	  <div class="button green" id="subButton" ng-click="workspace_click()">FibNumber</div><br>
+	   	  <div class="button green" id="subButton" ng-click="workspace_click()">BubbleSort</div><br>
+	   	  <div class="button green" id="subButton" ng-click="workspace_click()">BinaryTree</div><br>
 	  </div>
 	  </div>
 	  
@@ -261,7 +266,8 @@ import static java.lang.System.out;
       <div ng-show="view['grades']">
       	<div id="wrapper">
           <div id= "menubar">
-            <div class="backbutton" id="back" ng-click="courses_click()"><h3>&#8678;</h3></div>
+            <div class="backbutton" id="back" ng-click="assignments_click()"><h3>&#8678;</h3></div>
+            <div class="menubutton" id="submission" ng-click="submissions_click()"><h3>Submissions</h3></div>
             <div class="signoutbutton" id="signout" ng-click="signout_click()"><h3>Sign Out</h3></div>
           </div>
         </div>

@@ -6,10 +6,11 @@
 app.controller('main_controller',['$scope', '$location', 'example_service', 'c_compile_request',
                                   'j_compile_request', 'java_request', 'run_request', 'login_request',
                                   'signup_service', 'transferable_account', 'dir_creator', 'roles_request', 
-                                  'course_instance_request', 'course_inst_by_id_request', 'course_by_id_request',
+                                  'course_instance_request', 'course_inst_by_id_request', 'course_by_id_request', 
+                                  'file_request',
                           function($scope, $location, example_service, c_compile_request, j_compile_request,
                         		  java_request, run_request, login_request, signup_service, transferable_account, dir_creator,
-                        		  roles_request, course_instance_request, course_inst_by_id_request, course_by_id_request){
+                        		  roles_request, course_instance_request, course_inst_by_id_request, course_by_id_request, file_request){
 	console.log("main controller loading");
 	
     //initial view object set up	
@@ -34,15 +35,15 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	$scope.courseResults = [];
 	$scope.get_the_files = [];
 	$scope.finalResults = [];
+	var fileId = 4;
 	
 
 	//Setting view invisible
-	view["login"] = false;
+	view["login"] = true;
 	view["signup"] = false;
 	view["firstNav"] = false;
 	view["courses"] = false;
 	view["register"] = false;
-	view['courseSelect'] = false;
 	view["assignments"] = false;
 	view["workspace"] = false;
 	view["path"] = false;
@@ -50,7 +51,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	view["submissions"] = false;
 	view["grades"] = false;
 	view["signout"] = false;
-	view["results"] = true;
+	view["results"] = false;
 	var user_auth = "";
 	var crn = "";
 	
@@ -72,7 +73,6 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 				view["firstNav"] = true;
 				view["register"] = false;
 				view["assignments"] = false;
-				view['courseSelect'] = false;
 				view["workspace"] = false;
 				view["testing"] = false;	
 				view["submissions"] = false;
@@ -80,6 +80,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 				view["signout"] = false;
 				view["results"] = false;
 				rolesRequest();
+				getFile();
 		},
 		function(errors){
 			console.log(errors);
@@ -114,7 +115,6 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 							course_by_id_request(course_inst_response.data.refID).then(
 								function(course_response){
 									//console.log("course_response");
-									console.log(course_response.data.role);
 									course_response.data.role = role_list[course_inst_id];
 									course_response.data.clickHandler = function clickHandler(){
 										
@@ -174,38 +174,26 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		);
 	}
 	
-	var getSubmissions = function(){
-		var to_encode = $scope.user+":"+$scope.password;
-		var auth = window.btoa(to_encode);
-		console.log(crn);
-		
-		
-	}
-	
 	var getFile = function(){
 		var to_encode = $scope.user+":"+$scope.password;
 		var auth = window.btoa(to_encode);
-		console.log(fileId);
-		file.request(fileId).then(
-			function(response){
-				console.log(response.data);
-				get_the_files = response.data;
-			},
-			function(errors){
-				console.log("failblog");
-			}
-			
-		);
+			file_request(fileId).then(
+					function(response){
+						console.log(response.data);
+						$scope.get_the_files = (response.data.fileName);
+						console.log($scope.get_the_files);
+					},
+					function(errors){
+						console.log("failblog");
+					}
+			);
 	}
-	
 	var results = function(){
 		view["login"] = false;
 		view["signup"] = false;
 		view["courses"] = false;
 		view["firstNav"] = false;
 		view["register"] = false;
-		view["assignments"] = false;
-		view['courseSelect'] = false;
 		view["workspace"] = false;
 		view["testing"] = false;	
 		view["submissions"] = false;
@@ -220,7 +208,6 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["courses"] = false;
 		view["register"] = false;
 		view["assignments"] = false;
-		view['courseSelect'] = false;
 		view["workspace"] = false;
 		view["testing"] = false;	
 		view["submissions"] = false;
@@ -255,7 +242,6 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["register"] = false;
 		view["assignments"] = false;
 		view["workspace"] = false;
-		view['courseSelect'] = false;
 		view["testing"] = false;	
 		view["submissions"] = false;
 		view["grades"] = false;
@@ -271,7 +257,6 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["courses"] = true;
 		view["register"] = false;
 		view["assignments"] = false;
-		view['courseSelect'] = false;
 		view["workspace"] = false;
 		view["testing"] = false;	
 		view["submissions"] = false;
@@ -289,30 +274,13 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["assignments"] = false;
 		view["workspace"] = false;
 		view["testing"] = false;	
-		view['courseSelect'] = false;
 		view["submissions"] = false;
 		view["grades"] = false;
 		view["welcome"] = false;
 		view["signout"] = false;
 		view["results"] = false;
 	}
-	$scope.courseSelect = function(){
-		view["login"] = false;
-		view["register"] = false;
-		view["signup"] = false;
-		view["firstNav"] = false;
-		view["courses"] = false;
-		view['courseSelect'] = true;
-		view["register"] = false;
-		view["assignments"] = false;
-		view["workspace"] = false;
-		view["testing"] = false;	
-		view["submissions"] = false;
-		view["grades"] = false;
-		view["welcome"] = false;
-		view["signout"] = false;
-		view["results"] = false;
-	}
+
 	$scope.assignments_click = function(){
 		view["login"] = false;
 		view["signup"] = false;
@@ -321,7 +289,6 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["assignments"] = true;
 		view["workspace"] = false;
 		view["firstNav"] = false;
-		view['courseSelect'] = false;
 		view["testing"] = false;	
 		view["submissions"] = false;
 		view["grades"] = false;
@@ -336,7 +303,6 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["register"] = false;
 		view["assignments"] = false;
 		view["workspace"] = true;
-		view['courseSelect'] = false;
 		view["path"] = true;
 		view["testing"] = false;	
 		view["submissions"] = false;
@@ -355,7 +321,6 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["courses"] = false;
 		view["register"] = false;
 		view["assignments"] = false;
-		view['courseSelect'] = false;
 		view["workspace"] = false;
 		view["results"] = false;
 		view["testing"] = true;	
@@ -370,7 +335,6 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["courses"] = false;
 		view["register"] = false;
 		view["assignments"] = false;
-		view['courseSelect'] = false;
 		view["workspace"] = false;
 		view["testing"] = false;	
 		view["results"] = false;
@@ -386,7 +350,6 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["register"] = false;
 		view["assignments"] = false;
 		view["results"] = false;
-		view['courseSelect'] = false;
 		view["workspace"] = false;
 		view["testing"] = false;	
 		view["submissions"] = false;
@@ -401,7 +364,6 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["courses"] = false;
 		view["register"] = false;
 		view["assignments"] = false;
-		view['courseSelect'] = false;
 		view["results"] = false;
 		view["workspace"] = false;
 		view["testing"] = false;	
@@ -417,7 +379,6 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["courses"] = false;
 		view["register"] = false;
 		view["assignments"] = false;
-		view['courseSelect'] = false;
 		view["workspace"] = false;
 		view["results"] = false;
 		view["testing"] = false;	
@@ -520,46 +481,9 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		);
 		console.log("aout_function starting");
 	};
-	
-	//COURSE LIST GRABBER
-	$scope.courseList = [];
-	$scope.getCourseList = function(){
-		var user = document.getElementById("user_name").value;
-		var password = document.getElementById("user_name").value;
-		getMeMYCourses(user, password).then(
-				function(response){
-					$scope.courseList = response.data.courseList;
-				},
-				function(errors){
-					//TODO deal with the error
-				}
-		);
-	}
-	$scope.courseHandler = function(course){
-		//TODO something fucking useful with a course i guess?
-	}
+
 	console.log("main controller loaded");
-	
-	//END COURSE LIST GRABBER
-	
-	//MENUBAR GRABBER
-	
-	$scope.menuList = [];
-	$scope.getMenuList = function(){
-		var user = document.getElementById("user_name").value;
-		var password = document.getElementById("user_name").value;
-		getMeMYMenubar(user, password).then(
-				function(response){
-					$scope.menuList = response.data.menuList;
-				},
-				function(errors){
-					//TODO deal with the error
-				}
-		);
-	}
-	$scope.menuHandler = function(menu){
-		//TODO something fucking useful with a course i guess?
-	}
+
 	console.log("main controller loaded");
 	
 	//END MENUBAR GRABBER
