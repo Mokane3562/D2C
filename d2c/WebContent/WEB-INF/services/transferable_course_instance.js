@@ -1,4 +1,4 @@
-app.factory('transferable_course_inestance',[function(){
+app.factory('transferable_course_instance',[function(){
 	return function(year_offered, semester, crn, course){
 		return {
 			'semester': semester,

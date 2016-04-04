@@ -26,6 +26,10 @@
     <script type="text/javascript" src="/d2c/services/course_inst_by_id_request.js"></script> 
     <script type="text/javascript" src="/d2c/services/course_by_id_request.js"></script>
     <script type="text/javascript" src="/d2c/services/file_request.js"></script>
+    <script type="text/javascript" src="/d2c/services/assignment_by_id_request.js"></script>
+    <script type="text/javascript" src="/d2c/services/course_assignments_request.js"></script>
+    <script type="text/javascript" src="/d2c/services/course_register_request.js"></script>
+    <script type="text/javascript" src="/d2c/services/transferable_course.js"></script>
   </head>
   
 	<body bgcolor="#262626" ng-controller="main_controller">
@@ -151,7 +155,7 @@
             </td>
           </tr>
           <div class="button green" id="lookUpAgain" ng-click="register_click()">New Search</div>
-          <div id="searchbutton" class="button green" id="regCourse" ng-click="">Register</div>
+          <div id="searchbutton" class="button green" id="regCourse" ng-click="regForCourse()">Register</div>
         </form>
         </div>
         </div>
@@ -180,10 +184,10 @@
 	    	<br><br>
 	    	<div id="assignContainer">
 	    	<h1>Assignments</h1>
-	    	<div class="button green" id="assignButton" ng-repeat="assign in assignments" ng-click="assignments_click()">
-	      	{{assign.number + ": " + assign.name}}
-	      	</div> 
-	    	  <div class="button green" id="assignButton" ng-click="submissions_click()">Assignment</div><br>
+	    	  <div class="button green" id="assignButton" ng-click="submissions_click()">Assignment 1</div><br>
+	    	  <div class="button green" id="assignButton" ng-click="submissions_click()">Assignment 2</div><br>
+	    	  <div class="button green" id="assignButton" ng-click="submissions_click()">Assignment 3</div><br>
+	    	  <div class="button green" id="assignButton" ng-click="submissions_click()">Assignment 4</div><br>
 	    	</div>
 	  </div>
       

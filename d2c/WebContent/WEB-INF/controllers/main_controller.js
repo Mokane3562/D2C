@@ -7,10 +7,12 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
                                   'j_compile_request', 'java_request', 'run_request', 'login_request',
                                   'signup_service', 'transferable_account', 'dir_creator', 'roles_request', 
                                   'course_instance_request', 'course_inst_by_id_request', 'course_by_id_request', 
-                                  'file_request',
+                                  'file_request','assignment_by_id_request','course_assignments_request', 'course_register_request',
+                                  'transferable_course',
                           function($scope, $location, example_service, c_compile_request, j_compile_request,
                         		  java_request, run_request, login_request, signup_service, transferable_account, dir_creator,
-                        		  roles_request, course_instance_request, course_inst_by_id_request, course_by_id_request, file_request){
+                        		  roles_request, course_instance_request, course_inst_by_id_request, course_by_id_request, file_request,
+                        		  assignment_by_id_request, course_assignments_request, transferable_course){
 	console.log("main controller loading");
 	
     //initial view object set up	
@@ -53,7 +55,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	view["signout"] = false;
 	view["results"] = false;
 	var user_auth = "";
-	var crn = "";
+	var crn = "00005";
 	
 	//Setting view visible on click
 	$scope.login = function(){
@@ -81,6 +83,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 				view["results"] = false;
 				rolesRequest();
 				getFile();
+				//getAssignments();
 		},
 		function(errors){
 			console.log(errors);
@@ -159,15 +162,29 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		);
 	}
 	
+	$scope.regForCourse = function(){
+		var reg = transferable_course(
+				$scope.subject,
+				$scope.name,
+				$scope.number
+			);
+		course_register_request($scope.crn, $scope.user, "STUDENT").then(
+		function(response){
+		
+	   },
+	   function(response){
+	} 
+      );
+    }
+	
 	var getAssignments = function(){
 		var to_encode = $scope.user+":"+$scope.password;
 		var auth = window.btoa(to_encode);
 		$scope.assignments = [];
-		
-		course_assignments_request(crn).then(
+		course_assignments_request("00001").then(
 			function(response){
-				assignmentS = response.data;
-				console.log(response.data);				
+				var assignmentS = response.data;
+				console.log("return b"+response.data);				
 				for(var assignNumber in assignmentS){
 					if(!assignmentS.hasOwnProperty(assignNumber)){
 						continue;
@@ -178,7 +195,7 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 								$scope.assignments.push(assign_response.data);
 							});
 				}
-				console.log(assignments);
+				console.log($scope.assignments);
 			},
 			function(errors){
 				console.log("failure");
