@@ -162,11 +162,29 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	var getAssignments = function(){
 		var to_encode = $scope.user+":"+$scope.password;
 		var auth = window.btoa(to_encode);
-		console.log(crn);
-		courseAssignment_request(crn).then(
+		$scope.assignments=[];
+		
+		course_assignments_request(crn).then(
 			function(response){
-				console.log(response.data);
-				assignments = response.data;
+				assignmentS = response.data;
+				console.log(response.data);				
+				for(var assignNumber in assignmentS){
+					if(!assignments.hasOwnProperty(assignNumber)){
+						continue;
+					}
+					course_assignment_by_id_request(assignments[assignNumber]).then(//assignment_by_id_request
+							function(course_assign_responce){
+								course_assign_inst=course_assign_responce.data;
+								assignment_by_id_request(course_assign_responce.data.assign_id).then(
+										function(assign_responce){
+											assign_responce.data.number = assignments[assignNumber];
+											assign_responce.data.clickHandler= function clickHandler(){}
+											$scope.assignments.push(assign_responce.data);
+										});
+								
+								
+							});
+				}
 			},
 			function(errors){
 				console.log("failure");
