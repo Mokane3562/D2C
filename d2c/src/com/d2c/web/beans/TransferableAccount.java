@@ -12,9 +12,9 @@ public class TransferableAccount {
 	public int refID;
 	
 	public enum Role {
-		student ("STUDENT"),
-		professor ("PROFESSOR"),
-		ta ("TA");
+		STUDENT ("STUDENT"),
+		PROFESSOR ("PROFESSOR"),
+		TA ("TA");
 		
 		private final String roleName;
 		
