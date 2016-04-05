@@ -8,7 +8,6 @@ app.factory('saveFile_service',['$q','$http',function($q,$http){
 				'access-control-allow-origin': '*',
 			},
 			data: code
-			
 		}).then(function(response){
 			deferred.resolve(response);
 		},function(response){

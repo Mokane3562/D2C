@@ -452,15 +452,10 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	
 	//START c_compile_function
 	$scope.c_compile_function = function(){
-		var absolute_path = document.getElementById("path").value;
-		var path_array = absolute_path.split("/");
-		var name = path_array[path_array.length-1];
-		path_array.pop();
-		var path = path_array.join("/");
 		var code = {};
 		code[name]= editor.getValue();
 		var user = $scope.user;
-		c_compile_request(code, user, path).then(
+		c_compile_request(code, user).then(
 			function(response){
 				console.log("success");
 				$scope.output = response.data;
@@ -477,15 +472,9 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	//START j_compile_function
 	
 	$scope.j_compile_function = function(){
-		var absolute_path = document.getElementById("path").value;
-		var path_array = absolute_path.split("/");
-		var name = path_array[path_array.length-1];
-		path_array.pop();
-		var path = path_array.join("/");
-		var code = {};
 		code[name]= editor.getValue();
 		var user = $scope.user;
-		j_compile_request(code, user, path).then(
+		j_compile_request(code, user).then(
 			function(response){
 				console.log("success");
 				$scope.output = response.data;
@@ -501,15 +490,9 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	//END of j_compile_function
 	
 	$scope.java_function = function(){
-		var absolute_path = document.getElementById("path").value;
-		var path_array = absolute_path.split("/");
-		var name = path_array[path_array.length-1];
-		path_array.pop();
-		var path = path_array.join("/");
-		var code = {};
 		code[name]= "";
 		var user = $scope.user;
-		java_request(code, user, path).then(
+		java_request(code, user).then(
 			function(response){
 				console.log("success");
 				$scope.output = response.data;
@@ -523,15 +506,9 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	};
 	
 	$scope.aout_function = function(){
-		var absolute_path = document.getElementById("path").value;
-		var path_array = absolute_path.split("/");
-		var name = path_array[path_array.length-1];
-		path_array.pop();
-		var path = path_array.join("/");
-		var code = {};
 		code[name]= "";
 		var user = $scope.user;
-		run_request(code, user, path).then(
+		run_request(code, user).then(
 			function(response){
 				console.log("success");
 				$scope.output = response.data;

@@ -2,12 +2,12 @@
  * 
  */
 app.factory('java_request',[ '$q', '$http', function($q, $http){
-	return function(code, user, path){
+	return function(code, user){
 		var deferred = $q.defer();
-		console.log('/d2c/code/'+user+'/'+path.split("/").join("_")+'/java');
+		console.log('/d2c/code/'+user+'/java');
 		$http({
 			method: 'POST',
-			url: '/d2c/code/'+user+'/'+path.split("/").join("_")+'/java',
+			url: '/d2c/code/'+user+'/java',
 			headers: {
 				'Content-Type': 'application/json;charset=utf-8;',
 				'accept': 'text/plain',

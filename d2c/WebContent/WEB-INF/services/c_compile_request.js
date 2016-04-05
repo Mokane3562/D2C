@@ -2,16 +2,16 @@
  * 
  */
 app.factory('c_compile_request',[ '$q', '$http', function($q, $http){
-	return function(code, user, path){
+	return function(code, user){
 		var deferred = $q.defer();
 		var path_arg = path
 		if(path === ""){
 			path_arg = "default";
 		}
-		console.log('/d2c/code/'+user+'/'+path_arg.split("/").join("_")+'/c');
+		console.log('/d2c/code/'+user+'/c');
 		$http({
 			method: 'POST',
-			url: '/d2c/code/'+user+'/'+path_arg.split("/").join("_")+'/c',
+			url: '/d2c/code/'+user+'/c',
 			headers: {
 				'Content-Type': 'application/json;charset=utf-8;',
 				'accept': 'text/plain',

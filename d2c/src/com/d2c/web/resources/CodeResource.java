@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 //import java.io.BufferedWriter; //Uncomment later when we figure out the stream problem
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -18,34 +19,28 @@ import javax.ws.rs.core.Response;
 import com.d2c.util.IOPipe;
 import com.d2c.util.TerminalCaller;
 
-@Path("/code/{user}/{path}")
+@Path("/code/{user}/")
 public class CodeResource {
-
-	@POST
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response saveFile(@PathParam("user") String user, @PathParam("path") String path, Map<String, String> code){
-		try{
-			for(String name : code.keySet()){
-				TerminalCaller.saveFile(user, path, name, code.get(name));
-			}
-			return Response.accepted().build();
-		} catch (IOException e){
-			e.printStackTrace();
-			return Response.serverError().build();
-		}
-	}
 	
 	@POST
 	@Path("/c")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response compileCCode(@PathParam("user") String user, @PathParam("path") String path, Map<String, String> code) {
-		String proper_path = path.replace('_', '/');
+	public Response compileCCode(@PathParam("user") String user, Map<String, String> code) {
 		try {
 			ArrayList<String> args = new ArrayList<>();
 			IOPipe pipe;
 			String output = "";
-			for (String name : code.keySet()) {
+			List<String> outPathList = Arrays.asList(code.keySet().iterator().next().split("/"));
+			outPathList.remove(outPathList.size()-1);
+			for (String qualified : code.keySet()) {
+				List<String> list = Arrays.asList(qualified.split("/"));
+				String name = list.get(list.size()-1);
+				list.remove(list.size()-1);
+				String proper_path = String.join("/", list);
+				if(list.size() < outPathList.size()){
+					outPathList = list;
+				}
 				TerminalCaller.saveFile(user, proper_path, name + ".c", code.get(name));
 				pipe = TerminalCaller.gcc(user, proper_path, stringToList("-c " + name + ".c"));
 				args.add(name + ".o");
@@ -56,7 +51,7 @@ public class CodeResource {
 			}
 			args.add("-o");
 			args.add("a.out");
-			pipe = TerminalCaller.gcc(user, proper_path, args);
+			pipe = TerminalCaller.gcc(user, String.join("/", outPathList), args);
 			BufferedReader br = pipe.getReader();
 			output += stringContentsOfBuffer(br);
 			pipe.close();
@@ -79,12 +74,15 @@ public class CodeResource {
 	@Path("/javac")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response compileJavaCode(@PathParam("user") String user, @PathParam("path") String path, Map<String, String> code) {
-		String proper_path = path.replace('_', '/');
+	public Response compileJavaCode(@PathParam("user") String user, Map<String, String> code) {
 		try {
 			IOPipe pipe;
 			String output = "";
-			for (String name : code.keySet()) {
+			for (String qualified : code.keySet()) {
+				List<String> list = Arrays.asList(qualified.split("/"));
+				String name = list.get(list.size()-1);
+				list.remove(list.size()-1);
+				String proper_path = String.join("/", list);
 				TerminalCaller.saveFile(user, proper_path, name + ".java", code.get(name));
 				pipe = TerminalCaller.javac(user, proper_path, stringToList(name + ".java"));
 				// BufferedWriter bw = pipe.getInput();
@@ -109,13 +107,17 @@ public class CodeResource {
 	@Path("/java")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response runJavaClass(@PathParam("user") String user, @PathParam("path") String path, Map<String, String> code) {
-		String proper_path = path.replace('_', '/');
+	public Response runJavaClass(@PathParam("user") String user, Map<String, String> code) {
 		try {
 			ArrayList<String> args = new ArrayList<>();
 			IOPipe pipe;
 			String output = "";
-			args.add(code.keySet().iterator().next());
+			String qualified = code.keySet().iterator().next();
+			List<String> list = Arrays.asList(qualified.split("/"));
+			String name = list.get(list.size()-1);
+			list.remove(list.size()-1);
+			String proper_path = String.join("/", list);
+			args.add(name);
 			pipe = TerminalCaller.java(user, proper_path, args);
 			BufferedReader br = pipe.getReader();
 			output += stringContentsOfBuffer(br);
@@ -135,12 +137,15 @@ public class CodeResource {
 	@Path("/out")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response runCompiledClass(@PathParam("user") String user, @PathParam("path") String path, Map<String, String> code) {
-		String proper_path = path.replace('_', '/');
+	public Response runCompiledClass(@PathParam("user") String user, Map<String, String> code) {
 		try {
 			ArrayList<String> args = new ArrayList<>();
 			IOPipe pipe;
 			String output = "";
+			String qualified = code.keySet().iterator().next();
+			List<String> list = Arrays.asList(qualified.split("/"));
+			list.remove(list.size()-1);
+			String proper_path = String.join("/", list);
 			pipe = TerminalCaller.aout(user, proper_path, args);
 			BufferedReader br = pipe.getReader();
 			output = stringContentsOfBuffer(br);
