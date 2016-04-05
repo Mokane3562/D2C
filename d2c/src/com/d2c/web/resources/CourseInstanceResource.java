@@ -155,19 +155,20 @@ public class CourseInstanceResource {
 		SQLHandler sql = null;
 		try {
 			sql = new SQLHandler();
+			sql.setAutoCommit(false); //enable transactions
 			
 			Object[] accountInfo =  sql.getAccountInfo(user);
 			int accountID = (int) accountInfo[5];
 			
 			Object[] courseInstInfo =  sql.getCourseInst(crn);
-			int courseInstID = (int) courseInstInfo[6];
+			int courseInstID = (int) courseInstInfo[5];
 			
-			sql.setAutoCommit(false); //enable transactions
 			sql.makeParticipant(courseInstID, accountID, Role.valueOf(role));
 			sql.commit();
 			return Response.created(new URI("/registered/" + user)).build();
 		} catch (SQLException | ClassNotFoundException | URISyntaxException | EmptySetException e) {
 			try {
+				e.printStackTrace();
 				sql.rollback();
 			} catch (SQLException e1) {
 				System.err.println("\nROLLBACK FAILED\n");

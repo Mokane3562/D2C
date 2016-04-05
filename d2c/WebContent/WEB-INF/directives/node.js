@@ -5,7 +5,7 @@ app.directive('node', ['$compile',function($compile){
 		scope: {
 			node: '='
 		},
-		template: '<div></div>',
+		template: '<div class="nodeDiv"><span class="words"> + </span></div>',
 		link: function(scope, element, attributes){
 			element.append(scope.node.name);
 			if(angular.isArray(scope.node.contents)){

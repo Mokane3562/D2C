@@ -7,12 +7,12 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
                                   'j_compile_request', 'java_request', 'run_request', 'login_request',
                                   'signup_service', 'transferable_account', 'dir_creator', 'roles_request', 
                                   'course_instance_request', 'course_inst_by_id_request', 'course_by_id_request', 
-                                  'file_request','assignment_by_id_request','course_assignments_request', 'course_register_request',
-                                  'transferable_course',
+                                  'file_request','assignment_by_id_request','course_assignments_request', 
+                                  'transferable_course', 'course_register_request',
                           function($scope, $location, example_service, c_compile_request, j_compile_request,
                         		  java_request, run_request, login_request, signup_service, transferable_account, dir_creator,
                         		  roles_request, course_instance_request, course_inst_by_id_request, course_by_id_request, file_request,
-                        		  assignment_by_id_request, course_assignments_request, transferable_course){
+                        		  assignment_by_id_request, course_assignments_request, transferable_course, course_register_request){
 	console.log("main controller loading");
 	
     //initial view object set up	
@@ -47,13 +47,13 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	
 
 	//Setting view invisible
-	view["login"] = true;
+	view["login"] = false;
 	view["signup"] = false;
 	view["firstNav"] = false;
 	view["courses"] = false;
 	view["register"] = false;
 	view["assignments"] = false;
-	view["workspace"] = false;
+	view["workspace"] = true;
 	view["path"] = false;
 	view["testing"] = false;	
 	view["submissions"] = false;
@@ -196,18 +196,19 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	}
 	
 	$scope.regForCourse = function(){
-		var reg = transferable_course(
-				$scope.subject,
-				$scope.name,
-				$scope.number
-			);
-		course_register_request($scope.crn, $scope.user, "STUDENT").then(
+		var reg = transferable_course($scope.subject, $scope.name, $scope.number);
+		//console.log($scope.crn, $scope.user);
+		console.log(course_register_request);
+		var x = course_register_request($scope.crn, $scope.user, "STUDENT");
+		console.log(x);
+		x.then(
 		function(response){
-		
-	   },
-	   function(response){
-	} 
-      );
+			rolesRequest();
+		},
+		function(error){
+			console.log("COCKSUCKER");
+		} 
+		);
     }
 	
 	var getAssignments = function(){
