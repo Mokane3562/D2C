@@ -30,7 +30,7 @@ public class AssignmentResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAssignmentByRefID(@PathParam("id") int refID) {
 		try (SQLHandler sql = new SQLHandler();) {
-			Object[] results = sql.getCourseInstByRefID(refID);
+			Object[] results = sql.selectCourseInstByRefID(refID);
 			//create the course instance
 			TransferableAssignment assignment = new TransferableAssignment();
 			assignment.assignmentNum = (int) results[0];

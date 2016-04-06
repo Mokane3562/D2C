@@ -47,13 +47,13 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	
 
 	//Setting view invisible
-	view["login"] = false;
+	view["login"] = true;
 	view["signup"] = false;
 	view["firstNav"] = false;
 	view["courses"] = false;
 	view["register"] = false;
 	view["assignments"] = false;
-	view["workspace"] = true;
+	view["workspace"] = false;
 	view["path"] = false;
 	view["testing"] = false;	
 	view["submissions"] = false;

@@ -17,6 +17,7 @@ import javax.ws.rs.core.Response;
 
 import com.d2c.util.EmptySetException;
 import com.d2c.util.SQLHandler;
+import com.d2c.web.beans.TransferableAccount;
 import com.d2c.web.beans.TransferableCourse;
 import com.d2c.web.beans.TransferableFile;
 
@@ -64,7 +65,7 @@ public class FileResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getFileByRefID(@PathParam("id") int refID) {
 		try (SQLHandler sql = new SQLHandler();) {
-			Object[] results = sql.getFileByRefID(refID);
+			Object[] results = sql.selectFileByRefID(refID);
 			//create the file
 			TransferableFile file = new TransferableFile();
 			file.fileName = (String) results[0];
@@ -85,17 +86,35 @@ public class FileResource {
 		}
 	}
 
-	/*@POST
-	@Path("/{course_id}/{assignment}/{file_name}")
+	@POST
+	@Path("/new")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response uploadOrUpdateFile(@PathParam("course_id") String courseID, @PathParam("assignment") String assignment, @PathParam("file_name") String fileName, TransferableFile file) {
-		// TODO make this post the course info to the DB
-
+	public Response createAccount(TransferableAccount account) {
+		//start sql shit
+		SQLHandler sql = null;
 		try {
-			return Response.created(new URI("/" + courseID + "/" + assignment + "/" + fileName)).build();
-		} catch (URISyntaxException e) {
+			sql = new SQLHandler();
+			sql.setAutoCommit(false); //enable transactions
+			sql.insertAccount(account.userName, account.password, account.firstName, account.lastName);
+			sql.commit();
+			return Response.created(new URI("/" + account.userName)).build();
+		} catch (SQLException | ClassNotFoundException | URISyntaxException e) {
+			try {
+				sql.rollback();
+			} catch (SQLException e1) {
+				System.err.println("\nROLLBACK FAILED\n");
+				e1.printStackTrace();
+				return Response.serverError().build();
+			}
+			e.printStackTrace();
 			return Response.serverError().build();
+		} finally {
+			try {
+				sql.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
-	}*/
+	}
 
 }

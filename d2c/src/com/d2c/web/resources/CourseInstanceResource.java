@@ -34,7 +34,7 @@ public class CourseInstanceResource {
 	public Response getCourseInst(@PathParam("crn") String crn) {
 		System.out.println("yes buyyyyyyyyyy");
 		try (SQLHandler sql = new SQLHandler();) {
-			Object[] results = sql.getCourseInst(crn);
+			Object[] results = sql.selectCourseInst(crn);
 			//create the course instance
 			TransferableCourseInstance courseInstance = new TransferableCourseInstance();
 			courseInstance.semester = (Semester) Semester.valueOf((String) results[0]);
@@ -61,7 +61,7 @@ public class CourseInstanceResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getCourseInstAssignments(@PathParam("crn") String crn) {
 		try (SQLHandler sql = new SQLHandler();) {
-			List<Object[]> results = sql.getAssignments(crn);
+			List<Object[]> results = sql.selectAssignments(crn);
 			HashMap<Integer, Integer> assignments = new HashMap<>();
 			for (Object[] row: results) {
 				int assignmentNumber = (int) row[0];
@@ -85,7 +85,7 @@ public class CourseInstanceResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getCourseInstByRefID(@PathParam("id") int refID) {
 		try (SQLHandler sql = new SQLHandler();) {
-			Object[] results = sql.getCourseInstByRefID(refID);
+			Object[] results = sql.selectCourseInstByRefID(refID);
 			//create the course instance
 			TransferableCourseInstance courseInstance = new TransferableCourseInstance();
 			courseInstance.semester = (Semester) Semester.valueOf((String) results[0]);
@@ -118,7 +118,7 @@ public class CourseInstanceResource {
 		//start SQL shit	
 		try (SQLHandler sql = new SQLHandler();) {
 		//TODO:Set up authorization in a meaningful way
-			List<Object[]> results = sql.getParticipants(crn);
+			List<Object[]> results = sql.selectParticipants(crn);
 			//continue only if the user has authority to view this info
 			//Object[] account = sql.getAccountInfo(accountUserName);
 			if (true/*decodedUser.equals(accountUserName) && decodedPassword.equals(account[1])*/) {
@@ -157,13 +157,13 @@ public class CourseInstanceResource {
 			sql = new SQLHandler();
 			sql.setAutoCommit(false); //enable transactions
 			
-			Object[] accountInfo =  sql.getAccountInfo(user);
+			Object[] accountInfo =  sql.selectAccountInfo(user);
 			int accountID = (int) accountInfo[5];
 			
-			Object[] courseInstInfo =  sql.getCourseInst(crn);
+			Object[] courseInstInfo =  sql.selectCourseInst(crn);
 			int courseInstID = (int) courseInstInfo[5];
 			
-			sql.makeParticipant(courseInstID, accountID, Role.valueOf(role));
+			sql.insertParticipant(courseInstID, accountID, Role.valueOf(role));
 			sql.commit();
 			return Response.created(new URI("/registered/" + user)).build();
 		} catch (SQLException | ClassNotFoundException | URISyntaxException | EmptySetException e) {

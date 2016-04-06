@@ -37,7 +37,7 @@ public class AccountResource {
 		//start SQL shit	
 		try (SQLHandler sql = new SQLHandler();) {
 		//TODO:Set up encrypted passwords
-			Object[] results = sql.getAccountInfo(accountUserName);
+			Object[] results = sql.selectAccountInfo(accountUserName);
 			//continue only if the user has authority to view this info
 			if (decodedUser.equals(accountUserName) && decodedPassword.equals(results[1])) {
 				//create the account object
@@ -75,9 +75,9 @@ public class AccountResource {
 		//start SQL shit	
 		try (SQLHandler sql = new SQLHandler();) {
 		//TODO:Set up encrypted passwords
-			List<Object[]> results = sql.getAccountRoles(accountUserName);
+			List<Object[]> results = sql.selectAccountRoles(accountUserName);
 			//continue only if the user has authority to view this info
-			Object[] account = sql.getAccountInfo(accountUserName);
+			Object[] account = sql.selectAccountInfo(accountUserName);
 			if (decodedUser.equals(accountUserName) && decodedPassword.equals(account[1])) {
 				//create the map
 				HashMap<Integer, String> roles = new HashMap<>();
@@ -109,7 +109,7 @@ public class AccountResource {
 		String decodedPassword = decodePassword(encodedLogin);
 		//start sql
 		try (SQLHandler sql = new SQLHandler();) {
-			Object[] results = sql.getAccountInfo(decodedUser);	
+			Object[] results = sql.selectAccountInfo(decodedUser);	
 			//verify login info is legit (non null result set)
 			if(decodedPassword.equals(results[1])){
 				return Response.ok().build();
@@ -137,7 +137,7 @@ public class AccountResource {
 		try {
 			sql = new SQLHandler();
 			sql.setAutoCommit(false); //enable transactions
-			sql.makeAccount(account.userName, account.password, account.firstName, account.lastName);
+			sql.insertAccount(account.userName, account.password, account.firstName, account.lastName);
 			sql.commit();
 			return Response.created(new URI("/" + account.userName)).build();
 		} catch (SQLException | ClassNotFoundException | URISyntaxException e) {
@@ -171,7 +171,7 @@ public class AccountResource {
 		SQLHandler sql = null;
 		try {
 			sql = new SQLHandler();
-			Object[] results = sql.getAccountInfo(accountUserName);
+			Object[] results = sql.selectAccountInfo(accountUserName);
 			if (decodedUser.equals(accountUserName) && decodedPassword.equals(results[1])) {
 				sql.setAutoCommit(false); //enable transactions
 				sql.updateAccount(accountUserName, account.password, account.firstName, account.lastName);

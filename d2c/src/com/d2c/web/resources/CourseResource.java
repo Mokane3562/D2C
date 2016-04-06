@@ -31,7 +31,7 @@ public class CourseResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getCourseByRefID(@PathParam("id") int refID) {
 		try (SQLHandler sql = new SQLHandler();) {
-			Object[] results = sql.getCourseByRefID(refID);
+			Object[] results = sql.selectCourseByRefID(refID);
 			//create the course
 			TransferableCourse course = new TransferableCourse();
 			course.subject = (String) results[0];
