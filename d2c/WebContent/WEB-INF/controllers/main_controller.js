@@ -47,13 +47,13 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	
 
 	//Setting view invisible
-	view["login"] = false;
+	view["login"] = true;
 	view["signup"] = false;
 	view["firstNav"] = false;
 	view["courses"] = false;
 	view["register"] = false;
 	view["assignments"] = false;
-	view["workspace"] = true;
+	view["workspace"] = false;
 	view["path"] = false;
 	view["testing"] = false;	
 	view["submissions"] = false;
@@ -196,19 +196,8 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	}
 	
 	$scope.regForCourse = function(){
-		var reg = transferable_course($scope.subject, $scope.name, $scope.number);
-		//console.log($scope.crn, $scope.user);
-		console.log(course_register_request);
-		var x = course_register_request($scope.crn, $scope.user, "STUDENT");
-		console.log(x);
-		x.then(
-		function(response){
-			rolesRequest();
-		},
-		function(error){
-			console.log("COCKSUCKER");
-		} 
-		);
+		course_register_request($scope.crn, $scope.user, "STUDENT")
+			.then(function(response){rolesRequest();});
     }
 	
 	var getAssignments = function(){
@@ -453,10 +442,8 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	
 	//START c_compile_function
 	$scope.c_compile_function = function(){
-		var code = {};
-		code[name]= editor.getValue();
-		var user = $scope.user;
-		c_compile_request(code, user).then(
+		var code = getCode();
+		c_compile_request(code, $scope.user).then(
 			function(response){
 				console.log("success");
 				$scope.output = response.data;
@@ -473,9 +460,9 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	//START j_compile_function
 	
 	$scope.j_compile_function = function(){
-		code[name]= editor.getValue();
-		var user = $scope.user;
-		j_compile_request(code, user).then(
+		var code = getCode();
+		console.log(code);
+		j_compile_request(code, $scope.user).then(
 			function(response){
 				console.log("success");
 				$scope.output = response.data;
@@ -491,9 +478,9 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	//END of j_compile_function
 	
 	$scope.java_function = function(){
-		code[name]= "";
-		var user = $scope.user;
-		java_request(code, user).then(
+		var code = getCode();
+		var main = node.node.getQualifiedName();
+		java_request(code, $scope.user, main).then(
 			function(response){
 				console.log("success");
 				$scope.output = response.data;
@@ -507,9 +494,8 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	};
 	
 	$scope.aout_function = function(){
-		code[name]= "";
-		var user = $scope.user;
-		run_request(code, user).then(
+		var code = getCode();
+		run_request(code, $scope.user).then(
 			function(response){
 				console.log("success");
 				$scope.output = response.data;
@@ -521,10 +507,16 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		);
 		console.log("aout_function starting");
 	};
-
-	console.log("main controller loaded");
-
-	console.log("main controller loaded");
+	
+	var getCode = function(){
+		var code = {};
+		for(var i = 0; i<$scope.root.contents; i++){
+			if($scope.root.contents[i].type ==="file"){
+				code[$scope.root.contents[i].getQualifiedName()] = $scope.root.contents[i].contents;
+			}
+		}
+		return code;
+	}
 	
 	//END MENUBAR GRABBER
 	

@@ -19,7 +19,7 @@ import javax.ws.rs.core.Response;
 import com.d2c.util.IOPipe;
 import com.d2c.util.TerminalCaller;
 
-@Path("/code/{user}/")
+@Path("/code/{user}")
 public class CodeResource {
 	
 	@POST
@@ -104,15 +104,15 @@ public class CodeResource {
 	}
 
 	@POST
-	@Path("/java")
+	@Path("/java/{main}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response runJavaClass(@PathParam("user") String user, Map<String, String> code) {
+	public Response runJavaClass(@PathParam("user") String user, @PathParam("main") String main, Map<String, String> code) {
 		try {
 			ArrayList<String> args = new ArrayList<>();
 			IOPipe pipe;
 			String output = "";
-			String qualified = code.keySet().iterator().next();
+			String qualified = main;
 			List<String> list = Arrays.asList(qualified.split("/"));
 			String name = list.get(list.size()-1);
 			list.remove(list.size()-1);

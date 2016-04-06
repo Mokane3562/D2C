@@ -19,6 +19,12 @@ app.factory('dir_creator', [function(){
 			}
 			node.node = obj;
 		};
+		obj.getQualifiedName = function(){
+			if(obj.name === "root"){
+				return "/root";
+			}
+			return parent.getQualifiedName() + "/" + obj.name;
+		}
 		return obj;
 	};
 }]);
