@@ -6,7 +6,7 @@ app.factory('java_request',[ '$q', '$http', function($q, $http){
 		var deferred = $q.defer();
 		$http({
 			method: 'POST',
-			url: '/d2c/code/'+user+'/java/'+main,
+			url: '/d2c/code/'+user+'/java',
 			headers: {
 				'Content-Type': 'application/json;charset=utf-8;',
 				'accept': 'text/plain',

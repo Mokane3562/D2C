@@ -20,10 +20,12 @@ app.factory('dir_creator', [function(){
 			node.node = obj;
 		};
 		obj.getQualifiedName = function(){
+			console.log(obj);
 			if(obj.name === "root"){
 				return "/root";
 			}
-			return parent.getQualifiedName() + "/" + obj.name;
+			console.log(obj.parent);
+			return obj.parent.getQualifiedName() + "/" + obj.name;
 		}
 		return obj;
 	};
