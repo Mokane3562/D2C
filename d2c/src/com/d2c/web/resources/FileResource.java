@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -99,6 +100,36 @@ public class FileResource {
 			sql.commit();
 			return Response.created(new URI("/" + file.fileName)).build();
 		} catch (SQLException | ClassNotFoundException | URISyntaxException e) {
+			try {
+				sql.rollback();
+			} catch (SQLException e1) {
+				System.err.println("\nROLLBACK FAILED\n");
+				e1.printStackTrace();
+				return Response.serverError().build();
+			}
+			e.printStackTrace();
+			return Response.serverError().build();
+		} finally {
+			try {
+				sql.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	@POST
+	@Path("/refid/{id}") 
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response updateFile(TransferableFile file, @PathParam("id") int refID) {
+		SQLHandler sql = null;
+		try {
+			sql = new SQLHandler();
+			sql.setAutoCommit(false); //enable transactions
+			sql.updateFile(file, refID);
+			sql.commit();
+			return Response.created(new URI("/" + file.fileName)).build();//CHECKME: Is this the correct response?
+		} catch (SQLException | URISyntaxException | ClassNotFoundException e) {
 			try {
 				sql.rollback();
 			} catch (SQLException e1) {

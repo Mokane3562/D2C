@@ -124,8 +124,8 @@ public class SQLHandler implements AutoCloseable{
 			+ 	"VALUES ( ?, ?, ? )";
 	//Store a file in the database. Other fields will be generated automatically.
 	private static final String INSERT_FILE_SQL = 
-				"INSERT INTO file (name, type, contents, account_id, file_id) "
-			+ 	"VALUES (?, ?, ?, ?, ?)";
+				"INSERT INTO file (name, type, contents, account_id,) "
+			+ 	"VALUES (?, ?, ?, ?)";
 	//Change/update a grade for a submission.
 	private static final String POST_GRADE_SQL = 
 				"UPDATE submission "
@@ -148,6 +148,10 @@ public class SQLHandler implements AutoCloseable{
 				"UPDATE account "
 			+ 	"SET password=?, fname=?, lname=?"
 			+ 	"WHERE username = ?";
+	private static final String UPDATE_FILE_SQL = 
+				"UPDATE file "
+			+ 	"SET name=?, type=?, contents=?"
+			+ 	"WHERE file_id = ?";
 	// private PreparedStatement exampleStatement;
 //	private PreparedStatement getAccountStatement;
 //	private PreparedStatement getAssignmentStatement;
@@ -316,7 +320,6 @@ public class SQLHandler implements AutoCloseable{
 			insertFileStatement.setString(2, file.fileType);
 			insertFileStatement.setCharacterStream(3, new CharArrayReader(file.content));
 			insertFileStatement.setInt(4, file.authorAccountID);
-			insertFileStatement.setInt(5, file.refID);
 			insertFileStatement.executeUpdate();
 		}
 	}
@@ -650,6 +653,19 @@ public class SQLHandler implements AutoCloseable{
 			updateAccountStatement.executeUpdate();
 		}
 	}
+	
+	public void updateFile(TransferableFile file, int fileID) throws SQLException {
+		try (PreparedStatement updateFileStatement = connection.prepareStatement(UPDATE_FILE_SQL);) {
+			updateFileStatement.setString(1, file.fileName);
+			updateFileStatement.setString(2, file.fileType);
+			updateFileStatement.setCharacterStream(3, new CharArrayReader(file.content));
+			
+			updateFileStatement.setInt(4, fileID);
+			
+			updateFileStatement.executeUpdate();
+		}
+	}
+	
 	
 	//INHERITED/IMPLEMENTED METHODS
 	/**
