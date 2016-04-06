@@ -1,0 +1,9 @@
+-FRONT END-
+-Major UI Changes for course registration and general student activity
+-Course Registration now implemented
+-Directory system implemented
+
+-JAVA SERVER-
+-Implemented web-api service handlers for directory 
+	and file structure compilation
+-Implemented sql handlers for file saving, updating, and loading

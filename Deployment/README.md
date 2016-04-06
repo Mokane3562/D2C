@@ -1,5 +1,5 @@
 Requires: 
-- Apache Tomcat 8 (Tested on 8.0.32, included in this deployment)
+- Apache Tomcat 8 (Tested on 8.0.32, included in this deployment, Optimized for)
 - JRE version 8 (Tested on OpenJDK 1.8.0_66)
 - MySQL (Tested on version 5.6.28 running on debian-linux-gnu)
 
@@ -21,3 +21,11 @@ restarting after shutdown:
 -Start mysql server service if it is not already running
 -Run the Apache Tomcat 8 startup.sh file
 -You can now check out the app at localhost:8080/d2c
+
+testing:
+-go to http://localhost:8080/d2c
+-Click signup
+-Enter information
+-Click signup
+
+-examine the database with mysql
