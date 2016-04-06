@@ -8,11 +8,11 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
                                   'signup_service', 'transferable_account', 'dir_creator', 'roles_request', 
                                   'course_instance_request', 'course_inst_by_id_request', 'course_by_id_request', 
                                   'file_request','assignment_by_id_request','course_assignments_request', 
-                                  'transferable_course', 'course_register_request',
+                                  'transferable_course', 'course_register_request','create_file_request',
                           function($scope, $location, example_service, c_compile_request, j_compile_request,
                         		  java_request, run_request, login_request, signup_service, transferable_account, dir_creator,
                         		  roles_request, course_instance_request, course_inst_by_id_request, course_by_id_request, file_request,
-                        		  assignment_by_id_request, course_assignments_request, transferable_course, course_register_request){
+                        		  assignment_by_id_request, course_assignments_request, transferable_course, course_register_request, create_file_request){
 	console.log("main controller loading");
 	
     //initial view object set up	

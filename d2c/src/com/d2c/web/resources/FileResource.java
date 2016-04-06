@@ -89,15 +89,15 @@ public class FileResource {
 	@POST
 	@Path("/new")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createAccount(TransferableAccount account) {
+	public Response createNewFile(TransferableFile file) {
 		//start sql shit
 		SQLHandler sql = null;
 		try {
 			sql = new SQLHandler();
 			sql.setAutoCommit(false); //enable transactions
-			sql.insertAccount(account.userName, account.password, account.firstName, account.lastName);
+			sql.insertFile(file);
 			sql.commit();
-			return Response.created(new URI("/" + account.userName)).build();
+			return Response.created(new URI("/" + file.fileName)).build();
 		} catch (SQLException | ClassNotFoundException | URISyntaxException e) {
 			try {
 				sql.rollback();
