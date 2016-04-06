@@ -42,7 +42,19 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	var file_or_dir = "";
 	var file_dir_contents = "";
 	$scope.making_a_file = false;
+	var helloworld = 'import static java.lang.System.out;\npublic class HelloWorld{\n\tpublic static void main(String[] args){\n\t\tout.println("Hello World!");\n\t}\n}';
+	editor = ace.edit("textcodebox");
+	editor.getSession().setUseWorker(false);
+	editor.setTheme("ace/theme/twilight");
+	editor.getSession().setMode("ace/mode/java");
 	$scope.root = dir_creator("root", [], "dir", editor, node);
+	node.node = $scope.root;
+	var dir_1 = dir_creator("dir_1", [], "dir", editor, node)
+	node.node = dir_1;
+	var hello = dir_creator("HelloWorld", helloworld, "file", editor, node);
+	dir_1.contents.push(hello);
+	$scope.root.contents.push(dir_1);
+  	                
 	node.node = $scope.root;
 	
 
@@ -196,19 +208,8 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	}
 	
 	$scope.regForCourse = function(){
-		var reg = transferable_course($scope.subject, $scope.name, $scope.number);
-		//console.log($scope.crn, $scope.user);
-		console.log(course_register_request);
-		var x = course_register_request($scope.crn, $scope.user, "STUDENT");
-		console.log(x);
-		x.then(
-		function(response){
-			rolesRequest();
-		},
-		function(error){
-			console.log("COCKSUCKER");
-		} 
-		);
+		course_register_request($scope.crn, $scope.user, "STUDENT")
+			.then(function(response){rolesRequest();});
     }
 	
 	var getAssignments = function(){
@@ -373,10 +374,6 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		view["welcome"] = false;
 		view["signout"] = false;
 		view["results"] = false;
-		editor = ace.edit("textcodebox");
-		editor.getSession().setUseWorker(false);
-		editor.setTheme("ace/theme/twilight");
-		editor.getSession().setMode("ace/mode/java");
 	}
 	$scope.testing_click = function(){
 		view["login"] = false;
@@ -453,10 +450,8 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	
 	//START c_compile_function
 	$scope.c_compile_function = function(){
-		var code = {};
-		code[name]= editor.getValue();
-		var user = $scope.user;
-		c_compile_request(code, user).then(
+		var code = getCode($scope.root);
+		c_compile_request(code, $scope.user).then(
 			function(response){
 				console.log("success");
 				$scope.output = response.data;
@@ -473,9 +468,9 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	//START j_compile_function
 	
 	$scope.j_compile_function = function(){
-		code[name]= editor.getValue();
-		var user = $scope.user;
-		j_compile_request(code, user).then(
+		var code = getCode($scope.root);
+		console.log(code);
+		j_compile_request(code, $scope.user).then(
 			function(response){
 				console.log("success");
 				$scope.output = response.data;
@@ -491,9 +486,10 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	//END of j_compile_function
 	
 	$scope.java_function = function(){
-		code[name]= "";
-		var user = $scope.user;
-		java_request(code, user).then(
+		var main = node.node.getQualifiedName();
+		var code = {};
+		code[main] = node.node.contents;
+		java_request(code, $scope.user).then(
 			function(response){
 				console.log("success");
 				$scope.output = response.data;
@@ -507,9 +503,8 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 	};
 	
 	$scope.aout_function = function(){
-		code[name]= "";
-		var user = $scope.user;
-		run_request(code, user).then(
+		var code = getCode($scope.root);
+		run_request(code, $scope.user).then(
 			function(response){
 				console.log("success");
 				$scope.output = response.data;
@@ -521,10 +516,29 @@ app.controller('main_controller',['$scope', '$location', 'example_service', 'c_c
 		);
 		console.log("aout_function starting");
 	};
-
-	console.log("main controller loaded");
-
-	console.log("main controller loaded");
+	
+	var getCode = function(root){
+		var code = {};
+		console.log(root);
+		console.log(root.contents);
+		console.log(root.contents.length);
+		for(var i = 0; i<root.contents.length; i++){
+			if(root.contents[i].type ==="file"){
+				console.log(root.contents[i].getQualifiedName());
+				console.log(root.contents[i].contents);
+				code[root.contents[i].getQualifiedName()] = root.contents[i].contents;
+			} else {
+				var c = getCode(root.contents[i]);
+				for(var key in c){
+					if (!c.hasOwnProperty(key)) continue;
+					console.log(key);
+					console.log(c[key]);
+					code[key] = c[key];
+				}
+			} 
+		}
+		return code;
+	}
 	
 	//END MENUBAR GRABBER
 	

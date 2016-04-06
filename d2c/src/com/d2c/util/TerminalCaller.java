@@ -28,6 +28,7 @@ public class TerminalCaller {
 		File dir = new File("/tmp/" + user + "/" + path);
 		File file = new File("/tmp/" + user + "/" + path + "/" + name);
 		dir.mkdirs();
+		file.delete();
 		file.createNewFile();
 		
 		// write code contents to temporary file

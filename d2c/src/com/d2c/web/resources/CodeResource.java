@@ -19,7 +19,7 @@ import javax.ws.rs.core.Response;
 import com.d2c.util.IOPipe;
 import com.d2c.util.TerminalCaller;
 
-@Path("/code/{user}/")
+@Path("/code/{user}")
 public class CodeResource {
 	
 	@POST
@@ -31,7 +31,7 @@ public class CodeResource {
 			ArrayList<String> args = new ArrayList<>();
 			IOPipe pipe;
 			String output = "";
-			List<String> outPathList = Arrays.asList(code.keySet().iterator().next().split("/"));
+			ArrayList<String> outPathList = new ArrayList<>(Arrays.asList(code.keySet().iterator().next().split("/")));
 			outPathList.remove(outPathList.size()-1);
 			for (String qualified : code.keySet()) {
 				List<String> list = Arrays.asList(qualified.split("/"));
@@ -39,9 +39,9 @@ public class CodeResource {
 				list.remove(list.size()-1);
 				String proper_path = String.join("/", list);
 				if(list.size() < outPathList.size()){
-					outPathList = list;
+					outPathList = new ArrayList<>(list);
 				}
-				TerminalCaller.saveFile(user, proper_path, name + ".c", code.get(name));
+				TerminalCaller.saveFile(user, proper_path, name + ".c", code.get(proper_path+"/"+name));
 				pipe = TerminalCaller.gcc(user, proper_path, stringToList("-c " + name + ".c"));
 				args.add(name + ".o");
 				// BufferedWriter bw = pipe.getInput();
@@ -79,11 +79,15 @@ public class CodeResource {
 			IOPipe pipe;
 			String output = "";
 			for (String qualified : code.keySet()) {
-				List<String> list = Arrays.asList(qualified.split("/"));
+				ArrayList<String> list = new ArrayList<>(Arrays.asList(qualified.split("/")));
 				String name = list.get(list.size()-1);
-				list.remove(list.size()-1);
+				list.remove(name);
 				String proper_path = String.join("/", list);
-				TerminalCaller.saveFile(user, proper_path, name + ".java", code.get(name));
+				System.out.println(user);
+				System.out.println(proper_path);
+				System.out.println(name + ".java");
+				System.out.println(code.get(name));
+				TerminalCaller.saveFile(user, proper_path, name + ".java", code.get(proper_path+"/"+name));
 				pipe = TerminalCaller.javac(user, proper_path, stringToList(name + ".java"));
 				// BufferedWriter bw = pipe.getInput();
 				BufferedReader br = pipe.getReader();
@@ -112,8 +116,7 @@ public class CodeResource {
 			ArrayList<String> args = new ArrayList<>();
 			IOPipe pipe;
 			String output = "";
-			String qualified = code.keySet().iterator().next();
-			List<String> list = Arrays.asList(qualified.split("/"));
+			ArrayList<String> list = new ArrayList<>(Arrays.asList(code.keySet().iterator().next().split("/")));
 			String name = list.get(list.size()-1);
 			list.remove(list.size()-1);
 			String proper_path = String.join("/", list);
@@ -142,8 +145,7 @@ public class CodeResource {
 			ArrayList<String> args = new ArrayList<>();
 			IOPipe pipe;
 			String output = "";
-			String qualified = code.keySet().iterator().next();
-			List<String> list = Arrays.asList(qualified.split("/"));
+			ArrayList<String> list = new ArrayList<>(Arrays.asList(code.keySet().iterator().next().split("/")));
 			list.remove(list.size()-1);
 			String proper_path = String.join("/", list);
 			pipe = TerminalCaller.aout(user, proper_path, args);
